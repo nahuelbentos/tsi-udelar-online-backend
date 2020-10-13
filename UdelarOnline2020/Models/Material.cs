@@ -6,10 +6,10 @@ using System.Text;
 
 namespace Models
 {
-    public class Material
-    {
-        [Key]
-        public int Id { get; set; }
-        //public File Archivo { get; set; }
-    }
+  public class Material
+  {
+    [Key]
+    public Guid Id { get; set; }
+    //public File Archivo { get; set; }
+  }
 }

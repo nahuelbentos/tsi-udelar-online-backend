@@ -5,11 +5,11 @@ using System.Text;
 
 namespace Models
 {
-    public class Actividad
-    {
-        [Key]
-        public int Id { get; set; }
-        public DateTime FechaRealizada { get; set; }
-        public DateTime FechaFinalizada { get; set; }
-    }
+  public class Actividad
+  {
+    [Key]
+    public Guid Id { get; set; }
+    public DateTime FechaRealizada { get; set; }
+    public DateTime FechaFinalizada { get; set; }
+  }
 }

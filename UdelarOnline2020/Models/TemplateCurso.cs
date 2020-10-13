@@ -5,11 +5,11 @@ using System.Text;
 
 namespace Models
 {
-    public class TemplateCurso
-    {
-       [Key]
-       public int Id { get; set; }
-        public string Nombre { get; set; }
-        public string Descripcion { get; set; }
-    }
+  public class TemplateCurso
+  {
+    [Key]
+    public Guid Id { get; set; }
+    public string Nombre { get; set; }
+    public string Descripcion { get; set; }
+  }
 }
