@@ -2,7 +2,7 @@ using System.IO;
 
 namespace Models
 {
-    public class ClasesDictadas : Actividad
+    public class ClaseDictada : Actividad
     {
         //public File Archivo { get; set; }
     }
