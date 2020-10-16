@@ -4,7 +4,7 @@ namespace Models
 {
     public class DocenteTrabajo
     {
-        public String DocenteCI { get; set; }
+        public Guid DocenteId { get; set; }
 
         public Docente Docente { get; set; }
 
