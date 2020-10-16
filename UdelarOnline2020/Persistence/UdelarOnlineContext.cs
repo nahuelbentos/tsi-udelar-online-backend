@@ -9,6 +9,10 @@ namespace Persistence
   {
     public UdelarOnlineContext(DbContextOptions options) : base(options) { }
 
+    public UdelarOnlineContext()
+    {
+    }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
       base.OnModelCreating(modelBuilder);

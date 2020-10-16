@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Business;
+using Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
@@ -13,9 +14,9 @@ namespace WebAPI.Controllers
   {
     private readonly CursoBusiness cb;
 
-    public CursoController()
+    public CursoController(CursoBusiness cursoBusiness)
     {
-      cb = new CursoBusiness();
+      this.cb = cursoBusiness;
     }
 
 
@@ -31,19 +32,8 @@ namespace WebAPI.Controllers
       }
 
       return curso;
+
     }
 
-    //public async Task<ActionResult<Curso>> GetCurso(int id)
-    //{
-    //    var curso = await cb.GetCurso(id);;
-
-    //    if (curso == null)
-    //    {
-    //        return NotFound();
-    //    }
-
-    //    return curso;
-    //}
   }
-
 }

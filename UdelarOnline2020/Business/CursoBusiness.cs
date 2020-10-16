@@ -4,18 +4,18 @@ using Persistence;
 
 namespace Business
 {
-    public class CursoBusiness
+  public class CursoBusiness
+  {
+    private readonly UdelarOnlineContext context;
+
+    public CursoBusiness(UdelarOnlineContext context)
     {
-        private readonly Contexto _context;
-
-        public CursoBusiness()
-        {
-            _context = new Contexto();
-        }
-
-        public Curso GetCurso(int id)
-        {
-            return _context.Curso.Find(id);
-        }
+      this.context = context;
     }
+
+    public Curso GetCurso(int id)
+    {
+      return context.Curso.Find(id);
+    }
+  }
 }
