@@ -4,7 +4,7 @@ namespace Models
 {
     public class AdministradorFacultadFacultad
     {
-        public String AdministradorFacultadCI { get; set; }
+        public Guid AdministradorFacultadId { get; set; }
 
         public Usuario AdministradorFacultad { get; set; }
         //Puse usuario porque me tira error si pongo de tipo AdministradorFacultad
