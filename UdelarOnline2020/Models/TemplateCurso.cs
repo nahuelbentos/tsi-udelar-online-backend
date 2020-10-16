@@ -8,7 +8,7 @@ namespace Models
   public class TemplateCurso
   {
 
-    public Guid Id { get; set; }
+    public Guid TemplateCursoId { get; set; }
     public string Nombre { get; set; }
     public string Descripcion { get; set; }
   }

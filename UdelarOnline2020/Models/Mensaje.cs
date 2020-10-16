@@ -2,12 +2,15 @@ using System;
 
 namespace Models
 {
-    public class Mensaje
-    {
-        public Guid Id { get; set; }
+  public class Mensaje
+  {
+    public Guid MensajeId { get; set; }
 
-        public String Contenido { get; set; }
+    public string Contenido { get; set; }
 
-        public DateTime FechaDeEnviado { get; set; }
-    }
+    public DateTime FechaDeEnviado { get; set; }
+
+    public Usuario Emisor { get; set; }
+    public Guid EmisorId { get; set; }
+  }
 }

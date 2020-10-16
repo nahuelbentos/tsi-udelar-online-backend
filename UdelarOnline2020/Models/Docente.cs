@@ -4,8 +4,7 @@ using System.Text;
 
 namespace Models
 {
-    public class Docente : Usuario
-    {
-        public bool EsDocenteResponsable { get; set; }
-    }
+  public class Docente : Usuario
+  {
+  }
 }

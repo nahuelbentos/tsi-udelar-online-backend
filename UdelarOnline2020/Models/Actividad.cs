@@ -11,5 +11,8 @@ namespace Models
     public Guid Id { get; set; }
     public DateTime FechaRealizada { get; set; }
     public DateTime FechaFinalizada { get; set; }
+
+    public Curso Curso { get; set; }
+    public Guid CursoId { get; set; }
   }
 }

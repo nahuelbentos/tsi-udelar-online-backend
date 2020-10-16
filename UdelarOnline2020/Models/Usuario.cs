@@ -21,6 +21,6 @@ namespace Models
 
     public string UserName_udelar { get; set; }
     public string Password { get; set; }
-
+    public ICollection<Comunicado> ComunicadoLista { get; set; }
   }
 }

@@ -11,5 +11,8 @@ namespace Models
     public string Descripcion { get; set; }
     public string Nombre { get; set; }
 
+    public Facultad Facultad { get; set; }
+    public Guid FacultadId { get; set; }
+
   }
 }
