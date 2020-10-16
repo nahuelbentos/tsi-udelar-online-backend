@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Models
 {
-  class Encuesta : Actividad
+  public class Encuesta : Actividad
   {
 
     // public Guid Id { get; set; }
