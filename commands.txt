@@ -1,0 +1,19 @@
+dotnet restore
+dotnet build
+dotnet run -p WebAPI/
+
+
+// Para instalar dotnet-ef
+dotnet tool install --global dotnet-ef --version 3.1.8
+
+//Remover migration
+dotnet ef migrations remove -p Persistence/ -s WebAPI/
+
+dotnet ef migrations add "Nombre de la migracion (tiene que ir sin las comillas)" -p Persistence/ -s WebAPI/
+
+
+// Para ejecutar la migración hay que estar dentro de WebAPI/  y ejecutar: 
+dotnet watch run
+
+// Update database luego de migracion
+dotnet ef database update
