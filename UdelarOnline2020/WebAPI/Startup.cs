@@ -20,6 +20,8 @@ using FluentValidation.AspNetCore;
 using Business;
 using Persistence;
 using Models;
+using MediatR;
+using Newtonsoft.Json;
 
 namespace WebAPI
 {
@@ -35,14 +37,13 @@ namespace WebAPI
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
-      services.AddControllers();
-
 
       services.AddDbContext<UdelarOnlineContext>(opt =>
       {
         opt.UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection"));
       });
 
+      services.AddMediatR(typeof(Business.Cursos.Consulta.Manejador).Assembly);
 
       // services.AddMediatR(typeof(Consulta.Manejador).Assembly); 
       services.AddControllers()
@@ -50,6 +51,10 @@ namespace WebAPI
        {
          config.RegisterValidatorsFromAssemblyContaining<Business.Cursos.Nuevo>();
        });
+
+
+      services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
+       .AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
 
       // Configuración de IdentityCore
       var builder = services.AddIdentityCore<Usuario>();
@@ -84,7 +89,7 @@ namespace WebAPI
         builder.AllowAnyHeader();
       });
 
-      app.UseHttpsRedirection();
+      // app.UseHttpsRedirection();
 
       app.UseRouting();
 
