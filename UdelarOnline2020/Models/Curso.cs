@@ -7,7 +7,7 @@ namespace Models
   public class Curso
   {
 
-    public Guid Id { get; set; }
+    public Guid CursoId { get; set; }
     public string Descripcion { get; set; }
     public string Nombre { get; set; }
     public ModalidadEnum Modalidad { get; set; }

@@ -4,7 +4,7 @@ namespace Models
 {
   public class Respuesta
   {
-    public Guid Id { get; set; }
+    public Guid RespuestaId { get; set; }
 
     public string Mensaje { get; set; }
 

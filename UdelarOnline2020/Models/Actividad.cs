@@ -8,7 +8,7 @@ namespace Models
   public class Actividad
   {
 
-    public Guid Id { get; set; }
+    public Guid ActividadId { get; set; }
     public DateTime FechaRealizada { get; set; }
     public DateTime FechaFinalizada { get; set; }
 

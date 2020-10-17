@@ -8,7 +8,7 @@ namespace Models
   public class Encuesta : Actividad
   {
 
-    // public Guid Id { get; set; }
+    // public Guid EncuestaId { get; set; }
     public string Nombre { get; set; }
     public string Descripcion { get; set; }
     public bool EsAdministrador { get; set; }

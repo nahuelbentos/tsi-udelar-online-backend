@@ -9,7 +9,7 @@ namespace Models
   public class Material
   {
 
-    public Guid Id { get; set; }
+    public Guid MaterialId { get; set; }
     //public File Archivo { get; set; }
   }
 }

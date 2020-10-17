@@ -12,12 +12,14 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Identity;
 
-using Persistence;
-using Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using WebAPI.Middleware;
 using Microsoft.EntityFrameworkCore;
+using FluentValidation.AspNetCore;
+using Business;
+using Persistence;
+using Models;
 
 namespace WebAPI
 {
@@ -42,6 +44,13 @@ namespace WebAPI
       });
 
 
+      // services.AddMediatR(typeof(Consulta.Manejador).Assembly); 
+      services.AddControllers()
+       .AddFluentValidation(config =>
+       {
+         config.RegisterValidatorsFromAssemblyContaining<Business.Cursos.Nuevo>();
+       });
+
       // Configuración de IdentityCore
       var builder = services.AddIdentityCore<Usuario>();
       var identityBuilder = new IdentityBuilder(builder.UserType, builder.Services);
@@ -60,12 +69,13 @@ namespace WebAPI
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
+      app.UseMiddleware<ManejadorErrorMiddleware>();
+
       if (env.IsDevelopment())
       {
         app.UseDeveloperExceptionPage();
       }
 
-      app.UseMiddleware<ManejadorErrorMiddleware>();
 
       app.UseCors(builder =>
       {

@@ -7,7 +7,7 @@ namespace Models
 {
   public class Carrera
   {
-    public Guid Id { get; set; }
+    public Guid CarreraId { get; set; }
     public string Descripcion { get; set; }
     public string Nombre { get; set; }
 
