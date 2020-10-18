@@ -21,7 +21,7 @@ using Business;
 using Persistence;
 using Models;
 using MediatR;
-using Newtonsoft.Json;
+using Business.Cursos;
 
 namespace WebAPI
 {
@@ -43,9 +43,9 @@ namespace WebAPI
         opt.UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection"));
       });
 
-      services.AddMediatR(typeof(Business.Cursos.Consulta.Manejador).Assembly);
 
-      // services.AddMediatR(typeof(Consulta.Manejador).Assembly); 
+      services.AddMediatR(typeof(Consulta.Manejador).Assembly);
+
       services.AddControllers()
        .AddFluentValidation(config =>
        {
@@ -53,8 +53,6 @@ namespace WebAPI
        });
 
 
-      services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
-       .AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
 
       // Configuración de IdentityCore
       var builder = services.AddIdentityCore<Usuario>();
@@ -69,12 +67,15 @@ namespace WebAPI
 
       services.TryAddSingleton<ISystemClock, SystemClock>();
 
+      // Middleware
+
+      services.AddMediatR(typeof(Editar.Manejador).Assembly);
+
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
-      app.UseMiddleware<ManejadorErrorMiddleware>();
 
       if (env.IsDevelopment())
       {
@@ -93,6 +94,7 @@ namespace WebAPI
 
       app.UseRouting();
 
+      app.UseMiddleware<ManejadorErrorMiddleware>();
       app.UseAuthorization();
 
       app.UseEndpoints(endpoints =>

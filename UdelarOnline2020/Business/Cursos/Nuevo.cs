@@ -1,7 +1,9 @@
+using System.Net;
 using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Aplicacion.ManejadorError;
 using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -51,10 +53,12 @@ namespace Business.Cursos
       public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
       {
 
-        this.logger.LogInformation("Request nombre :::", request.Nombre);
 
         var templateCurso = await this.context.TemplateCurso.Where(tc => tc.TemplateCursoId == request.TemplateCursoId).FirstOrDefaultAsync();
-
+        if (templateCurso == null)
+        {
+          throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "No existe el template ingresado" });
+        }
         var curso = new Curso
         {
           CursoId = Guid.NewGuid(),
