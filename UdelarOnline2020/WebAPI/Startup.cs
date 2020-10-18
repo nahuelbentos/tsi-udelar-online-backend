@@ -20,6 +20,8 @@ using FluentValidation.AspNetCore;
 using Business;
 using Persistence;
 using Models;
+using MediatR;
+using Business.Cursos;
 
 namespace WebAPI
 {
@@ -35,8 +37,6 @@ namespace WebAPI
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
-      services.AddControllers();
-
 
       services.AddDbContext<UdelarOnlineContext>(opt =>
       {
@@ -44,12 +44,15 @@ namespace WebAPI
       });
 
 
-      // services.AddMediatR(typeof(Consulta.Manejador).Assembly); 
+      services.AddMediatR(typeof(Consulta.Manejador).Assembly);
+
       services.AddControllers()
        .AddFluentValidation(config =>
        {
          config.RegisterValidatorsFromAssemblyContaining<Business.Cursos.Nuevo>();
        });
+
+
 
       // Configuración de IdentityCore
       var builder = services.AddIdentityCore<Usuario>();
@@ -64,12 +67,15 @@ namespace WebAPI
 
       services.TryAddSingleton<ISystemClock, SystemClock>();
 
+      // Middleware
+
+      services.AddMediatR(typeof(Editar.Manejador).Assembly);
+
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
-      app.UseMiddleware<ManejadorErrorMiddleware>();
 
       if (env.IsDevelopment())
       {
@@ -84,10 +90,11 @@ namespace WebAPI
         builder.AllowAnyHeader();
       });
 
-      app.UseHttpsRedirection();
+      // app.UseHttpsRedirection();
 
       app.UseRouting();
 
+      app.UseMiddleware<ManejadorErrorMiddleware>();
       app.UseAuthorization();
 
       app.UseEndpoints(endpoints =>
