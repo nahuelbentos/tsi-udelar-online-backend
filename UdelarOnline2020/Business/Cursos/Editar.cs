@@ -20,8 +20,8 @@ namespace Business.Cursos
       public Guid CursoId { get; set; }
       public string Nombre { get; set; }
       public string Descripcion { get; set; }
-      public ModalidadEnum ModalidadCurso { get; set; }
-      public bool RequiereMatriculacion { get; set; }
+      public ModalidadEnum? ModalidadCurso { get; set; }
+      public bool? RequiereMatriculacion { get; set; }
       public string SalaVirtual { get; set; }
       public Guid TemplateCursoId { get; set; }
     }
@@ -33,7 +33,6 @@ namespace Business.Cursos
       {
         RuleFor(c => c.Nombre).NotEmpty().WithMessage("El nombre es requerido");
         RuleFor(c => c.ModalidadCurso).NotEmpty().WithMessage("Es requerido enviar ModalidadCurso, incluso si es la misma que la anterior.");
-        RuleFor(c => c.RequiereMatriculacion).NotEmpty().WithMessage("Es requerido enviar RequiereMatriculacion, incluso si no cambio el valor.");
       }
     }
 
@@ -56,27 +55,26 @@ namespace Business.Cursos
 
         }
 
-
-        var templateCurso = await this.context.TemplateCurso.Where(tc => tc.TemplateCursoId == request.TemplateCursoId).FirstOrDefaultAsync();
-
-
-        if (templateCurso == null)
+        if (request.TemplateCursoId != Guid.Empty)
         {
 
+          var templateCurso = await this.context.TemplateCurso.Where(tc => tc.TemplateCursoId == request.TemplateCursoId).FirstOrDefaultAsync();
 
-          throw new ManejadorExcepcion(HttpStatusCode.NotFound, new { mensaje = "El template enviado,  no existe." });
+
+          if (templateCurso == null)
+          {
+            throw new ManejadorExcepcion(HttpStatusCode.NotFound, new { mensaje = "El template enviado,  no existe." });
+          }
+
+          curso.TemplateCursoId = request.TemplateCursoId;
+          curso.TemplateCurso = templateCurso;
+
         }
-
-        curso.TemplateCursoId = request.TemplateCursoId;
-        curso.TemplateCurso = templateCurso;
-
-
-
 
         curso.Nombre = request.Nombre ?? curso.Nombre;
         curso.Descripcion = request.Descripcion ?? curso.Descripcion;
-        curso.Modalidad = request.ModalidadCurso;
-        curso.RequiereMatriculacion = request.RequiereMatriculacion;
+        curso.Modalidad = request.ModalidadCurso ?? curso.Modalidad;
+        curso.RequiereMatriculacion = request.RequiereMatriculacion ?? curso.RequiereMatriculacion;
         curso.SalaVirtual = request.SalaVirtual ?? curso.SalaVirtual;
 
 
@@ -87,10 +85,6 @@ namespace Business.Cursos
           return Unit.Value;
 
         throw new Exception("Ocurrio un error al editar el curso");
-
-
-
-
 
       }
     }
