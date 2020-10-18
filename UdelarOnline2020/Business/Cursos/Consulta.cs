@@ -23,7 +23,11 @@ namespace Business.Cursos
       public async Task<List<Curso>> Handle(Ejecuta request, CancellationToken cancellationToken)
       {
         // Esto cambia para devolver una lista de DataTypes, en breves lo cambio.
-        var cursos = await this.context.Curso.ToListAsync();
+        var cursos = await this.context.Curso
+                                      .Include(c => c.TemplateCurso)
+                                      .Include(c => c.MaterialLista)
+                                      .Include(c => c.ActividadLista)
+                                      .ToListAsync();
         return cursos;
       }
     }
