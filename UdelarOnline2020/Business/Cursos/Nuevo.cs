@@ -79,7 +79,7 @@ namespace Business.Cursos
           return Unit.Value;
         }
 
-        throw new Exception("No se pudo dar de alta el curso");
+        throw new ManejadorExcepcion(HttpStatusCode.InternalServerError, new { mensaje = "Ocurrio un error al insertar el curso" });
 
 
       }

@@ -84,7 +84,7 @@ namespace Business.Cursos
         if (res > 0)
           return Unit.Value;
 
-        throw new Exception("Ocurrio un error al editar el curso");
+        throw new ManejadorExcepcion(HttpStatusCode.InternalServerError, new { mensaje = "Ocurrio un error al editar el curso" });
 
       }
     }

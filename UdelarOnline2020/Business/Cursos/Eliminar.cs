@@ -47,7 +47,7 @@ namespace Business.Cursos
         if (res > 0)
           return Unit.Value;
 
-        throw new Exception("Ocurrio un error");
+        throw new ManejadorExcepcion(HttpStatusCode.InternalServerError, new { mensaje = "Ocurrio un error al eliminar el curso" });
       }
     }
   }
