@@ -14,10 +14,10 @@ namespace WebAPI.Middleware
     private readonly RequestDelegate next;
     private readonly ILogger<ManejadorErrorMiddleware> logger;
 
-    public ManejadorErrorMiddleware(RequestDelegate next, ILogger<ManejadorErrorMiddleware> logger)
+    public ManejadorErrorMiddleware(RequestDelegate _next, ILogger<ManejadorErrorMiddleware> _logger)
     {
-      this.next = next;
-      this.logger = logger;
+      this.next = _next;
+      this.logger = _logger;
     }
 
     public async Task Invoke(HttpContext context)
@@ -30,7 +30,6 @@ namespace WebAPI.Middleware
       catch (Exception exception)
       {
         await ManejadorExcepcionAsincrona(context, exception, this.logger);
-        // throw;
       }
     }
 
@@ -42,8 +41,8 @@ namespace WebAPI.Middleware
       {
         case ManejadorExcepcion manejador:
           logger.LogError(exception, "Manejador Error");
-          errores = manejador.errores;
-          context.Response.StatusCode = (int)manejador.code;
+          errores = manejador.Errores;
+          context.Response.StatusCode = (int)manejador.Code;
           break;
         case Exception e:
           logger.LogError(exception, "Error de Servidor");
@@ -51,6 +50,7 @@ namespace WebAPI.Middleware
           context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
           break;
       }
+
       context.Response.ContentType = "application/json";
       if (errores != null)
       {

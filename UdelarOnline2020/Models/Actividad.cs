@@ -7,6 +7,14 @@ namespace Models
 {
   public class Actividad
   {
+    // public Actividad(Guid actividadId, DateTime fechaRealizada, DateTime fechaFinalizada, Curso curso, Guid cursoId)
+    // {
+    //   ActividadId = actividadId;
+    //   FechaRealizada = fechaRealizada;
+    //   FechaFinalizada = fechaFinalizada;
+    //   Curso = curso;
+    //   CursoId = cursoId;
+    // }
 
     public Guid ActividadId { get; set; }
     public DateTime FechaRealizada { get; set; }
