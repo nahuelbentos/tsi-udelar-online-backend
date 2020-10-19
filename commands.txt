@@ -17,3 +17,6 @@ dotnet watch run
 
 // Update database luego de migracion
 dotnet ef database update
+
+// Generar release para prod
+dotnet publish -c Release -o publish --self-contained false UdelarOnline2020.sln 
