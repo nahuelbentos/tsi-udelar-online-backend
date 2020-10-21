@@ -1,38 +1,25 @@
-using System;
-using System.Linq;
 using System.Net;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Aplicacion.ManejadorError;
-using FluentValidation;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using Models;
 using Persistence;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Business.Facultades
 {
-  public class Nuevo
+  public class Editar
   {
     public class Ejecuta : IRequest
     {
 
+      public Guid FacultadId { get; set; }
       public string Nombre { get; set; }
       public string Descripcion { get; set; }
       public string UrlAcceso { get; set; }
       public string DominioMail { get; set; } // Ejemplo: @fing.edu.uy
-
-    }
-
-    public class EjecutaValidador : AbstractValidator<Ejecuta>
-    {
-      public EjecutaValidador()
-      {
-        RuleFor(f => f.Nombre).NotEmpty();
-        RuleFor(f => f.Descripcion).NotEmpty();
-        RuleFor(f => f.UrlAcceso).NotEmpty();
-        RuleFor(f => f.DominioMail).NotEmpty();
-      }
     }
 
     public class Manejador : IRequestHandler<Ejecuta>
@@ -46,23 +33,20 @@ namespace Business.Facultades
 
       public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
       {
+        var facultad = await this.context.Facultad.FindAsync(request.FacultadId);
+        if (facultad == null)
+          throw new ManejadorExcepcion(HttpStatusCode.NotFound, new { mensaje = "No existe una facultad con el Id ingresado." });
 
-
-        var otraFacultadConMisoDominio = await this.context.Facultad.Where(f => f.DominioMail == request.DominioMail).FirstOrDefaultAsync();
+        var otraFacultadConMisoDominio = await this.context.Facultad.Where(f => f.DominioMail == request.DominioMail && !f.FacultadId.Equals(request.FacultadId)).FirstOrDefaultAsync();
 
         if (otraFacultadConMisoDominio != null)
           throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "Existe otra facultad con el mismo Dominio de Mail, ingrese uno distinto." });
 
-        var facultad = new Facultad
-        {
-          FacultadId = Guid.NewGuid(),
-          Nombre = request.Nombre,
-          Descripcion = request.Descripcion,
-          UrlAcceso = request.UrlAcceso,
-          DominioMail = request.DominioMail,
-        };
+        facultad.Nombre = request.Nombre ?? facultad.Nombre;
+        facultad.Descripcion = request.Descripcion ?? facultad.Descripcion;
+        facultad.UrlAcceso = request.UrlAcceso ?? facultad.UrlAcceso;
+        facultad.DominioMail = request.DominioMail ?? facultad.DominioMail;
 
-        await this.context.Facultad.AddAsync(facultad);
 
         var res = await this.context.SaveChangesAsync();
 
@@ -70,8 +54,10 @@ namespace Business.Facultades
         if (res > 0)
           return Unit.Value;
 
-        throw new ManejadorExcepcion(HttpStatusCode.InternalServerError, new { mensaje = "No se pudo insertar la facultad" });
+        throw new ManejadorExcepcion(HttpStatusCode.InternalServerError, new { mensaje = "Ocurrio un error al editar la facultad" });
       }
     }
+
   }
+
 }
