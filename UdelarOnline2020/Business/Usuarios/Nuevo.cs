@@ -23,10 +23,10 @@ namespace Business.Usuarios
       public DateTime FechaNacimiento { get; set; }
       public string Direccion { get; set; }
       public string Telefono { get; set; }
-      public string UserNameUdelar { get; set; }
+      public string EmailPersonal { get; set; }
       public string UserName { get; set; }
       public string Password { get; set; }
-      public string Email { get; set; }
+      public Guid FacultadId { get; set; }
 
       // Esto para unificar el tipo y no hacer uno por cada uno
       public string Tipo { get; set; }
@@ -48,9 +48,9 @@ namespace Business.Usuarios
         RuleFor(u => u.Direccion).NotEmpty();
         RuleFor(u => u.Telefono).NotEmpty();
         RuleFor(u => u.UserName).NotEmpty();
-        RuleFor(u => u.UserNameUdelar).NotEmpty();
+        RuleFor(u => u.EmailPersonal).NotEmpty();
+        RuleFor(u => u.FacultadId).NotEmpty().WithMessage("Es necesario saber la facultad para crear el usuario");
         RuleFor(u => u.Password).NotEmpty();
-        RuleFor(u => u.Email).NotEmpty();
         RuleFor(u => u.Tipo).NotEmpty();
       }
     }
@@ -68,12 +68,18 @@ namespace Business.Usuarios
 
       public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
       {
+        var facultad = await this.context.Facultad.FindAsync(request.FacultadId);
+        if (facultad == null)
+          throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "No existe facultad con el FacultadId ingresado." });
 
-        var existe = await this.context.Users.Where(user => user.Email == request.Email).AnyAsync();
+        var email = request.UserName + '@' + facultad.DominioMail;
+
+        var existe = await this.context.Users.Where(user => user.Email == email).AnyAsync();
 
         if (existe)
-          throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "El email ingresado ya existe" });
+          throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "El email de la facultad ya existe en la misma." });
 
+        // habría que ver si tiene sentido esta validación
         var existeUserName = await this.context.Users.Where(user => user.UserName == request.UserName).AnyAsync();
 
         if (existeUserName)
@@ -105,10 +111,13 @@ namespace Business.Usuarios
         usuario.FechaNacimiento = request.FechaNacimiento;
         usuario.Direccion = request.Direccion;
         usuario.Telefono = request.Telefono;
-        usuario.UserName_udelar = request.UserNameUdelar;
+        usuario.EmailPersonal = request.EmailPersonal;
         usuario.UserName = request.UserName;
-        usuario.Email = request.Email;
+        usuario.Email = email;
         usuario.ComunicadoLista = null;
+
+        usuario.FacultadId = request.FacultadId;
+        usuario.Facultad = facultad;
 
         var result = await this.userManager.CreateAsync(usuario, request.Password);
 
