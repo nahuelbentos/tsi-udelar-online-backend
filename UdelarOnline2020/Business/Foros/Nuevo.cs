@@ -23,11 +23,11 @@ namespace Business.Foros
 
         public class EjecutaValidator : AbstractValidator<Ejecuta>
         {
-        public EjecutaValidator()
-        {
-            RuleFor(c => c.Titulo).NotEmpty().WithMessage("El Titulo es requerido.");
-            RuleFor(c => c.Descripcion).NotEmpty();
-        }
+            public EjecutaValidator()
+            {
+                RuleFor(c => c.Titulo).NotEmpty().WithMessage("El Titulo es requerido.");
+                RuleFor(c => c.Descripcion).NotEmpty();
+            }
         }
 
         public class Manejador : IRequestHandler<Ejecuta>
