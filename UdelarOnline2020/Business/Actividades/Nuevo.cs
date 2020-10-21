@@ -17,6 +17,14 @@ namespace Business.Actividades
         {
             public DateTime FechaRealizada { get; set; }
             public DateTime FechaFinalizada { get; set; }
+            public String Tipo { get; set; }
+            //public File Archivo { get; set; }
+            public String Nombre { get; set; }
+            public String Descripcion { get; set; }
+            public bool EsAdministrador { get; set; }
+            public bool EsIndividual { get; set; }
+            public int Calificacion { get; set; }
+            public String Nota { get; set; }
         }
 
         public class EjecutaValidator : AbstractValidator<Ejecuta>
@@ -41,12 +49,48 @@ namespace Business.Actividades
 
             public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
             {
-                var actividad = new Actividad
+                Actividad actividad = null;
+
+                Console.WriteLine(actividad.GetType().ToString());
+                
+                switch (request.Tipo)
                 {
-                    ActividadId = Guid.NewGuid(),
-                    FechaRealizada = request.FechaRealizada,
-                    FechaFinalizada = request.FechaFinalizada
-                };
+                    case "ClaseDictada":
+                        actividad = new ClaseDictada
+                        {
+                            FechaFinalizada = request.FechaFinalizada,
+                            FechaRealizada = request.FechaRealizada,
+                            //Y tambien tiene un file
+                            //Archivo = request.Archivo
+                        };
+                        break;
+                    case "Encuesta":
+                        actividad = new Encuesta
+                        {
+                            FechaFinalizada = request.FechaFinalizada,
+                            FechaRealizada = request.FechaRealizada,
+                            
+                            Nombre = request.Nombre,
+                            Descripcion = request.Descripcion,
+                            EsAdministrador = request.EsAdministrador
+                            
+                        };
+                        break;
+                    case "Trabajo":
+                        actividad = new Trabajo
+                        {
+                            FechaFinalizada = request.FechaFinalizada,
+                            FechaRealizada = request.FechaRealizada,
+                            
+                            EsIndividual = request.EsIndividual,
+                            Calificacion = request.Calificacion,
+                            Nota = request.Nota
+                            
+                        };
+                        break;
+                    default:
+                        throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "El tipo de actividad debe ser ClaseDictada, Encuesta o Trabajo" });
+                }
 
                 this.context.Actividad.Add(actividad);
 
