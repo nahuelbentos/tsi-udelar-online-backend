@@ -43,7 +43,7 @@ namespace WebAPI.Controllers
     {
       return await this.Mediator.Send(new Eliminar.Ejecuta { FacultadId = id });
     }
-
-
   }
 }
+
+
