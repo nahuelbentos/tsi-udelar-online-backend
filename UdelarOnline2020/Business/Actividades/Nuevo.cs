@@ -33,6 +33,7 @@ namespace Business.Actividades
             {
                 RuleFor(a => a.FechaRealizada).NotEmpty();
                 RuleFor(a => a.FechaFinalizada).NotEmpty();
+                RuleFor(a => a.Tipo).NotEmpty().WithMessage("Los tipos son Encuesta, Trabajo o ClaseDictada");
             }
         }
 
@@ -50,8 +51,6 @@ namespace Business.Actividades
             public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
             {
                 Actividad actividad = null;
-
-                Console.WriteLine(actividad.GetType().ToString());
                 
                 switch (request.Tipo)
                 {

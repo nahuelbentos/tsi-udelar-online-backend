@@ -56,7 +56,9 @@ namespace Business.Actividades
                 actividad.FechaRealizada = request.FechaRealizada;
                 actividad.FechaFinalizada = request.FechaFinalizada;
 
-                var aux = actividad.GetType().ToString();
+                var aux = actividad.GetType().ToString(); 
+
+                var tipo = "Models." + request.Tipo;
 
                 /*
                 switch (aux)
