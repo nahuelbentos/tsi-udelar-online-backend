@@ -164,6 +164,7 @@ namespace Business.Actividades
                 var res = this.context.Actividad.Remove(actividad);
                 if (res.State != EntityState.Deleted)
                     throw new ManejadorExcepcion(HttpStatusCode.InternalServerError, new { mensaje = "Ocurrió un error al eliminar el usuario." });
+                return Task.CompletedTask;
             }
 
         }
