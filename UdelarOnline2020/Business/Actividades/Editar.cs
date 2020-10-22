@@ -6,6 +6,7 @@ using Aplicacion.ManejadorError;
 using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Models;
 using Persistence;
 
 namespace Business.Actividades
@@ -33,6 +34,7 @@ namespace Business.Actividades
             {
                 RuleFor(a => a.FechaRealizada).NotEmpty();
                 RuleFor(a => a.FechaFinalizada).NotEmpty();
+                RuleFor(a => a.Tipo).NotEmpty();
             }
         }
 
@@ -52,35 +54,118 @@ namespace Business.Actividades
                 {
                     throw new ManejadorExcepcion(HttpStatusCode.NotFound, new { mensaje = "No existe la actividad ingresada." });
                 }
-                                                    
-                actividad.FechaRealizada = request.FechaRealizada;
-                actividad.FechaFinalizada = request.FechaFinalizada;
-
-                var aux = actividad.GetType().ToString(); 
 
                 var tipo = "Models." + request.Tipo;
 
-                /*
-                switch (aux)
-                {
-                    case "":
-                        break;
-                    case "":
-                        break;
-                    case "":
-                        break;
-                    default:
-                        throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "Ocurrio un error al traer la actividad de la base de datos." });
-                }
-                */
 
-                var result = await this.context.SaveChangesAsync();
-                if (result > 0)
+                if (!tipo.Equals(actividad.GetType().ToString()))
                 {
-                    return Unit.Value;
+                    Actividad actividadActualizar = null;
+
+                    switch (request.Tipo)
+                    {
+                        case "Trabajo":
+                        actividadActualizar = new Trabajo();
+                        break;
+                        case "ClaseDictada":
+                        actividadActualizar = new ClaseDictada();
+                        break;
+                        case "Encuesta":
+                        actividadActualizar = new Encuesta();
+                        break;
+                        default:
+                        throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "El tipo de actividad debe ser Trabajo, ClaseDictada o Encuesta" });
+                    }
+
+                    actividadActualizar = await this.editarActividad(actividad, actividadActualizar, request);
+
+                    this.context.Actividad.Add(actividadActualizar);
+
+                    var resultado = await this.context.SaveChangesAsync();
+
+                    if (resultado > 0)
+                        return Unit.Value;
+                }                                   
+                else
+                {
+
+                actividad = await this.editarActividad(actividad, null, request);
+
+                this.context.Actividad.Update(actividad);
+
+                var resultado = await this.context.SaveChangesAsync();
+
+
+                if (resultado > 0)
+                    return Unit.Value; 
                 }
+
                 throw new ManejadorExcepcion(HttpStatusCode.InternalServerError, new { mensaje = "No se pudo editar la actividad" });
             }
+
+            private async Task<Actividad> editarActividad(Actividad actividadOld, Actividad actividadActualizar, Ejecuta request)
+            {    
+                Actividad actividad = actividadActualizar ?? actividadOld;
+
+                //No me deja usar operador ??
+                actividad.FechaFinalizada = request.FechaFinalizada;
+                actividad.FechaRealizada = request.FechaRealizada;
+
+                switch (request.Tipo)
+                {
+                    case "ClaseDictada":
+                        /*
+
+                        ClaseDictada claseAux = (ClaseDictada)actividad;
+                        ClaseDictada claseOldAux = (ClaseDictada)actividadOld;
+                        claseAux.Archivo = request.Archivo ?? claseOldAux.Archivo;
+                        
+                        */
+                        break;
+                    case "Encuesta":
+                        //no me permitia acceder al atributo nombre sin hacer conversion implicita, por eso está asi 22-10-2020 Albert
+                        Encuesta encuestaAux = (Encuesta)actividad;
+                        Encuesta encuestaOldAux = (Encuesta)actividadOld;
+                        encuestaAux.Nombre = request.Nombre ?? encuestaOldAux.Nombre;
+                        encuestaAux.Descripcion = request.Descripcion ?? encuestaOldAux.Descripcion;
+                        //no me permite operador ?? con bool
+                        encuestaAux.EsAdministrador = request.EsAdministrador;
+                        break;
+                    case "Trabajo":
+                        Trabajo trabajoAux = (Trabajo)actividad;
+                        Trabajo trabajoOldAux = (Trabajo)actividadOld;
+
+                        trabajoAux.Nota = request.Nota ?? trabajoOldAux.Nota;
+                        //no me permite usar operador ?? con bool
+                        trabajoAux.EsIndividual = request.EsIndividual;
+                        trabajoAux.Calificacion = request.Calificacion;
+                        break;
+                    default:
+                        throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "El tipo de actividad debe ser ClaseDictada, Encuesta o Trabajo" });
+                }
+
+                if (actividadActualizar != null)
+                // Update
+                {
+                
+                actividad.Curso = actividadOld.Curso;
+                actividad.CursoId = actividadOld.CursoId;
+
+                await this.eliminarActividad(actividadOld);
+                }
+
+                return actividad;
+
+            }
+
+
+            private Task eliminarActividad(Actividad actividad)
+            {
+                var res = this.context.Actividad.Remove(actividad);
+                if (res.State != EntityState.Deleted)
+                    throw new ManejadorExcepcion(HttpStatusCode.InternalServerError, new { mensaje = "Ocurrió un error al eliminar el usuario." });
+            }
+
         }
     }
 }
