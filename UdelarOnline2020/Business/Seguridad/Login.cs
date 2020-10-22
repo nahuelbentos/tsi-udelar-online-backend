@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading;
@@ -59,7 +60,7 @@ namespace Business.Seguridad
 
           var listaRoles = await this.userManager.GetRolesAsync(usuario);
           var roles = new List<string>(listaRoles);
-
+          //   var facultad = await this.context.Facultad.FindAsync(usuario.FacultadId);
 
 
           return new DtUsuario
@@ -67,15 +68,17 @@ namespace Business.Seguridad
             Nombres = usuario.Nombres,
             Apellidos = usuario.Apellidos,
             emailPersonal = usuario.EmailPersonal,
+            CI = usuario.CI,
             Token = "Aca va el token",
             Email = usuario.Email,
             UserName = usuario.UserName,
-            FacultadId = usuario.FacultadId,
-            Facultad = usuario.Facultad,
+            FacultadId = Guid.Empty
+            // FacultadId = facultad.FacultadId,
+            // Facultad = facultad,
           };
         }
 
-        throw new ManejadorExcepcion(HttpStatusCode.Unauthorized);
+        throw new ManejadorExcepcion(HttpStatusCode.Unauthorized, new { mensaje = "Ocurrio un error al loguearse: " + resultado.ToString() });
       }
     }
   }

@@ -10,8 +10,8 @@ using Persistence;
 namespace Persistence.Migrations
 {
   [DbContext(typeof(UdelarOnlineContext))]
-  [Migration("20201021155416_ActualizacionUsuarioFacultad")]
-  partial class ActualizacionUsuarioFacultad
+  [Migration("20201022162650_EliminoReferenciaAdministradorFacultadFacultadEnContext")]
+  partial class EliminoReferenciaAdministradorFacultadFacultadEnContext
   {
     protected override void BuildTargetModel(ModelBuilder modelBuilder)
     {
@@ -178,26 +178,6 @@ namespace Persistence.Migrations
             b.ToTable("Actividad");
 
             b.HasDiscriminator<string>("Discriminator").HasValue("Actividad");
-          });
-
-      modelBuilder.Entity("Models.AdministradorFacultadFacultad", b =>
-          {
-            b.Property<Guid>("AdministradorFacultadId")
-                      .HasColumnType("uniqueidentifier");
-
-            b.Property<Guid>("FacultadId")
-                      .HasColumnType("uniqueidentifier");
-
-            b.Property<string>("AdministradorFacultadId1")
-                      .HasColumnType("nvarchar(450)");
-
-            b.HasKey("AdministradorFacultadId", "FacultadId");
-
-            b.HasIndex("AdministradorFacultadId1");
-
-            b.HasIndex("FacultadId");
-
-            b.ToTable("AdministradorFacultadFacultad");
           });
 
       modelBuilder.Entity("Models.AlumnoClaseDictada", b =>
@@ -891,19 +871,6 @@ namespace Persistence.Migrations
                       .IsRequired();
           });
 
-      modelBuilder.Entity("Models.AdministradorFacultadFacultad", b =>
-          {
-            b.HasOne("Models.Usuario", "AdministradorFacultad")
-                      .WithMany()
-                      .HasForeignKey("AdministradorFacultadId1");
-
-            b.HasOne("Models.Facultad", "Facultad")
-                      .WithMany()
-                      .HasForeignKey("FacultadId")
-                      .OnDelete(DeleteBehavior.Cascade)
-                      .IsRequired();
-          });
-
       modelBuilder.Entity("Models.AlumnoClaseDictada", b =>
           {
             b.HasOne("Models.Usuario", "Alumno")
@@ -1077,7 +1044,7 @@ namespace Persistence.Migrations
           {
             b.HasOne("Models.Facultad", null)
                       .WithMany("UsuarioLista")
-                      .HasForeignKey("FacultadId1");
+                      .HasForeignKey("FacultadId");
           });
 
       modelBuilder.Entity("Models.UsuarioCurso", b =>

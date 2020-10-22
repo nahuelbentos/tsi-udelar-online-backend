@@ -9,14 +9,10 @@ namespace Persistence
   {
     public UdelarOnlineContext(DbContextOptions options) : base(options) { }
 
-    public UdelarOnlineContext()
-    {
-    }
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
       base.OnModelCreating(modelBuilder);
-      modelBuilder.Entity<AdministradorFacultadFacultad>().HasKey(administradorFacultadFacultad => new { administradorFacultadFacultad.AdministradorFacultadId, administradorFacultadFacultad.FacultadId });
+      // modelBuilder.Entity<AdministradorFacultadFacultad>().HasKey(administradorFacultadFacultad => new { administradorFacultadFacultad.AdministradorFacultadId, administradorFacultadFacultad.FacultadId });
       modelBuilder.Entity<AlumnoClaseDictada>().HasKey(alumnoClaseDictada => new { alumnoClaseDictada.AlumnoId, alumnoClaseDictada.ClaseDictadaId });
       modelBuilder.Entity<AlumnoCurso>().HasKey(alumnoCurso => new { alumnoCurso.AlumnoId, alumnoCurso.CursoId });
       modelBuilder.Entity<AlumnoTrabajo>().HasKey(alumnoTrabajo => new { alumnoTrabajo.AlumnoId, alumnoTrabajo.TrabajoId });
@@ -29,6 +25,10 @@ namespace Persistence
       modelBuilder.Entity<UsuarioEnviaMensaje>().HasKey(usuarioEnviaMensaje => new { usuarioEnviaMensaje.UsuarioId, usuarioEnviaMensaje.MensajeId });
       modelBuilder.Entity<UsuarioRecibeMensaje>().HasKey(usuarioRecibeMensaje => new { usuarioRecibeMensaje.UsuarioId, usuarioRecibeMensaje.MensajeId });
 
+      // modelBuilder.Entity<Usuario>()
+      //     .HasOne(u => u.Facultad)
+      //     .WithMany(f => f.UsuarioLista);
+
     }
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -39,7 +39,7 @@ namespace Persistence
     public DbSet<Actividad> Actividad { get; set; }
     public DbSet<Administrador> Administrador { get; set; }
     public DbSet<AdministradorFacultad> AdministradorFacultad { get; set; }
-    public DbSet<AdministradorFacultadFacultad> AdministradorFacultadFacultad { get; set; }
+    // public DbSet<AdministradorFacultadFacultad> AdministradorFacultadFacultad { get; set; }
     public DbSet<Alumno> Alumno { get; set; }
     public DbSet<AlumnoClaseDictada> AlumnoClaseDictada { get; set; }
     public DbSet<AlumnoCurso> AlumnoCurso { get; set; }

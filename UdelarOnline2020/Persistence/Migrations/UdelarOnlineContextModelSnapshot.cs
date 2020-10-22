@@ -178,26 +178,6 @@ namespace Persistence.Migrations
                     b.HasDiscriminator<string>("Discriminator").HasValue("Actividad");
                 });
 
-            modelBuilder.Entity("Models.AdministradorFacultadFacultad", b =>
-                {
-                    b.Property<Guid>("AdministradorFacultadId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("FacultadId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("AdministradorFacultadId1")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("AdministradorFacultadId", "FacultadId");
-
-                    b.HasIndex("AdministradorFacultadId1");
-
-                    b.HasIndex("FacultadId");
-
-                    b.ToTable("AdministradorFacultadFacultad");
-                });
-
             modelBuilder.Entity("Models.AlumnoClaseDictada", b =>
                 {
                     b.Property<Guid>("AlumnoId")
@@ -885,19 +865,6 @@ namespace Persistence.Migrations
                     b.HasOne("Models.Curso", "Curso")
                         .WithMany("ActividadLista")
                         .HasForeignKey("CursoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Models.AdministradorFacultadFacultad", b =>
-                {
-                    b.HasOne("Models.Usuario", "AdministradorFacultad")
-                        .WithMany()
-                        .HasForeignKey("AdministradorFacultadId1");
-
-                    b.HasOne("Models.Facultad", "Facultad")
-                        .WithMany()
-                        .HasForeignKey("FacultadId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

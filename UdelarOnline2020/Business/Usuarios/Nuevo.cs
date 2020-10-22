@@ -115,15 +115,28 @@ namespace Business.Usuarios
         usuario.UserName = request.UserName;
         usuario.Email = email;
         usuario.ComunicadoLista = null;
-
-        usuario.FacultadId = request.FacultadId;
+        Console.WriteLine("FacultadId: " + request.FacultadId);
+        // usuario.FacultadId = request.FacultadId;
         usuario.Facultad = facultad;
+        Console.WriteLine("usuario.FacultadId: " + usuario.Facultad.FacultadId);
 
         var result = await this.userManager.CreateAsync(usuario, request.Password);
 
         if (result.Succeeded)
-          // Esto va a cambiar, luego devuelvo un dataType de usuario con el token.
-          return Unit.Value;
+        {
+
+          var user = await this.userManager.FindByEmailAsync(usuario.Email);
+          Console.WriteLine(user.Apellidos);
+          Console.WriteLine(user.Facultad.FacultadId);
+          Console.WriteLine(user.Facultad.Descripcion);
+          user.Facultad = facultad;
+          var res = await this.userManager.UpdateAsync(user);
+          Console.WriteLine(user.Facultad.Descripcion);
+          if (res.Succeeded)
+            return Unit.Value;
+
+        }
+        // Esto va a cambiar, luego devuelvo un dataType de usuario con el token.
 
         throw new ManejadorExcepcion(HttpStatusCode.InternalServerError, new { mensaje = "Ocurrió un error, no se pudo dar de alta el usuario" });
 
