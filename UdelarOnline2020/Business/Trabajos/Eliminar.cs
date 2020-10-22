@@ -7,20 +7,20 @@ using FluentValidation;
 using MediatR;
 using Persistence;
 
-namespace Business.TemasForo
+namespace Business.Trabajos
 {
     public class Eliminar
     {
          public class Ejecuta : IRequest
     {
-      public Guid TemaForoId { get; set; }
+      public Guid TemplateCursoId { get; set; }
     }
 
     public class EjecutaValidator : AbstractValidator<Ejecuta>
     {
       public EjecutaValidator()
       {
-        RuleFor(t => t.TemaForoId).NotEmpty().WithMessage("Es necesario el TemaForoId para eliminar un curso.");
+        RuleFor(t => t.TemplateCursoId).NotEmpty().WithMessage("Es necesario el TemplateCursoId para eliminar un template de curso.");
       }
     }
 
@@ -35,19 +35,19 @@ namespace Business.TemasForo
 
       public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
       {
-        var temaForo = await this.context.TemaForo.FindAsync(request.TemaForoId);
+        var templateCurso = await this.context.TemplateCurso.FindAsync(request.TemplateCursoId);
 
-        if (temaForo == null)
-          throw new ManejadorExcepcion(HttpStatusCode.NotFound, new { mensaje = "El tema de foro no existe. " });
+        if (templateCurso == null)
+          throw new ManejadorExcepcion(HttpStatusCode.NotFound, new { mensaje = "El template de curso no existe. " });
 
-        this.context.TemaForo.Remove(temaForo);
+        this.context.TemplateCurso.Remove(templateCurso);
 
         var res = await this.context.SaveChangesAsync();
 
         if (res > 0)
           return Unit.Value;
 
-        throw new ManejadorExcepcion(HttpStatusCode.InternalServerError, new { mensaje = "Ocurrio un error al eliminar el tema de foro" });
+        throw new ManejadorExcepcion(HttpStatusCode.InternalServerError, new { mensaje = "Ocurrio un error al eliminar el template de curso" });
       }
     }
     }

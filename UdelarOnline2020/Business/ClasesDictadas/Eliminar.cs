@@ -7,20 +7,20 @@ using FluentValidation;
 using MediatR;
 using Persistence;
 
-namespace Business.TemasForo
+namespace Business.ClasesDictadas
 {
     public class Eliminar
     {
          public class Ejecuta : IRequest
     {
-      public Guid TemaForoId { get; set; }
+      public Guid ClaseDictadaId { get; set; }
     }
 
     public class EjecutaValidator : AbstractValidator<Ejecuta>
     {
       public EjecutaValidator()
       {
-        RuleFor(t => t.TemaForoId).NotEmpty().WithMessage("Es necesario el TemaForoId para eliminar un curso.");
+        RuleFor(t => t.ClaseDictadaId).NotEmpty().WithMessage("Es necesario el ClaseDictadaId para eliminar un template de curso.");
       }
     }
 
@@ -35,19 +35,19 @@ namespace Business.TemasForo
 
       public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
       {
-        var temaForo = await this.context.TemaForo.FindAsync(request.TemaForoId);
+        var claseDictada = await this.context.ClaseDictada.FindAsync(request.ClaseDictadaId);
 
-        if (temaForo == null)
-          throw new ManejadorExcepcion(HttpStatusCode.NotFound, new { mensaje = "El tema de foro no existe. " });
+        if (claseDictada == null)
+          throw new ManejadorExcepcion(HttpStatusCode.NotFound, new { mensaje = "La clase dictada no existe. " });
 
-        this.context.TemaForo.Remove(temaForo);
+        this.context.ClaseDictada.Remove(claseDictada);
 
         var res = await this.context.SaveChangesAsync();
 
         if (res > 0)
           return Unit.Value;
 
-        throw new ManejadorExcepcion(HttpStatusCode.InternalServerError, new { mensaje = "Ocurrio un error al eliminar el tema de foro" });
+        throw new ManejadorExcepcion(HttpStatusCode.InternalServerError, new { mensaje = "Ocurrio un error al eliminar la clase dictada" });
       }
     }
     }

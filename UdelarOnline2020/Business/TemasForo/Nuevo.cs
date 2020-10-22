@@ -24,10 +24,10 @@ namespace Business.TemasForo
     {
       public EjecutaValidator()
       {
-        RuleFor(c => c.Asunto).NotEmpty().WithMessage("El asunto es requerido.");
-        RuleFor(c => c.Mensaje).NotEmpty();
-        RuleFor(c => c.EmisorId).NotEmpty();
-        RuleFor(c => c.SuscripcionADiscusion).NotEmpty();
+        RuleFor(t => t.Asunto).NotEmpty().WithMessage("El asunto es requerido.");
+        RuleFor(t => t.Mensaje).NotEmpty();
+        RuleFor(t => t.EmisorId).NotEmpty();
+        RuleFor(t => t.SuscripcionADiscusion).NotEmpty();
       }
     }
 
