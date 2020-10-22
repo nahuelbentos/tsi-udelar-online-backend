@@ -17,7 +17,6 @@ namespace Business.TemplatesCurso {
             }
 
             public async Task<List<TemplateCurso>> Handle (Ejecuta request, CancellationToken cancellationToken) {
-                // Esto cambia para devolver una lista de DataTypes, en breves lo cambio.
                 var templatesCurso = await this.context.TemplateCurso
                                         .ToListAsync ();
                 return templatesCurso;

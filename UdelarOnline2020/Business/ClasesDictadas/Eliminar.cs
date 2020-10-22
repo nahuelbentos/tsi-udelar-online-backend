@@ -20,7 +20,7 @@ namespace Business.ClasesDictadas
     {
       public EjecutaValidator()
       {
-        RuleFor(t => t.ClaseDictadaId).NotEmpty().WithMessage("Es necesario el ClaseDictadaId para eliminar un template de curso.");
+        RuleFor(t => t.ClaseDictadaId).NotEmpty().WithMessage("Es necesario el ClaseDictadaId para eliminar una clase.");
       }
     }
 

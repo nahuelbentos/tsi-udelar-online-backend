@@ -17,7 +17,6 @@ namespace Business.TemasForo {
             }
 
             public async Task<List<TemaForo>> Handle (Ejecuta request, CancellationToken cancellationToken) {
-                // Esto cambia para devolver una lista de DataTypes, en breves lo cambio.
                 var temasForo = await this.context.TemaForo
                                         .ToListAsync ();
                 return temasForo;

@@ -25,7 +25,7 @@ namespace Business.Comunicados {
                 var comunicado = await this.context.Comunicado
                     .FirstOrDefaultAsync (c => c.ComunicadoId == request.ComunicadoId);
                 if (comunicado == null) {
-                    throw new ManejadorExcepcion (HttpStatusCode.Forbidden, new { mensaje = "No existe un Comunicado con el Id ingresado" });
+                    throw new ManejadorExcepcion (HttpStatusCode.Forbidden, new { mensaje = "No existe un comunicado con el Id ingresado" });
                 }
                 return comunicado;
             }

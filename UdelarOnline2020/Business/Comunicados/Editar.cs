@@ -19,8 +19,8 @@ namespace Business.Comunicados {
         public class EjecutaValidacion : AbstractValidator<Ejecuta> {
             public EjecutaValidacion () {
                 RuleFor (t => t.Nombre).NotEmpty ().WithMessage ("El nombre es requerido");
-                RuleFor (t => t.Descripcion).NotEmpty ().WithMessage ("");
-
+                RuleFor (t => t.Descripcion).NotEmpty ();
+                RuleFor(t => t.Url).NotEmpty();
             }
         }
 

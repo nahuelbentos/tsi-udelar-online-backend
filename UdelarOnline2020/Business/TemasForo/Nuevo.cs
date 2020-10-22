@@ -15,7 +15,7 @@ namespace Business.TemasForo
       public string Asunto { get; set; }
       public string Mensaje { get; set; }
       public Guid EmisorId { get; set; }
-      // public File ArchivoAdjunto { get; set; }
+      public string ArchivoAdjunto { get; set; }
       public bool SuscripcionADiscusion { get; set; }
 
     }
@@ -49,7 +49,7 @@ namespace Business.TemasForo
           Asunto = request.Asunto,
           Mensaje = request.Mensaje,
           EmisorId = request.EmisorId,
-          // ArchivoAdjunto = request.ArchivoAdjunto,
+          ArchivoAdjunto = request.ArchivoAdjunto,
           SubscripcionADiscusion = request.SuscripcionADiscusion,
         };
 
@@ -61,7 +61,7 @@ namespace Business.TemasForo
           return Unit.Value;
         }
 
-        throw new Exception("No se pudo dar de alta el curso");
+        throw new Exception("No se pudo dar de alta el tema de foro");
 
 
       }

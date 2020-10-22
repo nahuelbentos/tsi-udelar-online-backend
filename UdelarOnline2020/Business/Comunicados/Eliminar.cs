@@ -47,7 +47,7 @@ namespace Business.Comunicados
         if (res > 0)
           return Unit.Value;
 
-        throw new ManejadorExcepcion(HttpStatusCode.InternalServerError, new { mensaje = "Ocurrio un error al eliminar el Comunicado" });
+        throw new ManejadorExcepcion(HttpStatusCode.InternalServerError, new { mensaje = "Ocurrio un error al eliminar el comunicado" });
       }
     }
     }

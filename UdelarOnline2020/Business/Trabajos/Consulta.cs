@@ -17,7 +17,6 @@ namespace Business.Trabajos {
             }
 
             public async Task<List<Trabajo>> Handle (Ejecuta request, CancellationToken cancellationToken) {
-                // Esto cambia para devolver una lista de DataTypes, en breves lo cambio.
                 var trabajos = await this.context.Trabajo
                                         .ToListAsync ();
                 return trabajos;

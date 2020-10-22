@@ -13,14 +13,14 @@ namespace Business.Trabajos
     {
          public class Ejecuta : IRequest
     {
-      public Guid TemplateCursoId { get; set; }
+      public Guid TrabajoId { get; set; }
     }
 
     public class EjecutaValidator : AbstractValidator<Ejecuta>
     {
       public EjecutaValidator()
       {
-        RuleFor(t => t.TemplateCursoId).NotEmpty().WithMessage("Es necesario el TemplateCursoId para eliminar un template de curso.");
+        RuleFor(t => t.TrabajoId).NotEmpty().WithMessage("Es necesario el TrabajoId para eliminar un template de curso.");
       }
     }
 
@@ -35,19 +35,19 @@ namespace Business.Trabajos
 
       public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
       {
-        var templateCurso = await this.context.TemplateCurso.FindAsync(request.TemplateCursoId);
+        var trabajo = await this.context.Trabajo.FindAsync(request.TrabajoId);
 
-        if (templateCurso == null)
-          throw new ManejadorExcepcion(HttpStatusCode.NotFound, new { mensaje = "El template de curso no existe. " });
+        if (trabajo == null)
+          throw new ManejadorExcepcion(HttpStatusCode.NotFound, new { mensaje = "El trabajo no existe. " });
 
-        this.context.TemplateCurso.Remove(templateCurso);
+        this.context.Trabajo.Remove(trabajo);
 
         var res = await this.context.SaveChangesAsync();
 
         if (res > 0)
           return Unit.Value;
 
-        throw new ManejadorExcepcion(HttpStatusCode.InternalServerError, new { mensaje = "Ocurrio un error al eliminar el template de curso" });
+        throw new ManejadorExcepcion(HttpStatusCode.InternalServerError, new { mensaje = "Ocurrio un error al eliminar el trabajo" });
       }
     }
     }

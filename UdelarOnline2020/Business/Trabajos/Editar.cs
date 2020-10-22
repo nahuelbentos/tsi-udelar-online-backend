@@ -35,22 +35,20 @@ namespace Business.Trabajos {
                 var trabajo = await this.context.Trabajo.FindAsync (request.ActividadId);
 
                 if (trabajo == null) {
-                    throw new ManejadorExcepcion (HttpStatusCode.NotFound, new { mensaje = "El template de curso no existe" });
+                    throw new ManejadorExcepcion (HttpStatusCode.NotFound, new { mensaje = "El trabajo no existe" });
 
                 }
 
 
-                // trabajo.Calificacion = request.Calificacion ?? trabajo.Calificacion;
+                trabajo.Calificacion = request.Calificacion;
                 trabajo.Nota = request.Nota ?? trabajo.Nota;
-                // temaForo.ArcchivoAdjunto = request.ArchivoAdjunto ?? temaForo.ArchivoAdjunto;
-                // temaForo.SubscripcionADiscusion = request.SubscripcionADiscusion ?? temaForo.SubscripcionADiscusion;
 
                 var res = await this.context.SaveChangesAsync ();
 
                 if (res > 0)
                     return Unit.Value;
 
-                throw new ManejadorExcepcion (HttpStatusCode.InternalServerError, new { mensaje = "Ocurrio un error al editar el temaplate de curso" });
+                throw new ManejadorExcepcion (HttpStatusCode.InternalServerError, new { mensaje = "Ocurrio un error al editar el trabajo" });
 
             }
         }

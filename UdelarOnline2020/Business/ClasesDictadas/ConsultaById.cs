@@ -22,7 +22,6 @@ namespace Business.ClasesDictadas {
             }
 
             public async Task<ClaseDictada> Handle (Ejecuta request, CancellationToken cancellationToken) {
-                // Esto cambia para devolver una lista de DataTypes, en breves lo cambio.
                 var claseDictada = await this.context.ClaseDictada
                     .FirstOrDefaultAsync (t => t.ActividadId == request.ClaseDictadaId);
                 if (claseDictada == null) {

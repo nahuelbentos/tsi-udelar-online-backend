@@ -41,8 +41,6 @@ namespace Business.TemplatesCurso {
 
                 templateCurso.Nombre = request.Nombre ?? templateCurso.Nombre;
                 templateCurso.Descripcion = request.Descripcion ?? templateCurso.Descripcion;
-                // temaForo.ArcchivoAdjunto = request.ArchivoAdjunto ?? temaForo.ArchivoAdjunto;
-                // temaForo.SubscripcionADiscusion = request.SubscripcionADiscusion ?? temaForo.SubscripcionADiscusion;
 
                 var res = await this.context.SaveChangesAsync ();
 

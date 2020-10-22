@@ -17,7 +17,6 @@ namespace Business.ClasesDictadas {
             }
 
             public async Task<List<ClaseDictada>> Handle (Ejecuta request, CancellationToken cancellationToken) {
-                // Esto cambia para devolver una lista de DataTypes, en breves lo cambio.
                 var claseDictada = await this.context.ClaseDictada
                                         .ToListAsync ();
                 return claseDictada;

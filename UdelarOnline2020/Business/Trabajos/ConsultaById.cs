@@ -22,11 +22,10 @@ namespace Business.Trabajos {
             }
 
             public async Task<Trabajo> Handle (Ejecuta request, CancellationToken cancellationToken) {
-                // Esto cambia para devolver una lista de DataTypes, en breves lo cambio.
                 var trabajo = await this.context.Trabajo
                     .FirstOrDefaultAsync (t => t.ActividadId == request.ActividadId);
                 if (trabajo == null) {
-                    throw new ManejadorExcepcion (HttpStatusCode.Forbidden, new { mensaje = "No existe un template de curso con el TrabajoId ingresado" });
+                    throw new ManejadorExcepcion (HttpStatusCode.Forbidden, new { mensaje = "No existe un trabajo con el TrabajoId ingresado" });
                 }
                 return trabajo;
             }

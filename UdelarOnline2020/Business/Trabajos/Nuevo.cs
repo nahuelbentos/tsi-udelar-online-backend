@@ -22,7 +22,7 @@ namespace Business.TemplatesCurso
     {
       public EjecutaValidator()
       {
-        RuleFor(t => t.Calificacion).NotEmpty().WithMessage("El nombre es requerido.");
+        RuleFor(t => t.Calificacion).NotEmpty().WithMessage("La calificaicon es requerida.");
         RuleFor(t => t.Nota).NotEmpty();
       }
     }

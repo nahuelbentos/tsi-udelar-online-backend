@@ -17,10 +17,9 @@ namespace Business.Comunicados {
             }
 
             public async Task<List<Comunicado>> Handle (Ejecuta request, CancellationToken cancellationToken) {
-                // Esto cambia para devolver una lista de DataTypes, en breves lo cambio.
-                var templatesCurso = await this.context.Comunicado
+                var comunicados = await this.context.Comunicado
                                         .ToListAsync ();
-                return templatesCurso;
+                return comunicados;
             }
         }
     }

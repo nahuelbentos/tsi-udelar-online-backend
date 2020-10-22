@@ -22,11 +22,10 @@ namespace Business.TemasForo {
             }
 
             public async Task<TemaForo> Handle (Ejecuta request, CancellationToken cancellationToken) {
-                // Esto cambia para devolver una lista de DataTypes, en breves lo cambio.
                 var temaForo = await this.context.TemaForo
                     .FirstOrDefaultAsync (t => t.TemaForoId == request.TemaForoId);
                 if (temaForo == null) {
-                    throw new ManejadorExcepcion (HttpStatusCode.Forbidden, new { mensaje = "No existe un curso con el CursoId ingresado" });
+                    throw new ManejadorExcepcion (HttpStatusCode.Forbidden, new { mensaje = "No existe un tema de foro con el TemaForoId ingresado" });
                 }
                 return temaForo;
             }

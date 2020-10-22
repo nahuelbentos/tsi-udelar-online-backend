@@ -24,6 +24,7 @@ namespace Business.Comunicados
       {
         RuleFor(t => t.Nombre).NotEmpty().WithMessage("El nombre es requerido.");
         RuleFor(t => t.Descripcion).NotEmpty();
+        RuleFor(t => t.Url).NotEmpty();
       }
     }
 

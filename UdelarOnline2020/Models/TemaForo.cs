@@ -11,8 +11,7 @@ namespace Models
 
     public Guid EmisorId { get; set; }
     public Usuario Emisor { get; set; }
-
-    //public File ArchivoAdjunto { get; set; }
+    public string ArchivoAdjunto { get; set; } //File
     public bool SubscripcionADiscusion { get; set; }
   }
 }
