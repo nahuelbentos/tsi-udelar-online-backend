@@ -1,14 +1,11 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-using Microsoft.AspNetCore.Identity;
+using Models;
 
-namespace Models
+namespace Business.Datatypes
 {
-  public class Usuario : IdentityUser
+  public class DtUsuario
   {
-
 
     public string Nombres { get; set; }
     public string Apellidos { get; set; }
@@ -18,9 +15,13 @@ namespace Models
     public string Direccion { get; set; }
     public string Telefono { get; set; }
 
-    public string EmailPersonal { get; set; }
-    public Guid FacultadId;
+
+    public string emailPersonal { get; set; }
+
+    public string Token { get; set; }
+    public string Email { get; set; }
+    public string UserName { get; set; }
     public Facultad Facultad;
-    public virtual ICollection<Comunicado> ComunicadoLista { get; set; }
+    public Guid FacultadId;
   }
 }

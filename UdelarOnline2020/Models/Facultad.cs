@@ -12,5 +12,8 @@ namespace Models
     public string Nombre { get; set; }
     public string Descripcion { get; set; }
     public string UrlAcceso { get; set; }
+    public string DominioMail { get; set; } // Ejemplo: @fing.edu.uy
+
+    public ICollection<Usuario> UsuarioLista { get; set; }
   }
 }

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence;
 
 namespace Persistence.Migrations
 {
     [DbContext(typeof(UdelarOnlineContext))]
-    partial class UdelarOnlineContextModelSnapshot : ModelSnapshot
+    [Migration("20201021014536_AddDominioMail")]
+    partial class AddDominioMail
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -176,6 +178,26 @@ namespace Persistence.Migrations
                     b.ToTable("Actividad");
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("Actividad");
+                });
+
+            modelBuilder.Entity("Models.AdministradorFacultadFacultad", b =>
+                {
+                    b.Property<Guid>("AdministradorFacultadId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("FacultadId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("AdministradorFacultadId1")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("AdministradorFacultadId", "FacultadId");
+
+                    b.HasIndex("AdministradorFacultadId1");
+
+                    b.HasIndex("FacultadId");
+
+                    b.ToTable("AdministradorFacultadFacultad");
                 });
 
             modelBuilder.Entity("Models.AlumnoClaseDictada", b =>
@@ -587,12 +609,6 @@ namespace Persistence.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<string>("EmailPersonal")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("FacultadId1")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<DateTime>("FechaNacimiento")
                         .HasColumnType("datetime2");
 
@@ -612,6 +628,9 @@ namespace Persistence.Migrations
                     b.Property<string>("NormalizedUserName")
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
+
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
@@ -635,9 +654,10 @@ namespace Persistence.Migrations
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
 
-                    b.HasKey("Id");
+                    b.Property<string>("UserName_udelar")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasIndex("FacultadId1");
+                    b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
@@ -869,6 +889,19 @@ namespace Persistence.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Models.AdministradorFacultadFacultad", b =>
+                {
+                    b.HasOne("Models.Usuario", "AdministradorFacultad")
+                        .WithMany()
+                        .HasForeignKey("AdministradorFacultadId1");
+
+                    b.HasOne("Models.Facultad", "Facultad")
+                        .WithMany()
+                        .HasForeignKey("FacultadId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Models.AlumnoClaseDictada", b =>
                 {
                     b.HasOne("Models.Usuario", "Alumno")
@@ -1036,13 +1069,6 @@ namespace Persistence.Migrations
                     b.HasOne("Models.Foro", null)
                         .WithMany("TemaForoLista")
                         .HasForeignKey("ForoId");
-                });
-
-            modelBuilder.Entity("Models.Usuario", b =>
-                {
-                    b.HasOne("Models.Facultad", null)
-                        .WithMany("UsuarioLista")
-                        .HasForeignKey("FacultadId1");
                 });
 
             modelBuilder.Entity("Models.UsuarioCurso", b =>
