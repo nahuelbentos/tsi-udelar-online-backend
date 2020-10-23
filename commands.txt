@@ -10,6 +10,8 @@ dotnet tool install --global dotnet-ef --version 3.1.8
 dotnet ef migrations remove -p Persistence/ -s WebAPI/
 
 dotnet ef migrations add "Nombre de la migracion (tiene que ir sin las comillas)" -p Persistence/ -s WebAPI/
+dotnet ef migrations add NombreMigracion -p Persistence/ -s WebAPI/
+
 
 
 // Para ejecutar la migración hay que estar dentro de WebAPI/  y ejecutar: 
@@ -20,3 +22,25 @@ dotnet ef database update
 
 // Generar release para prod
 dotnet publish -c Release -o publish --self-contained false UdelarOnline2020.sln 
+
+
+// Crear proyecto nuevo
+dotnet new classlib -o NombreProyecto
+
+
+// Aregar proyecto a la solucion
+dotnet sln add NombreProyecto
+
+// Agregar referncias entre proyectos
+cd NombreProyectoA
+dotnet add reference ../NombreProyectoB/
+
+
+/*
+Para probar los WS con tokens hay dos maneras:
+  1) Agregar en los headers el token con el siguiente header:
+    Authorization: Bearer tokenJWT
+  2) Agregar arriba del controller para hacerlo publico
+    [AllowAnonymous]
+
+*/ 

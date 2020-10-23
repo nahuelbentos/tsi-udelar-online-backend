@@ -1,9 +1,12 @@
+using System;
+using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using Aplicacion.ManejadorError;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Models;
 using Persistence;
 
@@ -31,7 +34,10 @@ namespace Business.Usuarios
 
       public async Task<Usuario> Handle(Ejecuta request, CancellationToken cancellationToken)
       {
-        var usuario = await this.userManager.FindByIdAsync(request.Id);
+        // var usuario = await this.userManager.FindByIdAsync(request.Id);
+        var usuario = await this.context.Users.Include(u => u.ComunicadoLista).FirstOrDefaultAsync(u => u.Id == request.Id);
+        Console.WriteLine(usuario.Facultad.Descripcion);
+        Console.WriteLine(usuario.FacultadId);
 
         if (usuario == null)
           throw new ManejadorExcepcion(HttpStatusCode.NotFound, new { mensaje = "No existe un usuario con ese Id." });

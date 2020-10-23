@@ -39,11 +39,10 @@ namespace WebAPI.Controllers
       return await this.Mediator.Send(new ConsultaByEmail.Ejecuta { Email = email });
     }
 
-    [HttpPut("{username}")]
-    public async Task<ActionResult<Unit>> ModificarUsuario(string username, Editar.Ejecuta data)
+    [HttpPut("{email}")]
+    public async Task<ActionResult<Unit>> ModificarUsuario(string email, Editar.Ejecuta data)
     {
-      data.UserName = username;
-      // data.Email = email;
+      data.Email = email;
       return await this.Mediator.Send(data);
     }
 
