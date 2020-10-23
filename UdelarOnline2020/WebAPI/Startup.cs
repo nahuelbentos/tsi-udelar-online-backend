@@ -22,6 +22,13 @@ using Persistence;
 using Models;
 using MediatR;
 using Business.Cursos;
+using Seguridad.Token;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Business.Interfaces;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace WebAPI
 {
@@ -46,7 +53,12 @@ namespace WebAPI
 
       services.AddMediatR(typeof(Consulta.Manejador).Assembly);
 
-      services.AddControllers()
+      services.AddControllers(opt =>
+      {
+        // Declaro politica para requerir Autenticación y la agrego como filtro.
+        var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+        opt.Filters.Add(new AuthorizeFilter(policy));
+      })
        .AddFluentValidation(config =>
        {
          config.RegisterValidatorsFromAssemblyContaining<Business.Cursos.Nuevo>();
@@ -66,6 +78,22 @@ namespace WebAPI
       identityBuilder.AddSignInManager<SignInManager<Usuario>>();
 
       services.TryAddSingleton<ISystemClock, SystemClock>();
+
+
+      // Configuración para los JWT Tokens
+      var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("Udelar Online TSI"));
+      services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>
+      {
+        opt.TokenValidationParameters = new TokenValidationParameters
+        {
+          ValidateIssuerSigningKey = true,
+          IssuerSigningKey = key,
+          ValidateAudience = false, // Alguien con una IP cualquiera pueda generar un Token
+          ValidateIssuer = false, // Es para el envio del token (?)
+        };
+      });
+
+      services.AddScoped<IJwtGenerador, JwtGenerador>();
 
       // Middleware
 
@@ -91,6 +119,8 @@ namespace WebAPI
       });
 
       // app.UseHttpsRedirection();
+
+      app.UseAuthentication();
 
       app.UseRouting();
 

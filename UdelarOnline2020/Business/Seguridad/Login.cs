@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Aplicacion.ManejadorError;
 using Business.Datatypes;
+using Business.Interfaces;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
@@ -35,12 +36,14 @@ namespace Business.Seguridad
       private readonly UdelarOnlineContext context;
       private readonly UserManager<Usuario> userManager;
       private readonly SignInManager<Usuario> signInManager;
+      private readonly IJwtGenerador jwtGenerador;
 
-      public Manejador(UdelarOnlineContext context, UserManager<Usuario> userManager, SignInManager<Usuario> signInManager)
+      public Manejador(UdelarOnlineContext context, UserManager<Usuario> userManager, SignInManager<Usuario> signInManager, IJwtGenerador jwtGenerador)
       {
         this.context = context;
         this.userManager = userManager;
         this.signInManager = signInManager;
+        this.jwtGenerador = jwtGenerador;
       }
 
       public async Task<DtUsuario> Handle(Ejecuta request, CancellationToken cancellationToken)
@@ -49,7 +52,7 @@ namespace Business.Seguridad
 
         if (usuario == null)
         {
-          throw new ManejadorExcepcion(HttpStatusCode.Unauthorized);
+          throw new ManejadorExcepcion(HttpStatusCode.Unauthorized, new { mensaje = "El usuario no existe en el sistema." });
         }
 
         var resultado = await signInManager.CheckPasswordSignInAsync(usuario, request.Password, false);
@@ -69,10 +72,11 @@ namespace Business.Seguridad
             Apellidos = usuario.Apellidos,
             emailPersonal = usuario.EmailPersonal,
             CI = usuario.CI,
-            Token = "Aca va el token",
+            Token = this.jwtGenerador.CrearToken(usuario, roles),
             Email = usuario.Email,
             UserName = usuario.UserName,
-            FacultadId = Guid.Empty
+            FacultadId = Guid.Empty,
+            Tipo = usuario.GetType().ToString().Split('.')[1]
             // FacultadId = facultad.FacultadId,
             // Facultad = facultad,
           };

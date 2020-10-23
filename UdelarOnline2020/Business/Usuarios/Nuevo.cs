@@ -116,7 +116,7 @@ namespace Business.Usuarios
         usuario.Email = email;
         usuario.ComunicadoLista = null;
         Console.WriteLine("FacultadId: " + request.FacultadId);
-        // usuario.FacultadId = request.FacultadId;
+        usuario.FacultadId = request.FacultadId;
         usuario.Facultad = facultad;
         Console.WriteLine("usuario.FacultadId: " + usuario.Facultad.FacultadId);
 
