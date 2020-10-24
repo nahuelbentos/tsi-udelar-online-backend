@@ -178,26 +178,6 @@ namespace Persistence.Migrations
                     b.HasDiscriminator<string>("Discriminator").HasValue("Actividad");
                 });
 
-            modelBuilder.Entity("Models.AdministradorFacultadFacultad", b =>
-                {
-                    b.Property<Guid>("AdministradorFacultadId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("FacultadId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("AdministradorFacultadId1")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("AdministradorFacultadId", "FacultadId");
-
-                    b.HasIndex("AdministradorFacultadId1");
-
-                    b.HasIndex("FacultadId");
-
-                    b.ToTable("AdministradorFacultadFacultad");
-                });
-
             modelBuilder.Entity("Models.AlumnoClaseDictada", b =>
                 {
                     b.Property<Guid>("AlumnoId")
@@ -607,6 +587,12 @@ namespace Persistence.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("EmailPersonal")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("FacultadId1")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("FechaNacimiento")
                         .HasColumnType("datetime2");
 
@@ -626,9 +612,6 @@ namespace Persistence.Migrations
                     b.Property<string>("NormalizedUserName")
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
-
-                    b.Property<string>("Password")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
@@ -652,10 +635,9 @@ namespace Persistence.Migrations
                         .HasColumnType("nvarchar(256)")
                         .HasMaxLength(256);
 
-                    b.Property<string>("UserName_udelar")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
+
+                    b.HasIndex("FacultadId1");
 
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
@@ -887,19 +869,6 @@ namespace Persistence.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Models.AdministradorFacultadFacultad", b =>
-                {
-                    b.HasOne("Models.Usuario", "AdministradorFacultad")
-                        .WithMany()
-                        .HasForeignKey("AdministradorFacultadId1");
-
-                    b.HasOne("Models.Facultad", "Facultad")
-                        .WithMany()
-                        .HasForeignKey("FacultadId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Models.AlumnoClaseDictada", b =>
                 {
                     b.HasOne("Models.Usuario", "Alumno")
@@ -1067,6 +1036,13 @@ namespace Persistence.Migrations
                     b.HasOne("Models.Foro", null)
                         .WithMany("TemaForoLista")
                         .HasForeignKey("ForoId");
+                });
+
+            modelBuilder.Entity("Models.Usuario", b =>
+                {
+                    b.HasOne("Models.Facultad", null)
+                        .WithMany("UsuarioLista")
+                        .HasForeignKey("FacultadId1");
                 });
 
             modelBuilder.Entity("Models.UsuarioCurso", b =>

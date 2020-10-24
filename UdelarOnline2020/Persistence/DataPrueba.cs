@@ -16,8 +16,8 @@ namespace Persistence
           Nombres = "Nahuel",
           Apellidos = "Bentos Gnocchi",
           UserName = "nbentos",
-          UserName_udelar = "nbentos@fing.edu.uy",
-          Email = "nahuelbentosgnocchi@gmail.com",
+          Email = "nbentos@fing.edu.uy",
+          EmailPersonal = "nahuelbentosgnocchi@gmail.com",
           Direccion = "Chana 2021",
           Telefono = "098765432",
         };
