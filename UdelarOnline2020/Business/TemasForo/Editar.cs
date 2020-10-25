@@ -11,12 +11,13 @@ using Persistence;
 
 namespace Business.TemasForo {
     public class Editar {
+
         public class Ejecuta : IRequest {
             public Guid TemaForoId { get; set; }
             public string Asunto { get; set; }
             public string Mensaje { get; set; }
             public string EmisorId { get; set; }
-             public string ArchivoAdjunto { get; set; }  // File
+            public string ArchivoAdjunto { get; set; } // File
             public bool SubscripcionADiscusion { get; set; }
         }
 
@@ -24,7 +25,7 @@ namespace Business.TemasForo {
             public EjecutaValidacion () {
                 RuleFor (t => t.Asunto).NotEmpty ().WithMessage ("El asunto es requerido");
                 RuleFor (t => t.Mensaje).NotEmpty ();
-                RuleFor (t => t.EmisorId).NotEmpty();
+                RuleFor (t => t.EmisorId).NotEmpty ();
             }
         }
 
@@ -51,7 +52,7 @@ namespace Business.TemasForo {
                         throw new ManejadorExcepcion (HttpStatusCode.NotFound, new { mensaje = "El emisor enviado no existe." });
                     }
 
-                    temaForo.EmisorId = Guid.Parse(request.EmisorId);
+                    temaForo.EmisorId = Guid.Parse (request.EmisorId);
                     temaForo.Emisor = emisorId;
 
                 }

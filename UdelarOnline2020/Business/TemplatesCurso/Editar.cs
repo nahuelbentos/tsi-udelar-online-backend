@@ -9,6 +9,7 @@ using Persistence;
 
 namespace Business.TemplatesCurso {
     public class Editar {
+
         public class Ejecuta : IRequest {
             public Guid TemplateCursoId { get; set; }
             public string Nombre { get; set; }
@@ -37,7 +38,6 @@ namespace Business.TemplatesCurso {
                     throw new ManejadorExcepcion (HttpStatusCode.NotFound, new { mensaje = "El template de curso no existe" });
 
                 }
-
 
                 templateCurso.Nombre = request.Nombre ?? templateCurso.Nombre;
                 templateCurso.Descripcion = request.Descripcion ?? templateCurso.Descripcion;

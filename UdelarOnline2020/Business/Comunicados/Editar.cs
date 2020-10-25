@@ -13,14 +13,14 @@ namespace Business.Comunicados {
             public Guid ComunicadoId { get; set; }
             public string Nombre { get; set; }
             public string Descripcion { get; set; }
-            public string Url {get; set;}
+            public string Url { get; set; }
         }
 
         public class EjecutaValidacion : AbstractValidator<Ejecuta> {
             public EjecutaValidacion () {
                 RuleFor (t => t.Nombre).NotEmpty ().WithMessage ("El nombre es requerido");
                 RuleFor (t => t.Descripcion).NotEmpty ();
-                RuleFor(t => t.Url).NotEmpty();
+                RuleFor (t => t.Url).NotEmpty ();
             }
         }
 
@@ -38,7 +38,6 @@ namespace Business.Comunicados {
                     throw new ManejadorExcepcion (HttpStatusCode.NotFound, new { mensaje = "El comunicado no existe" });
 
                 }
-
 
                 comunicado.Nombre = request.Nombre ?? comunicado.Nombre;
                 comunicado.Descripcion = request.Descripcion ?? comunicado.Descripcion;

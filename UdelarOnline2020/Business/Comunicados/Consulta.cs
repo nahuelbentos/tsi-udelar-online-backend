@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Models;
 using Persistence;
 
@@ -17,8 +17,7 @@ namespace Business.Comunicados {
             }
 
             public async Task<List<Comunicado>> Handle (Ejecuta request, CancellationToken cancellationToken) {
-                var comunicados = await this.context.Comunicado
-                                        .ToListAsync ();
+                var comunicados = await this.context.Comunicado.ToListAsync ();
                 return comunicados;
             }
         }
