@@ -1,20 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
-
   <ItemGroup>
-    <ProjectReference Include="..\Business\Business.csproj" />
+    <ProjectReference Include="..\Business\Business.csproj"/>
+    <ProjectReference Include="..\Seguridad\Seguridad.csproj"/>
   </ItemGroup>
-
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <Folder Include="Controllers\"/>
   </ItemGroup>
-
-   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3"/> 
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3"/>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.8"/>
   </ItemGroup>
-
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
-
-
 </Project>

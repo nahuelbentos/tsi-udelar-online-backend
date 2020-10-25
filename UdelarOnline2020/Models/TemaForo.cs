@@ -6,13 +6,10 @@ namespace Models
   {
     public Guid TemaForoId { get; set; }
     public string Asunto { get; set; }
-
     public string Mensaje { get; set; }
-
-    public Guid EmisorId { get; set; }
+    public string EmisorId { get; set; }
     public Usuario Emisor { get; set; }
-
-    //public File ArchivoAdjunto { get; set; }
+    public string ArchivoAdjunto { get; set; } //File
     public bool SubscripcionADiscusion { get; set; }
   }
 }

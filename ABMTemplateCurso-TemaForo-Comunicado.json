@@ -1,0 +1,801 @@
+{
+	"info": {
+		"_postman_id": "8f119d09-d166-438b-97e1-e01ff9dc107a",
+		"name": "Proyecto",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Local",
+			"item": [
+				{
+					"name": "Comunicados",
+					"item": [
+						{
+							"name": "Alta Comunicado",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Nombre\" : \"Prueba\",\r\n    \"Descripcion\" : \"Descr\",\r\n    \"Url\" : \"http://prueba.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:5000/api/Comunicado",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"Comunicado"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modificar Comunicado",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Nombre\" : \"Prueba cambio\",\r\n    \"Descripcion\" : \"Descr\",\r\n    \"Url\" : \"http://prueba.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:5000/api/Comunicado/84bbf328-7a03-41b3-b1b2-d5aec5beec51",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"Comunicado",
+										"84bbf328-7a03-41b3-b1b2-d5aec5beec51"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Comunicados",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:5000/api/Comunicado",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"Comunicado"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Comunicado by Id",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:5000/api/Comunicado/id/159dd5d6-d6aa-4707-bdde-344b43d557c1",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"Comunicado",
+										"id",
+										"159dd5d6-d6aa-4707-bdde-344b43d557c1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Comunicado",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:5000/api/Comunicado/159dd5d6-d6aa-4707-bdde-344b43d557c1",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"Comunicado",
+										"159dd5d6-d6aa-4707-bdde-344b43d557c1"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Usuarios",
+					"item": [
+						{
+							"name": "Alta Usuarios",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Nombres\" : \"Tomas\",\r\n    \"Apellidos\" : \"Pascal\",\r\n    \"Cedula\" : \"5.159.785-2\",\r\n    \"FechaNacimiento\" : \"1998-12-29\",\r\n    \"Direccion\" : \"Oyarvide 3365\",\r\n    \"Telefono\" : \"09883573\",\r\n    \"EmailPersonal\" : \"pascaltomas27@gmail.com\",\r\n    \"UserName\" : \"tomas.pascal\",\r\n    \"Password\" : \"Hola123.\",\r\n    \"FacultadId\" : \"55e69ec3-60fd-4df3-ad51-aec13988ed48\",\r\n    \"Tipo\" : \"Alumno\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:5000/api/Usuario",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"Usuario"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modificar Comunicado",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Nombre\" : \"Prueba cambio\",\r\n    \"Descripcion\" : \"Descr\",\r\n    \"Url\" : \"http://prueba.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:5000/api/Comunicado/84bbf328-7a03-41b3-b1b2-d5aec5beec51",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"Comunicado",
+										"84bbf328-7a03-41b3-b1b2-d5aec5beec51"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Usuarios",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:5000/api/Usuario",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"Usuario"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Usuario by Id",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:5000/api/Usuario/id/159dd5d6-d6aa-4707-bdde-344b43d557c1",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"Usuario",
+										"id",
+										"159dd5d6-d6aa-4707-bdde-344b43d557c1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Usuario",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:5000/api/Usuario/159dd5d6-d6aa-4707-bdde-344b43d557c1",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"Usuario",
+										"159dd5d6-d6aa-4707-bdde-344b43d557c1"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Facultades",
+					"item": [
+						{
+							"name": "Alta Facultades",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Nombre\" : \"Facultad de Ingenieria\",\r\n    \"Descripcion\" : \"Facultad de Ingenieria\",\r\n    \"UrlAcceso\" : \"www.fing.edu.uy\",\r\n    \"DominioMail\" : \"@fing.edu.uy\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:5000/api/Facultad",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"Facultad"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modificar Facultad",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Nombre\" : \"Facultad de Ingenieria\",\r\n    \"Descripcion\" : \"Facultad de Ingenieria\",\r\n    \"UrlAcceso\" : \"www.fing.edu.uy\",\r\n    \"DominioMail\" : \"@fing.edu.uy\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:5000/api/Facultad/84bbf328-7a03-41b3-b1b2-d5aec5beec51",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"Facultad",
+										"84bbf328-7a03-41b3-b1b2-d5aec5beec51"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Facultades",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:5000/api/Facultad",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"Facultad"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Facultad by Id",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:5000/api/Facultad/id/159dd5d6-d6aa-4707-bdde-344b43d557c1",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"Facultad",
+										"id",
+										"159dd5d6-d6aa-4707-bdde-344b43d557c1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Facultad",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:5000/api/Facultad/159dd5d6-d6aa-4707-bdde-344b43d557c1",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"Facultad",
+										"159dd5d6-d6aa-4707-bdde-344b43d557c1"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Templates Curso",
+					"item": [
+						{
+							"name": "Alta Template Curso",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Nombre\" : \"Prueba\",\r\n    \"Descripcion\" : \"Descr\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:5000/api/TemplateCurso",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"TemplateCurso"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modificar Template Curso",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Nombre\" : \"Prueba cambio\",\r\n    \"Descripcion\" : \"Descr\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:5000/api/TemplateCurso/8da103d4-4764-4df0-af31-8021f927fa6d",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"TemplateCurso",
+										"8da103d4-4764-4df0-af31-8021f927fa6d"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Templates Curso",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:5000/api/TemplateCurso",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"TemplateCurso"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Template Curso by Id",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:5000/api/TemplateCurso/id/ea10cc19-dd86-4213-b6c3-5734d2155bc7",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"TemplateCurso",
+										"id",
+										"ea10cc19-dd86-4213-b6c3-5734d2155bc7"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Template Curso",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:5000/api/TemplateCurso/ea10cc19-dd86-4213-b6c3-5734d2155bc7",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"TemplateCurso",
+										"ea10cc19-dd86-4213-b6c3-5734d2155bc7"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Temas Foro",
+					"item": [
+						{
+							"name": "Alta  Tema Foro",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Asunto\" : \"Prueba\",\r\n    \"Mensaje\" : \"Mensaje\",\r\n    \"ArchivoAdjunto\" : \"./prueba\",\r\n    \"SuscripcionADiscusion\" : false,\r\n    \"EmisorId\" : \"4f8ad4b4-ca0a-4694-846d-c8bf16838597\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:5000/api/TemaForo",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"TemaForo"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modificar Tema Foro",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Asunto\" : \"Prueba cambio\",\r\n    \"Mensaje\" : \"Mensaje\",\r\n    \"ArchvioAdjunto\" : \"./prueba\",\r\n    \"SuscripcionADiscusion\" : false,\r\n    \"EmisorId\" : \"4f8ad4b4-ca0a-4694-846d-c8bf16838597\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:5000/api/TemaForo/53c781ff-edcc-4949-92c3-bc60c94e18d6",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"TemaForo",
+										"53c781ff-edcc-4949-92c3-bc60c94e18d6"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Temas Foro",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:5000/api/TemaForo",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"TemaForo"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Tema Foro by Id",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:5000/api/TemaForo/id/53c781ff-edcc-4949-92c3-bc60c94e18d6",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"TemaForo",
+										"id",
+										"53c781ff-edcc-4949-92c3-bc60c94e18d6"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Tema Foro",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:5000/api/TemaForo/159dd5d6-d6aa-4707-bdde-344b43d557c1",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"api",
+										"TemaForo",
+										"159dd5d6-d6aa-4707-bdde-344b43d557c1"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
