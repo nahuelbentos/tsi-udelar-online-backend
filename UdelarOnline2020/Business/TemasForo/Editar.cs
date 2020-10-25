@@ -37,6 +37,7 @@ namespace Business.TemasForo {
             }
 
             public async Task<Unit> Handle (Ejecuta request, CancellationToken cancellationToken) {
+                
                 var temaForo = await this.context.TemaForo.FindAsync (request.TemaForoId);
 
                 if (temaForo == null) {
@@ -52,8 +53,7 @@ namespace Business.TemasForo {
                         throw new ManejadorExcepcion (HttpStatusCode.NotFound, new { mensaje = "El emisor enviado no existe." });
                     }
 
-                    temaForo.EmisorId = Guid.Parse (request.EmisorId);
-                    temaForo.Emisor = emisorId;
+                   temaForo.Emisor = emisorId;
 
                 }
 

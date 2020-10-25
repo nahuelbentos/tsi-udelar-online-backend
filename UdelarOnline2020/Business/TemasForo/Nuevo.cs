@@ -1,8 +1,12 @@
 using System;
+using System.Linq;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using Aplicacion.ManejadorError;
 using FluentValidation;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Models;
 using Persistence;
 
@@ -12,7 +16,7 @@ namespace Business.TemasForo {
     public class Ejecuta : IRequest {
       public string Asunto { get; set; }
       public string Mensaje { get; set; }
-      public Guid EmisorId { get; set; }
+      public string EmisorId { get; set; }
       public string ArchivoAdjunto { get; set; }
       public bool SuscripcionADiscusion { get; set; }
 
@@ -23,7 +27,6 @@ namespace Business.TemasForo {
         RuleFor (t => t.Asunto).NotEmpty ().WithMessage ("El asunto es requerido.");
         RuleFor (t => t.Mensaje).NotEmpty ();
         RuleFor (t => t.EmisorId).NotEmpty ();
-        RuleFor (t => t.SuscripcionADiscusion).NotEmpty ();
       }
     }
 
@@ -35,6 +38,15 @@ namespace Business.TemasForo {
       }
 
       public async Task<Unit> Handle (Ejecuta request, CancellationToken cancellationToken) {
+
+      if (request.EmisorId != string.Empty) {
+
+        var emisorId = await this.context.Usuario.Where (u => u.Id == request.EmisorId).FirstOrDefaultAsync ();
+
+        if (emisorId == null) {
+            throw new ManejadorExcepcion (HttpStatusCode.NotFound, new { mensaje = "No existe el emisor ingresado." });
+        }
+      }
         var temaForo = new TemaForo {
           TemaForoId = Guid.NewGuid (),
           Asunto = request.Asunto,
