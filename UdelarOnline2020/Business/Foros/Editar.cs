@@ -22,6 +22,7 @@ namespace Business.Foros
         {
             public EjecutaValidacion()
             {
+                RuleFor(f => f.ForoId).NotEmpty();
                 RuleFor(f => f.Titulo).NotEmpty().WithMessage("El Titulo es requerido");
             }
             

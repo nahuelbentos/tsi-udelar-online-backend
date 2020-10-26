@@ -5,9 +5,11 @@ using Business.Foros;
 using System.Collections.Generic;
 using Models;
 using System;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebAPI.Controllers
 {
+    [AllowAnonymous]
     [Route("api/[controller]")]
     [ApiController]
     public class ForoController : MiControllerBase
