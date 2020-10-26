@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Business.Carreras;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 
 namespace WebAPI.Controllers
 {
+    [AllowAnonymous]
     [Route("api/[controller]")]
     [ApiController]
     public class CarreraController : MiControllerBase
@@ -25,7 +27,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Carrera>> GetForo(Guid id)
+        public async Task<ActionResult<Carrera>> GetCarrera(Guid id)
         {
             return await this.Mediator.Send(new ConsultaById.Ejecuta { CarreraId = id });
         }

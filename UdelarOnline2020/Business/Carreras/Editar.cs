@@ -6,6 +6,7 @@ using Aplicacion.ManejadorError;
 using FluentValidation;
 using MediatR;
 using Persistence;
+using Models;
 
 namespace Business.Carreras
 {
@@ -16,6 +17,7 @@ namespace Business.Carreras
             public Guid CarreraId { get; set; }
             public String Nombre { get; set; }
             public String Descripcion { get; set; }
+            public Guid FacultadId { get; set; }
         }
 
         public class EjecutaValidacion : AbstractValidator<Ejecuta>
@@ -42,8 +44,14 @@ namespace Business.Carreras
                 if (carrera == null)
                     throw new ManejadorExcepcion(HttpStatusCode.NotFound, new { mensaje = "La carrera no existe"});
                 
+                //se realiza este control porque el request si puede traer la facultad vacia, quiere decir que no recibe cambios
+                Facultad facultad = null;
+                if (request.FacultadId != null)
+                    facultad = await this.context.Facultad.FindAsync(request.FacultadId);
+
                 carrera.Nombre = request.Nombre ?? carrera.Nombre;
                 carrera.Descripcion = request.Descripcion ?? carrera.Descripcion;
+                carrera.Facultad = facultad ?? carrera.Facultad;
 
                 var res = await this.context.SaveChangesAsync();
 

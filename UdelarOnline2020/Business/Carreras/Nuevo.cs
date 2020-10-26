@@ -17,6 +17,7 @@ namespace Business.Carreras
         {
             public String Nombre { get; set; }
             public String Descripcion { get; set; }
+            public Guid FacultadId { get; set; }
         }
 
         public class EjecutaValidator : AbstractValidator<Ejecuta>
@@ -25,6 +26,7 @@ namespace Business.Carreras
             {
                 RuleFor(c => c.Nombre).NotEmpty().WithMessage("El Nombre es requerido.");
                 RuleFor(c => c.Descripcion).NotEmpty();
+                RuleFor(c => c.FacultadId).NotEmpty();
             }
         }
 
@@ -41,11 +43,14 @@ namespace Business.Carreras
 
             public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
             {
+                //No se controla si la facultad es vacia, puede arrojar excepcion
+                Facultad facultad = await this.context.Facultad.FindAsync(request.FacultadId);
                 var carrera = new Carrera
                 {
                     CarreraId = Guid.NewGuid(),
                     Nombre = request.Nombre,
-                    Descripcion = request.Descripcion
+                    Descripcion = request.Descripcion,
+                    Facultad = facultad
                 };
 
                 this.context.Carrera.Add(carrera);
