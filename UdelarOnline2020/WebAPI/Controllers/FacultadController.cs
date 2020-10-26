@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Business.Facultades;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 
 namespace WebAPI.Controllers
 {
+  
+[AllowAnonymous]
   public class FacultadController : MiControllerBase
   {
-
+   
     [HttpPost]
     public async Task<ActionResult<Unit>> AltaFacultad(Nuevo.Ejecuta data)
     {
