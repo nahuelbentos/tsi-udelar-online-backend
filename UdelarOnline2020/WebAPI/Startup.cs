@@ -56,8 +56,8 @@ namespace WebAPI
       services.AddControllers(opt =>
       {
         // Declaro politica para requerir Autenticación y la agrego como filtro.
-        var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
-        opt.Filters.Add(new AuthorizeFilter(policy));
+        // var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+        // opt.Filters.Add(new AuthorizeFilter(policy));
       })
        .AddFluentValidation(config =>
        {
