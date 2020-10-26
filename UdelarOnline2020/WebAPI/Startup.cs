@@ -34,11 +34,13 @@ namespace WebAPI
 {
   public class Startup
   {
+
+
     public Startup(IConfiguration configuration)
     {
-      Configuration = configuration;
-    }
+      this.Configuration = configuration;
 
+    }
     public IConfiguration Configuration { get; }
 
     // This method gets called by the runtime. Use this method to add services to the container.
@@ -98,6 +100,11 @@ namespace WebAPI
       // Middleware
 
       services.AddMediatR(typeof(Editar.Manejador).Assembly);
+
+      services.AddControllersWithViews()
+          .AddNewtonsoftJson(options =>
+          options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+      );
 
     }
 

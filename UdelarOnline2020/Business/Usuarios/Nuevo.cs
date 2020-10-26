@@ -116,7 +116,7 @@ namespace Business.Usuarios
         usuario.Email = email;
         usuario.ComunicadoLista = null;
         Console.WriteLine("FacultadId: " + request.FacultadId);
-        usuario.FacultadId = request.FacultadId;
+
         usuario.Facultad = facultad;
         Console.WriteLine("usuario.FacultadId: " + usuario.Facultad.FacultadId);
 
@@ -130,6 +130,7 @@ namespace Business.Usuarios
           Console.WriteLine(user.Facultad.FacultadId);
           Console.WriteLine(user.Facultad.Descripcion);
           user.Facultad = facultad;
+
           var res = await this.userManager.UpdateAsync(user);
           Console.WriteLine(user.Facultad.Descripcion);
           if (res.Succeeded)
