@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence;
 
 namespace Persistence.Migrations
 {
     [DbContext(typeof(UdelarOnlineContext))]
-    partial class UdelarOnlineContextModelSnapshot : ModelSnapshot
+    [Migration("20201027004240_QuitoAlumnoIdDeRespuesta")]
+    partial class QuitoAlumnoIdDeRespuesta
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -489,20 +491,21 @@ namespace Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("AlumnoId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<Guid?>("EncuestaActividadId")
+                    b.Property<Guid>("ActividadId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("AlumnoId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("AlumnoId1")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Mensaje")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("RespuestaId");
 
-                    b.HasIndex("AlumnoId");
-
-                    b.HasIndex("EncuestaActividadId");
+                    b.HasIndex("AlumnoId1");
 
                     b.ToTable("Respuesta");
                 });
@@ -1026,11 +1029,7 @@ namespace Persistence.Migrations
                 {
                     b.HasOne("Models.Usuario", "Alumno")
                         .WithMany()
-                        .HasForeignKey("AlumnoId");
-
-                    b.HasOne("Models.Encuesta", "Encuesta")
-                        .WithMany()
-                        .HasForeignKey("EncuestaActividadId");
+                        .HasForeignKey("AlumnoId1");
                 });
 
             modelBuilder.Entity("Models.TemaForo", b =>

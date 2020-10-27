@@ -9,9 +9,7 @@ namespace Models
     public string Mensaje { get; set; }
 
     public Usuario Alumno { get; set; }
-    public Guid AlumnoId { get; set; }
     //Consultar si va encuesta o no 
     public Encuesta Encuesta { get; set; }
-    public Guid ActividadId { get; set; }
   }
 }
