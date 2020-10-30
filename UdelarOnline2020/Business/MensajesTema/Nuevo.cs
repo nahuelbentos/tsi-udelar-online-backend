@@ -1,10 +1,12 @@
 using System;
+using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using Aplicacion.ManejadorError;
 using FluentValidation;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Models;
 using Persistence;
@@ -20,18 +22,19 @@ namespace Business.MensajesTema
             public DateTime FechaDeEnviado { get; set; }
             public Guid EmisorId { get; set; }
             public Guid TemaForoId { get; set; }
-            
+            public bool MensajeBloqueado { get; set; }
 
         }
 
         public class EjecutaValidator : AbstractValidator<Ejecuta>
         {
         public EjecutaValidator()
-        {
-            RuleFor(c => c.Contenido).NotEmpty().WithMessage("El Contenido es requerido.");
-            RuleFor(c => c.FechaDeEnviado).NotEmpty().WithMessage("La Fecha es requerida");
-
-        }
+            {
+                RuleFor(c => c.Contenido).NotEmpty().WithMessage("El Contenido es requerido.");
+                RuleFor(c => c.FechaDeEnviado).NotEmpty().WithMessage("La Fecha es requerida");
+                RuleFor(c => c.EmisorId).NotEmpty().WithMessage("El EmisorId es requerida");
+                RuleFor(c => c.TemaForoId).NotEmpty().WithMessage("El TemaForoId es requerida");
+            }
         }
 
 
@@ -48,13 +51,13 @@ namespace Business.MensajesTema
 
             public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
             {
-                var usuario = await this.context.Usuario.FindAsync(request.EmisorId);
-                if (usuario == null)
+                var emisor = await this.context.Usuario.Where(e => e.Id == request.EmisorId.ToString()).FirstOrDefaultAsync();
+                if (emisor == null)
                 {
                     throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "No existe el emisor ingresado" });
                 }
                 var temaForo = await this.context.TemaForo.FindAsync(request.TemaForoId);
-                if (usuario == null)
+                if (temaForo == null)
                 {
                     throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "No existe el tema foro ingresado" });
                 }
@@ -63,7 +66,9 @@ namespace Business.MensajesTema
                     Contenido = request.Contenido,
                     FechaDeEnviado = request.FechaDeEnviado,
                     TemaForoId = request.TemaForoId,
-                    EmisorId = request.EmisorId
+                    EmisorId = request.EmisorId,
+                    MensajeBloqueado = request.MensajeBloqueado,
+                    Emisor = emisor
                 };
                 
                 context.MensajeTema.Add(mensajeTema);

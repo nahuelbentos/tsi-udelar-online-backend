@@ -1,10 +1,12 @@
 using System;
+using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using Aplicacion.ManejadorError;
 using FluentValidation;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Persistence;
 
@@ -15,7 +17,7 @@ namespace Business.MensajesDirecto
         public class Ejecuta : IRequest
         {
             public string Contenido { get; set; }
-            public DateTime FechaDeEnviado { get; set; }
+            public DateTime? FechaDeEnviado { get; set; }
             public Guid MensajeId { get; set; }
             public Guid ReceptorId { get; set; }
             public Guid EmisorId { get; set; }
@@ -26,10 +28,10 @@ namespace Business.MensajesDirecto
         {
         public EjecutaValidator()
         {
-
             RuleFor(c => c.Contenido).NotEmpty().WithMessage("El Contenido es requerido.");
             RuleFor(c => c.FechaDeEnviado).NotEmpty().WithMessage("La Fecha de enviado es requerido");
-
+            RuleFor(c => c.ReceptorId).NotEmpty().WithMessage("El ReceptorId es requerido.");
+            RuleFor(c => c.EmisorId).NotEmpty().WithMessage("El EmisorId es requerido.");
         }
         }
 
@@ -51,20 +53,20 @@ namespace Business.MensajesDirecto
                     throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "No se encontro el mensaje directo" });
                 }
 
-                var emisor = await this.context.Usuario.FindAsync(request.EmisorId);
+                var emisor = await this.context.Usuario.Where(u => u.Id == request.EmisorId.ToString()).FirstOrDefaultAsync();
                 if (emisor == null)
                 {
                     throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "No existe el emisor ingresado" });
                 }
 
-                var receptor = await this.context.Usuario.FindAsync(request.ReceptorId);
+                var receptor = await this.context.Usuario.Where(u => u.Id == request.ReceptorId.ToString()).FirstOrDefaultAsync();
                 if (receptor == null)
                 {
                     throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "No existe el receptor ingresado" });
                 }
 
                 mensajeDirecto.Contenido = request.Contenido ?? mensajeDirecto.Contenido;
-                //mensajeDirecto.FechaDeEnviado = request.FechaDeEnviado ?? mensajeDirecto.FechaDeEnviado;
+                mensajeDirecto.FechaDeEnviado = request.FechaDeEnviado ?? mensajeDirecto.FechaDeEnviado;
 
                 var res = await this.context.SaveChangesAsync();
                 if (res > 0)

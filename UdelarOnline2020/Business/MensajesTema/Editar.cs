@@ -1,10 +1,12 @@
 using System;
+using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using Aplicacion.ManejadorError;
 using FluentValidation;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Persistence;
 
@@ -19,7 +21,7 @@ namespace Business.MensajesTema
             public Guid MensajeId { get; set; }
             public Guid TemaForoId { get; set; }
             public Guid EmisorId { get; set; }
-            public bool MensajeBloqueado { get; set; }
+            public bool? MensajeBloqueado { get; set; }
 
         }
 
@@ -53,20 +55,20 @@ namespace Business.MensajesTema
                     throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "No se encontro el mensaje tema" });
                 }
 
-                var usuario = await this.context.Usuario.FindAsync(request.EmisorId);
-                if (usuario == null)
+                var emisor = await this.context.Usuario.Where(e => e.Id == request.EmisorId.ToString()).FirstOrDefaultAsync();
+                if (emisor == null)
                 {
                     throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "No existe el emisor ingresado" });
                 }
 
                 var temaForo = await this.context.TemaForo.FindAsync(request.TemaForoId);
-                if (usuario == null)
+                if (temaForo == null)
                 {
                     throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "No existe el tema foro ingresado" });
                 }
 
                 mensajeTema.Contenido = request.Contenido ?? mensajeTema.Contenido;
-                //mensajeTema.MensajeBloqueado = request.MensajeBloqueado ?? mensajeTema.MensajeBloqueado;
+                mensajeTema.MensajeBloqueado = request.MensajeBloqueado ?? mensajeTema.MensajeBloqueado;
 
                 var res = await this.context.SaveChangesAsync();
                 if (res > 0)

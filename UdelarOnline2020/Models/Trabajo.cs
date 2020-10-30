@@ -5,9 +5,7 @@ namespace Models
 {
   public class Trabajo : Actividad
   {
-
-
-    // public File Archivo { get; set; }
+    public byte[] Archivo { get; set; }
 
     public bool EsIndividual { get; set; }
 

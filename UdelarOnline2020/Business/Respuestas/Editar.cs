@@ -1,10 +1,12 @@
 using System;
+using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using Aplicacion.ManejadorError;
 using FluentValidation;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Models;
 using Persistence;
@@ -17,7 +19,7 @@ namespace Business.Respuestas
         {
             public Guid RespuestaId { get; set; }
             public string Mensaje { get; set; }
-            public Usuario Alumno { get; set; }
+            public Guid AlumnoId { get; set; }
 
         }
 
@@ -27,7 +29,7 @@ namespace Business.Respuestas
         {
 
             RuleFor(c => c.Mensaje).NotEmpty().WithMessage("El Mensaje es requerido.");
-            RuleFor(c => c.Alumno).NotEmpty().WithMessage("El Alumno es Requerido");
+            RuleFor(c => c.AlumnoId).NotEmpty().WithMessage("El AlumnoId es Requerido");
         }
         }
 
@@ -51,7 +53,8 @@ namespace Business.Respuestas
                     throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "No se encontro la respuesta" });
                 }
 
-                var alumno = await this.context.Alumno.FindAsync(request.Alumno.Id);
+
+                var alumno = await this.context.Alumno.Where(e => e.Id == request.AlumnoId.ToString()).FirstOrDefaultAsync();
                 
                 if (alumno == null)
                 {
@@ -59,7 +62,7 @@ namespace Business.Respuestas
                 }
 
                 respuesta.Mensaje = request.Mensaje ?? respuesta.Mensaje;
-                respuesta.Alumno = request.Alumno ?? respuesta.Alumno;
+                respuesta.Alumno = alumno ?? respuesta.Alumno;
 
                 var res = await this.context.SaveChangesAsync();
                 if (res > 0)
