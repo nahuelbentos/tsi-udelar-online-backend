@@ -1,10 +1,12 @@
 using System;
+using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using Aplicacion.ManejadorError;
 using FluentValidation;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Persistence;
 
@@ -15,7 +17,7 @@ namespace Business.Mensajes
         public class Ejecuta : IRequest
         {
             public string Contenido { get; set; }
-            public DateTime FechaDeEnviado { get; set; }
+            public DateTime? FechaDeEnviado { get; set; }
             public Guid MensajeId { get; set; }
             public Guid EmisorId { get; set; }
 
@@ -50,15 +52,15 @@ namespace Business.Mensajes
                 {
                     throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "No se encontro el mensaje directo" });
                 }
-
-                var emisor = await this.context.Usuario.FindAsync(request.EmisorId);
+                var emisor = await this.context.Usuario.Where(u => u.Id == request.EmisorId.ToString()).FirstOrDefaultAsync();
+                // var emisor = await this.context.Usuario.FindAsync(request.EmisorId);
                 if (emisor == null)
                 {
                     throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "No existe el emisor ingresado" });
                 }
 
                 mensaje.Contenido = request.Contenido ?? mensaje.Contenido;
-                //mensajeDirecto.FechaDeEnviado = request.FechaDeEnviado ?? mensajeDirecto.FechaDeEnviado;
+                mensaje.FechaDeEnviado = request.FechaDeEnviado ?? mensaje.FechaDeEnviado;
 
                 var res = await this.context.SaveChangesAsync();
                 if (res > 0)

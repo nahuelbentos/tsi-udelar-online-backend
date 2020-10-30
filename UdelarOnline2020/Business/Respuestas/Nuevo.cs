@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Net;
 using System.Threading;
@@ -5,6 +6,7 @@ using System.Threading.Tasks;
 using Aplicacion.ManejadorError;
 using FluentValidation;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Models;
 using Persistence;
@@ -18,7 +20,9 @@ namespace Business.Respuestas
         {
 
             public string Mensaje { get; set; }
-            public Usuario Alumno { get; set; }
+            public Guid AlumnoId { get; set; }
+            
+            public Guid EncuestaId { get; set; }
 
         }
 
@@ -27,7 +31,7 @@ namespace Business.Respuestas
         public EjecutaValidator()
         {
             RuleFor(c => c.Mensaje).NotEmpty().WithMessage("El Mensaje es requerido.");
-            RuleFor(c => c.Alumno).NotEmpty().WithMessage("El Alumno es Requerido");
+            RuleFor(c => c.AlumnoId).NotEmpty().WithMessage("El Alumno es Requerido");
         }
         }
 
@@ -44,15 +48,20 @@ namespace Business.Respuestas
             }
             public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
             {
-                var alumno = await this.context.Alumno.FindAsync(request.Alumno.Id);
-                //var alumno = await this.context.Alumno.Where(a => a.UserName == request.Alumno.UserName).FirstOrDefault();
+                var alumno = await this.context.Alumno.Where(e => e.Id == request.AlumnoId.ToString()).FirstOrDefaultAsync();
                 if (alumno == null)
                 {
                     throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "No existe el alumno ingresado" });
                 }
+                var encuesta = await this.context.Encuesta.FindAsync(request.EncuestaId);
+                if (encuesta == null)
+                {
+                    throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "No existe la encuesta ingresada" });
+                }
                 var resp = new Respuesta {
                     Mensaje = request.Mensaje,
-                    Alumno = request.Alumno
+                    Alumno = alumno,
+                    Encuesta = encuesta
                 };
                 
                 context.Respuesta.Add(resp);

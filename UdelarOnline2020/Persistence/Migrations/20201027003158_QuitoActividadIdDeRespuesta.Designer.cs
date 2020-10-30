@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence;
 
 namespace Persistence.Migrations
 {
     [DbContext(typeof(UdelarOnlineContext))]
-    partial class UdelarOnlineContextModelSnapshot : ModelSnapshot
+    [Migration("20201027003158_QuitoActividadIdDeRespuesta")]
+    partial class QuitoActividadIdDeRespuesta
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -489,7 +491,10 @@ namespace Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("AlumnoId")
+                    b.Property<Guid>("AlumnoId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("AlumnoId1")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<Guid?>("EncuestaActividadId")
@@ -500,7 +505,7 @@ namespace Persistence.Migrations
 
                     b.HasKey("RespuestaId");
 
-                    b.HasIndex("AlumnoId");
+                    b.HasIndex("AlumnoId1");
 
                     b.HasIndex("EncuestaActividadId");
 
@@ -1026,7 +1031,7 @@ namespace Persistence.Migrations
                 {
                     b.HasOne("Models.Usuario", "Alumno")
                         .WithMany()
-                        .HasForeignKey("AlumnoId");
+                        .HasForeignKey("AlumnoId1");
 
                     b.HasOne("Models.Encuesta", "Encuesta")
                         .WithMany()
