@@ -10,6 +10,6 @@ namespace Models
   {
 
     public Guid MaterialId { get; set; }
-    //public File Archivo { get; set; }
+    public byte[] Archivo { get; set; }
   }
 }

@@ -20,6 +20,7 @@ namespace Models
 
     public string EmailPersonal { get; set; }
     public Facultad Facultad { get; set; }
-    public virtual ICollection<Comunicado> ComunicadoLista { get; set; }
+
+    public  ICollection<Comunicado> ComunicadoLista { get; set; }
   }
 }

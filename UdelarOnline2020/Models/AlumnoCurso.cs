@@ -7,7 +7,7 @@ namespace Models
 
     public Guid AlumnoId { get; set; }
 
-    public Usuario Alumno { get; set; }
+    public Alumno Alumno { get; set; }
     //tendria que ir tipo Alumno pero me tiraba error
 
     public Guid CursoId { get; set; }
