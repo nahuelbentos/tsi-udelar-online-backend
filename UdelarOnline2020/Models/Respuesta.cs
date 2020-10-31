@@ -11,5 +11,7 @@ namespace Models
     public Alumno Alumno { get; set; }
     //Consultar si va encuesta o no 
     public Encuesta Encuesta { get; set; }
+
+    public DateTime FechaRealizada { get; set; }
   }
 }

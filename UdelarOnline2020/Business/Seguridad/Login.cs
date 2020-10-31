@@ -63,8 +63,16 @@ namespace Business.Seguridad
 
           var listaRoles = await this.userManager.GetRolesAsync(usuario);
           var roles = new List<string>(listaRoles);
-          //   var facultad = await this.context.Facultad.FindAsync(usuario.FacultadId);
+          var facultad = await this.context.Facultad.FindAsync(usuario.Facultad.FacultadId);
 
+          var dtFacultad = new DtFacultad
+          {
+            Nombre = facultad.Nombre,
+            Descripcion = facultad.Descripcion,
+            DominioMail = facultad.DominioMail,
+            UrlAcceso = facultad.UrlAcceso,
+            FacultadId = facultad.FacultadId
+          };
 
           return new DtUsuario
           {
@@ -75,10 +83,8 @@ namespace Business.Seguridad
             Token = this.jwtGenerador.CrearToken(usuario, roles),
             Email = usuario.Email,
             UserName = usuario.UserName,
-            FacultadId = Guid.Empty,
-            Tipo = usuario.GetType().ToString().Split('.')[1]
-            // FacultadId = facultad.FacultadId,
-            // Facultad = facultad,
+            Tipo = usuario.GetType().ToString().Split('.')[1],
+            Facultad = dtFacultad,
           };
         }
 
