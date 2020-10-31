@@ -8,7 +8,7 @@ using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using Models;
+
 using Persistence;
 
 namespace Business.Respuestas
@@ -63,7 +63,7 @@ namespace Business.Respuestas
 
         respuesta.Mensaje = request.Mensaje ?? respuesta.Mensaje;
         respuesta.Alumno = alumno ?? respuesta.Alumno;
-        respuesta.FechaRealizada = new DateTime();
+        respuesta.FechaRealizada = DateTime.Now;
 
         var res = await this.context.SaveChangesAsync();
         if (res > 0)
@@ -74,4 +74,5 @@ namespace Business.Respuestas
       }
     }
   }
+
 }

@@ -22,6 +22,6 @@ namespace Business.Datatypes
     public string Email { get; set; }
     public string UserName { get; set; }
     public string Tipo { get; set; }
-    public DtFacultad Facultad;
+    public DtFacultad Facultad { get; set; }
   }
 }

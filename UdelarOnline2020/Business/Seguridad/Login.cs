@@ -84,7 +84,7 @@ namespace Business.Seguridad
             Email = usuario.Email,
             UserName = usuario.UserName,
             Tipo = usuario.GetType().ToString().Split('.')[1],
-            Facultad = dtFacultad,
+            Facultad = dtFacultad
           };
         }
 

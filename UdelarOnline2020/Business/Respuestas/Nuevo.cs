@@ -49,11 +49,14 @@ namespace Business.Respuestas
       public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
       {
         var alumno = await this.context.Alumno.Where(e => e.Id == request.AlumnoId.ToString()).FirstOrDefaultAsync();
+
         if (alumno == null)
         {
           throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "No existe el alumno ingresado" });
         }
+
         var encuesta = await this.context.Encuesta.FindAsync(request.EncuestaId);
+
         if (encuesta == null)
         {
           throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "No existe la encuesta ingresada" });
@@ -63,7 +66,7 @@ namespace Business.Respuestas
           Mensaje = request.Mensaje,
           Alumno = alumno,
           Encuesta = encuesta,
-          FechaRealizada = new DateTime()
+          FechaRealizada = DateTime.Now
         };
 
         context.Respuesta.Add(resp);
@@ -73,6 +76,7 @@ namespace Business.Respuestas
           return Unit.Value;
         }
         throw new ManejadorExcepcion(HttpStatusCode.InternalServerError, new { mensaje = "Ocurrio un error al insertar la respuesta" });
+
       }
     }
   }
