@@ -9,6 +9,7 @@ using Business.Interfaces;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Models;
 using Persistence;
 
@@ -48,6 +49,8 @@ namespace Business.Seguridad
 
       public async Task<DtUsuario> Handle(Ejecuta request, CancellationToken cancellationToken)
       {
+        Console.WriteLine("request.email" + request.Email);
+        Console.WriteLine("request.password" + request.Password);
         var usuario = await this.userManager.FindByEmailAsync(request.Email);
 
         if (usuario == null)
@@ -55,15 +58,17 @@ namespace Business.Seguridad
           throw new ManejadorExcepcion(HttpStatusCode.Unauthorized, new { mensaje = "El usuario no existe en el sistema." });
         }
 
+
+
         var resultado = await signInManager.CheckPasswordSignInAsync(usuario, request.Password, false);
 
 
         if (resultado.Succeeded)
         {
-
+          var usuarioContext = await this.context.Usuario.Include(u => u.Facultad).Include(u => u.ComunicadoLista).FirstOrDefaultAsync(u => u.Id == usuario.Id);
           var listaRoles = await this.userManager.GetRolesAsync(usuario);
           var roles = new List<string>(listaRoles);
-          var facultad = await this.context.Facultad.FindAsync(usuario.Facultad.FacultadId);
+          var facultad = await this.context.Facultad.FindAsync(usuarioContext.Facultad.FacultadId);
 
           var dtFacultad = new DtFacultad
           {
