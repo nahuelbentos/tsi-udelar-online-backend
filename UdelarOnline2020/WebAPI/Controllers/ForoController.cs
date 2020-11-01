@@ -33,9 +33,13 @@ namespace WebAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<Unit>> ModificarForo(Guid Id, Editar.Ejecuta data)
+        public async Task<ActionResult<Unit>> ModificarForo(Guid id, Editar.Ejecuta data)
         {
-            data.ForoId = Id;
+            Console.WriteLine(id);
+            Console.WriteLine(id.GetType().ToString());
+            
+
+            data.ForoId = id;
             return await this.Mediator.Send(data);
         }
 

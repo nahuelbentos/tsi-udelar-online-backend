@@ -90,7 +90,9 @@ namespace Business.Actividades
                     default:
                         throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "El tipo de actividad debe ser ClaseDictada, Encuesta o Trabajo" });
                 }
-
+                //relacion hardcodeada para testear
+                actividad.Curso = this.context.Curso.Find(Guid.Parse("5c5ffa80-f005-4995-944f-2d807eee1c08"));
+                actividad.CursoId = actividad.Curso.CursoId;
                 this.context.Actividad.Add(actividad);
 
                 var res = await this.context.SaveChangesAsync();
