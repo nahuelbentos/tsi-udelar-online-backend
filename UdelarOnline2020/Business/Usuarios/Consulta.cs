@@ -32,7 +32,8 @@ namespace Business.Usuarios
       public async Task<List<Usuario>> Handle(Ejecuta request, CancellationToken cancellationToken)
       {
 
-        var usuarios = await this.context.Users.Include(u => u.ComunicadoLista).ToListAsync();
+        var usuarios = await this.context.Users.Include(u => u.Facultad).Include(u => u.ComunicadoLista).ToListAsync();
+
         return usuarios;
       }
     }

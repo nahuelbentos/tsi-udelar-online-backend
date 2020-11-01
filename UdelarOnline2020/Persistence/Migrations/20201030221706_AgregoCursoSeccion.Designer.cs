@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence;
 
 namespace Persistence.Migrations
 {
     [DbContext(typeof(UdelarOnlineContext))]
-    partial class UdelarOnlineContextModelSnapshot : ModelSnapshot
+    [Migration("20201030221706_AgregoCursoSeccion")]
+    partial class AgregoCursoSeccion
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -572,9 +574,6 @@ namespace Persistence.Migrations
                     b.Property<Guid?>("EncuestaActividadId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("FechaRealizada")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Mensaje")
                         .HasColumnType("nvarchar(max)");
 
@@ -615,9 +614,6 @@ namespace Persistence.Migrations
                     b.Property<Guid>("TemaForoId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<byte[]>("ArchivoAdjunto")
-                        .HasColumnType("varbinary(max)");
 
                     b.Property<string>("Asunto")
                         .HasColumnType("nvarchar(max)");

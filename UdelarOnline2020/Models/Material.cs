@@ -8,8 +8,7 @@ namespace Models
 {
   public class Material
   {
-
     public Guid MaterialId { get; set; }
-    //public File Archivo { get; set; }
+    public byte[] Archivo { get; set; }
   }
 }

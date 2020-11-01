@@ -19,8 +19,8 @@ namespace Models
     public string Telefono { get; set; }
 
     public string EmailPersonal { get; set; }
-    public Guid FacultadId;
-    public Facultad Facultad;
-    public virtual ICollection<Comunicado> ComunicadoLista { get; set; }
+    public Facultad Facultad { get; set; }
+
+    public  ICollection<Comunicado> ComunicadoLista { get; set; }
   }
 }

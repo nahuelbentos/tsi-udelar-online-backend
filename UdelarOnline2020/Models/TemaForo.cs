@@ -9,7 +9,7 @@ namespace Models
     public string Mensaje { get; set; }
     public string EmisorId { get; set; }
     public Usuario Emisor { get; set; }
-    public string ArchivoAdjunto { get; set; } //File
+    public byte[] ArchivoAdjunto { get; set; } //File
     public bool SubscripcionADiscusion { get; set; }
   }
 }

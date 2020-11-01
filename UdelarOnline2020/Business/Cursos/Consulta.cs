@@ -25,8 +25,6 @@ namespace Business.Cursos
         // Esto cambia para devolver una lista de DataTypes, en breves lo cambio.
         var cursos = await this.context.Curso
                                       .Include(c => c.TemplateCurso)
-                                      .Include(c => c.MaterialLista)
-                                      .Include(c => c.ActividadLista)
                                       .ToListAsync();
         return cursos;
       }

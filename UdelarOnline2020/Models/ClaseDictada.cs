@@ -5,7 +5,7 @@ namespace Models
 {
   public class ClaseDictada : Actividad
   {
-    //public File Archivo { get; set; }
+    public byte[] Archivo { get; set; }
 
   }
 }
