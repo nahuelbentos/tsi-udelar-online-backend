@@ -6,9 +6,11 @@ using MediatR;
 using Business.Cursos;
 using Models;
 using System;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebAPI.Controllers
 {
+  [AllowAnonymous]
   [Route("api/[controller]")]
   [ApiController]
   public class CursoController : MiControllerBase
