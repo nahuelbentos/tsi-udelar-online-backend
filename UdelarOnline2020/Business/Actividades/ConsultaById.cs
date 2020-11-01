@@ -28,9 +28,7 @@ namespace Business.Actividades
                                                 CancellationToken cancellationToken)
             {
                 //Hay que devolver datatypes
-                var actividad = await this.context.Actividad
-                                                        .Include(a => a.Curso)
-                                                        .FirstOrDefaultAsync(a => a.ActividadId == request.ActividadId);
+                var actividad = await this.context.Actividad.FirstOrDefaultAsync(a => a.ActividadId == request.ActividadId);
                 if (actividad == null)
                 {
                     throw new ManejadorExcepcion(HttpStatusCode.Forbidden, new { mensaje = "No existe una actividad con el CursoId ingresado" });

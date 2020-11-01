@@ -104,8 +104,11 @@ namespace Business.Actividades
             }
 
             private async Task<Actividad> editarActividad(Actividad actividadOld, Actividad actividadActualizar, Ejecuta request)
-            {    
+            {   
+                if (actividadActualizar == null)
+                    actividadActualizar = actividadOld;
                 Actividad actividad = actividadActualizar ?? actividadOld;
+
 
                 //No me deja usar operador ??
                 actividad.FechaFinalizada = request.FechaFinalizada;
@@ -117,7 +120,7 @@ namespace Business.Actividades
                         /*
 
                         ClaseDictada claseAux = (ClaseDictada)actividad;
-                        ClaseDictada claseOldAux = (ClaseDictada)actividadOld;
+                        ClaseDictada claseOldAux = (ClaseDictada)actividadActualizar;
                         claseAux.Archivo = request.Archivo ?? claseOldAux.Archivo;
                         
                         */
@@ -125,7 +128,7 @@ namespace Business.Actividades
                     case "Encuesta":
                         //no me permitia acceder al atributo nombre sin hacer conversion implicita, por eso está asi 22-10-2020 Albert
                         Encuesta encuestaAux = (Encuesta)actividad;
-                        Encuesta encuestaOldAux = (Encuesta)actividadOld;
+                        Encuesta encuestaOldAux = (Encuesta)actividadActualizar;
                         encuestaAux.Nombre = request.Nombre ?? encuestaOldAux.Nombre;
                         encuestaAux.Descripcion = request.Descripcion ?? encuestaOldAux.Descripcion;
                         //no me permite operador ?? con bool
@@ -133,7 +136,7 @@ namespace Business.Actividades
                         break;
                     case "Trabajo":
                         Trabajo trabajoAux = (Trabajo)actividad;
-                        Trabajo trabajoOldAux = (Trabajo)actividadOld;
+                        Trabajo trabajoOldAux = (Trabajo)actividadActualizar;
 
                         trabajoAux.Nota = request.Nota ?? trabajoOldAux.Nota;
                         //no me permite usar operador ?? con bool
@@ -147,11 +150,7 @@ namespace Business.Actividades
                 if (actividadActualizar != null)
                 // Update
                 {
-                
-                actividad.Curso = actividadOld.Curso;
-                actividad.CursoId = actividadOld.CursoId;
-
-                await this.eliminarActividad(actividadOld);
+                    await this.eliminarActividad(actividadOld);
                 }
 
                 return actividad;
