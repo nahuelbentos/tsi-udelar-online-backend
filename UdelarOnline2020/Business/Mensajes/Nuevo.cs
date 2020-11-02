@@ -1,10 +1,12 @@
 using System;
+using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using Aplicacion.ManejadorError;
 using FluentValidation;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Models;
 using Persistence;
@@ -37,7 +39,7 @@ namespace Business.Mensajes
             private readonly UdelarOnlineContext context;
             private readonly ILogger<Manejador> logger;
 
-            public Manejador(UdelarOnlineContext context, ILogger<Manejador> logger)
+            public Manejador( UdelarOnlineContext context, ILogger<Manejador> logger)
             {
                 this.context = context;
                 this.logger = logger;
@@ -45,16 +47,19 @@ namespace Business.Mensajes
 
             public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
             {
-                var emisor = await this.context.Usuario.FindAsync(request.EmisorId);
+
+                var emisor = await this.context.Usuario.Where(e => e.Id == request.EmisorId.ToString()).FirstOrDefaultAsync();
+               
                 if (emisor == null)
                 {
                     throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "No existe el emisor ingresado" });
                 }
-
+                //Guid emisorIdGuid = Guid.Parse(request.EmisorId);
                 var mensaje = new Mensaje {
                     Contenido = request.Contenido,
                     FechaDeEnviado = request.FechaDeEnviado,
-                    EmisorId = request.EmisorId
+                    EmisorId = request.EmisorId,
+                    Emisor = emisor
                 };
                 
                 context.Mensaje.Add(mensaje);

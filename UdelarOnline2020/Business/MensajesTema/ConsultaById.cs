@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Aplicacion.ManejadorError;
 using FluentValidation;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Models;
 using Persistence;
 
@@ -28,7 +29,7 @@ namespace Business.MensajesTema
 
             public async Task<MensajeTema> Handle(Ejecuta request, CancellationToken cancellationToken)
             {
-                var mensajeTema = await this.context.MensajeTema.FindAsync(request.MensajeId);
+                var mensajeTema = await this.context.MensajeTema.Include( m => m.Emisor).FirstOrDefaultAsync(m => m.MensajeId == request.MensajeId);
 
                 if (mensajeTema == null)
                     throw new ManejadorExcepcion(HttpStatusCode.NotFound, new { mensaje = "El mensaje tema no existe. " });

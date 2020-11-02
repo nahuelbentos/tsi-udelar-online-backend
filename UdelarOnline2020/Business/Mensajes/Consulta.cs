@@ -24,7 +24,7 @@ namespace Business.Mensajes
 
             public async Task<List<Mensaje>> Handle(Ejecuta request, CancellationToken cancellationToken)
             {
-                var mensaje = await this.context.Mensaje.ToListAsync();
+                var mensaje = await this.context.Mensaje.Include( m => m.Emisor).ToListAsync();
                 return mensaje;
             }
         }

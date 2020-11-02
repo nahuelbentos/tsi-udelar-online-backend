@@ -6,7 +6,7 @@ namespace Models
   {
     public Guid AlumnoId { get; set; }
 
-    public Usuario Alumno { get; set; }
+    public Alumno Alumno { get; set; }
     //Tiene que ser de tipo Alumno pero me tira error
 
     public Guid ClaseDictadaId { get; set; }

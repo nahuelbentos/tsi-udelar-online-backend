@@ -24,7 +24,7 @@ namespace Business.MensajesDirecto
 
             public async Task<List<MensajeDirecto>> Handle(Ejecuta request, CancellationToken cancellationToken)
             {
-                var mensajeDirecto = await this.context.MensajeDirecto.ToListAsync();
+                var mensajeDirecto = await this.context.MensajeDirecto.Include( m => m.Emisor).Include(r => r.Receptor).ToListAsync();
                 return mensajeDirecto;
             }
         }

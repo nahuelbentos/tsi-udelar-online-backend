@@ -14,11 +14,8 @@ namespace Models
     public bool RequiereMatriculacion { get; set; }
     public string SalaVirtual { get; set; }
 
-    public Guid TemplateCursoId { get; set; }
-    public TemplateCurso TemplateCurso { get; set; }
-    public ICollection<Material> MaterialLista { get; set; }
-    public ICollection<Actividad> ActividadLista { get; set; }
 
+    public TemplateCurso TemplateCurso { get; set; }
 
 
   }

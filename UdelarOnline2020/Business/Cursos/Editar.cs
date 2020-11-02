@@ -17,13 +17,13 @@ namespace Business.Cursos
   {
     public class Ejecuta : IRequest
     {
-      public Guid CursoId { get; set; }
+      public Guid? CursoId { get; set; }
       public string Nombre { get; set; }
       public string Descripcion { get; set; }
       public ModalidadEnum? ModalidadCurso { get; set; }
       public bool? RequiereMatriculacion { get; set; }
       public string SalaVirtual { get; set; }
-      public Guid TemplateCursoId { get; set; }
+      public Guid? TemplateCursoId { get; set; }
     }
 
 
@@ -55,8 +55,10 @@ namespace Business.Cursos
 
         }
 
-        if (request.TemplateCursoId != Guid.Empty)
+        Console.WriteLine("1 template: " + request.TemplateCursoId);
+        if (!(request.TemplateCursoId.Equals(Guid.Empty) || request.TemplateCursoId.Equals(String.Empty)))
         {
+          Console.WriteLine("2 template: " + request.TemplateCursoId);
 
           var templateCurso = await this.context.TemplateCurso.Where(tc => tc.TemplateCursoId == request.TemplateCursoId).FirstOrDefaultAsync();
 
@@ -66,7 +68,7 @@ namespace Business.Cursos
             throw new ManejadorExcepcion(HttpStatusCode.NotFound, new { mensaje = "El template enviado,  no existe." });
           }
 
-          curso.TemplateCursoId = request.TemplateCursoId;
+
           curso.TemplateCurso = templateCurso;
 
         }
@@ -79,6 +81,7 @@ namespace Business.Cursos
 
 
         var res = await this.context.SaveChangesAsync();
+
 
 
         if (res > 0)
