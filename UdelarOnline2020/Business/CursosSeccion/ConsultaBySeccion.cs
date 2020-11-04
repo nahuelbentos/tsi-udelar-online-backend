@@ -11,11 +11,11 @@ using Persistence;
 
 namespace Business.CursosSeccion
 {
-  public class ConsultaById
+  public class ConsultaBySeccion
   {
     public class Ejecuta : IRequest<CursoSeccion>
     {
-      public Guid CursoSeccionId { get; set; }
+      public Guid SeccionId { get; set; }
     }
     public class Manejador : IRequestHandler<Ejecuta, CursoSeccion>
     {
@@ -29,7 +29,7 @@ namespace Business.CursosSeccion
       public async Task<CursoSeccion> Handle(Ejecuta request, CancellationToken cancellationToken)
       {
         // Esto cambia para devolver una lista de DataTypes, en breves lo cambio.
-        var curso = await this.context.CursoSeccion.FirstOrDefaultAsync(c => c.CursoSeccionId == request.CursoSeccionId);
+        var curso = await this.context.CursoSeccion.FirstOrDefaultAsync(c => c.SeccionId == request.SeccionId);
         if (curso == null)
         {
           throw new ManejadorExcepcion(HttpStatusCode.Forbidden, new { mensaje = "No existe un curso con el CursoId ingresado" });
