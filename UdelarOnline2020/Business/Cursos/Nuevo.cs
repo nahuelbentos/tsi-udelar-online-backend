@@ -22,7 +22,7 @@ namespace Business.Cursos
       public ModalidadEnum ModalidadCurso { get; set; }
       public bool RequiereMatriculacion { get; set; }
       public string SalaVirtual { get; set; }
-      public Guid TemplateCursoId { get; set; }
+      public Guid? TemplateCursoId { get; set; }
 
     }
 
@@ -34,7 +34,6 @@ namespace Business.Cursos
         RuleFor(c => c.Descripcion).NotEmpty();
         RuleFor(c => c.ModalidadCurso).NotEmpty();
         RuleFor(c => c.SalaVirtual).NotEmpty();
-        RuleFor(c => c.TemplateCursoId).NotEmpty().WithMessage("El template del curso es Requerido");
       }
     }
 
@@ -54,11 +53,20 @@ namespace Business.Cursos
       {
 
 
-        var templateCurso = await this.context.TemplateCurso.Where(tc => tc.TemplateCursoId == request.TemplateCursoId).FirstOrDefaultAsync();
-        if (templateCurso == null)
+        TemplateCurso templateCurso = null;
+
+        if (request.TemplateCursoId != null)
         {
-          throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "No existe el template ingresado" });
+
+          templateCurso = await this.context.TemplateCurso.Where(tc => tc.TemplateCursoId == request.TemplateCursoId).FirstOrDefaultAsync();
+
+          if (templateCurso == null)
+          {
+            throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "No existe el template ingresado" });
+          }
+
         }
+
         var curso = new Curso
         {
           CursoId = Guid.NewGuid(),

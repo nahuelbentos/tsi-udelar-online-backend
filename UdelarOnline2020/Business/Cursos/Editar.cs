@@ -54,22 +54,26 @@ namespace Business.Cursos
           throw new ManejadorExcepcion(HttpStatusCode.NotFound, new { mensaje = "El curso no existe" });
 
         }
-
-        Console.WriteLine("1 template: " + request.TemplateCursoId);
-        if (!(request.TemplateCursoId.Equals(Guid.Empty) || request.TemplateCursoId.Equals(String.Empty)))
+        TemplateCurso templateCurso = null;
+        if (request.TemplateCursoId != null)
         {
-          Console.WriteLine("2 template: " + request.TemplateCursoId);
 
-          var templateCurso = await this.context.TemplateCurso.Where(tc => tc.TemplateCursoId == request.TemplateCursoId).FirstOrDefaultAsync();
-
-
-          if (templateCurso == null)
+          if (!(request.TemplateCursoId.Equals(Guid.Empty) || request.TemplateCursoId.Equals(String.Empty)))
           {
-            throw new ManejadorExcepcion(HttpStatusCode.NotFound, new { mensaje = "El template enviado,  no existe." });
+
+
+            templateCurso = await this.context.TemplateCurso.Where(tc => tc.TemplateCursoId == request.TemplateCursoId).FirstOrDefaultAsync();
+
+
+            if (templateCurso == null)
+            {
+              throw new ManejadorExcepcion(HttpStatusCode.NotFound, new { mensaje = "El template enviado,  no existe." });
+            }
+
+
+            curso.TemplateCurso = templateCurso;
+
           }
-
-
-          curso.TemplateCurso = templateCurso;
 
         }
 

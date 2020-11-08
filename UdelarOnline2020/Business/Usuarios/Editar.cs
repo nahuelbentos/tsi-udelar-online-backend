@@ -19,7 +19,7 @@ namespace Business.Usuarios
     {
       public string Nombres { get; set; }
       public string Apellidos { get; set; }
-      public string Cedula { get; set; }
+      public string CI { get; set; }
       public DateTime? FechaNacimiento { get; set; }
       public string Direccion { get; set; }
       public string Telefono { get; set; }
@@ -58,7 +58,7 @@ namespace Business.Usuarios
       {
 
         Console.WriteLine("request.Email:: " + request.Email);
-        var usuario = await this.userManager.FindByEmailAsync(request.Email);
+        var usuario = await this.context.Users.Include(u => u.Facultad).Include(u => u.ComunicadoLista).FirstOrDefaultAsync(u => u.Email == request.Email);
 
 
         // var user = await this.context.FindAsync();
@@ -137,7 +137,7 @@ namespace Business.Usuarios
 
         usuario.Nombres = request.Nombres ?? usuarioOld.Nombres;
         usuario.Apellidos = request.Apellidos ?? usuarioOld.Apellidos;
-        usuario.CI = request.Cedula ?? usuarioOld.CI;
+        usuario.CI = request.CI ?? usuarioOld.CI;
         usuario.FechaNacimiento = request.FechaNacimiento ?? usuarioOld.FechaNacimiento;
         usuario.Direccion = request.Direccion ?? usuarioOld.Nombres;
         usuario.Telefono = request.Telefono ?? usuarioOld.Telefono;
@@ -147,7 +147,7 @@ namespace Business.Usuarios
 
         if (usuarioActualizar != null)
         {
-          // // usuario.FacultadId = usuarioOld.FacultadId;
+          
           usuario.Facultad = usuarioOld.Facultad;
           usuario.EmailPersonal = usuarioOld.EmailPersonal;
           usuario.UserName = usuarioOld.UserName;
