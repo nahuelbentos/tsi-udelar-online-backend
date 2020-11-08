@@ -20,6 +20,10 @@ namespace Business.Facultades
       public string Descripcion { get; set; }
       public string UrlAcceso { get; set; }
       public string DominioMail { get; set; } // Ejemplo: @fing.edu.uy
+      public string LogoNombre { get; set; }
+      public string LogoExtension { get; set; }
+      public string LogoData { get; set; }
+      public string ColorCodigo { get; set; }
     }
 
     public class Manejador : IRequestHandler<Ejecuta>
@@ -46,6 +50,11 @@ namespace Business.Facultades
         facultad.Descripcion = request.Descripcion ?? facultad.Descripcion;
         facultad.UrlAcceso = request.UrlAcceso ?? facultad.UrlAcceso;
         facultad.DominioMail = request.DominioMail ?? facultad.DominioMail;
+
+        facultad.LogoNombre = request.LogoNombre ?? facultad.LogoNombre;
+        facultad.LogoData = request.LogoData ?? facultad.LogoData;
+        facultad.LogoExtension = request.LogoExtension ?? facultad.LogoExtension;
+        facultad.ColorCodigo = request.ColorCodigo ?? facultad.ColorCodigo;
 
 
         var res = await this.context.SaveChangesAsync();

@@ -14,8 +14,13 @@ namespace Business.Materiales
     {
         public class Ejecuta : IRequest
         {
-            public string File { get; set; }
             public Guid MaterialId { get; set; }
+
+            public string Nombre { get; set; }
+            public string Descripcion { get; set; }
+            public string ArchivoData { get; set; }
+            public string ArchivoNombre { get; set; }
+            public string ArchivoExtension { get; set; }
 
         }
 
@@ -24,7 +29,7 @@ namespace Business.Materiales
         public EjecutaValidator()
         {
 
-            RuleFor(c => c.File).NotEmpty().WithMessage("El File es requerido.");
+            RuleFor(c => c.ArchivoData).NotEmpty().WithMessage("El FileData es requerido.");
 
         }
         }
@@ -48,7 +53,11 @@ namespace Business.Materiales
                     throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "No se encontro el material" });
                 }
 
-                //material.File = request.File ?? material.File;
+                material.ArchivoData = Convert.FromBase64String(request.ArchivoData) ?? material.ArchivoData;
+                material.ArchivoExtension = request.ArchivoExtension ?? material.ArchivoExtension;
+                material.ArchivoNombre = request.ArchivoNombre ?? material.ArchivoNombre;
+                material.Nombre = request.Nombre ?? material.Nombre;
+                material.Descripcion = request.Descripcion ?? material.Descripcion;
 
                 var res = await this.context.SaveChangesAsync();
                 if (res > 0)

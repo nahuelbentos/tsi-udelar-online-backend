@@ -1,3 +1,4 @@
+using System;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
@@ -14,8 +15,11 @@ namespace Business.Materiales
     {
         public class Ejecuta : IRequest
         {
-            //ver como guardar file
-            public string File { get; set; }
+            public string Nombre { get; set; }
+            public string Descripcion { get; set; }
+            public string ArchivoData { get; set; }
+            public string ArchivoNombre { get; set; }
+            public string ArchivoExtension { get; set; }
 
         }
 
@@ -23,7 +27,7 @@ namespace Business.Materiales
         {
         public EjecutaValidator()
         {
-            RuleFor(c => c.File).NotEmpty().WithMessage("El File es requerido.");
+            RuleFor(c => c.ArchivoData).NotEmpty().WithMessage("El File es requerido.");
 
         }
         }
@@ -42,7 +46,11 @@ namespace Business.Materiales
             public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
             {
                 var material = new Material {
-                    //File = request.File
+                    ArchivoData = Convert.FromBase64String(request.ArchivoData),
+                    ArchivoExtension = request.ArchivoExtension,
+                    ArchivoNombre = request.ArchivoNombre,
+                    Descripcion = request.Descripcion,
+                    Nombre = request.Nombre
                 };
                 
                 context.Material.Add(material);
