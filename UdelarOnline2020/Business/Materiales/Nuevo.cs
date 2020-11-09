@@ -27,7 +27,8 @@ namespace Business.Materiales
         {
         public EjecutaValidator()
         {
-            RuleFor(c => c.ArchivoData).NotEmpty().WithMessage("El File es requerido.");
+            RuleFor(c => c.Nombre).NotEmpty().WithMessage("El Nombre es requerido.");
+            RuleFor(c => c.Descripcion).NotEmpty().WithMessage("El Descripcion es requerido.");
 
         }
         }
@@ -45,10 +46,23 @@ namespace Business.Materiales
 
             public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
             {
+                byte[] archivoData = null;
+                if(request.ArchivoData != null)
+                    archivoData = Convert.FromBase64String(request.ArchivoData);
+
+                string archivoNombre = null;
+                if(request.ArchivoNombre != null)
+                    archivoNombre = request.Nombre;
+
+                string archivoExtension = null;
+                if(request.ArchivoExtension != null)
+                    archivoExtension = request.ArchivoExtension;
+
+                
                 var material = new Material {
-                    ArchivoData = Convert.FromBase64String(request.ArchivoData),
-                    ArchivoExtension = request.ArchivoExtension,
-                    ArchivoNombre = request.ArchivoNombre,
+                    ArchivoData = archivoData,
+                    ArchivoExtension = archivoExtension,
+                    ArchivoNombre = archivoNombre,
                     Descripcion = request.Descripcion,
                     Nombre = request.Nombre
                 };
