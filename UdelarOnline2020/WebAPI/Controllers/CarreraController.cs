@@ -39,7 +39,7 @@ namespace WebAPI.Controllers
             return await this.Mediator.Send(data);
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<ActionResult<Unit>> EliminarCarrera(Guid Id)
         {
             return await this.Mediator.Send(new Eliminar.Ejecuta { CarreraId = Id });

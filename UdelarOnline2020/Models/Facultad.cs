@@ -13,6 +13,10 @@ namespace Models
     public string Descripcion { get; set; }
     public string UrlAcceso { get; set; }
     public string DominioMail { get; set; } // Ejemplo: @fing.edu.uy
+    public string LogoNombre { get; set; } 
+    public string LogoExtension { get; set; } 
+    public string LogoData { get; set; } 
+    public string ColorCodigo { get; set; } 
 
     public ICollection<Usuario> UsuarioLista { get; set; }
   }

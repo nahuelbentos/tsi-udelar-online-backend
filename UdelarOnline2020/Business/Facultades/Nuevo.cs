@@ -21,6 +21,10 @@ namespace Business.Facultades
       public string Descripcion { get; set; }
       public string UrlAcceso { get; set; }
       public string DominioMail { get; set; } // Ejemplo: @fing.edu.uy
+      public string LogoNombre { get; set; }
+      public string LogoExtension { get; set; }
+      public string LogoData { get; set; }
+      public string ColorCodigo { get; set; }
 
     }
 
@@ -60,6 +64,11 @@ namespace Business.Facultades
           Descripcion = request.Descripcion,
           UrlAcceso = request.UrlAcceso,
           DominioMail = request.DominioMail,
+
+          LogoData = request.LogoData,
+          LogoExtension = request.LogoExtension,
+          LogoNombre = request.LogoNombre,
+          ColorCodigo = request.ColorCodigo,
         };
 
         await this.context.Facultad.AddAsync(facultad);
