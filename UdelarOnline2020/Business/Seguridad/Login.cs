@@ -72,11 +72,11 @@ namespace Business.Seguridad
 
           var dtFacultad = new DtFacultad
           {
-            Nombre = facultad.Nombre,
+            FacultadId = facultad.FacultadId,
             Descripcion = facultad.Descripcion,
-            DominioMail = facultad.DominioMail,
+            Nombre = facultad.Nombre,
             UrlAcceso = facultad.UrlAcceso,
-            FacultadId = facultad.FacultadId
+            DominioMail = facultad.DominioMail,
           };
 
           return new DtUsuario

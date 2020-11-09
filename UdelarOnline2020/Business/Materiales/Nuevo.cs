@@ -1,3 +1,4 @@
+using System;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
@@ -14,8 +15,11 @@ namespace Business.Materiales
     {
         public class Ejecuta : IRequest
         {
-            //ver como guardar file
-            public string File { get; set; }
+            public string Nombre { get; set; }
+            public string Descripcion { get; set; }
+            public string ArchivoData { get; set; }
+            public string ArchivoNombre { get; set; }
+            public string ArchivoExtension { get; set; }
 
         }
 
@@ -23,7 +27,8 @@ namespace Business.Materiales
         {
         public EjecutaValidator()
         {
-            RuleFor(c => c.File).NotEmpty().WithMessage("El File es requerido.");
+            RuleFor(c => c.Nombre).NotEmpty().WithMessage("El Nombre es requerido.");
+            RuleFor(c => c.Descripcion).NotEmpty().WithMessage("El Descripcion es requerido.");
 
         }
         }
@@ -41,8 +46,25 @@ namespace Business.Materiales
 
             public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
             {
+                byte[] archivoData = null;
+                if(request.ArchivoData != null)
+                    archivoData = Convert.FromBase64String(request.ArchivoData);
+
+                string archivoNombre = null;
+                if(request.ArchivoNombre != null)
+                    archivoNombre = request.Nombre;
+
+                string archivoExtension = null;
+                if(request.ArchivoExtension != null)
+                    archivoExtension = request.ArchivoExtension;
+
+                
                 var material = new Material {
-                    //File = request.File
+                    ArchivoData = archivoData,
+                    ArchivoExtension = archivoExtension,
+                    ArchivoNombre = archivoNombre,
+                    Descripcion = request.Descripcion,
+                    Nombre = request.Nombre
                 };
                 
                 context.Material.Add(material);

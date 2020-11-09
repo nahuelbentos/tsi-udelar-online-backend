@@ -20,7 +20,9 @@ namespace Business.TemasForo
       public string Asunto { get; set; }
       public string Mensaje { get; set; }
       public string EmisorId { get; set; }
-      public string ArchivoAdjunto { get; set; }
+      public string ArchivoData { get; set; }
+      public string ArchivoNombre { get; set; }
+      public string ArchivoExtension { get; set; }
       public bool SuscripcionADiscusion { get; set; }
 
     }
@@ -63,7 +65,9 @@ namespace Business.TemasForo
           Asunto = request.Asunto,
           Mensaje = request.Mensaje,
           EmisorId = request.EmisorId,
-          ArchivoAdjunto = Convert.FromBase64String(request.ArchivoAdjunto),
+          ArchivoData = Convert.FromBase64String(request.ArchivoData),
+          ArchivoNombre = request.ArchivoNombre,
+          ArchivoExtension = request.ArchivoExtension,
           SubscripcionADiscusion = request.SuscripcionADiscusion,
         };
 
