@@ -17,6 +17,13 @@ namespace WebAPI.Controllers
       return await Mediator.Send(data);
     }
 
+    [HttpPut("forgot-password")]
+
+    public async Task<ActionResult<DtUsuario>> ForgotPassword(Login.Ejecuta data)
+    {
+      return await Mediator.Send(data);
+    }
+
 
     // //http://localhost:5000/api/auth/register
     // [HttpPost("register")]
