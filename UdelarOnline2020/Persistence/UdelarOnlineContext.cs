@@ -75,6 +75,7 @@ namespace Persistence
 
 
     public DbSet<TemplateCursoSeccion> TemplateCursoSeccion { get; set; }
+    public DbSet<Seccion> Seccion { get; set; }
     public DbSet<CursoSeccion> CursoSeccion { get; set; }
     public DbSet<CursoSeccionForo> CursoSeccionForo { get; set; }
     public DbSet<CursoSeccionMaterial> CursoSeccionMaterial { get; set; }
