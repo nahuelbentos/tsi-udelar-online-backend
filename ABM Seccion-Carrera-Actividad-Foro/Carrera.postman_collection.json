@@ -1,0 +1,403 @@
+{
+	"info": {
+		"_postman_id": "3aaaefb9-c352-45eb-bbe3-4d013d63a9a5",
+		"name": "Carrera",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Test 1: Get Carreras",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/carrera/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"carrera",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test 2: Get Carrera By Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/carrera/69d0f937-c036-4275-ac15-cd309ccac210",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"carrera",
+						"69d0f937-c036-4275-ac15-cd309ccac210"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test 3: Add Carrera",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Nombre\": \"Ingenieria Naval\",\r\n    \"Descripcion\": \"Quien hace esta carrera ???\",\r\n    \"FacultadId\": \"a44437fc-09d5-4a83-8435-973a5029b293\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/carrera/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"carrera",
+						""
+					],
+					"query": [
+						{
+							"key": "Nombre",
+							"value": "Tecnologo en Informatica",
+							"disabled": true
+						},
+						{
+							"key": "Descripcion",
+							"value": "Una descripcion completa",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test 3: Add Carrera (Facultad vacia)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Nombre\": \"Ingenieria Carnica\",\r\n    \"Descripcion\": \"Quien hace esta carrera ???\",\r\n    \"FacultadId\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/carrera/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"carrera",
+						""
+					],
+					"query": [
+						{
+							"key": "Nombre",
+							"value": "Tecnologo en Informatica",
+							"disabled": true
+						},
+						{
+							"key": "Descripcion",
+							"value": "Una descripcion completa",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test 3: Add Carrera (Descripcion vacia)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Nombre\": \"Ingenieria Industrial\",\r\n    \"Descripcion\": \"\",\r\n    \"FacultadId\": \"a44437fc-09d5-4a83-8435-973a5029b293\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/carrera/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"carrera",
+						""
+					],
+					"query": [
+						{
+							"key": "Nombre",
+							"value": "Tecnologo en Informatica",
+							"disabled": true
+						},
+						{
+							"key": "Descripcion",
+							"value": "Una descripcion completa",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test 3: Add Carrera (Nombre vacio)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Nombre\": \"\",\r\n    \"Descripcion\": \"Quien hace esta carrera ???\",\r\n    \"FacultadId\": \"a44437fc-09d5-4a83-8435-973a5029b293\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/carrera/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"carrera",
+						""
+					],
+					"query": [
+						{
+							"key": "Nombre",
+							"value": "Tecnologo en Informatica",
+							"disabled": true
+						},
+						{
+							"key": "Descripcion",
+							"value": "Una descripcion completa",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test 4: Editar Carrera",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"CarreraId\": \"2ee27c8d-4a53-4b91-bc7c-28dfb09543ab\",\r\n    \"Nombre\": \"Ingenieria en sistemas cuanticos de Jerusalen\",\r\n    \"Descripcion\": \"Otra descripcion que hay por ahi que no se que dice\",\r\n    \"FacultadId\": \"a44437fc-09d5-4a83-8435-973a5029b293\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/carrera/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"carrera",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test 4: Editar Carrera (sin CarreraId)",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"CarreraId\": \"\",\r\n    \"Nombre\": \"Ingenieria en sistemas cuanticos\",\r\n    \"Descripcion\": \"Test 4 sin CarreraId\",\r\n    \"FacultadId\": \"cf64a7f3-7bb1-4278-b5d0-e81460f6637a\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/carrera/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"carrera",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test 4: Editar Carrera (sin nombre)",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"CarreraId\": \"2ee27c8d-4a53-4b91-bc7c-28dfb09543ab\",\r\n    \"Nombre\": \"\",\r\n    \"Descripcion\": \"Test 4 sin nombre\",\r\n    \"FacultadId\": \"cf64a7f3-7bb1-4278-b5d0-e81460f6637a\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/carrera/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"carrera",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test 4: Editar Carrera (sin descripcion)",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"CarreraId\": \"2ee27c8d-4a53-4b91-bc7c-28dfb09543ab\",\r\n    \"Nombre\": \"Test 4 sin Descripcion\",\r\n    \"Descripcion\": \"\",\r\n    \"FacultadId\": \"cf64a7f3-7bb1-4278-b5d0-e81460f6637a\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/carrera/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"carrera",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test 4: Editar Carrera (sin FacultadId)",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"CarreraId\": \"2ee27c8d-4a53-4b91-bc7c-28dfb09543ab\",\r\n    \"Nombre\": \"Ingenieria en sistemas cuanticos\",\r\n    \"Descripcion\": \"Test 4 sin FacultadId\",\r\n    \"FacultadId\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/carrera/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"carrera",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test 5: Borrar Carrera",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/carrera/2ee27c8d-4a53-4b91-bc7c-28dfb09543ab",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"carrera",
+						"2ee27c8d-4a53-4b91-bc7c-28dfb09543ab"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"id": "1917758e-a6f1-4a3e-a80d-769110bfcc4c",
+			"key": "Nombre",
+			"value": ""
+		},
+		{
+			"id": "9c5aa34c-1922-4537-8658-96fa03848922",
+			"key": "Descripcion",
+			"value": ""
+		}
+	],
+	"protocolProfileBehavior": {}
+}
