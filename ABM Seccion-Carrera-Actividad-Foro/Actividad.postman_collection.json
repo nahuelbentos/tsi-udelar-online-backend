@@ -1,0 +1,277 @@
+{
+	"info": {
+		"_postman_id": "50a0bf16-e85b-40ab-aced-b1bbb1c7430d",
+		"name": "Actividad",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Test 1: Agregar Trabajo",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"FechaRealizada\": \"2020-10-26T00:00:00\",\r\n    \"FechaFinalizada\": \"2020-10-28T00:00:00\",\r\n    \"Tipo\": \"Trabajo\",\r\n    \"Nombre\": \"Entrega individual\",\r\n    \"Descripcion\": \"Esta primer entrega es para evaluar el nivel de los estudiantes respecto del lenguaje de programacion utilizado en el curso.\",\r\n    \"EsIndividual\": true,\r\n    \"Calificacion\": 10,\r\n    \"Nota\": \"Muy bueno bueno\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/actividad/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"actividad",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test 2: Agregar Encuesta",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"FechaRealizada\": \"2020-10-26T00:00:00\",\r\n    \"FechaFinalizada\": \"2020-10-28T00:00:00\",\r\n    \"Tipo\": \"Encuesta\",\r\n    \"Nombre\": \"Un nombre para la encuesta\",\r\n    \"Descripcion\": \"Tremenda descripcion\",\r\n    \"EsAdministrador\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/actividad/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"actividad",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test 3: Agregar ClaseDictada",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"FechaRealizada\": \"2020-10-26T00:00:00\",\r\n    \"FechaFinalizada\": \"2020-10-28T00:00:00\",\r\n    \"Tipo\": \"ClaseDictada\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/actividad/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"actividad",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test 4: Get Actividades",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/actividad/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"actividad",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test 5: Get Actividad By Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/actividad/8384cf1d-30d4-454e-37fa-08d87eb259c3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"actividad",
+						"8384cf1d-30d4-454e-37fa-08d87eb259c3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test 6: Editar Actividad (sin cambio de tipo)",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"archivo\": null,\r\n    \"tipo\": \"Trabajo\",\r\n    \"esIndividual\": true,\r\n    \"calificacion\": 9,\r\n    \"nota\": \"Bajo la nota a 9 por faltas de ortografia\",\r\n    \"fechaRealizada\": \"2020-10-26T00:00:00\",\r\n    \"fechaFinalizada\": \"2020-10-28T00:00:00\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/actividad/f1e2ffe6-81c8-43c9-37f9-08d87eb259c3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"actividad",
+						"f1e2ffe6-81c8-43c9-37f9-08d87eb259c3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test 7: Editar Actividad (cambio de tipo)",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"FechaRealizada\": \"2020-10-26T00:00:00\",\r\n    \"FechaFinalizada\": \"2020-10-28T00:00:00\",\r\n    \"Tipo\": \"Trabajo\",\r\n    \"Nombre\": \"Entrega individual\",\r\n    \"Descripcion\": \"Cambio la descripcion\",\r\n    \"EsIndividual\": true,\r\n    \"Calificacion\": 10,\r\n    \"Nota\": \"Muy bueno bueno\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/actividad/cf408b07-89bd-4086-37fb-08d87eb259c3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"actividad",
+						"cf408b07-89bd-4086-37fb-08d87eb259c3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test 8: Eliminar Actividad By Id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/actividad/8384cf1d-30d4-454e-37fa-08d87eb259c3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"actividad",
+						"8384cf1d-30d4-454e-37fa-08d87eb259c3"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"id": "e89ae3a6-84c2-4913-bb15-f057720a4bbc",
+			"key": "FechaRealizada",
+			"value": "17.03.2020"
+		},
+		{
+			"id": "c61631fb-aebf-4f21-b42c-c01d6182c5ec",
+			"key": "FechaFinalizada",
+			"value": "18.03.2020"
+		},
+		{
+			"id": "52ce9742-d0ef-42a7-8ad7-442f069337b9",
+			"key": "Tipo",
+			"value": "Encuesta"
+		},
+		{
+			"id": "deaf85f2-7e5b-4cfe-b623-f4f14c9ab82c",
+			"key": "Nombre",
+			"value": ""
+		},
+		{
+			"id": "ef9f9b75-c1fc-4949-a9b9-b0099e0efb86",
+			"key": "Descripcion\n",
+			"value": ""
+		},
+		{
+			"id": "a997c4b3-54a4-4970-8eb8-a232a2cef210",
+			"key": "EsAdministrador",
+			"value": ""
+		},
+		{
+			"id": "d02c7fd3-b6cd-49f6-907d-ed83c83135ca",
+			"key": "EsIndividual",
+			"value": ""
+		},
+		{
+			"id": "914457b7-738a-4980-aba3-05a14eab05e3",
+			"key": "Calificacion",
+			"value": ""
+		},
+		{
+			"id": "ce231354-2eac-46ee-9ec6-119d29d84ff0",
+			"key": "Nota",
+			"value": ""
+		}
+	],
+	"protocolProfileBehavior": {}
+}
