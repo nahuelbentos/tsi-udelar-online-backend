@@ -1,0 +1,295 @@
+{
+	"info": {
+		"_postman_id": "929c8d36-9427-47d1-abf3-f99f17cb382c",
+		"name": "Foro",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Test 1: Get Foro",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/foro/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"foro",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test 2: Get Foro By Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/foro/293cbfe3-d836-4351-a212-0daa37c9f75e",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"foro",
+						"293cbfe3-d836-4351-a212-0daa37c9f75e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test 3: Add Foro",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Titulo\": \"Foro de Consultas\",\r\n    \"Descripcion\": \"Un foro de consultas más del monton\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/foro/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"foro",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test 3: Add Foro (sin titulo)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Titulo\": \"\",\r\n    \"Descripcion\": \"Un foro general más del monton\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/foro/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"foro",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test 3: Add Foro (sin descripcion)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Titulo\": \"Otro Foro general\",\r\n    \"Descripcion\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/foro/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"foro",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test 4: Editar Foro",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"ForoId\": \"293cbfe3-d836-4351-a212-0daa37c9f75e\",\r\n    \"Titulo\": \"Un titulo diferente a los demás 2\",\r\n    \"Descripcion\": \"Una descripcion descriptiva\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/foro/293cbfe3-d836-4351-a212-0daa37c9f75e",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"foro",
+						"293cbfe3-d836-4351-a212-0daa37c9f75e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test 4: Editar Foro (sin foroid)",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"ForoId\": \"\",\r\n    \"Titulo\": \"Un titulo que no es tan diferente a los demás\",\r\n    \"Descripcion\": \"Test 4 sin foroid\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/foro/b3a4306f-8904-480a-8e3d-550e35159a0e",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"foro",
+						"b3a4306f-8904-480a-8e3d-550e35159a0e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test 4: Editar Foro (sin titulo)",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"ForoId\": \"293cbfe3-d836-4351-a212-0daa37c9f75e\",\r\n    \"Titulo\": \"\",\r\n    \"Descripcion\": \"Test 4 sin titulo\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/foro/293cbfe3-d836-4351-a212-0daa37c9f75e",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"foro",
+						"293cbfe3-d836-4351-a212-0daa37c9f75e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test 4: Editar Foro (sin descripcion)",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"ForoId\": \"293cbfe3-d836-4351-a212-0daa37c9f75e\",\r\n    \"Titulo\": \"Un titulo del Test 4 sin Descripcion\",\r\n    \"Descripcion\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/foro/293cbfe3-d836-4351-a212-0daa37c9f75e",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"foro",
+						"293cbfe3-d836-4351-a212-0daa37c9f75e"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test 5: Delete Foro",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/foro/293cbfe3-d836-4351-a212-0daa37c9f75e",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"foro",
+						"293cbfe3-d836-4351-a212-0daa37c9f75e"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"id": "f4921013-6719-452e-8438-dc803bd69fb9",
+			"key": "Titulo",
+			"value": ""
+		},
+		{
+			"id": "a993a205-ad84-451e-b236-7160ec4a2b32",
+			"key": "Descripcion",
+			"value": ""
+		}
+	],
+	"protocolProfileBehavior": {}
+}

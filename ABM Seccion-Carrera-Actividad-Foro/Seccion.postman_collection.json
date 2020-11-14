@@ -1,0 +1,265 @@
+{
+	"info": {
+		"_postman_id": "14c73ac0-dd5f-4427-a00a-7f34c7906682",
+		"name": "Seccion",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Test 1: Get Secciones",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/seccion/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"seccion",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test 2: Get Seccion by Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/seccion/5976dd2b-cc06-424e-a16e-8fcd56550655",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"seccion",
+						"5976dd2b-cc06-424e-a16e-8fcd56550655"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test 2: Get Seccion by id con Id invalido",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/seccion/5976dd2b-cc06-424e-a16e-8fcd56550656",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"seccion",
+						"5976dd2b-cc06-424e-a16e-8fcd56550656"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test 3: Put Seccion",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/seccion/{id}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"seccion",
+						"{id}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test 4: Post Seccion",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Nombre\": \"Primera seccion\",\r\n    \"Descripcion\": \"Una descripcion acorde a la primera seccion\",\r\n    \"IsDefault\": true,\r\n    \"IsVisible\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/seccion/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"seccion",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test 4: Post Seccion sin nombre",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Nombre\": \"\",\r\n    \"Descripcion\": \"Una descripcion acorde a la seccion sin nombre\",\r\n    \"IsDefault\": true,\r\n    \"IsVisible\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/seccion/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"seccion",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test 4: Post Seccion sin descripcion",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Nombre\": \"Sin Descripcion\",\r\n    \"Descripcion\": \"\",\r\n    \"IsDefault\": true,\r\n    \"IsVisible\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/seccion/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"seccion",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test 4: Post Seccion sin IsDefault",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Nombre\": \"Test 4 sin IsDefault\",\r\n    \"Descripcion\": \"Una descripcion bonita\",\r\n    \"IsVisible\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/seccion/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"seccion",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test 4: Post Seccion sin IsDefault Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Nombre\": \"Test 4 sin IsVisible\",\r\n    \"Descripcion\": \"Una descripcion bonita y ademas visible\",\r\n    \"IsDefault\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/seccion/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"seccion",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test 5: Delete Seccion",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/seccion/5976dd2b-cc06-424e-a16e-8fcd56550655",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"seccion",
+						"5976dd2b-cc06-424e-a16e-8fcd56550655"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
