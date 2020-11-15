@@ -31,7 +31,6 @@ namespace Business.Preguntas
                 //Hay que reemplazarlo con DataTypes
                 var pregunta = await this.context.Pregunta
                                                     .Include(p => p.Encuesta)
-                                                    .Include(p => p.RespuestaLista)
                                                     .FirstOrDefaultAsync(p => p.PreguntaId == request.PreguntaId);
                 if (pregunta == null)
                 {
