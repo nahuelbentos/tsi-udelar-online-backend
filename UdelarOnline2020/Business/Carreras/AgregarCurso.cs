@@ -1,10 +1,12 @@
 using System;
+using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using Aplicacion.ManejadorError;
 using FluentValidation;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Models;
 using Persistence;
 
@@ -46,6 +48,10 @@ namespace Business.Carreras
                 if (curso == null)
                     throw new ManejadorExcepcion(HttpStatusCode.NotFound, new { mensaje = "La curso no existe"});
                 
+                var carreracurso = await this.context.CarreraCurso.Where(cc => cc.CursoId == request.CursoId && cc.CarreraId == request.CarreraId).FirstOrDefaultAsync();
+                if (carreracurso != null){
+                    throw new ManejadorExcepcion(HttpStatusCode.NotFound, new { mensaje = "El curso ya se encuentra asignado a la carrera." });
+                }   
                 CarreraCurso cc = new CarreraCurso 
                 {
                     CarreraId = request.CarreraId,

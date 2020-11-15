@@ -1,10 +1,12 @@
 using System;
+using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using Aplicacion.ManejadorError;
 using FluentValidation;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Persistence;
 
 namespace Business.Carreras
@@ -37,8 +39,7 @@ namespace Business.Carreras
 
             public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
             {
-                object[] keyvalues = {request.CarreraId, request.CursoId};
-                var carreracurso = await this.context.CarreraCurso.FindAsync(keyvalues);
+                var carreracurso = await this.context.CarreraCurso.Where(cc => cc.CursoId == request.CursoId && cc.CarreraId == request.CarreraId).FirstOrDefaultAsync();
                 if (carreracurso == null){
                     throw new ManejadorExcepcion(HttpStatusCode.NotFound, new { mensaje = "No se encontró la relacion entre carrera y curso" });
                 }    
