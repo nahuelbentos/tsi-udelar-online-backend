@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence;
 
 namespace Persistence.Migrations
 {
     [DbContext(typeof(UdelarOnlineContext))]
-    partial class UdelarOnlineContextModelSnapshot : ModelSnapshot
+    [Migration("20201115023907_AgregoPreguntasDeEncuesta")]
+    partial class AgregoPreguntasDeEncuesta
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -612,18 +614,23 @@ namespace Persistence.Migrations
                     b.Property<string>("AlumnoId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<Guid?>("EncuestaActividadId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<DateTime>("FechaRealizada")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Mensaje")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("PreguntaId")
+                    b.Property<Guid?>("PreguntaId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("RespuestaId");
 
                     b.HasIndex("AlumnoId");
+
+                    b.HasIndex("EncuestaActividadId");
 
                     b.HasIndex("PreguntaId");
 
@@ -1299,11 +1306,13 @@ namespace Persistence.Migrations
                         .WithMany()
                         .HasForeignKey("AlumnoId");
 
-                    b.HasOne("Models.Pregunta", "Pregunta")
+                    b.HasOne("Models.Encuesta", "Encuesta")
+                        .WithMany()
+                        .HasForeignKey("EncuestaActividadId");
+
+                    b.HasOne("Models.Pregunta", null)
                         .WithMany("RespuestaLista")
-                        .HasForeignKey("PreguntaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("PreguntaId");
                 });
 
             modelBuilder.Entity("Models.TemaForo", b =>

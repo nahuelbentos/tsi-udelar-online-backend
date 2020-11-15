@@ -26,7 +26,7 @@ namespace WebAPI.Controllers
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<Usuario>>> GetUsuarios()
+    public async Task<ActionResult<List<DtUsuario>>> GetUsuarios()
     {
       return await this.Mediator.Send(new Consulta.Ejecuta());
     }
