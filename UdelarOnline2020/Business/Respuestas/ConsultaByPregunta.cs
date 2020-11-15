@@ -11,13 +11,13 @@ using Persistence;
 
 namespace Business.Respuestas
 {
-    public class ConsultaByEncuesta
+    public class ConsultaByPregunta
     {
         public class Ejecuta : IRequest<Respuesta>
         {
             
             //public Guid RespuestaId { get; set; }
-            public Guid EncuestaId { get; set; }
+            public Guid PreguntaId { get; set; }
 
         }
 
@@ -33,7 +33,7 @@ namespace Business.Respuestas
             public async Task<Respuesta> Handle(Ejecuta request, CancellationToken cancellationToken)
             {
                 //var resp = await this.context.Encuesta.Where(enc => enc.RespuestaLista.FirstOrDefault<Respuesta>(request.RespuestaId) == request.RespuestaId).AnyAsync();
-                var respuesta = await this.context.Respuesta.Include( m => m.Alumno).Include( m => m.Encuesta).FirstOrDefaultAsync(m => m.Encuesta.ActividadId == request.EncuestaId);
+                var respuesta = await this.context.Respuesta.Include( m => m.Alumno).Include( m => m.Pregunta).FirstOrDefaultAsync(m => m.PreguntaId == request.PreguntaId);
                 if (respuesta == null)
                 {
                     throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "No se encontro la respuesta para esa encuesta" });
