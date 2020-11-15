@@ -25,6 +25,7 @@ namespace Business.Preguntas
                 //Hay que devolver DataTypes
                 var preguntas = await this.context.Pregunta
                                                 .Include(p => p.Encuesta)
+                                                .Include(p => p.RespuestaLista)
                                                 .ToListAsync();
                 return preguntas;    
             }
