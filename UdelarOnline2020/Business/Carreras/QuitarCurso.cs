@@ -24,7 +24,7 @@ namespace Business.Carreras
             public EjecutaValidator()
             {
                 RuleFor(c => c.CarreraId).NotEmpty().WithMessage("Es necesario el CarreraId para eliminar una carrera");
-                RuleFor(c => c.CarreraId).NotEmpty().WithMessage("Es necesario el CursoId para eliminar una carrera");
+                RuleFor(c => c.CursoId).NotEmpty().WithMessage("Es necesario el CursoId para eliminar una carrera");
             }
         }
 

@@ -54,7 +54,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"Nombre\": \"Ingenieria Naval\",\r\n    \"Descripcion\": \"Quien hace esta carrera ???\",\r\n    \"FacultadId\": \"a44437fc-09d5-4a83-8435-973a5029b293\"\r\n}",
+					"raw": "{\r\n    \"Nombre\": \"Ingenieria Naval\",\r\n    \"Descripcion\": \"Quien hace esta carrera ???\",\r\n    \"FacultadId\": \"6c14458c-fe68-4280-b0c2-0d4b09a04a41\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -385,16 +385,76 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Test 6: Agregar Curso",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"CarreraId\": \"d11c772f-cd40-45a4-90cc-d9538be8e711\",\r\n    \"CursoId\": \"33dd2aba-f0ce-4d4d-8551-8840db254df9\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/carrera/asignar-curso",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"carrera",
+						"asignar-curso"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test 7: Quitar Curso",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"CarreraId\": \"d11c772f-cd40-45a4-90cc-d9538be8e711\",\r\n    \"CursoId\": \"33dd2aba-f0ce-4d4d-8551-8840db254df9\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/carrera/quitar-curso",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"carrera",
+						"quitar-curso"
+					]
+				}
+			},
+			"response": []
 		}
 	],
 	"variable": [
 		{
-			"id": "1917758e-a6f1-4a3e-a80d-769110bfcc4c",
+			"id": "5bd30fc8-4451-4d18-b0da-4e9d84f207c5",
 			"key": "Nombre",
 			"value": ""
 		},
 		{
-			"id": "9c5aa34c-1922-4537-8658-96fa03848922",
+			"id": "1ae73c2d-2131-4d0f-8eda-34a06c5f9ac4",
 			"key": "Descripcion",
 			"value": ""
 		}

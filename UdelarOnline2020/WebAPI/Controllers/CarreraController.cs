@@ -39,6 +39,18 @@ namespace WebAPI.Controllers
             return await this.Mediator.Send(data);
         }
 
+        [HttpPost("asignar-curso")]
+        public async Task<ActionResult<Unit>> AsignarCurso(AgregarCurso.Ejecuta data)
+        {
+            return await this.Mediator.Send(data);
+        }
+
+        [HttpDelete("quitar-curso")]
+        public async Task<ActionResult<Unit>> QuitarCurso(QuitarCurso.Ejecuta data)
+        {
+            return await this.Mediator.Send(data);
+        }
+
         [HttpDelete("{id}")]
         public async Task<ActionResult<Unit>> EliminarCarrera(Guid Id)
         {

@@ -25,7 +25,7 @@ namespace Business.Carreras
             public EjecutaValidacion()
             {
                 RuleFor(c => c.CarreraId).NotEmpty().WithMessage("CarreraId es requerido");
-                RuleFor(c => c.CursoId).NotEmpty().WithMessage("CarreraId es requerido");
+                RuleFor(c => c.CursoId).NotEmpty().WithMessage("CursoId es requerido");
             }
         }
 
@@ -60,6 +60,7 @@ namespace Business.Carreras
                     Curso = curso
                 };
 
+                this.context.CarreraCurso.Add(cc);
                 var res = await this.context.SaveChangesAsync();
 
                 if (res > 0)
