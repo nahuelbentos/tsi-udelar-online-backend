@@ -22,7 +22,7 @@ namespace Business.Respuestas
       public string Mensaje { get; set; }
       public Guid AlumnoId { get; set; }
 
-      public Guid EncuestaId { get; set; }
+      public Guid PreguntaId { get; set; }
 
     }
 
@@ -55,17 +55,18 @@ namespace Business.Respuestas
           throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "No existe el alumno ingresado" });
         }
 
-        var encuesta = await this.context.Encuesta.FindAsync(request.EncuestaId);
+        var pregunta = await this.context.Pregunta.FindAsync(request.PreguntaId);
 
-        if (encuesta == null)
+        if (pregunta == null)
         {
-          throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "No existe la encuesta ingresada" });
+          throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "No existe la pregunta ingresada" });
         }
         var resp = new Respuesta
         {
           Mensaje = request.Mensaje,
           Alumno = alumno,
-          Encuesta = encuesta,
+          Pregunta = pregunta,
+          PreguntaId = request.PreguntaId,
           FechaRealizada = DateTime.Now
         };
 
