@@ -1,0 +1,193 @@
+{
+	"info": {
+		"_postman_id": "9c471aa6-983a-46f8-a12e-bb3aac3fd995",
+		"name": "Preguntas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Test 1: Get Preguntas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/pregunta/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"pregunta",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test 2: Get Pregunta by Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/pregunta/1cb25b1c-4474-4cf3-d8fa-08d889af6b82",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"pregunta",
+						"1cb25b1c-4474-4cf3-d8fa-08d889af6b82"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test 3: Add Pregunta",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Texto\": \"¿Por que nos preguntamos?\",\r\n    \"EncuestaId\": \"bbc958a9-a77b-4123-b97a-08d889abf5f9\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/pregunta/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"pregunta",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test 3: Add Pregunta sin Texto",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \r\n    \"EncuestaId\": \"bbc958a9-a77b-4123-b97a-08d889abf5f9\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/pregunta/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"pregunta",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test 3: Add Preguntasin EncuestaId",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Texto\": \"¿Por que nos preguntamos?\"\r\n    \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/pregunta/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"pregunta",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test 4: Editar Pregunta",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"PreguntaId\": \"1cb25b1c-4474-4cf3-d8fa-08d889af6b82\",\r\n    \"Texto\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/pregunta/1cb25b1c-4474-4cf3-d8fa-08d889af6b82",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"pregunta",
+						"1cb25b1c-4474-4cf3-d8fa-08d889af6b82"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Test 5: Eliminar Pregunta",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/pregunta/1cb25b1c-4474-4cf3-d8fa-08d889af6b82",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"pregunta",
+						"1cb25b1c-4474-4cf3-d8fa-08d889af6b82"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
