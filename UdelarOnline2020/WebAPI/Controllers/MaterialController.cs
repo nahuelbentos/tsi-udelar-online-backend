@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Business.Datatypes;
 using Business.Materiales;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -19,10 +20,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Material>>> GetMensajes()
-        {
-        return await this.Mediator.Send(new Consulta.Ejecuta());
-        }
+        public async Task<ActionResult<List<DtMaterial>>> GetMensajes() =>  await this.Mediator.Send(new Consulta.Ejecuta());
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Material>> GetMensaje(Guid Id)
