@@ -65,6 +65,7 @@ namespace Persistence
     public DbSet<MensajeDirecto> MensajeDirecto { get; set; }
     public DbSet<MensajeTema> MensajeTema { get; set; }
     public DbSet<Respuesta> Respuesta { get; set; }
+    public DbSet<Seccion> Seccion {get; set;}
     public DbSet<TemaForo> TemaForo { get; set; }
     public DbSet<TemplateCurso> TemplateCurso { get; set; }
     public DbSet<Trabajo> Trabajo { get; set; }
@@ -76,7 +77,6 @@ namespace Persistence
 
     public DbSet<TemplateCursoSeccion> TemplateCursoSeccion { get; set; }
     public DbSet<Pregunta> Pregunta { get; set; }
-    public DbSet<Seccion> Seccion { get; set; }
     public DbSet<CursoSeccion> CursoSeccion { get; set; }
     public DbSet<CursoSeccionForo> CursoSeccionForo { get; set; }
     public DbSet<CursoSeccionMaterial> CursoSeccionMaterial { get; set; }
