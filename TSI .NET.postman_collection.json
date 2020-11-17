@@ -1,0 +1,2378 @@
+{
+	"info": {
+		"_postman_id": "b0100175-2f21-4e57-87c4-725b15782058",
+		"name": "TSI .NET",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Local",
+			"item": [
+				{
+					"name": "Usuarios",
+					"item": [
+						{
+							"name": "Alta Usuarios",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{localToken}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{localtoken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Nombres\" : \"Tomas\",\r\n    \"Apellidos\" : \"Pascal\",\r\n    \"CI\" : \"5.159.785-2\",\r\n    \"FechaNacimiento\" : \"1998-12-29\",\r\n    \"Direccion\" : \"Oyarvide 3365\",\r\n    \"Telefono\" : \"09883573\",\r\n    \"EmailPersonal\" : \"pascaltomas27@gmail.com\",\r\n    \"UserName\" : \"tomas.pascal\",\r\n    \"Password\" : \"Hola123.\",\r\n    \"FacultadId\" : \"6c14458c-fe68-4280-b0c2-0d4b09a04a41\",\r\n    \"Tipo\" : \"Alumno\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}usuario",
+									"host": [
+										"{{local}}usuario"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modificar Comunicado",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{localToken}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{localtoken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Nombre\" : \"Prueba cambio\",\r\n    \"Descripcion\" : \"Descr\",\r\n    \"Url\" : \"http://prueba.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}usuario/84bbf328-7a03-41b3-b1b2-d5aec5beec51",
+									"host": [
+										"{{local}}usuario"
+									],
+									"path": [
+										"84bbf328-7a03-41b3-b1b2-d5aec5beec51"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Usuarios",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{localToken}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{localtoken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}usuario",
+									"host": [
+										"{{local}}usuario"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Usuario by Id",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{localToken}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{localtoken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}usuario/id/159dd5d6-d6aa-4707-bdde-344b43d557c1",
+									"host": [
+										"{{local}}usuario"
+									],
+									"path": [
+										"id",
+										"159dd5d6-d6aa-4707-bdde-344b43d557c1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Usuario",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{localToken}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{localtoken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}usuario/159dd5d6-d6aa-4707-bdde-344b43d557c1",
+									"host": [
+										"{{local}}usuario"
+									],
+									"path": [
+										"159dd5d6-d6aa-4707-bdde-344b43d557c1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Obtener Usuarios by Email",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{localToken}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{localtoken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \r\n    \"Nombre\": \"TSI 2020\",\r\n    \"Descripcion\": \"Taller de Net Core del 2020\",\r\n    \"ModalidadCurso\": 2,\r\n    \"RequiereMatriculacion\": true,\r\n    \"SalaVirtual\": \"salaVirtual-TSI.com\",    \r\n    \"TemplateCursoId\": \"9F4CA882-B42F-473B-85E9-BEFD1E818B7F\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}usuario/email/rita.iglesias.adrover@gmail.com",
+									"host": [
+										"{{local}}usuario"
+									],
+									"path": [
+										"email",
+										"rita.iglesias.adrover@gmail.com"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Facultades",
+					"item": [
+						{
+							"name": "Alta Facultades",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{localToken}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{localtoken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Nombre\" : \"Facultad de Ingenieria\",\r\n    \"Descripcion\" : \"Facultad de Ingenieria\",\r\n    \"UrlAcceso\" : \"www.fing.edu.uy\",\r\n    \"DominioMail\" : \"@fing.edu.uy\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}Facultad",
+									"host": [
+										"{{local}}Facultad"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modificar Facultad",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{localToken}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{localtoken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Nombre\" : \"Facultad de Ingenieria\",\r\n    \"Descripcion\" : \"Facultad de Ingenieria\",\r\n    \"UrlAcceso\" : \"www.fing.edu.uy\",\r\n    \"DominioMail\" : \"@fing.edu.uy\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}Facultad/84bbf328-7a03-41b3-b1b2-d5aec5beec51",
+									"host": [
+										"{{local}}Facultad"
+									],
+									"path": [
+										"84bbf328-7a03-41b3-b1b2-d5aec5beec51"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Facultades",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{localToken}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{localtoken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}Facultad",
+									"host": [
+										"{{local}}Facultad"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Facultad by Id",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{localToken}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{localtoken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}Facultad/id/159dd5d6-d6aa-4707-bdde-344b43d557c1",
+									"host": [
+										"{{local}}Facultad"
+									],
+									"path": [
+										"id",
+										"159dd5d6-d6aa-4707-bdde-344b43d557c1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Facultad",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{localToken}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{localtoken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}Facultad/159dd5d6-d6aa-4707-bdde-344b43d557c1",
+									"host": [
+										"{{local}}Facultad"
+									],
+									"path": [
+										"159dd5d6-d6aa-4707-bdde-344b43d557c1"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Temas Foro",
+					"item": [
+						{
+							"name": "Alta  Tema Foro",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{localToken}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{localtoken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Asunto\" : \"Prueba\",\r\n    \"Mensaje\" : \"Mensaje\",\r\n    \"ArchivoAdjunto\" : \"./prueba\",\r\n    \"SuscripcionADiscusion\" : false,\r\n    \"EmisorId\" : \"4f8ad4b4-ca0a-4694-846d-c8bf16838597\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}TemaForo",
+									"host": [
+										"{{local}}TemaForo"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modificar Tema Foro",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{localToken}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{localtoken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Asunto\" : \"Prueba cambio\",\r\n    \"Mensaje\" : \"Mensaje\",\r\n    \"ArchvioAdjunto\" : \"./prueba\",\r\n    \"SuscripcionADiscusion\" : false,\r\n    \"EmisorId\" : \"4f8ad4b4-ca0a-4694-846d-c8bf16838597\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}TemaForo/53c781ff-edcc-4949-92c3-bc60c94e18d6",
+									"host": [
+										"{{local}}TemaForo"
+									],
+									"path": [
+										"53c781ff-edcc-4949-92c3-bc60c94e18d6"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Temas Foro",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{localToken}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{localtoken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}TemaForo",
+									"host": [
+										"{{local}}TemaForo"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Tema Foro by Id",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{localToken}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{localtoken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}TemaForo/id/53c781ff-edcc-4949-92c3-bc60c94e18d6",
+									"host": [
+										"{{local}}TemaForo"
+									],
+									"path": [
+										"id",
+										"53c781ff-edcc-4949-92c3-bc60c94e18d6"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Tema Foro",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{localToken}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{localtoken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}TemaForo/159dd5d6-d6aa-4707-bdde-344b43d557c1",
+									"host": [
+										"{{local}}TemaForo"
+									],
+									"path": [
+										"159dd5d6-d6aa-4707-bdde-344b43d557c1"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Templates Curso",
+					"item": [
+						{
+							"name": "Alta Template Curso",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{localToken}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{localtoken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Nombre\" : \"Prueba\",\r\n    \"Descripcion\" : \"Descr\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}TemplateCurso",
+									"host": [
+										"{{local}}TemplateCurso"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modificar Template Curso",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{localToken}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{localtoken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Nombre\" : \"Prueba cambio\",\r\n    \"Descripcion\" : \"Descr\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}TemplateCurso/8da103d4-4764-4df0-af31-8021f927fa6d",
+									"host": [
+										"{{local}}TemplateCurso"
+									],
+									"path": [
+										"8da103d4-4764-4df0-af31-8021f927fa6d"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Templates Curso",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{localToken}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{localtoken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}TemplateCurso",
+									"host": [
+										"{{local}}TemplateCurso"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Template Curso by Id",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{localToken}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{localtoken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}TemplateCurso/id/ea10cc19-dd86-4213-b6c3-5734d2155bc7",
+									"host": [
+										"{{local}}TemplateCurso"
+									],
+									"path": [
+										"id",
+										"ea10cc19-dd86-4213-b6c3-5734d2155bc7"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Template Curso",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{localToken}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{localtoken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}TemplateCurso/ea10cc19-dd86-4213-b6c3-5734d2155bc7",
+									"host": [
+										"{{local}}TemplateCurso"
+									],
+									"path": [
+										"ea10cc19-dd86-4213-b6c3-5734d2155bc7"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Comunicados",
+					"item": [
+						{
+							"name": "Alta Comunicado",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{localToken}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{localtoken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Nombre\" : \"Prueba\",\r\n    \"Descripcion\" : \"Descr\",\r\n    \"Url\" : \"http://prueba.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}Comunicado",
+									"host": [
+										"{{local}}Comunicado"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modificar Comunicado",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{localToken}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{localtoken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"Nombre\" : \"Prueba cambio\",\r\n    \"Descripcion\" : \"Descr\",\r\n    \"Url\" : \"http://prueba.com\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}Comunicado/84bbf328-7a03-41b3-b1b2-d5aec5beec51",
+									"host": [
+										"{{local}}Comunicado"
+									],
+									"path": [
+										"84bbf328-7a03-41b3-b1b2-d5aec5beec51"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Comunicados",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{localToken}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{localtoken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}Comunicado",
+									"host": [
+										"{{local}}Comunicado"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Comunicado by Id",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{localToken}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{localtoken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}Comunicado/id/159dd5d6-d6aa-4707-bdde-344b43d557c1",
+									"host": [
+										"{{local}}Comunicado"
+									],
+									"path": [
+										"id",
+										"159dd5d6-d6aa-4707-bdde-344b43d557c1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Comunicado",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{localToken}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{localtoken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}Comunicado/159dd5d6-d6aa-4707-bdde-344b43d557c1",
+									"host": [
+										"{{local}}Comunicado"
+									],
+									"path": [
+										"159dd5d6-d6aa-4707-bdde-344b43d557c1"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Seccion",
+					"item": [
+						{
+							"name": "Crear Sección",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{localToken}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{localtoken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5iZW50b3NAZmluZy5lZHUudXkiLCJuYmYiOjE2MDM0MTM3MzMsImV4cCI6MTYwNjAwNTczMywiaWF0IjoxNjAzNDEzNzMzfQ.XCHrr5D65w57yli2pF-bVcuYxNQOenuwxqOdzUY09UCspP_UITR5TfrDn3ejgkGmCSpqy0ruo32fuLxzOSBKjw",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n        \"nombre\": \"Seccion Test\",\r\n        \"descripcion\": \"descripcionTest\",\r\n        \"isDefault\": false,\r\n        \"isVisible\": false\r\n    }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}Seccion/",
+									"host": [
+										"{{local}}Seccion"
+									],
+									"path": [
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Secciones",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{localToken}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{localtoken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}Seccion",
+									"host": [
+										"{{local}}Seccion"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Encuestas",
+					"item": [
+						{
+							"name": "Crear Encuesta",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{localToken}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{localtoken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n        \r\n        \"fechaRealizada\": \"2020-10-12T00:00:00\",\r\n        \"fechaFinalizada\": \"2020-11-12T00:00:00\",\r\n        \"cursoId\": \"A4E6248A-C19F-4C98-875B-07DCF3E19F50\",\r\n        \"nombre\": \"Encuesta para eliminar 2\",\r\n        \"descripcion\": \"Esta es la primer encuesta mas pa buena\",\r\n        \"esAdministradorFacultad\": true\r\n    }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}Encuesta/",
+									"host": [
+										"{{local}}Encuesta"
+									],
+									"path": [
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Editar Encuesta",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{localToken}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{localtoken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n        \r\n        \"fechaRealizada\": \"2020-10-12T00:00:00\",\r\n        \"fechaFinalizada\": \"2020-11-12T00:00:00\",\r\n        \"cursoId\": \"2639748C-6762-4064-8D46-EC7BC521FB4B\",\r\n        \"nombre\": \"Encuesta de Curso final - Y la edito pa\",\r\n        \"descripcion\": \"Esta es la primer encuesta mas pa buena\",\r\n        \"esAdministradorFacultad\": true\r\n    }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}Encuesta/F41152BB-45A4-4ABC-966E-700CD1F8CFED",
+									"host": [
+										"{{local}}Encuesta"
+									],
+									"path": [
+										"F41152BB-45A4-4ABC-966E-700CD1F8CFED"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Consulta Encuesta by Id",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{localToken}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{localtoken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n        \r\n        \"fechaRealizada\": \"2020-10-12T00:00:00\",\r\n        \"fechaFinalizada\": \"2020-11-12T00:00:00\",\r\n        \"cursoId\": \"2639748C-6762-4064-8D46-EC7BC521FB4B\",\r\n        \"nombre\": \"Encuesta de Curso final - Y la edito pa\",\r\n        \"descripcion\": \"Esta es la primer encuesta mas pa buena\",\r\n        \"esAdministradorFacultad\": true\r\n    }",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}Encuesta/4F3CDD35-B7A4-447C-AE90-2AED628A44FE",
+									"host": [
+										"{{local}}Encuesta"
+									],
+									"path": [
+										"4F3CDD35-B7A4-447C-AE90-2AED628A44FE"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Consulta Encuestas",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{localToken}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{localtoken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5iZW50b3NAZmluZy5lZHUudXkiLCJuYmYiOjE2MDMzOTU4MjgsImV4cCI6MTYwNTk4NzgyOCwiaWF0IjoxNjAzMzk1ODI4fQ.ldIJSS4ff4RPGzhaCeyjkibr8kFR1EhGQf535ntLDLAGxIWXRI7ToFFt87w7iZ3x8n8g-1Sp4CM_GcEWoKSnig",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{local}}Encuesta/",
+									"host": [
+										"{{local}}Encuesta"
+									],
+									"path": [
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Eliminar Encuesta ",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{localToken}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{localtoken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{local}}Encuesta/466f37ef-2961-4cd7-a672-1fc2a61576c9",
+									"host": [
+										"{{local}}Encuesta"
+									],
+									"path": [
+										"466f37ef-2961-4cd7-a672-1fc2a61576c9"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Cursos",
+					"item": [
+						{
+							"name": "Crear Cursos",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{localToken}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{localtoken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \r\n    \"Nombre\": \"TSI 2020\",\r\n    \"Descripcion\": \"Taller de Net Core del 2020\",\r\n    \"ModalidadCurso\": 2,\r\n    \"RequiereMatriculacion\": true,\r\n    \"SalaVirtual\": \"salaVirtual-TSI.com\",    \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}Curso",
+									"host": [
+										"{{local}}Curso"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Obtener Cursos",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{localToken}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{localtoken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \r\n    \"Nombre\": \"TSI 2020\",\r\n    \"Descripcion\": \"Taller de Net Core del 2020\",\r\n    \"ModalidadCurso\": 2,\r\n    \"RequiereMatriculacion\": true,\r\n    \"SalaVirtual\": \"salaVirtual-TSI.com\",    \r\n    \"TemplateCursoId\": \"9F4CA882-B42F-473B-85E9-BEFD1E818B7F\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}Curso",
+									"host": [
+										"{{local}}Curso"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Obtener Curso By Id",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{localToken}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{localtoken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \r\n    \"Nombre\": \"TSI 2020\",\r\n    \"Descripcion\": \"Taller de Net Core del 2020\",\r\n    \"ModalidadCurso\": 2,\r\n    \"RequiereMatriculacion\": true,\r\n    \"SalaVirtual\": \"salaVirtual-TSI.com\",    \r\n    \"TemplateCursoId\": \"9F4CA882-B42F-473B-85E9-BEFD1E818B7F\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}Curso/a4e6248a-c19f-4c98-875b-07dcf3e19f50",
+									"host": [
+										"{{local}}Curso"
+									],
+									"path": [
+										"a4e6248a-c19f-4c98-875b-07dcf3e19f50"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Editar Curso ",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{localToken}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{localtoken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \r\n    \"Nombre\": \"TSE 2020 - Se la banca\",\r\n    \"Descripcion\": \"Taller de JAVA del 2020\",\r\n    \"ModalidadCurso\": 2,\r\n    \"RequiereMatriculacion\": false,\r\n    \"SalaVirtual\": \"salaVirtual-TSI.com\"     \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}Curso/B111686C-1A52-4904-9CE4-FC2BF9D0ACF9",
+									"host": [
+										"{{local}}Curso"
+									],
+									"path": [
+										"B111686C-1A52-4904-9CE4-FC2BF9D0ACF9"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Eliminar Curso ",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{localToken}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{localtoken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{local}}Curso/f754ef0c-27eb-4d4a-8ee4-97359352fbf7",
+									"host": [
+										"{{local}}Curso"
+									],
+									"path": [
+										"f754ef0c-27eb-4d4a-8ee4-97359352fbf7"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Asignar Docente",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{localToken}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{localtoken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{ \r\n    \"Nombre\": \"TSE 2020 - Se la banca\",\r\n    \"Descripcion\": \"Taller de JAVA del 2020\",\r\n    \"ModalidadCurso\": 2,\r\n    \"RequiereMatriculacion\": false,\r\n    \"SalaVirtual\": \"salaVirtual-TSI.com\"     \r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}Curso/asignar-docente",
+									"host": [
+										"{{local}}Curso"
+									],
+									"path": [
+										"asignar-docente"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Auth",
+					"item": [
+						{
+							"name": "Login",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "2b8ac466-c4a1-4de9-abed-a554b9b8848a",
+										"exec": [
+											"var jsonData = JSON.parse(responseBody);",
+											"pm.collectionVariables.set(\"localToken\", jsonData.token);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\":\"tomas.pascal@@fder.edu.uy\",\r\n    \"password\":\"Hola123.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}auth/login",
+									"host": [
+										"{{local}}auth"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "TemplateCursoSeccion",
+					"item": [
+						{
+							"name": "Alta Template Curso Seccion",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{localToken}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{localtoken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"TemplateCursoId\" : \"f9a840cc-26f7-4352-b554-d8c4ea8436a9\",\r\n    \"SeccionId\" : \"0d3febe1-02f3-452d-a672-5e9bf86f11a5\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}TemplateCursoSeccion",
+									"host": [
+										"{{local}}TemplateCursoSeccion"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modificar Template Curso Seccion",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{localToken}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{localtoken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"TemplateCursoId\" : \"f9a840cc-26f7-4352-b554-d8c4ea8436a9\",\r\n    \"SeccionId\" : \"0d3febe1-02f3-452d-a672-5e9bf86f11a5\",\r\n    \"TemplateCursoSeccionId\" : \"f9a840cc-26f7-4352-b554-d8c4ea8436a9\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}TemplateCursoSeccion/8da103d4-4764-4df0-af31-8021f927fa6d",
+									"host": [
+										"{{local}}TemplateCursoSeccion"
+									],
+									"path": [
+										"8da103d4-4764-4df0-af31-8021f927fa6d"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Templates Curso Seccion",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{localToken}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{localtoken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}TemplateCursoSeccion",
+									"host": [
+										"{{local}}TemplateCursoSeccion"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Template Curso Seccion by Id",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{localToken}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{localtoken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}TemplateCursoSeccion/id/ea10cc19-dd86-4213-b6c3-5734d2155bc7",
+									"host": [
+										"{{local}}TemplateCursoSeccion"
+									],
+									"path": [
+										"id",
+										"ea10cc19-dd86-4213-b6c3-5734d2155bc7"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Template Curso",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{localToken}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{localtoken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}TemplateCursoSeccion/ea10cc19-dd86-4213-b6c3-5734d2155bc7",
+									"host": [
+										"{{local}}TemplateCursoSeccion"
+									],
+									"path": [
+										"ea10cc19-dd86-4213-b6c3-5734d2155bc7"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Template Curso Seccion by Seccion",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{localToken}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{localtoken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}TemplateCursoSeccion/secccionId/ea10cc19-dd86-4213-b6c3-5734d2155bc7",
+									"host": [
+										"{{local}}TemplateCursoSeccion"
+									],
+									"path": [
+										"secccionId",
+										"ea10cc19-dd86-4213-b6c3-5734d2155bc7"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Template Curso Seccion  by Template Curso",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{localToken}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{localtoken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}TemplateCursoSeccion/templateCursoId/f9a840cc-26f7-4352-b554-d8c4ea8436a9",
+									"host": [
+										"{{local}}TemplateCursoSeccion"
+									],
+									"path": [
+										"templateCursoId",
+										"f9a840cc-26f7-4352-b554-d8c4ea8436a9"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "CursoSeccion",
+					"item": [
+						{
+							"name": "Alta Curso Seccion",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{localToken}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{localtoken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"CursoId\" : \"49a7bca0-a49d-4f07-91fc-35f8e3d9f3a0\",\r\n    \"SeccionId\" : \"0d3febe1-02f3-452d-a672-5e9bf86f11a5\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}cursoSeccion",
+									"host": [
+										"{{local}}cursoSeccion"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Modificar Template Curso Seccion",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{localToken}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{localtoken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"CursoId\" : \"f9a840cc-26f7-4352-b554-d8c4ea8436a9\",\r\n    \"SeccionId\" : \"0d3febe1-02f3-452d-a672-5e9bf86f11a5\",\r\n    \"CursoSeccionId\" : \"f9a840cc-26f7-4352-b554-d8c4ea8436a9\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}cursoSeccion/8da103d4-4764-4df0-af31-8021f927fa6d",
+									"host": [
+										"{{local}}cursoSeccion"
+									],
+									"path": [
+										"8da103d4-4764-4df0-af31-8021f927fa6d"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Cursos Seccion",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{localToken}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{localtoken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}TemplateCursoSeccion",
+									"host": [
+										"{{local}}TemplateCursoSeccion"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get  Curso Seccion by Id",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{localToken}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{localtoken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}TemplateCursoSeccion/id/ea10cc19-dd86-4213-b6c3-5734d2155bc7",
+									"host": [
+										"{{local}}TemplateCursoSeccion"
+									],
+									"path": [
+										"id",
+										"ea10cc19-dd86-4213-b6c3-5734d2155bc7"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete  Curso Seccion",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{localToken}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{localtoken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}TemplateCursoSeccion/ea10cc19-dd86-4213-b6c3-5734d2155bc7",
+									"host": [
+										"{{local}}TemplateCursoSeccion"
+									],
+									"path": [
+										"ea10cc19-dd86-4213-b6c3-5734d2155bc7"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get  Curso Seccion  by  Curso",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{localToken}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{localtoken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}TemplateCursoSeccion/templateCursoId/f9a840cc-26f7-4352-b554-d8c4ea8436a9",
+									"host": [
+										"{{local}}TemplateCursoSeccion"
+									],
+									"path": [
+										"templateCursoId",
+										"f9a840cc-26f7-4352-b554-d8c4ea8436a9"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get  Curso Seccion by Seccion",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{localToken}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{localtoken}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}TemplateCursoSeccion/secccionId/ea10cc19-dd86-4213-b6c3-5734d2155bc7",
+									"host": [
+										"{{local}}TemplateCursoSeccion"
+									],
+									"path": [
+										"secccionId",
+										"ea10cc19-dd86-4213-b6c3-5734d2155bc7"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Notificaciones",
+					"item": [
+						{
+							"name": "Send Mail Prueba",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{local}}Notificaciones/sendMail",
+									"host": [
+										"{{local}}Notificaciones"
+									],
+									"path": [
+										"sendMail"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "e73858a7-84a1-4061-8506-41004c7fcf23",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "c0006873-c5d1-4985-b286-b4648d922144",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "39455ab7-4e84-42cf-b89c-e7198c32e8e7",
+			"key": "local",
+			"value": "localhost:5000/api/"
+		},
+		{
+			"id": "e5610055-45c7-41c3-b7eb-7812436c0f8e",
+			"key": "localToken",
+			"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwYXNjYWx0b21hczI3QGdtYWlsLmNvbSIsImV4cCI6MTYwNTA1NDA1MSwiaWF0IjoxNjA0OTY3NjUxfQ.6KT3R2yB9G4TNx3-5_HsCC628ORRTvYO8i-mLKU0_pQkWsceghRmkDd4pdgSyyWZSYYKLHrf2iK6WhOGrgCnmA"
+		}
+	],
+	"protocolProfileBehavior": {}
+}
