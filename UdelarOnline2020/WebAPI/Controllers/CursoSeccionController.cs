@@ -18,17 +18,17 @@ namespace WebAPI.Controllers {
       return await this.Mediator.Send (data);
     }
 
-    [HttpPost]
+    [HttpPost ("/foro")]
     public async Task<ActionResult<Unit>> AgregarForo (AgregarForo.Ejecuta data) {
       return await this.Mediator.Send (data);
     }
 
-    [HttpPost]
+    [HttpPost ("/actividad")]
     public async Task<ActionResult<Unit>> AgregarActividad (AgregarActividad.Ejecuta data) {
       return await this.Mediator.Send (data);
     }
 
-    [HttpPost]
+    [HttpPost ("/material")]
     public async Task<ActionResult<Unit>> AgregarMaterial (AgregarMaterial.Ejecuta data) {
       return await this.Mediator.Send (data);
     }

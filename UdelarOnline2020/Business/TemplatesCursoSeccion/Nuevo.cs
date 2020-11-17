@@ -46,7 +46,8 @@ namespace Business.TemplatesCursoSeccion {
         }
 
         var templateCursoSeccion = new TemplateCursoSeccion {
-          TemplateCursoId = Guid.NewGuid (),
+          TemplateCursoSeccionId = Guid.NewGuid (),
+          TemplateCursoId = request.TemplateCursoId,
           TemplateCurso = templateCurso,
           SeccionId = request.SeccionId,
           Seccion = seccion

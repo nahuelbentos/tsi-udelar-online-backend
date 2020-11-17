@@ -24,9 +24,9 @@ namespace Business.TemplatesCursoSeccion {
 
             public async Task<TemplateCursoSeccion> Handle (Ejecuta request, CancellationToken cancellationToken) {
                 var templateCursoSeccion = await this.context.TemplateCursoSeccion
-                    .FirstOrDefaultAsync (t => t.TemplateCursoId == request.TemplateCursoId);
+                    .Include(t => t.Seccion).Include(t => t.TemplateCurso).FirstOrDefaultAsync (t => t.TemplateCursoId == request.TemplateCursoId);
                 if (templateCursoSeccion == null) {
-                    throw new ManejadorExcepcion (HttpStatusCode.Forbidden, new { mensaje = "No existe un template de curso con el TemplateCursoId ingresado" });
+                    throw new ManejadorExcepcion (HttpStatusCode.Forbidden, new { mensaje = "No existe un template de curso con el TemplateCursoSeccionId ingresado" });
                 }
                 return templateCursoSeccion;
             }

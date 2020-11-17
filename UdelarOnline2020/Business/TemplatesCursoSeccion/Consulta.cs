@@ -18,7 +18,9 @@ namespace Business.TemplatesCursoSeccion {
             }
 
             public async Task<List<TemplateCursoSeccion>> Handle (Ejecuta request, CancellationToken cancellationToken) {
-                var templatesCursoSeccion = await this.context.TemplateCursoSeccion.ToListAsync ();
+                var templatesCursoSeccion = await this.context.TemplateCursoSeccion.Include(t => t.Seccion)
+                                                                                    .Include(t => t.TemplateCurso)
+                                                                                    .ToListAsync ();
                 return templatesCursoSeccion;
             }
         }
