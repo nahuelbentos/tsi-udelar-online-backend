@@ -7,6 +7,7 @@ using Models;
 using System;
 using Business.Usuarios;
 using Microsoft.AspNetCore.Authorization;
+using Business.Datatypes;
 
 namespace WebAPI.Controllers
 {
@@ -25,13 +26,13 @@ namespace WebAPI.Controllers
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<Usuario>>> GetUsuarios()
+    public async Task<ActionResult<List<DtUsuario>>> GetUsuarios()
     {
       return await this.Mediator.Send(new Consulta.Ejecuta());
     }
 
     [HttpGet("id/{id}")]
-    public async Task<ActionResult<Usuario>> GetUsuarioById(string id)
+    public async Task<ActionResult<DtUsuario>> GetUsuarioById(string id)
     {
       return await this.Mediator.Send(new ConsultaById.Ejecuta { Id = id });
     }

@@ -5,7 +5,12 @@ namespace Models
 {
   public class ClaseDictada : Actividad
   {
-    public byte[] Archivo { get; set; }
+
+    public string Nombre { get; set; }
+    public string Descripcion { get; set; }
+    public byte[] ArchivoData { get; set; }
+    public string ArchivoNombre { get; set; }
+    public string ArchivoExtension { get; set; }
 
   }
 }

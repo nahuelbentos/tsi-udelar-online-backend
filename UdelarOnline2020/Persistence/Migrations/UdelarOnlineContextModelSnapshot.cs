@@ -465,10 +465,22 @@ namespace Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("ColorCodigo")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Descripcion")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DominioMail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LogoData")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LogoExtension")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LogoNombre")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nombre")
@@ -513,14 +525,26 @@ namespace Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<byte[]>("Archivo")
+                    b.Property<byte[]>("ArchivoData")
                         .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("ArchivoExtension")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ArchivoNombre")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid?>("CursoSeccionCursoId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("CursoSeccionSeccionId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Descripcion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nombre")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("MaterialId");
 
@@ -560,6 +584,25 @@ namespace Persistence.Migrations
                     b.HasDiscriminator<string>("Discriminator").HasValue("Mensaje");
                 });
 
+            modelBuilder.Entity("Models.Pregunta", b =>
+                {
+                    b.Property<Guid>("PreguntaId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("EncuestaId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Texto")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("PreguntaId");
+
+                    b.HasIndex("EncuestaId");
+
+                    b.ToTable("Pregunta");
+                });
+
             modelBuilder.Entity("Models.Respuesta", b =>
                 {
                     b.Property<Guid>("RespuestaId")
@@ -569,17 +612,20 @@ namespace Persistence.Migrations
                     b.Property<string>("AlumnoId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<Guid?>("EncuestaActividadId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<DateTime>("FechaRealizada")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Mensaje")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("PreguntaId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("RespuestaId");
 
                     b.HasIndex("AlumnoId");
 
-                    b.HasIndex("EncuestaActividadId");
+                    b.HasIndex("PreguntaId");
 
                     b.ToTable("Respuesta");
                 });
@@ -613,8 +659,14 @@ namespace Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<byte[]>("ArchivoAdjunto")
+                    b.Property<byte[]>("ArchivoData")
                         .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("ArchivoExtension")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ArchivoNombre")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Asunto")
                         .HasColumnType("nvarchar(max)");
@@ -833,8 +885,20 @@ namespace Persistence.Migrations
                 {
                     b.HasBaseType("Models.Actividad");
 
-                    b.Property<byte[]>("Archivo")
+                    b.Property<byte[]>("ArchivoData")
                         .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("ArchivoExtension")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ArchivoNombre")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Descripcion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nombre")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue("ClaseDictada");
                 });
@@ -844,12 +908,14 @@ namespace Persistence.Migrations
                     b.HasBaseType("Models.Actividad");
 
                     b.Property<string>("Descripcion")
+                        .HasColumnName("Encuesta_Descripcion")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("EsAdministrador")
                         .HasColumnType("bit");
 
                     b.Property<string>("Nombre")
+                        .HasColumnName("Encuesta_Nombre")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue("Encuesta");
@@ -859,9 +925,17 @@ namespace Persistence.Migrations
                 {
                     b.HasBaseType("Models.Actividad");
 
-                    b.Property<byte[]>("Archivo")
-                        .HasColumnName("Trabajo_Archivo")
+                    b.Property<byte[]>("ArchivoData")
+                        .HasColumnName("Trabajo_ArchivoData")
                         .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("ArchivoExtension")
+                        .HasColumnName("Trabajo_ArchivoExtension")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ArchivoNombre")
+                        .HasColumnName("Trabajo_ArchivoNombre")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Calificacion")
                         .HasColumnType("int");
@@ -1210,15 +1284,26 @@ namespace Persistence.Migrations
                         .HasForeignKey("EmisorId1");
                 });
 
+            modelBuilder.Entity("Models.Pregunta", b =>
+                {
+                    b.HasOne("Models.Encuesta", "Encuesta")
+                        .WithMany("PreguntaLista")
+                        .HasForeignKey("EncuestaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Models.Respuesta", b =>
                 {
                     b.HasOne("Models.Alumno", "Alumno")
                         .WithMany()
                         .HasForeignKey("AlumnoId");
 
-                    b.HasOne("Models.Encuesta", "Encuesta")
-                        .WithMany()
-                        .HasForeignKey("EncuestaActividadId");
+                    b.HasOne("Models.Pregunta", "Pregunta")
+                        .WithMany("RespuestaLista")
+                        .HasForeignKey("PreguntaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Models.TemaForo", b =>

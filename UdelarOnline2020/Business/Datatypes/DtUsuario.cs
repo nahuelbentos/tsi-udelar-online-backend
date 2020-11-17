@@ -22,7 +22,6 @@ namespace Business.Datatypes
     public string Email { get; set; }
     public string UserName { get; set; }
     public string Tipo { get; set; }
-    public Facultad Facultad;
-    public Guid FacultadId;
+    public DtFacultad Facultad { get; set; }
   }
 }

@@ -19,7 +19,7 @@ namespace Business.Usuarios
     {
       public string Nombres { get; set; }
       public string Apellidos { get; set; }
-      public string Cedula { get; set; }
+      public string CI { get; set; }
       public DateTime FechaNacimiento { get; set; }
       public string Direccion { get; set; }
       public string Telefono { get; set; }
@@ -43,7 +43,7 @@ namespace Business.Usuarios
       {
         RuleFor(u => u.Nombres).NotEmpty();
         RuleFor(u => u.Apellidos).NotEmpty();
-        RuleFor(u => u.Cedula).NotEmpty();
+        RuleFor(u => u.CI).NotEmpty();
         RuleFor(u => u.FechaNacimiento).NotEmpty();
         RuleFor(u => u.Direccion).NotEmpty();
         RuleFor(u => u.Telefono).NotEmpty();
@@ -107,7 +107,7 @@ namespace Business.Usuarios
 
         usuario.Nombres = request.Nombres;
         usuario.Apellidos = request.Apellidos;
-        usuario.CI = request.Cedula;
+        usuario.CI = request.CI;
         usuario.FechaNacimiento = request.FechaNacimiento;
         usuario.Direccion = request.Direccion;
         usuario.Telefono = request.Telefono;
