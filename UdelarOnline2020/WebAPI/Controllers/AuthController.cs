@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Business.Datatypes;
 using Business.Seguridad;
@@ -11,27 +12,13 @@ namespace WebAPI.Controllers
   {
     //http://localhost:5000/api/auth/login
     [HttpPost("login")]
+    public async Task<ActionResult<DtUsuario>> Login(Login.Ejecuta data) => await Mediator.Send(data);
 
-    public async Task<ActionResult<DtUsuario>> Login(Login.Ejecuta data)
-    {
-      return await Mediator.Send(data);
-    }
+    [HttpPost("validate-token")]
+    public async Task<ActionResult<Boolean>> ValidateToken(ValidateToken.Ejecuta data) => await Mediator.Send(data);
 
     [HttpPut("forgot-password")]
-
-    public async Task<ActionResult<DtUsuario>> ForgotPassword(Login.Ejecuta data)
-    {
-      return await Mediator.Send(data);
-    }
-
-
-    // //http://localhost:5000/api/auth/register
-    // [HttpPost("register")]
-
-    // public async Task<ActionResult<DtUsuario>> Registrar(Registrar.Ejecuta data)
-    // {
-    //   return await Mediator.Send(data);
-    // }
+    public async Task<ActionResult<DtUsuario>> ForgotPassword(Login.Ejecuta data) => await Mediator.Send(data);
 
   }
 }

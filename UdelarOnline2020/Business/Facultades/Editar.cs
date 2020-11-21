@@ -2,7 +2,7 @@ using System.Net;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Aplicacion.ManejadorError;
+using Business.ManejadorError;
 using MediatR;
 using Persistence;
 using System.Linq;

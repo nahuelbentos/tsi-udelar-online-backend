@@ -1,7 +1,7 @@
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
-using Aplicacion.ManejadorError;
+using Business.ManejadorError;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Models;

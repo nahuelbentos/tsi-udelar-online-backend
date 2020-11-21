@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
-using Aplicacion.ManejadorError;
+using Business.ManejadorError;
 using Business.Datatypes;
 using Business.Interfaces;
 using FluentValidation;
@@ -49,8 +49,7 @@ namespace Business.Seguridad
 
       public async Task<DtUsuario> Handle(Ejecuta request, CancellationToken cancellationToken)
       {
-        Console.WriteLine("request.email" + request.Email);
-        Console.WriteLine("request.password" + request.Password);
+        
         var usuario = await this.userManager.FindByEmailAsync(request.Email);
 
         if (usuario == null)
@@ -69,6 +68,11 @@ namespace Business.Seguridad
           var listaRoles = await this.userManager.GetRolesAsync(usuario);
           var roles = new List<string>(listaRoles);
           var facultad = await this.context.Facultad.FindAsync(usuarioContext.Facultad.FacultadId);
+
+          // La idea es que solo haya un único rol por usuario.
+          var rol = "";
+          if (roles.Count > 0)
+            rol = roles[0];
 
           var dtFacultad = new DtFacultad
           {
@@ -89,6 +93,7 @@ namespace Business.Seguridad
             Email = usuario.Email,
             UserName = usuario.UserName,
             Tipo = usuario.GetType().ToString().Split('.')[1],
+            Rol = rol,
             Facultad = dtFacultad
           };
         }

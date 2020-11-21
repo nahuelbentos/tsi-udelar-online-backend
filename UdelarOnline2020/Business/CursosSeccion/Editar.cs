@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Models;
 using Persistence;
 using Microsoft.Extensions.Logging;
-using Aplicacion.ManejadorError;
+using Business.ManejadorError;
 
 namespace Business.CursosSeccion
 {

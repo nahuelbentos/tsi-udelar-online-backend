@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using FluentValidation;
 using MediatR;
 using Persistence;
-using Aplicacion.ManejadorError;
+using Business.ManejadorError;
 
 namespace Business.CursosSeccion
 {

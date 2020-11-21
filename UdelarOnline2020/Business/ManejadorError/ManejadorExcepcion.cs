@@ -1,6 +1,6 @@
 using System.Net;
 using System;
-namespace Aplicacion.ManejadorError
+namespace Business.ManejadorError
 {
   public class ManejadorExcepcion : Exception
   {
