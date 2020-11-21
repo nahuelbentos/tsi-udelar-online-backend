@@ -10,14 +10,14 @@ namespace Business.Bedelias
     public class Ejecuta : IRequest<Boolean>
     {
 
+      public string[] coleccionCI { get; set; }
+      public Guid cursoId { get; set; }
     }
 
     public class Manejador : IRequestHandler<Ejecuta, Boolean>
     {
-      public Task<bool> Handle(Ejecuta request, CancellationToken cancellationToken)
-      {
-        throw new NotImplementedException();
-      }
+      public Task<bool> Handle(Ejecuta request, CancellationToken cancellationToken) => 
+        Task.FromResult(request.coleccionCI.Length % 2 == 0);
     }
   }
 }
