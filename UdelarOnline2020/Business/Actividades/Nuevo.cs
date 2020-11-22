@@ -89,7 +89,8 @@ namespace Business.Actividades
             actividad = new Encuesta
             {
 
-              EsAdministrador = request.EsAdministrador
+              EsAdministrador = request.EsAdministrador,
+              
 
             };
             break;

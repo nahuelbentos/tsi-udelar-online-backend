@@ -40,7 +40,7 @@ namespace Business.Cursos
         var ciAlumnos = alumnosDelCurso.Select( a => a.Alumno.CI).ToArray();
         var actaCerrada = await this.bedelias.CerrarActa(ciAlumnos, curso.CursoId);
 
-        // curso.ActaCerrada = actaCerrada;
+        curso.ActaCerrada = actaCerrada;
         if(!actaCerrada)
             throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "No se pudo cerrar el acta, verifique la lista de alumnos."} );
 
