@@ -4,7 +4,7 @@ namespace Models
 {
   public class UsuarioCurso
   {
-    public Guid UsuarioId { get; set; }
+    public string UsuarioId { get; set; }
 
     public Usuario Usuario { get; set; }
 

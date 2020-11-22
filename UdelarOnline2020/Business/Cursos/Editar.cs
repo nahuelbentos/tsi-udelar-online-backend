@@ -23,7 +23,7 @@ namespace Business.Cursos
       public ModalidadEnum? ModalidadCurso { get; set; }
       public bool? RequiereMatriculacion { get; set; }
       public string SalaVirtual { get; set; }
-      public Guid? TemplateCursoId { get; set; }
+      public Guid? TemplateCursoId { get; set; } 
     }
 
 
@@ -50,10 +50,8 @@ namespace Business.Cursos
         var curso = await this.context.Curso.FindAsync(request.CursoId);
 
         if (curso == null)
-        {
           throw new ManejadorExcepcion(HttpStatusCode.NotFound, new { mensaje = "El curso no existe" });
-
-        }
+        
         TemplateCurso templateCurso = null;
         if (request.TemplateCursoId != null)
         {

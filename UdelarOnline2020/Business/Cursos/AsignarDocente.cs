@@ -47,7 +47,7 @@ namespace Business.Cursos
           throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "El usuario ingresado no es Docente." });
 
         var existeDocenteEnCurso = await this.context.UsuarioCurso
-                                                        .Where(dc => dc.CursoId == request.CursoId && dc.UsuarioId == Guid.Parse(request.DocenteId))
+                                                        .Where(dc => dc.CursoId == request.CursoId && dc.UsuarioId ==  request.DocenteId)
                                                         .FirstOrDefaultAsync();
         
         if(existeDocenteEnCurso != null)

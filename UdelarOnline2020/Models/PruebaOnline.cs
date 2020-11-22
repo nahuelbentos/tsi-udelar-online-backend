@@ -15,7 +15,7 @@ namespace Models
     public bool Activa { get; set; }
 
 
-    public ICollection<PreguntaRespuesta> ListaPreguntaRespuesta { get; set; }
+    public ICollection<PreguntaRespuesta> ListaPreguntaRespuesta { get; set; } 
 
 
 

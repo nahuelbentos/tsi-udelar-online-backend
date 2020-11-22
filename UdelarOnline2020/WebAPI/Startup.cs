@@ -55,7 +55,7 @@ namespace WebAPI
 
       services.AddDbContext<UdelarOnlineContext>(opt =>
       {
-        opt.UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection"));
+        opt.UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection")).EnableRetryOnFailure();
       });
 
       // If using Kestrel
