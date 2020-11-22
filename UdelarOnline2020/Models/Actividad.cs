@@ -13,5 +13,8 @@ namespace Models
     public DateTime FechaRealizada { get; set; }
     public DateTime FechaFinalizada { get; set; }
 
+    public string Nombre { get; set; }
+    public string Descripcion { get; set; }
+
   }
 }

@@ -12,7 +12,7 @@ using Business.Datatypes;
 namespace WebAPI.Controllers
 {
 
-  [AllowAnonymous]
+  
   [Route("api/[controller]")]
   [ApiController]
   public class UsuarioController : MiControllerBase

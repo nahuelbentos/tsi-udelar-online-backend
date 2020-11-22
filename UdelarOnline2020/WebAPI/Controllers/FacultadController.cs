@@ -10,7 +10,7 @@ using Models;
 namespace WebAPI.Controllers
 {
   
-[AllowAnonymous]
+
   public class FacultadController : MiControllerBase
   {
    

@@ -9,8 +9,6 @@ namespace Models
   {
 
 
-    public string Nombre { get; set; }
-    public string Descripcion { get; set; }
     public bool EsAdministrador { get; set; }
 
     public ICollection<Pregunta> PreguntaLista { get; set; }

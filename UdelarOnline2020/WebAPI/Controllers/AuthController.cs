@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace WebAPI.Controllers
 {
   [AllowAnonymous]
+  [Route("api/[controller]")]
+  [ApiController]
   public class AuthController : MiControllerBase
   {
     //http://localhost:5000/api/auth/login
