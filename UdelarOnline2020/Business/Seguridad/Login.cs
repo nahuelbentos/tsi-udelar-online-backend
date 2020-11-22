@@ -60,19 +60,28 @@ namespace Business.Seguridad
 
 
         var resultado = await signInManager.CheckPasswordSignInAsync(usuario, request.Password, false);
-
+        
+        Console.WriteLine(resultado.Succeeded);
 
         if (resultado.Succeeded)
         {
+          Console.WriteLine("1");
           var usuarioContext = await this.context.Usuario.Include(u => u.Facultad).Include(u => u.ComunicadoLista).FirstOrDefaultAsync(u => u.Id == usuario.Id);
+          Console.WriteLine("2");
           var listaRoles = await this.userManager.GetRolesAsync(usuario);
+          Console.WriteLine("3");
           var roles = new List<string>(listaRoles);
+          Console.WriteLine("4 ");
+          Console.WriteLine("4 + "+ usuarioContext.Facultad.FacultadId);
           var facultad = await this.context.Facultad.FindAsync(usuarioContext.Facultad.FacultadId);
+          Console.WriteLine("5");
 
           // La idea es que solo haya un único rol por usuario.
           var rol = "";
+          Console.WriteLine("6 + " + roles.Count);
           if (roles.Count > 0)
             rol = roles[0];
+          Console.WriteLine("7 + " + rol);
 
           var dtFacultad = new DtFacultad
           {

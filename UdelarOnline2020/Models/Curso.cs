@@ -16,7 +16,7 @@ namespace Models
 
 
     public TemplateCurso TemplateCurso { get; set; }
-    public bool ActaCerrada { get; set; }
+    // public bool ActaCerrada { get; set; }
 
 
   }

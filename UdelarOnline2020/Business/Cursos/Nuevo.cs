@@ -76,7 +76,7 @@ namespace Business.Cursos
           RequiereMatriculacion = request.RequiereMatriculacion,
           SalaVirtual = request.SalaVirtual,
           TemplateCurso = templateCurso,
-          ActaCerrada = false 
+          // ActaCerrada = false 
         };
 
         this.context.Curso.Add(curso);
