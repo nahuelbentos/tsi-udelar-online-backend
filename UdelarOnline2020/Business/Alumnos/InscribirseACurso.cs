@@ -46,7 +46,7 @@ namespace Business.Alumnos
         var inscripto = true;
         if(curso.RequiereMatriculacion){
             inscripto = await this.bedelias.AprobarInscripcionCurso(alumno.CI, curso.CursoId);
-            if(inscripto)
+            if(!inscripto)
                 throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "Bedelías rechazo la inscripcion, comuniquese con un administrador." });
         }
 

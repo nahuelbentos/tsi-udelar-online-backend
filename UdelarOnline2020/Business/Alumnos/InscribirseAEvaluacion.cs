@@ -62,7 +62,7 @@ namespace Business.Alumnos
           AlumnoId = Guid.Parse(alumno.Id),
           Inscripto = inscripto,
           PruebaOnline = pruebaOnline,
-          PruebaOnlineId = pruebaOnline.PruebaOnlineId
+          PruebaOnlineId = pruebaOnline.ActividadId
         };
 
         this.context.AlumnoPruebaOnline.Add(alumnoPruebaOnline);

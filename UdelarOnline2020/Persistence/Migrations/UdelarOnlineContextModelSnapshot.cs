@@ -8,1564 +8,1398 @@ using Persistence;
 
 namespace Persistence.Migrations
 {
-    [DbContext(typeof(UdelarOnlineContext))]
-    partial class UdelarOnlineContextModelSnapshot : ModelSnapshot
+  [DbContext(typeof(UdelarOnlineContext))]
+  partial class UdelarOnlineContextModelSnapshot : ModelSnapshot
+  {
+    protected override void BuildModel(ModelBuilder modelBuilder)
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
-        {
 #pragma warning disable 612, 618
-            modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.8")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+      modelBuilder
+          .HasAnnotation("ProductVersion", "3.1.8")
+          .HasAnnotation("Relational:MaxIdentifierLength", 128)
+          .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+      modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+          {
+            b.Property<string>("Id")
+                      .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
+            b.Property<string>("ConcurrencyStamp")
+                      .IsConcurrencyToken()
+                      .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+            b.Property<string>("Name")
+                      .HasColumnType("nvarchar(256)")
+                      .HasMaxLength(256);
 
-                    b.Property<string>("NormalizedName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+            b.Property<string>("NormalizedName")
+                      .HasColumnType("nvarchar(256)")
+                      .HasMaxLength(256);
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.HasIndex("NormalizedName")
-                        .IsUnique()
-                        .HasName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
+            b.HasIndex("NormalizedName")
+                      .IsUnique()
+                      .HasName("RoleNameIndex")
+                      .HasFilter("[NormalizedName] IS NOT NULL");
 
-                    b.ToTable("AspNetRoles");
-                });
+            b.ToTable("AspNetRoles");
+          });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+      modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+          {
+            b.Property<int>("Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("int")
+                      .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
+            b.Property<string>("ClaimType")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
+            b.Property<string>("ClaimValue")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RoleId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+            b.Property<string>("RoleId")
+                      .IsRequired()
+                      .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.HasIndex("RoleId");
+            b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetRoleClaims");
-                });
+            b.ToTable("AspNetRoleClaims");
+          });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+      modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+          {
+            b.Property<int>("Id")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("int")
+                      .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ClaimType")
-                        .HasColumnType("nvarchar(max)");
+            b.Property<string>("ClaimType")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ClaimValue")
-                        .HasColumnType("nvarchar(max)");
+            b.Property<string>("ClaimValue")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+            b.Property<string>("UserId")
+                      .IsRequired()
+                      .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+            b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserClaims");
-                });
+            b.ToTable("AspNetUserClaims");
+          });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
-                {
-                    b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+      modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+          {
+            b.Property<string>("LoginProvider")
+                      .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("ProviderKey")
-                        .HasColumnType("nvarchar(450)");
+            b.Property<string>("ProviderKey")
+                      .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("ProviderDisplayName")
-                        .HasColumnType("nvarchar(max)");
+            b.Property<string>("ProviderDisplayName")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+            b.Property<string>("UserId")
+                      .IsRequired()
+                      .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("LoginProvider", "ProviderKey");
+            b.HasKey("LoginProvider", "ProviderKey");
 
-                    b.HasIndex("UserId");
+            b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserLogins");
-                });
+            b.ToTable("AspNetUserLogins");
+          });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+      modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+          {
+            b.Property<string>("UserId")
+                      .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("RoleId")
-                        .HasColumnType("nvarchar(450)");
+            b.Property<string>("RoleId")
+                      .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("UserId", "RoleId");
+            b.HasKey("UserId", "RoleId");
 
-                    b.HasIndex("RoleId");
+            b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetUserRoles");
-                });
+            b.ToTable("AspNetUserRoles");
+          });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+      modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+          {
+            b.Property<string>("UserId")
+                      .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("LoginProvider")
-                        .HasColumnType("nvarchar(450)");
+            b.Property<string>("LoginProvider")
+                      .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
+            b.Property<string>("Name")
+                      .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Value")
-                        .HasColumnType("nvarchar(max)");
+            b.Property<string>("Value")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("UserId", "LoginProvider", "Name");
+            b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.ToTable("AspNetUserTokens");
-                });
+            b.ToTable("AspNetUserTokens");
+          });
 
-            modelBuilder.Entity("Models.Actividad", b =>
-                {
-                    b.Property<Guid>("ActividadId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+      modelBuilder.Entity("Models.Actividad", b =>
+          {
+            b.Property<Guid>("ActividadId")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("CursoSeccionCursoId")
-                        .HasColumnType("uniqueidentifier");
+            b.Property<Guid?>("CursoSeccionCursoId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("CursoSeccionSeccionId")
-                        .HasColumnType("uniqueidentifier");
+            b.Property<Guid?>("CursoSeccionSeccionId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+            b.Property<string>("Discriminator")
+                      .IsRequired()
+                      .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("FechaFinalizada")
-                        .HasColumnType("datetime2");
+            b.Property<DateTime>("FechaFinalizada")
+                      .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("FechaRealizada")
-                        .HasColumnType("datetime2");
+            b.Property<DateTime>("FechaRealizada")
+                      .HasColumnType("datetime2");
 
-                    b.HasKey("ActividadId");
+            b.HasKey("ActividadId");
 
-                    b.HasIndex("CursoSeccionCursoId", "CursoSeccionSeccionId");
+            b.HasIndex("CursoSeccionCursoId", "CursoSeccionSeccionId");
 
-                    b.ToTable("Actividad");
+            b.ToTable("Actividad");
 
-                    b.HasDiscriminator<string>("Discriminator").HasValue("Actividad");
-                });
+            b.HasDiscriminator<string>("Discriminator").HasValue("Actividad");
+          });
 
-            modelBuilder.Entity("Models.AlumnoClaseDictada", b =>
-                {
-                    b.Property<Guid>("AlumnoId")
-                        .HasColumnType("uniqueidentifier");
+      modelBuilder.Entity("Models.AlumnoClaseDictada", b =>
+          {
+            b.Property<Guid>("AlumnoId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("ClaseDictadaId")
-                        .HasColumnType("uniqueidentifier");
+            b.Property<Guid>("ClaseDictadaId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("AlumnoId1")
-                        .HasColumnType("nvarchar(450)");
+            b.Property<string>("AlumnoId1")
+                      .HasColumnType("nvarchar(450)");
 
-                    b.HasKey("AlumnoId", "ClaseDictadaId");
+            b.HasKey("AlumnoId", "ClaseDictadaId");
 
-                    b.HasIndex("AlumnoId1");
+            b.HasIndex("AlumnoId1");
 
-                    b.HasIndex("ClaseDictadaId");
+            b.HasIndex("ClaseDictadaId");
 
-                    b.ToTable("AlumnoClaseDictada");
-                });
+            b.ToTable("AlumnoClaseDictada");
+          });
 
-            modelBuilder.Entity("Models.AlumnoCurso", b =>
-                {
-                    b.Property<Guid>("AlumnoId")
-                        .HasColumnType("uniqueidentifier");
+      modelBuilder.Entity("Models.AlumnoCurso", b =>
+          {
+            b.Property<Guid>("AlumnoId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("CursoId")
-                        .HasColumnType("uniqueidentifier");
+            b.Property<Guid>("CursoId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("AlumnoId1")
-                        .HasColumnType("nvarchar(450)");
+            b.Property<string>("AlumnoId1")
+                      .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("Calificacion")
-                        .HasColumnType("int");
+            b.HasKey("AlumnoId", "CursoId");
 
-                    b.Property<DateTime>("FechaActaCerrada")
-                        .HasColumnType("datetime2");
+            b.HasIndex("AlumnoId1");
 
-                    b.Property<string>("Feedback")
-                        .HasColumnType("nvarchar(max)");
+            b.HasIndex("CursoId");
 
-                    b.Property<bool>("Inscripto")
-                        .HasColumnType("bit");
+            b.ToTable("AlumnoCurso");
+          });
 
-                    b.HasKey("AlumnoId", "CursoId");
+      modelBuilder.Entity("Models.AlumnoTrabajo", b =>
+          {
+            b.Property<Guid>("AlumnoId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.HasIndex("AlumnoId1");
+            b.Property<Guid>("TrabajoId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.HasIndex("CursoId");
+            b.Property<string>("AlumnoId1")
+                      .HasColumnType("nvarchar(450)");
 
-                    b.ToTable("AlumnoCurso");
-                });
+            b.HasKey("AlumnoId", "TrabajoId");
 
-            modelBuilder.Entity("Models.AlumnoPruebaOnline", b =>
-                {
-                    b.Property<Guid>("AlumnoId")
-                        .HasColumnType("uniqueidentifier");
+            b.HasIndex("AlumnoId1");
 
-                    b.Property<Guid>("PruebaOnlineId")
-                        .HasColumnType("uniqueidentifier");
+            b.HasIndex("TrabajoId");
 
-                    b.Property<string>("AlumnoId1")
-                        .HasColumnType("nvarchar(450)");
+            b.ToTable("AlumnoTrabajo");
+          });
 
-                    b.Property<DateTime>("FechaExpiracion")
-                        .HasColumnType("datetime2");
+      modelBuilder.Entity("Models.Carrera", b =>
+          {
+            b.Property<Guid>("CarreraId")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("FechaFin")
-                        .HasColumnType("datetime2");
+            b.Property<string>("Descripcion")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("FechaInicio")
-                        .HasColumnType("datetime2");
+            b.Property<Guid>("FacultadId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<bool>("Inscripto")
-                        .HasColumnType("bit");
+            b.Property<string>("Nombre")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Nota")
-                        .HasColumnType("int");
+            b.HasKey("CarreraId");
 
-                    b.HasKey("AlumnoId", "PruebaOnlineId");
+            b.HasIndex("FacultadId");
 
-                    b.HasIndex("AlumnoId1");
+            b.ToTable("Carrera");
+          });
 
-                    b.HasIndex("PruebaOnlineId");
+      modelBuilder.Entity("Models.CarreraCurso", b =>
+          {
+            b.Property<Guid>("CarreraId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.ToTable("AlumnoPruebaOnline");
-                });
+            b.Property<Guid>("CursoId")
+                      .HasColumnType("uniqueidentifier");
 
-            modelBuilder.Entity("Models.AlumnoTrabajo", b =>
-                {
-                    b.Property<Guid>("AlumnoId")
-                        .HasColumnType("uniqueidentifier");
+            b.HasKey("CarreraId", "CursoId");
 
-                    b.Property<Guid>("TrabajoId")
-                        .HasColumnType("uniqueidentifier");
+            b.HasIndex("CursoId");
 
-                    b.Property<string>("AlumnoId1")
-                        .HasColumnType("nvarchar(450)");
+            b.ToTable("CarreraCurso");
+          });
 
-                    b.HasKey("AlumnoId", "TrabajoId");
+      modelBuilder.Entity("Models.Comunicado", b =>
+          {
+            b.Property<Guid>("ComunicadoId")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uniqueidentifier");
 
-                    b.HasIndex("AlumnoId1");
+            b.Property<string>("Descripcion")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.HasIndex("TrabajoId");
+            b.Property<string>("Nombre")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.ToTable("AlumnoTrabajo");
-                });
+            b.Property<string>("Url")
+                      .HasColumnType("nvarchar(max)");
 
-            modelBuilder.Entity("Models.Carrera", b =>
-                {
-                    b.Property<Guid>("CarreraId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+            b.Property<string>("UsuarioId")
+                      .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Descripcion")
-                        .HasColumnType("nvarchar(max)");
+            b.HasKey("ComunicadoId");
 
-                    b.Property<Guid>("FacultadId")
-                        .HasColumnType("uniqueidentifier");
+            b.HasIndex("UsuarioId");
 
-                    b.Property<string>("Nombre")
-                        .HasColumnType("nvarchar(max)");
+            b.ToTable("Comunicado");
+          });
 
-                    b.HasKey("CarreraId");
+      modelBuilder.Entity("Models.ComunicadoCurso", b =>
+          {
+            b.Property<Guid>("ComunicadoId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.HasIndex("FacultadId");
+            b.Property<Guid>("CursoId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.ToTable("Carrera");
-                });
+            b.HasKey("ComunicadoId", "CursoId");
 
-            modelBuilder.Entity("Models.CarreraCurso", b =>
-                {
-                    b.Property<Guid>("CarreraId")
-                        .HasColumnType("uniqueidentifier");
+            b.HasIndex("CursoId");
 
-                    b.Property<Guid>("CursoId")
-                        .HasColumnType("uniqueidentifier");
+            b.ToTable("ComunicadoCurso");
+          });
 
-                    b.HasKey("CarreraId", "CursoId");
+      modelBuilder.Entity("Models.ComunicadoFacultad", b =>
+          {
+            b.Property<Guid>("ComunicadoId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.HasIndex("CursoId");
+            b.Property<Guid>("FacultadId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.ToTable("CarreraCurso");
-                });
+            b.HasKey("ComunicadoId", "FacultadId");
 
-            modelBuilder.Entity("Models.Comunicado", b =>
-                {
-                    b.Property<Guid>("ComunicadoId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+            b.HasIndex("FacultadId");
 
-                    b.Property<string>("Descripcion")
-                        .HasColumnType("nvarchar(max)");
+            b.ToTable("ComunicadoFacultad");
+          });
 
-                    b.Property<string>("Nombre")
-                        .HasColumnType("nvarchar(max)");
+      modelBuilder.Entity("Models.Curso", b =>
+          {
+            b.Property<Guid>("CursoId")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Url")
-                        .HasColumnType("nvarchar(max)");
+            b.Property<string>("Descripcion")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("usuarioId")
-                        .HasColumnType("nvarchar(450)");
+            b.Property<int>("Modalidad")
+                      .HasColumnType("int");
 
-                    b.HasKey("ComunicadoId");
+            b.Property<string>("Nombre")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.HasIndex("usuarioId");
+            b.Property<bool>("RequiereMatriculacion")
+                      .HasColumnType("bit");
 
-                    b.ToTable("Comunicado");
-                });
+            b.Property<string>("SalaVirtual")
+                      .HasColumnType("nvarchar(max)");
 
-            modelBuilder.Entity("Models.ComunicadoCurso", b =>
-                {
-                    b.Property<Guid>("ComunicadoId")
-                        .HasColumnType("uniqueidentifier");
+            b.Property<Guid?>("TemplateCursoId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("CursoId")
-                        .HasColumnType("uniqueidentifier");
+            b.HasKey("CursoId");
 
-                    b.HasKey("ComunicadoId", "CursoId");
+            b.HasIndex("TemplateCursoId");
 
-                    b.HasIndex("CursoId");
+            b.ToTable("Curso");
+          });
 
-                    b.ToTable("ComunicadoCurso");
-                });
+      modelBuilder.Entity("Models.CursoSeccion", b =>
+          {
+            b.Property<Guid>("CursoId")
+                      .HasColumnType("uniqueidentifier");
 
-            modelBuilder.Entity("Models.ComunicadoFacultad", b =>
-                {
-                    b.Property<Guid>("ComunicadoId")
-                        .HasColumnType("uniqueidentifier");
+            b.Property<Guid>("SeccionId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("FacultadId")
-                        .HasColumnType("uniqueidentifier");
+            b.Property<Guid>("CursoSeccionId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("ComunicadoId", "FacultadId");
+            b.HasKey("CursoId", "SeccionId");
 
-                    b.HasIndex("FacultadId");
+            b.HasIndex("SeccionId");
 
-                    b.ToTable("ComunicadoFacultad");
-                });
+            b.ToTable("CursoSeccion");
+          });
 
-            modelBuilder.Entity("Models.Curso", b =>
-                {
-                    b.Property<Guid>("CursoId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+      modelBuilder.Entity("Models.CursoSeccionActividad", b =>
+          {
+            b.Property<Guid>("CursoId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<bool>("ActaCerrada")
-                        .HasColumnType("bit");
+            b.Property<Guid>("SeccionId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Descripcion")
-                        .HasColumnType("nvarchar(max)");
+            b.Property<Guid>("ActividadId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("Modalidad")
-                        .HasColumnType("int");
+            b.HasKey("CursoId", "SeccionId", "ActividadId");
 
-                    b.Property<string>("Nombre")
-                        .HasColumnType("nvarchar(max)");
+            b.HasIndex("ActividadId");
 
-                    b.Property<bool>("RequiereMatriculacion")
-                        .HasColumnType("bit");
+            b.HasIndex("SeccionId");
 
-                    b.Property<string>("SalaVirtual")
-                        .HasColumnType("nvarchar(max)");
+            b.ToTable("CursoSeccionActividad");
+          });
 
-                    b.Property<Guid?>("TemplateCursoId")
-                        .HasColumnType("uniqueidentifier");
+      modelBuilder.Entity("Models.CursoSeccionForo", b =>
+          {
+            b.Property<Guid>("CursoId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("CursoId");
+            b.Property<Guid>("SeccionId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.HasIndex("TemplateCursoId");
+            b.Property<Guid>("ForoId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.ToTable("Curso");
-                });
+            b.HasKey("CursoId", "SeccionId", "ForoId");
 
-            modelBuilder.Entity("Models.CursoSeccion", b =>
-                {
-                    b.Property<Guid>("CursoId")
-                        .HasColumnType("uniqueidentifier");
+            b.HasIndex("ForoId");
 
-                    b.Property<Guid>("SeccionId")
-                        .HasColumnType("uniqueidentifier");
+            b.HasIndex("SeccionId");
 
-                    b.Property<Guid>("CursoSeccionId")
-                        .HasColumnType("uniqueidentifier");
+            b.ToTable("CursoSeccionForo");
+          });
 
-                    b.HasKey("CursoId", "SeccionId");
+      modelBuilder.Entity("Models.CursoSeccionMaterial", b =>
+          {
+            b.Property<Guid>("CursoId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.HasIndex("SeccionId");
+            b.Property<Guid>("SeccionId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.ToTable("CursoSeccion");
-                });
+            b.Property<Guid>("MaterialId")
+                      .HasColumnType("uniqueidentifier");
 
-            modelBuilder.Entity("Models.CursoSeccionActividad", b =>
-                {
-                    b.Property<Guid>("CursoId")
-                        .HasColumnType("uniqueidentifier");
+            b.HasKey("CursoId", "SeccionId", "MaterialId");
 
-                    b.Property<Guid>("SeccionId")
-                        .HasColumnType("uniqueidentifier");
+            b.HasIndex("MaterialId");
 
-                    b.Property<Guid>("ActividadId")
-                        .HasColumnType("uniqueidentifier");
+            b.HasIndex("SeccionId");
 
-                    b.HasKey("CursoId", "SeccionId", "ActividadId");
+            b.ToTable("CursoSeccionMaterial");
+          });
 
-                    b.HasIndex("ActividadId");
+      modelBuilder.Entity("Models.DocenteTrabajo", b =>
+          {
+            b.Property<Guid>("DocenteId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.HasIndex("SeccionId");
+            b.Property<Guid>("TrabajoId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.ToTable("CursoSeccionActividad");
-                });
+            b.Property<string>("DocenteId1")
+                      .HasColumnType("nvarchar(450)");
 
-            modelBuilder.Entity("Models.CursoSeccionForo", b =>
-                {
-                    b.Property<Guid>("CursoId")
-                        .HasColumnType("uniqueidentifier");
+            b.HasKey("DocenteId", "TrabajoId");
 
-                    b.Property<Guid>("SeccionId")
-                        .HasColumnType("uniqueidentifier");
+            b.HasIndex("DocenteId1");
 
-                    b.Property<Guid>("ForoId")
-                        .HasColumnType("uniqueidentifier");
+            b.HasIndex("TrabajoId");
 
-                    b.HasKey("CursoId", "SeccionId", "ForoId");
+            b.ToTable("DocenteTrabajo");
+          });
 
-                    b.HasIndex("ForoId");
+      modelBuilder.Entity("Models.Facultad", b =>
+          {
+            b.Property<Guid>("FacultadId")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uniqueidentifier");
 
-                    b.HasIndex("SeccionId");
+            b.Property<string>("ColorCodigo")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.ToTable("CursoSeccionForo");
-                });
+            b.Property<string>("Descripcion")
+                      .HasColumnType("nvarchar(max)");
 
-            modelBuilder.Entity("Models.CursoSeccionMaterial", b =>
-                {
-                    b.Property<Guid>("CursoId")
-                        .HasColumnType("uniqueidentifier");
+            b.Property<string>("DominioMail")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("SeccionId")
-                        .HasColumnType("uniqueidentifier");
+            b.Property<string>("LogoData")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("MaterialId")
-                        .HasColumnType("uniqueidentifier");
+            b.Property<string>("LogoExtension")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("CursoId", "SeccionId", "MaterialId");
+            b.Property<string>("LogoNombre")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.HasIndex("MaterialId");
+            b.Property<string>("Nombre")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.HasIndex("SeccionId");
+            b.Property<string>("UrlAcceso")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.ToTable("CursoSeccionMaterial");
-                });
+            b.HasKey("FacultadId");
 
-            modelBuilder.Entity("Models.DocenteTrabajo", b =>
-                {
-                    b.Property<Guid>("DocenteId")
-                        .HasColumnType("uniqueidentifier");
+            b.ToTable("Facultad");
+          });
 
-                    b.Property<Guid>("TrabajoId")
-                        .HasColumnType("uniqueidentifier");
+      modelBuilder.Entity("Models.Foro", b =>
+          {
+            b.Property<Guid>("ForoId")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("DocenteId1")
-                        .HasColumnType("nvarchar(450)");
+            b.Property<Guid?>("CursoSeccionCursoId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("DocenteId", "TrabajoId");
+            b.Property<Guid?>("CursoSeccionSeccionId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.HasIndex("DocenteId1");
+            b.Property<string>("Descripcion")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.HasIndex("TrabajoId");
+            b.Property<string>("Titulo")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.ToTable("DocenteTrabajo");
-                });
+            b.HasKey("ForoId");
 
-            modelBuilder.Entity("Models.DtPruebaRespuesta", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+            b.HasIndex("CursoSeccionCursoId", "CursoSeccionSeccionId");
 
-                    b.Property<Guid?>("PreguntaRespuestaId")
-                        .HasColumnType("uniqueidentifier");
+            b.ToTable("Foro");
+          });
 
-                    b.Property<string>("respuesta")
-                        .HasColumnType("nvarchar(max)");
+      modelBuilder.Entity("Models.Material", b =>
+          {
+            b.Property<Guid>("MaterialId")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("id");
+            b.Property<byte[]>("ArchivoData")
+                      .HasColumnType("varbinary(max)");
 
-                    b.HasIndex("PreguntaRespuestaId");
+            b.Property<string>("ArchivoExtension")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.ToTable("DtPruebaRespuesta");
-                });
+            b.Property<string>("ArchivoNombre")
+                      .HasColumnType("nvarchar(max)");
 
-            modelBuilder.Entity("Models.Facultad", b =>
-                {
-                    b.Property<Guid>("FacultadId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+            b.Property<Guid?>("CursoSeccionCursoId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("ColorCodigo")
-                        .HasColumnType("nvarchar(max)");
+            b.Property<Guid?>("CursoSeccionSeccionId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Descripcion")
-                        .HasColumnType("nvarchar(max)");
+            b.Property<string>("Descripcion")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("DominioMail")
-                        .HasColumnType("nvarchar(max)");
+            b.Property<string>("Nombre")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("LogoData")
-                        .HasColumnType("nvarchar(max)");
+            b.HasKey("MaterialId");
 
-                    b.Property<string>("LogoExtension")
-                        .HasColumnType("nvarchar(max)");
+            b.HasIndex("CursoSeccionCursoId", "CursoSeccionSeccionId");
 
-                    b.Property<string>("LogoNombre")
-                        .HasColumnType("nvarchar(max)");
+            b.ToTable("Material");
+          });
 
-                    b.Property<string>("Nombre")
-                        .HasColumnType("nvarchar(max)");
+      modelBuilder.Entity("Models.Mensaje", b =>
+          {
+            b.Property<Guid>("MensajeId")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("UrlAcceso")
-                        .HasColumnType("nvarchar(max)");
+            b.Property<string>("Contenido")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("FacultadId");
+            b.Property<string>("Discriminator")
+                      .IsRequired()
+                      .HasColumnType("nvarchar(max)");
 
-                    b.ToTable("Facultad");
-                });
+            b.Property<Guid>("EmisorId")
+                      .HasColumnType("uniqueidentifier");
 
-            modelBuilder.Entity("Models.Foro", b =>
-                {
-                    b.Property<Guid>("ForoId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+            b.Property<string>("EmisorId1")
+                      .HasColumnType("nvarchar(450)");
 
-                    b.Property<Guid?>("CursoSeccionCursoId")
-                        .HasColumnType("uniqueidentifier");
+            b.Property<DateTime>("FechaDeEnviado")
+                      .HasColumnType("datetime2");
 
-                    b.Property<Guid?>("CursoSeccionSeccionId")
-                        .HasColumnType("uniqueidentifier");
+            b.HasKey("MensajeId");
 
-                    b.Property<string>("Descripcion")
-                        .HasColumnType("nvarchar(max)");
+            b.HasIndex("EmisorId1");
 
-                    b.Property<string>("Titulo")
-                        .HasColumnType("nvarchar(max)");
+            b.ToTable("Mensaje");
 
-                    b.HasKey("ForoId");
+            b.HasDiscriminator<string>("Discriminator").HasValue("Mensaje");
+          });
 
-                    b.HasIndex("CursoSeccionCursoId", "CursoSeccionSeccionId");
+      modelBuilder.Entity("Models.Pregunta", b =>
+          {
+            b.Property<Guid>("PreguntaId")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uniqueidentifier");
 
-                    b.ToTable("Foro");
-                });
+            b.Property<Guid>("EncuestaId")
+                      .HasColumnType("uniqueidentifier");
 
-            modelBuilder.Entity("Models.Material", b =>
-                {
-                    b.Property<Guid>("MaterialId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+            b.Property<string>("Texto")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.Property<byte[]>("ArchivoData")
-                        .HasColumnType("varbinary(max)");
+            b.HasKey("PreguntaId");
 
-                    b.Property<string>("ArchivoExtension")
-                        .HasColumnType("nvarchar(max)");
+            b.HasIndex("EncuestaId");
 
-                    b.Property<string>("ArchivoNombre")
-                        .HasColumnType("nvarchar(max)");
+            b.ToTable("Pregunta");
+          });
 
-                    b.Property<Guid?>("CursoSeccionCursoId")
-                        .HasColumnType("uniqueidentifier");
+      modelBuilder.Entity("Models.Respuesta", b =>
+          {
+            b.Property<Guid>("RespuestaId")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("CursoSeccionSeccionId")
-                        .HasColumnType("uniqueidentifier");
+            b.Property<string>("AlumnoId")
+                      .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Descripcion")
-                        .HasColumnType("nvarchar(max)");
+            b.Property<DateTime>("FechaRealizada")
+                      .HasColumnType("datetime2");
 
-                    b.Property<string>("Nombre")
-                        .HasColumnType("nvarchar(max)");
+            b.Property<string>("Mensaje")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("MaterialId");
+            b.Property<Guid>("PreguntaId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.HasIndex("CursoSeccionCursoId", "CursoSeccionSeccionId");
+            b.HasKey("RespuestaId");
 
-                    b.ToTable("Material");
-                });
+            b.HasIndex("AlumnoId");
 
-            modelBuilder.Entity("Models.Mensaje", b =>
-                {
-                    b.Property<Guid>("MensajeId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+            b.HasIndex("PreguntaId");
 
-                    b.Property<string>("Contenido")
-                        .HasColumnType("nvarchar(max)");
+            b.ToTable("Respuesta");
+          });
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+      modelBuilder.Entity("Models.Seccion", b =>
+          {
+            b.Property<Guid>("SeccionId")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("EmisorId")
-                        .HasColumnType("uniqueidentifier");
+            b.Property<string>("Descripcion")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("EmisorId1")
-                        .HasColumnType("nvarchar(450)");
+            b.Property<bool>("IsDefault")
+                      .HasColumnType("bit");
 
-                    b.Property<DateTime>("FechaDeEnviado")
-                        .HasColumnType("datetime2");
+            b.Property<bool>("IsVisible")
+                      .HasColumnType("bit");
 
-                    b.HasKey("MensajeId");
+            b.Property<string>("Nombre")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.HasIndex("EmisorId1");
+            b.HasKey("SeccionId");
 
-                    b.ToTable("Mensaje");
+            b.ToTable("Seccion");
+          });
 
-                    b.HasDiscriminator<string>("Discriminator").HasValue("Mensaje");
-                });
+      modelBuilder.Entity("Models.TemaForo", b =>
+          {
+            b.Property<Guid>("TemaForoId")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uniqueidentifier");
 
-            modelBuilder.Entity("Models.Pregunta", b =>
-                {
-                    b.Property<Guid>("PreguntaId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+            b.Property<byte[]>("ArchivoData")
+                      .HasColumnType("varbinary(max)");
 
-                    b.Property<Guid>("EncuestaId")
-                        .HasColumnType("uniqueidentifier");
+            b.Property<string>("ArchivoExtension")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Texto")
-                        .HasColumnType("nvarchar(max)");
+            b.Property<string>("ArchivoNombre")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("PreguntaId");
+            b.Property<string>("Asunto")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.HasIndex("EncuestaId");
+            b.Property<string>("EmisorId")
+                      .HasColumnType("nvarchar(450)");
 
-                    b.ToTable("Pregunta");
-                });
+            b.Property<Guid?>("ForoId")
+                      .HasColumnType("uniqueidentifier");
 
-            modelBuilder.Entity("Models.PreguntaRespuesta", b =>
-                {
-                    b.Property<Guid>("PreguntaRespuestaId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+            b.Property<string>("Mensaje")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Pregunta")
-                        .HasColumnType("nvarchar(max)");
+            b.Property<bool>("SubscripcionADiscusion")
+                      .HasColumnType("bit");
 
-                    b.Property<Guid?>("PruebaOnlineActividadId")
-                        .HasColumnType("uniqueidentifier");
+            b.HasKey("TemaForoId");
 
-                    b.Property<int>("Puntos")
-                        .HasColumnType("int");
+            b.HasIndex("EmisorId");
 
-                    b.Property<int>("RespuestaCorrecta")
-                        .HasColumnType("int");
+            b.HasIndex("ForoId");
 
-                    b.Property<bool>("Resta")
-                        .HasColumnType("bit");
+            b.ToTable("TemaForo");
+          });
 
-                    b.HasKey("PreguntaRespuestaId");
+      modelBuilder.Entity("Models.TemplateCurso", b =>
+          {
+            b.Property<Guid>("TemplateCursoId")
+                      .ValueGeneratedOnAdd()
+                      .HasColumnType("uniqueidentifier");
 
-                    b.HasIndex("PruebaOnlineActividadId");
+            b.Property<string>("Descripcion")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.ToTable("PreguntaRespuesta");
-                });
+            b.Property<string>("Nombre")
+                      .HasColumnType("nvarchar(max)");
 
-            modelBuilder.Entity("Models.Respuesta", b =>
-                {
-                    b.Property<Guid>("RespuestaId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+            b.HasKey("TemplateCursoId");
 
-                    b.Property<string>("AlumnoId")
-                        .HasColumnType("nvarchar(450)");
+            b.ToTable("TemplateCurso");
+          });
 
-                    b.Property<DateTime>("FechaRealizada")
-                        .HasColumnType("datetime2");
+      modelBuilder.Entity("Models.TemplateCursoSeccion", b =>
+          {
+            b.Property<Guid>("TemplateCursoId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Mensaje")
-                        .HasColumnType("nvarchar(max)");
+            b.Property<Guid>("SeccionId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("PreguntaId")
-                        .HasColumnType("uniqueidentifier");
+            b.Property<Guid>("TemplateCursoSeccionId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("RespuestaId");
+            b.HasKey("TemplateCursoId", "SeccionId");
 
-                    b.HasIndex("AlumnoId");
+            b.HasIndex("SeccionId");
 
-                    b.HasIndex("PreguntaId");
+            b.ToTable("TemplateCursoSeccion");
+          });
 
-                    b.ToTable("Respuesta");
-                });
+      modelBuilder.Entity("Models.Usuario", b =>
+          {
+            b.Property<string>("Id")
+                      .HasColumnType("nvarchar(450)");
 
-            modelBuilder.Entity("Models.Seccion", b =>
-                {
-                    b.Property<Guid>("SeccionId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+            b.Property<int>("AccessFailedCount")
+                      .HasColumnType("int");
 
-                    b.Property<string>("Descripcion")
-                        .HasColumnType("nvarchar(max)");
+            b.Property<string>("Apellidos")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsDefault")
-                        .HasColumnType("bit");
+            b.Property<string>("CI")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsVisible")
-                        .HasColumnType("bit");
+            b.Property<string>("ConcurrencyStamp")
+                      .IsConcurrencyToken()
+                      .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Nombre")
-                        .HasColumnType("nvarchar(max)");
+            b.Property<string>("Direccion")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("SeccionId");
+            b.Property<string>("Discriminator")
+                      .IsRequired()
+                      .HasColumnType("nvarchar(max)");
 
-                    b.ToTable("Seccion");
-                });
+            b.Property<string>("Email")
+                      .HasColumnType("nvarchar(256)")
+                      .HasMaxLength(256);
 
-            modelBuilder.Entity("Models.TemaForo", b =>
-                {
-                    b.Property<Guid>("TemaForoId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+            b.Property<bool>("EmailConfirmed")
+                      .HasColumnType("bit");
 
-                    b.Property<byte[]>("ArchivoData")
-                        .HasColumnType("varbinary(max)");
+            b.Property<string>("EmailPersonal")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ArchivoExtension")
-                        .HasColumnType("nvarchar(max)");
+            b.Property<Guid?>("FacultadId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("ArchivoNombre")
-                        .HasColumnType("nvarchar(max)");
+            b.Property<DateTime>("FechaNacimiento")
+                      .HasColumnType("datetime2");
 
-                    b.Property<string>("Asunto")
-                        .HasColumnType("nvarchar(max)");
+            b.Property<bool>("LockoutEnabled")
+                      .HasColumnType("bit");
 
-                    b.Property<string>("EmisorId")
-                        .HasColumnType("nvarchar(450)");
+            b.Property<DateTimeOffset?>("LockoutEnd")
+                      .HasColumnType("datetimeoffset");
 
-                    b.Property<Guid?>("ForoId")
-                        .HasColumnType("uniqueidentifier");
+            b.Property<string>("Nombres")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Mensaje")
-                        .HasColumnType("nvarchar(max)");
+            b.Property<string>("NormalizedEmail")
+                      .HasColumnType("nvarchar(256)")
+                      .HasMaxLength(256);
 
-                    b.Property<bool>("SubscripcionADiscusion")
-                        .HasColumnType("bit");
+            b.Property<string>("NormalizedUserName")
+                      .HasColumnType("nvarchar(256)")
+                      .HasMaxLength(256);
 
-                    b.HasKey("TemaForoId");
+            b.Property<string>("PasswordHash")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.HasIndex("EmisorId");
+            b.Property<string>("PhoneNumber")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.HasIndex("ForoId");
+            b.Property<bool>("PhoneNumberConfirmed")
+                      .HasColumnType("bit");
 
-                    b.ToTable("TemaForo");
-                });
+            b.Property<string>("SecurityStamp")
+                      .HasColumnType("nvarchar(max)");
 
-            modelBuilder.Entity("Models.TemplateCurso", b =>
-                {
-                    b.Property<Guid>("TemplateCursoId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+            b.Property<string>("Telefono")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Descripcion")
-                        .HasColumnType("nvarchar(max)");
+            b.Property<bool>("TwoFactorEnabled")
+                      .HasColumnType("bit");
 
-                    b.Property<string>("Nombre")
-                        .HasColumnType("nvarchar(max)");
+            b.Property<string>("UserName")
+                      .HasColumnType("nvarchar(256)")
+                      .HasMaxLength(256);
 
-                    b.HasKey("TemplateCursoId");
+            b.HasKey("Id");
 
-                    b.ToTable("TemplateCurso");
-                });
+            b.HasIndex("FacultadId");
 
-            modelBuilder.Entity("Models.TemplateCursoSeccion", b =>
-                {
-                    b.Property<Guid>("TemplateCursoId")
-                        .HasColumnType("uniqueidentifier");
+            b.HasIndex("NormalizedEmail")
+                      .HasName("EmailIndex");
 
-                    b.Property<Guid>("SeccionId")
-                        .HasColumnType("uniqueidentifier");
+            b.HasIndex("NormalizedUserName")
+                      .IsUnique()
+                      .HasName("UserNameIndex")
+                      .HasFilter("[NormalizedUserName] IS NOT NULL");
 
-                    b.Property<Guid>("TemplateCursoSeccionId")
-                        .HasColumnType("uniqueidentifier");
+            b.ToTable("AspNetUsers");
 
-                    b.HasKey("TemplateCursoId", "SeccionId");
+            b.HasDiscriminator<string>("Discriminator").HasValue("Usuario");
+          });
 
-                    b.HasIndex("SeccionId");
+      modelBuilder.Entity("Models.UsuarioCurso", b =>
+          {
+            b.Property<Guid>("UsuarioId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.ToTable("TemplateCursoSeccion");
-                });
+            b.Property<Guid>("CursoId")
+                      .HasColumnType("uniqueidentifier");
 
-            modelBuilder.Entity("Models.Usuario", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+            b.Property<string>("UsuarioId1")
+                      .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("AccessFailedCount")
-                        .HasColumnType("int");
+            b.HasKey("UsuarioId", "CursoId");
 
-                    b.Property<string>("Apellidos")
-                        .HasColumnType("nvarchar(max)");
+            b.HasIndex("CursoId");
 
-                    b.Property<string>("CI")
-                        .HasColumnType("nvarchar(max)");
+            b.HasIndex("UsuarioId1");
 
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
+            b.ToTable("UsuarioCurso");
+          });
 
-                    b.Property<string>("Direccion")
-                        .HasColumnType("nvarchar(max)");
+      modelBuilder.Entity("Models.UsuarioEnviaMensaje", b =>
+          {
+            b.Property<Guid>("UsuarioId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+            b.Property<Guid>("MensajeId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+            b.Property<string>("UsuarioEnviaId")
+                      .HasColumnType("nvarchar(450)");
 
-                    b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("bit");
+            b.HasKey("UsuarioId", "MensajeId");
 
-                    b.Property<string>("EmailPersonal")
-                        .HasColumnType("nvarchar(max)");
+            b.HasIndex("MensajeId");
 
-                    b.Property<Guid?>("FacultadId")
-                        .HasColumnType("uniqueidentifier");
+            b.HasIndex("UsuarioEnviaId");
 
-                    b.Property<DateTime>("FechaNacimiento")
-                        .HasColumnType("datetime2");
+            b.ToTable("UsuarioEnviaMensaje");
+          });
 
-                    b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("bit");
+      modelBuilder.Entity("Models.UsuarioRecibeMensaje", b =>
+          {
+            b.Property<Guid>("UsuarioId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("datetimeoffset");
+            b.Property<Guid>("MensajeId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Nombres")
-                        .HasColumnType("nvarchar(max)");
+            b.Property<string>("UsuarioRecibeId")
+                      .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("NormalizedEmail")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+            b.HasKey("UsuarioId", "MensajeId");
 
-                    b.Property<string>("NormalizedUserName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+            b.HasIndex("MensajeId");
 
-                    b.Property<string>("PasswordHash")
-                        .HasColumnType("nvarchar(max)");
+            b.HasIndex("UsuarioRecibeId");
 
-                    b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
+            b.ToTable("UsuarioRecibeMensaje");
+          });
 
-                    b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("bit");
+      modelBuilder.Entity("Models.ClaseDictada", b =>
+          {
+            b.HasBaseType("Models.Actividad");
 
-                    b.Property<string>("SecurityStamp")
-                        .HasColumnType("nvarchar(max)");
+            b.Property<byte[]>("ArchivoData")
+                      .HasColumnType("varbinary(max)");
 
-                    b.Property<string>("Telefono")
-                        .HasColumnType("nvarchar(max)");
+            b.Property<string>("ArchivoExtension")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("bit");
+            b.Property<string>("ArchivoNombre")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(256)")
-                        .HasMaxLength(256);
+            b.Property<string>("Descripcion")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+            b.Property<string>("Nombre")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.HasIndex("FacultadId");
+            b.HasDiscriminator().HasValue("ClaseDictada");
+          });
 
-                    b.HasIndex("NormalizedEmail")
-                        .HasName("EmailIndex");
+      modelBuilder.Entity("Models.Encuesta", b =>
+          {
+            b.HasBaseType("Models.Actividad");
 
-                    b.HasIndex("NormalizedUserName")
-                        .IsUnique()
-                        .HasName("UserNameIndex")
-                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+            b.Property<string>("Descripcion")
+                      .HasColumnName("Encuesta_Descripcion")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.ToTable("AspNetUsers");
+            b.Property<bool>("EsAdministrador")
+                      .HasColumnType("bit");
 
-                    b.HasDiscriminator<string>("Discriminator").HasValue("Usuario");
-                });
+            b.Property<string>("Nombre")
+                      .HasColumnName("Encuesta_Nombre")
+                      .HasColumnType("nvarchar(max)");
 
-            modelBuilder.Entity("Models.UsuarioCurso", b =>
-                {
-                    b.Property<string>("UsuarioId")
-                        .HasColumnType("nvarchar(450)");
+            b.HasDiscriminator().HasValue("Encuesta");
+          });
 
-                    b.Property<Guid>("CursoId")
-                        .HasColumnType("uniqueidentifier");
+      modelBuilder.Entity("Models.Trabajo", b =>
+          {
+            b.HasBaseType("Models.Actividad");
 
-                    b.HasKey("UsuarioId", "CursoId");
+            b.Property<byte[]>("ArchivoData")
+                      .HasColumnName("Trabajo_ArchivoData")
+                      .HasColumnType("varbinary(max)");
 
-                    b.HasIndex("CursoId");
+            b.Property<string>("ArchivoExtension")
+                      .HasColumnName("Trabajo_ArchivoExtension")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.ToTable("UsuarioCurso");
-                });
+            b.Property<string>("ArchivoNombre")
+                      .HasColumnName("Trabajo_ArchivoNombre")
+                      .HasColumnType("nvarchar(max)");
 
-            modelBuilder.Entity("Models.UsuarioEnviaMensaje", b =>
-                {
-                    b.Property<Guid>("UsuarioId")
-                        .HasColumnType("uniqueidentifier");
+            b.Property<int>("Calificacion")
+                      .HasColumnType("int");
 
-                    b.Property<Guid>("MensajeId")
-                        .HasColumnType("uniqueidentifier");
+            b.Property<bool>("EsIndividual")
+                      .HasColumnType("bit");
 
-                    b.Property<string>("UsuarioEnviaId")
-                        .HasColumnType("nvarchar(450)");
+            b.Property<string>("Nota")
+                      .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("UsuarioId", "MensajeId");
+            b.HasDiscriminator().HasValue("Trabajo");
+          });
 
-                    b.HasIndex("MensajeId");
+      modelBuilder.Entity("Models.MensajeDirecto", b =>
+          {
+            b.HasBaseType("Models.Mensaje");
 
-                    b.HasIndex("UsuarioEnviaId");
+            b.Property<Guid>("ReceptorId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.ToTable("UsuarioEnviaMensaje");
-                });
+            b.Property<string>("ReceptorId1")
+                      .HasColumnType("nvarchar(450)");
 
-            modelBuilder.Entity("Models.UsuarioRecibeMensaje", b =>
-                {
-                    b.Property<Guid>("UsuarioId")
-                        .HasColumnType("uniqueidentifier");
+            b.HasIndex("ReceptorId1");
 
-                    b.Property<Guid>("MensajeId")
-                        .HasColumnType("uniqueidentifier");
+            b.HasDiscriminator().HasValue("MensajeDirecto");
+          });
 
-                    b.Property<string>("UsuarioRecibeId")
-                        .HasColumnType("nvarchar(450)");
+      modelBuilder.Entity("Models.MensajeTema", b =>
+          {
+            b.HasBaseType("Models.Mensaje");
 
-                    b.HasKey("UsuarioId", "MensajeId");
+            b.Property<bool>("MensajeBloqueado")
+                      .HasColumnType("bit");
 
-                    b.HasIndex("MensajeId");
+            b.Property<Guid>("TemaForoId")
+                      .HasColumnType("uniqueidentifier");
 
-                    b.HasIndex("UsuarioRecibeId");
+            b.HasIndex("TemaForoId");
 
-                    b.ToTable("UsuarioRecibeMensaje");
-                });
+            b.HasDiscriminator().HasValue("MensajeTema");
+          });
 
-            modelBuilder.Entity("Models.ClaseDictada", b =>
-                {
-                    b.HasBaseType("Models.Actividad");
+      modelBuilder.Entity("Models.Administrador", b =>
+          {
+            b.HasBaseType("Models.Usuario");
 
-                    b.Property<byte[]>("ArchivoData")
-                        .HasColumnType("varbinary(max)");
+            b.HasDiscriminator().HasValue("Administrador");
+          });
 
-                    b.Property<string>("ArchivoExtension")
-                        .HasColumnType("nvarchar(max)");
+      modelBuilder.Entity("Models.AdministradorFacultad", b =>
+          {
+            b.HasBaseType("Models.Usuario");
 
-                    b.Property<string>("ArchivoNombre")
-                        .HasColumnType("nvarchar(max)");
+            b.HasDiscriminator().HasValue("AdministradorFacultad");
+          });
 
-                    b.Property<string>("Descripcion")
-                        .HasColumnType("nvarchar(max)");
+      modelBuilder.Entity("Models.Alumno", b =>
+          {
+            b.HasBaseType("Models.Usuario");
 
-                    b.Property<string>("Nombre")
-                        .HasColumnType("nvarchar(max)");
+            b.HasDiscriminator().HasValue("Alumno");
+          });
 
-                    b.HasDiscriminator().HasValue("ClaseDictada");
-                });
+      modelBuilder.Entity("Models.Docente", b =>
+          {
+            b.HasBaseType("Models.Usuario");
 
-            modelBuilder.Entity("Models.Encuesta", b =>
-                {
-                    b.HasBaseType("Models.Actividad");
+            b.HasDiscriminator().HasValue("Docente");
+          });
 
-                    b.Property<string>("Descripcion")
-                        .HasColumnName("Encuesta_Descripcion")
-                        .HasColumnType("nvarchar(max)");
+      modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+          {
+            b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                      .WithMany()
+                      .HasForeignKey("RoleId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
+          });
 
-                    b.Property<bool>("EsAdministrador")
-                        .HasColumnType("bit");
+      modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+          {
+            b.HasOne("Models.Usuario", null)
+                      .WithMany()
+                      .HasForeignKey("UserId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
+          });
 
-                    b.Property<Guid>("FacultadId")
-                        .HasColumnType("uniqueidentifier");
+      modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+          {
+            b.HasOne("Models.Usuario", null)
+                      .WithMany()
+                      .HasForeignKey("UserId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
+          });
 
-                    b.Property<string>("Nombre")
-                        .HasColumnName("Encuesta_Nombre")
-                        .HasColumnType("nvarchar(max)");
+      modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+          {
+            b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                      .WithMany()
+                      .HasForeignKey("RoleId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
 
-                    b.HasIndex("FacultadId");
+            b.HasOne("Models.Usuario", null)
+                      .WithMany()
+                      .HasForeignKey("UserId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
+          });
 
-                    b.HasDiscriminator().HasValue("Encuesta");
-                });
+      modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+          {
+            b.HasOne("Models.Usuario", null)
+                      .WithMany()
+                      .HasForeignKey("UserId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
+          });
 
-            modelBuilder.Entity("Models.PruebaOnline", b =>
-                {
-                    b.HasBaseType("Models.Actividad");
+      modelBuilder.Entity("Models.Actividad", b =>
+          {
+            b.HasOne("Models.CursoSeccion", null)
+                      .WithMany("ActividadLista")
+                      .HasForeignKey("CursoSeccionCursoId", "CursoSeccionSeccionId");
+          });
 
-                    b.Property<bool>("Activa")
-                        .HasColumnType("bit");
+      modelBuilder.Entity("Models.AlumnoClaseDictada", b =>
+          {
+            b.HasOne("Models.Alumno", "Alumno")
+                      .WithMany()
+                      .HasForeignKey("AlumnoId1");
 
-                    b.Property<string>("Descripcion")
-                        .HasColumnName("PruebaOnline_Descripcion")
-                        .HasColumnType("nvarchar(max)");
+            b.HasOne("Models.ClaseDictada", "ClaseDictada")
+                      .WithMany()
+                      .HasForeignKey("ClaseDictadaId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
+          });
 
-                    b.Property<DateTime>("Fecha")
-                        .HasColumnType("datetime2");
+      modelBuilder.Entity("Models.AlumnoCurso", b =>
+          {
+            b.HasOne("Models.Alumno", "Alumno")
+                      .WithMany()
+                      .HasForeignKey("AlumnoId1");
 
-                    b.Property<DateTime>("MinutosExpiracion")
-                        .HasColumnType("datetime2");
+            b.HasOne("Models.Curso", "Curso")
+                      .WithMany()
+                      .HasForeignKey("CursoId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
+          });
 
-                    b.Property<string>("Nombre")
-                        .HasColumnName("PruebaOnline_Nombre")
-                        .HasColumnType("nvarchar(max)");
+      modelBuilder.Entity("Models.AlumnoTrabajo", b =>
+          {
+            b.HasOne("Models.Alumno", "Alumno")
+                      .WithMany()
+                      .HasForeignKey("AlumnoId1");
 
-                    b.Property<Guid>("PruebaOnlineId")
-                        .HasColumnType("uniqueidentifier");
+            b.HasOne("Models.Trabajo", "Trabajo")
+                      .WithMany()
+                      .HasForeignKey("TrabajoId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
+          });
 
-                    b.Property<string>("Url")
-                        .HasColumnType("nvarchar(max)");
+      modelBuilder.Entity("Models.Carrera", b =>
+          {
+            b.HasOne("Models.Facultad", "Facultad")
+                      .WithMany()
+                      .HasForeignKey("FacultadId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
+          });
 
-                    b.HasDiscriminator().HasValue("PruebaOnline");
-                });
+      modelBuilder.Entity("Models.CarreraCurso", b =>
+          {
+            b.HasOne("Models.Carrera", "Carrera")
+                      .WithMany()
+                      .HasForeignKey("CarreraId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
 
-            modelBuilder.Entity("Models.Trabajo", b =>
-                {
-                    b.HasBaseType("Models.Actividad");
+            b.HasOne("Models.Curso", "Curso")
+                      .WithMany()
+                      .HasForeignKey("CursoId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
+          });
 
-                    b.Property<byte[]>("ArchivoData")
-                        .HasColumnName("Trabajo_ArchivoData")
-                        .HasColumnType("varbinary(max)");
+      modelBuilder.Entity("Models.Comunicado", b =>
+          {
+            b.HasOne("Models.Usuario", null)
+                      .WithMany("ComunicadoLista")
+                      .HasForeignKey("UsuarioId");
+          });
 
-                    b.Property<string>("ArchivoExtension")
-                        .HasColumnName("Trabajo_ArchivoExtension")
-                        .HasColumnType("nvarchar(max)");
+      modelBuilder.Entity("Models.ComunicadoCurso", b =>
+          {
+            b.HasOne("Models.Comunicado", "Comunicado")
+                      .WithMany()
+                      .HasForeignKey("ComunicadoId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
 
-                    b.Property<string>("ArchivoNombre")
-                        .HasColumnName("Trabajo_ArchivoNombre")
-                        .HasColumnType("nvarchar(max)");
+            b.HasOne("Models.Curso", "Curso")
+                      .WithMany()
+                      .HasForeignKey("CursoId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
+          });
 
-                    b.Property<int>("Calificacion")
-                        .HasColumnType("int");
+      modelBuilder.Entity("Models.ComunicadoFacultad", b =>
+          {
+            b.HasOne("Models.Comunicado", "Comunicado")
+                      .WithMany()
+                      .HasForeignKey("ComunicadoId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
 
-                    b.Property<bool>("EsIndividual")
-                        .HasColumnType("bit");
+            b.HasOne("Models.Facultad", "Facultad")
+                      .WithMany()
+                      .HasForeignKey("FacultadId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
+          });
 
-                    b.Property<string>("Nota")
-                        .HasColumnType("nvarchar(max)");
+      modelBuilder.Entity("Models.Curso", b =>
+          {
+            b.HasOne("Models.TemplateCurso", "TemplateCurso")
+                      .WithMany()
+                      .HasForeignKey("TemplateCursoId");
+          });
 
-                    b.HasDiscriminator().HasValue("Trabajo");
-                });
+      modelBuilder.Entity("Models.CursoSeccion", b =>
+          {
+            b.HasOne("Models.Curso", "Curso")
+                      .WithMany()
+                      .HasForeignKey("CursoId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
 
-            modelBuilder.Entity("Models.MensajeDirecto", b =>
-                {
-                    b.HasBaseType("Models.Mensaje");
+            b.HasOne("Models.Seccion", "Seccion")
+                      .WithMany()
+                      .HasForeignKey("SeccionId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
+          });
 
-                    b.Property<Guid>("ReceptorId")
-                        .HasColumnType("uniqueidentifier");
+      modelBuilder.Entity("Models.CursoSeccionActividad", b =>
+          {
+            b.HasOne("Models.Actividad", "Actividad")
+                      .WithMany()
+                      .HasForeignKey("ActividadId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
 
-                    b.Property<string>("ReceptorId1")
-                        .HasColumnType("nvarchar(450)");
+            b.HasOne("Models.Curso", "Curso")
+                      .WithMany()
+                      .HasForeignKey("CursoId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
 
-                    b.HasIndex("ReceptorId1");
+            b.HasOne("Models.Seccion", "Seccion")
+                      .WithMany()
+                      .HasForeignKey("SeccionId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
+          });
 
-                    b.HasDiscriminator().HasValue("MensajeDirecto");
-                });
+      modelBuilder.Entity("Models.CursoSeccionForo", b =>
+          {
+            b.HasOne("Models.Curso", "Curso")
+                      .WithMany()
+                      .HasForeignKey("CursoId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
 
-            modelBuilder.Entity("Models.MensajeTema", b =>
-                {
-                    b.HasBaseType("Models.Mensaje");
+            b.HasOne("Models.Foro", "Foro")
+                      .WithMany()
+                      .HasForeignKey("ForoId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
 
-                    b.Property<bool>("MensajeBloqueado")
-                        .HasColumnType("bit");
+            b.HasOne("Models.Seccion", "Seccion")
+                      .WithMany()
+                      .HasForeignKey("SeccionId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
+          });
 
-                    b.Property<Guid>("TemaForoId")
-                        .HasColumnType("uniqueidentifier");
+      modelBuilder.Entity("Models.CursoSeccionMaterial", b =>
+          {
+            b.HasOne("Models.Curso", "Curso")
+                      .WithMany()
+                      .HasForeignKey("CursoId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
 
-                    b.HasIndex("TemaForoId");
+            b.HasOne("Models.Material", "Material")
+                      .WithMany()
+                      .HasForeignKey("MaterialId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
 
-                    b.HasDiscriminator().HasValue("MensajeTema");
-                });
+            b.HasOne("Models.Seccion", "Seccion")
+                      .WithMany()
+                      .HasForeignKey("SeccionId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
+          });
 
-            modelBuilder.Entity("Models.Administrador", b =>
-                {
-                    b.HasBaseType("Models.Usuario");
+      modelBuilder.Entity("Models.DocenteTrabajo", b =>
+          {
+            b.HasOne("Models.Docente", "Docente")
+                      .WithMany()
+                      .HasForeignKey("DocenteId1");
 
-                    b.HasDiscriminator().HasValue("Administrador");
-                });
+            b.HasOne("Models.Trabajo", "Trabajo")
+                      .WithMany()
+                      .HasForeignKey("TrabajoId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
+          });
 
-            modelBuilder.Entity("Models.AdministradorFacultad", b =>
-                {
-                    b.HasBaseType("Models.Usuario");
+      modelBuilder.Entity("Models.Foro", b =>
+          {
+            b.HasOne("Models.CursoSeccion", null)
+                      .WithMany("ForoLista")
+                      .HasForeignKey("CursoSeccionCursoId", "CursoSeccionSeccionId");
+          });
 
-                    b.HasDiscriminator().HasValue("AdministradorFacultad");
-                });
+      modelBuilder.Entity("Models.Material", b =>
+          {
+            b.HasOne("Models.CursoSeccion", null)
+                      .WithMany("MaterialLista")
+                      .HasForeignKey("CursoSeccionCursoId", "CursoSeccionSeccionId");
+          });
 
-            modelBuilder.Entity("Models.Alumno", b =>
-                {
-                    b.HasBaseType("Models.Usuario");
+      modelBuilder.Entity("Models.Mensaje", b =>
+          {
+            b.HasOne("Models.Usuario", "Emisor")
+                      .WithMany()
+                      .HasForeignKey("EmisorId1");
+          });
 
-                    b.HasDiscriminator().HasValue("Alumno");
-                });
+      modelBuilder.Entity("Models.Pregunta", b =>
+          {
+            b.HasOne("Models.Encuesta", "Encuesta")
+                      .WithMany("PreguntaLista")
+                      .HasForeignKey("EncuestaId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
+          });
 
-            modelBuilder.Entity("Models.Docente", b =>
-                {
-                    b.HasBaseType("Models.Usuario");
+      modelBuilder.Entity("Models.Respuesta", b =>
+          {
+            b.HasOne("Models.Alumno", "Alumno")
+                      .WithMany()
+                      .HasForeignKey("AlumnoId");
 
-                    b.HasDiscriminator().HasValue("Docente");
-                });
+            b.HasOne("Models.Pregunta", "Pregunta")
+                      .WithMany("RespuestaLista")
+                      .HasForeignKey("PreguntaId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
+          });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+      modelBuilder.Entity("Models.TemaForo", b =>
+          {
+            b.HasOne("Models.Usuario", "Emisor")
+                      .WithMany()
+                      .HasForeignKey("EmisorId");
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
-                {
-                    b.HasOne("Models.Usuario", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+            b.HasOne("Models.Foro", null)
+                      .WithMany("TemaForoLista")
+                      .HasForeignKey("ForoId");
+          });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
-                {
-                    b.HasOne("Models.Usuario", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+      modelBuilder.Entity("Models.TemplateCursoSeccion", b =>
+          {
+            b.HasOne("Models.Seccion", "Seccion")
+                      .WithMany()
+                      .HasForeignKey("SeccionId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+            b.HasOne("Models.TemplateCurso", "TemplateCurso")
+                      .WithMany()
+                      .HasForeignKey("TemplateCursoId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
+          });
 
-                    b.HasOne("Models.Usuario", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+      modelBuilder.Entity("Models.Usuario", b =>
+          {
+            b.HasOne("Models.Facultad", "Facultad")
+                      .WithMany("UsuarioLista")
+                      .HasForeignKey("FacultadId");
+          });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
-                {
-                    b.HasOne("Models.Usuario", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+      modelBuilder.Entity("Models.UsuarioCurso", b =>
+          {
+            b.HasOne("Models.Curso", "Curso")
+                      .WithMany()
+                      .HasForeignKey("CursoId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
 
-            modelBuilder.Entity("Models.Actividad", b =>
-                {
-                    b.HasOne("Models.CursoSeccion", null)
-                        .WithMany("ActividadLista")
-                        .HasForeignKey("CursoSeccionCursoId", "CursoSeccionSeccionId");
-                });
+            b.HasOne("Models.Usuario", "Usuario")
+                      .WithMany()
+                      .HasForeignKey("UsuarioId1");
+          });
 
-            modelBuilder.Entity("Models.AlumnoClaseDictada", b =>
-                {
-                    b.HasOne("Models.Alumno", "Alumno")
-                        .WithMany()
-                        .HasForeignKey("AlumnoId1");
+      modelBuilder.Entity("Models.UsuarioEnviaMensaje", b =>
+          {
+            b.HasOne("Models.Mensaje", "Mensaje")
+                      .WithMany()
+                      .HasForeignKey("MensajeId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
 
-                    b.HasOne("Models.ClaseDictada", "ClaseDictada")
-                        .WithMany()
-                        .HasForeignKey("ClaseDictadaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+            b.HasOne("Models.Usuario", "UsuarioEnvia")
+                      .WithMany()
+                      .HasForeignKey("UsuarioEnviaId");
+          });
 
-            modelBuilder.Entity("Models.AlumnoCurso", b =>
-                {
-                    b.HasOne("Models.Alumno", "Alumno")
-                        .WithMany()
-                        .HasForeignKey("AlumnoId1");
+      modelBuilder.Entity("Models.UsuarioRecibeMensaje", b =>
+          {
+            b.HasOne("Models.Mensaje", "Mensaje")
+                      .WithMany()
+                      .HasForeignKey("MensajeId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
 
-                    b.HasOne("Models.Curso", "Curso")
-                        .WithMany()
-                        .HasForeignKey("CursoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+            b.HasOne("Models.Usuario", "UsuarioRecibe")
+                      .WithMany()
+                      .HasForeignKey("UsuarioRecibeId");
+          });
 
-            modelBuilder.Entity("Models.AlumnoPruebaOnline", b =>
-                {
-                    b.HasOne("Models.Alumno", "Alumno")
-                        .WithMany()
-                        .HasForeignKey("AlumnoId1");
+      modelBuilder.Entity("Models.MensajeDirecto", b =>
+          {
+            b.HasOne("Models.Usuario", "Receptor")
+                      .WithMany()
+                      .HasForeignKey("ReceptorId1");
+          });
 
-                    b.HasOne("Models.PruebaOnline", "PruebaOnline")
-                        .WithMany()
-                        .HasForeignKey("PruebaOnlineId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Models.AlumnoTrabajo", b =>
-                {
-                    b.HasOne("Models.Alumno", "Alumno")
-                        .WithMany()
-                        .HasForeignKey("AlumnoId1");
-
-                    b.HasOne("Models.Trabajo", "Trabajo")
-                        .WithMany()
-                        .HasForeignKey("TrabajoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Models.Carrera", b =>
-                {
-                    b.HasOne("Models.Facultad", "Facultad")
-                        .WithMany()
-                        .HasForeignKey("FacultadId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Models.CarreraCurso", b =>
-                {
-                    b.HasOne("Models.Carrera", "Carrera")
-                        .WithMany()
-                        .HasForeignKey("CarreraId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Models.Curso", "Curso")
-                        .WithMany()
-                        .HasForeignKey("CursoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Models.Comunicado", b =>
-                {
-                    b.HasOne("Models.Usuario", "usuario")
-                        .WithMany("ComunicadoLista")
-                        .HasForeignKey("usuarioId");
-                });
-
-            modelBuilder.Entity("Models.ComunicadoCurso", b =>
-                {
-                    b.HasOne("Models.Comunicado", "Comunicado")
-                        .WithMany()
-                        .HasForeignKey("ComunicadoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Models.Curso", "Curso")
-                        .WithMany()
-                        .HasForeignKey("CursoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Models.ComunicadoFacultad", b =>
-                {
-                    b.HasOne("Models.Comunicado", "Comunicado")
-                        .WithMany()
-                        .HasForeignKey("ComunicadoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Models.Facultad", "Facultad")
-                        .WithMany()
-                        .HasForeignKey("FacultadId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Models.Curso", b =>
-                {
-                    b.HasOne("Models.TemplateCurso", "TemplateCurso")
-                        .WithMany()
-                        .HasForeignKey("TemplateCursoId");
-                });
-
-            modelBuilder.Entity("Models.CursoSeccion", b =>
-                {
-                    b.HasOne("Models.Curso", "Curso")
-                        .WithMany()
-                        .HasForeignKey("CursoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Models.Seccion", "Seccion")
-                        .WithMany()
-                        .HasForeignKey("SeccionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Models.CursoSeccionActividad", b =>
-                {
-                    b.HasOne("Models.Actividad", "Actividad")
-                        .WithMany()
-                        .HasForeignKey("ActividadId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Models.Curso", "Curso")
-                        .WithMany()
-                        .HasForeignKey("CursoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Models.Seccion", "Seccion")
-                        .WithMany()
-                        .HasForeignKey("SeccionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Models.CursoSeccionForo", b =>
-                {
-                    b.HasOne("Models.Curso", "Curso")
-                        .WithMany()
-                        .HasForeignKey("CursoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Models.Foro", "Foro")
-                        .WithMany()
-                        .HasForeignKey("ForoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Models.Seccion", "Seccion")
-                        .WithMany()
-                        .HasForeignKey("SeccionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Models.CursoSeccionMaterial", b =>
-                {
-                    b.HasOne("Models.Curso", "Curso")
-                        .WithMany()
-                        .HasForeignKey("CursoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Models.Material", "Material")
-                        .WithMany()
-                        .HasForeignKey("MaterialId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Models.Seccion", "Seccion")
-                        .WithMany()
-                        .HasForeignKey("SeccionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Models.DocenteTrabajo", b =>
-                {
-                    b.HasOne("Models.Docente", "Docente")
-                        .WithMany()
-                        .HasForeignKey("DocenteId1");
-
-                    b.HasOne("Models.Trabajo", "Trabajo")
-                        .WithMany()
-                        .HasForeignKey("TrabajoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Models.DtPruebaRespuesta", b =>
-                {
-                    b.HasOne("Models.PreguntaRespuesta", null)
-                        .WithMany("Respuestas")
-                        .HasForeignKey("PreguntaRespuestaId");
-                });
-
-            modelBuilder.Entity("Models.Foro", b =>
-                {
-                    b.HasOne("Models.CursoSeccion", null)
-                        .WithMany("ForoLista")
-                        .HasForeignKey("CursoSeccionCursoId", "CursoSeccionSeccionId");
-                });
-
-            modelBuilder.Entity("Models.Material", b =>
-                {
-                    b.HasOne("Models.CursoSeccion", null)
-                        .WithMany("MaterialLista")
-                        .HasForeignKey("CursoSeccionCursoId", "CursoSeccionSeccionId");
-                });
-
-            modelBuilder.Entity("Models.Mensaje", b =>
-                {
-                    b.HasOne("Models.Usuario", "Emisor")
-                        .WithMany()
-                        .HasForeignKey("EmisorId1");
-                });
-
-            modelBuilder.Entity("Models.Pregunta", b =>
-                {
-                    b.HasOne("Models.Encuesta", "Encuesta")
-                        .WithMany("PreguntaLista")
-                        .HasForeignKey("EncuestaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Models.PreguntaRespuesta", b =>
-                {
-                    b.HasOne("Models.PruebaOnline", null)
-                        .WithMany("ListaPreguntaRespuesta")
-                        .HasForeignKey("PruebaOnlineActividadId");
-                });
-
-            modelBuilder.Entity("Models.Respuesta", b =>
-                {
-                    b.HasOne("Models.Alumno", "Alumno")
-                        .WithMany()
-                        .HasForeignKey("AlumnoId");
-
-                    b.HasOne("Models.Pregunta", "Pregunta")
-                        .WithMany("RespuestaLista")
-                        .HasForeignKey("PreguntaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Models.TemaForo", b =>
-                {
-                    b.HasOne("Models.Usuario", "Emisor")
-                        .WithMany()
-                        .HasForeignKey("EmisorId");
-
-                    b.HasOne("Models.Foro", null)
-                        .WithMany("TemaForoLista")
-                        .HasForeignKey("ForoId");
-                });
-
-            modelBuilder.Entity("Models.TemplateCursoSeccion", b =>
-                {
-                    b.HasOne("Models.Seccion", "Seccion")
-                        .WithMany()
-                        .HasForeignKey("SeccionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Models.TemplateCurso", "TemplateCurso")
-                        .WithMany()
-                        .HasForeignKey("TemplateCursoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Models.Usuario", b =>
-                {
-                    b.HasOne("Models.Facultad", "Facultad")
-                        .WithMany("UsuarioLista")
-                        .HasForeignKey("FacultadId");
-                });
-
-            modelBuilder.Entity("Models.UsuarioCurso", b =>
-                {
-                    b.HasOne("Models.Curso", "Curso")
-                        .WithMany()
-                        .HasForeignKey("CursoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Models.Usuario", "Usuario")
-                        .WithMany()
-                        .HasForeignKey("UsuarioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Models.UsuarioEnviaMensaje", b =>
-                {
-                    b.HasOne("Models.Mensaje", "Mensaje")
-                        .WithMany()
-                        .HasForeignKey("MensajeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Models.Usuario", "UsuarioEnvia")
-                        .WithMany()
-                        .HasForeignKey("UsuarioEnviaId");
-                });
-
-            modelBuilder.Entity("Models.UsuarioRecibeMensaje", b =>
-                {
-                    b.HasOne("Models.Mensaje", "Mensaje")
-                        .WithMany()
-                        .HasForeignKey("MensajeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Models.Usuario", "UsuarioRecibe")
-                        .WithMany()
-                        .HasForeignKey("UsuarioRecibeId");
-                });
-
-            modelBuilder.Entity("Models.Encuesta", b =>
-                {
-                    b.HasOne("Models.Facultad", "Facultad")
-                        .WithMany("ListaEncuesta")
-                        .HasForeignKey("FacultadId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Models.MensajeDirecto", b =>
-                {
-                    b.HasOne("Models.Usuario", "Receptor")
-                        .WithMany()
-                        .HasForeignKey("ReceptorId1");
-                });
-
-            modelBuilder.Entity("Models.MensajeTema", b =>
-                {
-                    b.HasOne("Models.TemaForo", "TemaForo")
-                        .WithMany()
-                        .HasForeignKey("TemaForoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
+      modelBuilder.Entity("Models.MensajeTema", b =>
+          {
+            b.HasOne("Models.TemaForo", "TemaForo")
+                      .WithMany()
+                      .HasForeignKey("TemaForoId")
+                      .OnDelete(DeleteBehavior.Cascade)
+                      .IsRequired();
+          });
 #pragma warning restore 612, 618
-        }
     }
+  }
 }

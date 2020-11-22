@@ -10,7 +10,7 @@ using Models;
 namespace WebAPI.Controllers
 {
 
-    [Authorize(Roles = "Alumno")]
+    // [Authorize(Roles = "Alumno")]
     [Route("api/[controller]")]
     [ApiController]
     public class AlumnoController : MiControllerBase

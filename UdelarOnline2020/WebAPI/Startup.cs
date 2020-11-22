@@ -55,7 +55,7 @@ namespace WebAPI
 
       services.AddDbContext<UdelarOnlineContext>(opt =>
       {
-        opt.UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection")).EnableRetryOnFailure();
+        opt.UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection"));
       });
 
       // If using Kestrel
@@ -78,8 +78,8 @@ namespace WebAPI
       {
  
         // Declaro politica para requerir Autenticación y la agrego como filtro.
-        // var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
-        // opt.Filters.Add(new AuthorizeFilter(policy));
+        var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+        opt.Filters.Add(new AuthorizeFilter(policy));
       })
        .AddFluentValidation(config =>
        {
