@@ -3,7 +3,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj" />
     <ProjectReference Include="..\Persistence\Persistence.csproj" />
-    <ProjectReference Include="..\Perifericos\Perifericos.csproj" />
   </ItemGroup>
 
   

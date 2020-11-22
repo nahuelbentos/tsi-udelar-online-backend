@@ -21,15 +21,10 @@ namespace Business.Bedelias
 
     public class Manejador : IRequestHandler<Ejecuta, Boolean>
     {
-      private readonly CiValidator ciValidator;
-
-      public Manejador(CiValidator ciValidator)
-      {
-        this.ciValidator = ciValidator;
-      }
+     
 
       public Task<bool> Handle(Ejecuta request, CancellationToken cancellationToken)
-              => Task.FromResult(this.ciValidator.ciInCollectionValids(request.ci) ? true : CiValidator.Validate(request.ci));
+              => Task.FromResult( CiValidator.ciInCollectionValids(request.ci) ? true : CiValidator.Validate(request.ci));
     
     }
 
