@@ -16,8 +16,7 @@ namespace Business.Bedelias
 
     public class Manejador : IRequestHandler<Ejecuta, Boolean>
     {
-      public Task<bool> Handle(Ejecuta request, CancellationToken cancellationToken) => 
-        Task.FromResult(request.coleccionCI.Length % 2 == 0);
+      public async Task<bool> Handle(Ejecuta request, CancellationToken cancellationToken) => request.coleccionCI.Length % 2 == 0;
     }
   }
 }

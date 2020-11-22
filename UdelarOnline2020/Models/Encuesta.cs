@@ -15,6 +15,10 @@ namespace Models
 
     public ICollection<Pregunta> PreguntaLista { get; set; }
     
+    public Facultad Facultad { get; set; }
+    public Guid FacultadId { get; set; }
+    
+    
     
   }
 }

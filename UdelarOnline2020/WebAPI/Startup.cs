@@ -31,6 +31,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.AspNetCore.Http.Features;
+using Perifericos.Mail;
+using Perifericos.Bedelias;
 
 namespace WebAPI
 {
@@ -114,6 +116,8 @@ namespace WebAPI
       });
 
       services.AddScoped<IJwtGenerador, JwtGenerador>();
+      services.AddScoped<IMailGenerator, MailGenerator>();
+      services.AddScoped<IBedeliasGenerator, BedeliasGenerator>();
 
       // Middleware
 

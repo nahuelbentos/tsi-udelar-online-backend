@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Business.Bedelias;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -10,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using WebAPI.Middleware;
 
 namespace WebAPI
 {
@@ -45,6 +48,7 @@ namespace WebAPI
                 builder.AllowAnyMethod();
                 builder.AllowAnyHeader();
             });
+            
 
             // app.UseHttpsRedirection();
 

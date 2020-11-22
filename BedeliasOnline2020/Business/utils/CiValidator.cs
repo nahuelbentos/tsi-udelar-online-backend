@@ -3,19 +3,13 @@ using System.Collections.Generic;
 
 namespace Business.utils
 {
-    public class CiValidator
-    {
-      public List<string> validCI { get; set; }
-      
-      
+  public class CiValidator
+  {
+
+
     public CiValidator()
-    { 
-        var init = 11111111;
-        for (int i = 1; i < 9; i++)
-        { 
-            init *= i;
-            this.validCI.Add(init.ToString());
-        };
+    {
+
     }
 
     private static int validation_digit(string ci)
@@ -52,10 +46,22 @@ namespace Business.utils
       return (Int32.Parse(dig.ToString()) == validDigitCalculated);
     }
 
-    public  bool ciInCollectionValids(string ci) => this.validCI.Contains(ci);
-    // public static bool IsCIInCIVAlids(string ci) {
-    //   return ciInCollectionValids(ci);
-    //   }
+    public static bool ciInCollectionValids(string ci)
+    {
+      var validCI = new List<string>();
+      var init = 11111111;
+      for (int i = 1; i < 9; i++)
+      {
+        init *= i;
+        validCI.Add(init.ToString());
+      };
+
+      return validCI.Contains(ci);
+    }
+
+
+
+
 
   }
 }
