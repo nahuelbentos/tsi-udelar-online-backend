@@ -47,5 +47,33 @@ namespace Seguridad.Token
 
     }
 
+    public bool ValidarToken(string token)
+    {
+
+      
+      var mySecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("Udelar Online TSI"));
+
+
+      var tokenHandler = new JwtSecurityTokenHandler();
+      try
+      {
+        tokenHandler.ValidateToken(token, new TokenValidationParameters
+        {
+          ValidateIssuerSigningKey = true,
+          ValidateIssuer = false,
+          ValidateAudience = false,
+          IssuerSigningKey = mySecurityKey
+        }, out SecurityToken validatedToken);
+      }
+      catch
+      {
+        return false;
+      }
+
+      return true;
+
+    }
+
+
   }
 }

@@ -3,7 +3,7 @@ using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
-using Aplicacion.ManejadorError;
+using Business.ManejadorError;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
@@ -115,24 +115,13 @@ namespace Business.Usuarios
         usuario.UserName = request.UserName;
         usuario.Email = email;
         usuario.ComunicadoLista = null;
-        Console.WriteLine("FacultadId: " + request.FacultadId);
-
         usuario.Facultad = facultad;
-        Console.WriteLine("usuario.FacultadId: " + usuario.Facultad.FacultadId);
-
         var result = await this.userManager.CreateAsync(usuario, request.Password);
 
         if (result.Succeeded)
         {
 
-          var user = await this.userManager.FindByEmailAsync(usuario.Email);
-          Console.WriteLine(user.Apellidos);
-          Console.WriteLine(user.Facultad.FacultadId);
-          Console.WriteLine(user.Facultad.Descripcion);
-          user.Facultad = facultad;
-
-          var res = await this.userManager.UpdateAsync(user);
-          Console.WriteLine(user.Facultad.Descripcion);
+          var res = await this.userManager.AddToRoleAsync(usuario, request.Tipo);
           if (res.Succeeded)
             return Unit.Value;
 

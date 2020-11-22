@@ -10,14 +10,14 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace WebAPI.Controllers
 {
-  [AllowAnonymous]
+  
   [Route("api/[controller]")]
   [ApiController]
   public class ComunicadoController : MiControllerBase
   {
     [HttpPost]
     public async Task<ActionResult<Unit>> AltaComunicado(Nuevo.Ejecuta data)
-    {
+    { 
       return await this.Mediator.Send(data);
     }
 
@@ -27,7 +27,7 @@ namespace WebAPI.Controllers
       return await this.Mediator.Send(new Consulta.Ejecuta());
     }
 
-    [HttpGet("id/{id}")]
+    [HttpGet("{id}")]
     public async Task<ActionResult<Comunicado>> GetComunicadoById(Guid id)
     {
       return await this.Mediator.Send(new ConsultaById.Ejecuta { ComunicadoId = id });

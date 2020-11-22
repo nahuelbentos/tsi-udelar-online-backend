@@ -31,6 +31,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.AspNetCore.Http.Features;
+using Perifericos.Mail;
+using Perifericos.Bedelias;
 
 namespace WebAPI
 {
@@ -76,8 +78,8 @@ namespace WebAPI
       {
  
         // Declaro politica para requerir Autenticación y la agrego como filtro.
-        // var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
-        // opt.Filters.Add(new AuthorizeFilter(policy));
+        var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+        opt.Filters.Add(new AuthorizeFilter(policy));
       })
        .AddFluentValidation(config =>
        {
@@ -114,6 +116,8 @@ namespace WebAPI
       });
 
       services.AddScoped<IJwtGenerador, JwtGenerador>();
+      services.AddScoped<IMailGenerator, MailGenerator>();
+      services.AddScoped<IBedeliasGenerator, BedeliasGenerator>();
 
       // Middleware
 

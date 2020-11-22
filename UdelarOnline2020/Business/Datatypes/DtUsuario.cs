@@ -23,5 +23,6 @@ namespace Business.Datatypes
     public string UserName { get; set; }
     public string Tipo { get; set; }
     public DtFacultad Facultad { get; set; }
+    public string Rol { get; set; }
   }
 }

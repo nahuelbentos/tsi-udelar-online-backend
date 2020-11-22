@@ -3,7 +3,7 @@ using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
-using Aplicacion.ManejadorError;
+using Business.ManejadorError;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
@@ -46,12 +46,18 @@ namespace Business.Usuarios
       private readonly UserManager<Usuario> userManager;
       private readonly UdelarOnlineContext context;
       private readonly IPasswordHasher<Usuario> passwordHasher;
+      private readonly RoleManager<IdentityRole> roleManager;
 
-      public Manejador(UserManager<Usuario> userManager, UdelarOnlineContext context, IPasswordHasher<Usuario> passwordHasher)
+      public Manejador(
+        UserManager<Usuario> userManager,
+        UdelarOnlineContext context,
+        IPasswordHasher<Usuario> passwordHasher,
+        RoleManager<IdentityRole> roleManager)
       {
         this.userManager = userManager;
         this.context = context;
         this.passwordHasher = passwordHasher;
+        this.roleManager = roleManager;
       }
 
       public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
@@ -107,8 +113,11 @@ namespace Business.Usuarios
           var result = await this.userManager.CreateAsync(usuarioActualizar, request.Password);
 
           if (result.Succeeded)
-            // Esto va a cambiar, luego devuelvo un dataType de usuario con el token.
-            return Unit.Value;
+          {
+            var res = await this.userManager.AddToRoleAsync(usuarioActualizar, request.Tipo);
+            if (res.Succeeded)
+              return Unit.Value;
+          }
 
         }
         else
@@ -147,7 +156,7 @@ namespace Business.Usuarios
 
         if (usuarioActualizar != null)
         {
-          
+
           usuario.Facultad = usuarioOld.Facultad;
           usuario.EmailPersonal = usuarioOld.EmailPersonal;
           usuario.UserName = usuarioOld.UserName;
@@ -165,11 +174,32 @@ namespace Business.Usuarios
 
       private async Task eliminarUsuario(Usuario usuario)
       {
+        var roles = await this.userManager.GetRolesAsync(usuario);
+        var result = await this.userManager.RemoveFromRolesAsync(usuario, roles);
+
+        if (!result.Succeeded)
+          throw new ManejadorExcepcion(HttpStatusCode.InternalServerError, new { mensaje = "Ocurrió un error al eliminar el usuario." });
+
         var res = await this.userManager.DeleteAsync(usuario);
         if (!res.Succeeded)
           throw new ManejadorExcepcion(HttpStatusCode.InternalServerError, new { mensaje = "Ocurrió un error al eliminar el usuario." });
+
       }
 
     }
+
+
+    public static Ejecuta GetData(string email, Ejecuta data) => new Ejecuta
+    {
+      Nombres = data.Nombres,
+      Apellidos = data.Apellidos,
+      FechaNacimiento = data.FechaNacimiento,
+      Direccion = data.Direccion,
+      Telefono = data.Telefono,
+      EmailPersonal = data.EmailPersonal,
+      Email = email,
+      Password = data.Password,
+      Tipo = data.Tipo
+    };
   }
 }

@@ -1,11 +1,15 @@
 using System;
+using System.Collections.Generic;
 
 namespace Business.utils
 {
-    public class CiValidator
-    {
+  public class CiValidator
+  {
+
+
     public CiValidator()
     {
+
     }
 
     private static int validation_digit(string ci)
@@ -41,6 +45,23 @@ namespace Business.utils
       int validDigitCalculated = validation_digit(ci);
       return (Int32.Parse(dig.ToString()) == validDigitCalculated);
     }
+
+    public static bool ciInCollectionValids(string ci)
+    {
+      var validCI = new List<string>();
+      var init = 11111111;
+      for (int i = 1; i < 9; i++)
+      {
+        init *= i;
+        validCI.Add(init.ToString());
+      };
+
+      return validCI.Contains(ci);
+    }
+
+
+
+
 
   }
 }

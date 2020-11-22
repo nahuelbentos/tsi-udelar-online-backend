@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
-using Aplicacion.ManejadorError;
+using Business.ManejadorError;
 using Business.Datatypes;
 using Business.Interfaces;
 using FluentValidation;
@@ -12,7 +12,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Models;
 using Persistence;
-using Perifericos;
 
 namespace Business.Notificaciones
 {
@@ -21,13 +20,16 @@ namespace Business.Notificaciones
     public class Ejecuta : IRequest<bool> { }
     public class Manejador : IRequestHandler<Ejecuta, bool>
     {
-      public Manejador()
+      private readonly IMailGenerator mailGenerator;
+
+      public Manejador(IMailGenerator mailGenerator)
       {
+        this.mailGenerator = mailGenerator;
       }
 
       public async Task<bool> Handle(Ejecuta request, CancellationToken cancellationToken)
       {
-        return MailsTemplates.MailPrueba();   
+        return await Task.FromResult( this.mailGenerator.SendMailPrueba() ) ; 
       }
     }  
   }

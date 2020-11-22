@@ -32,6 +32,8 @@ namespace Persistence
       modelBuilder.Entity<CursoSeccionMaterial>().HasKey(cursoSeccionMaterial => new { cursoSeccionMaterial.CursoId, cursoSeccionMaterial.SeccionId, cursoSeccionMaterial.MaterialId });
       modelBuilder.Entity<CursoSeccionActividad>().HasKey(cursoSeccionActividad => new { cursoSeccionActividad.CursoId, cursoSeccionActividad.SeccionId, cursoSeccionActividad.ActividadId });
       modelBuilder.Entity<CursoSeccionForo>().HasKey(cursoSeccionForo => new { cursoSeccionForo.CursoId, cursoSeccionForo.SeccionId, cursoSeccionForo.ForoId });
+      
+      modelBuilder.Entity<AlumnoPruebaOnline>().HasKey(alumnoPruebaOnline => new { alumnoPruebaOnline.AlumnoId, alumnoPruebaOnline.PruebaOnlineId });
 
 
     }
@@ -81,6 +83,10 @@ namespace Persistence
     public DbSet<CursoSeccionForo> CursoSeccionForo { get; set; }
     public DbSet<CursoSeccionMaterial> CursoSeccionMaterial { get; set; }
     public DbSet<CursoSeccionActividad> CursoSeccionActividad { get; set; }
+
+    public DbSet<AlumnoPruebaOnline> AlumnoPruebaOnline { get; set; }
+    public DbSet<PruebaOnline> PruebaOnline { get; set; }
+    public DbSet<PreguntaRespuesta> PreguntaRespuesta { get; set; }
 
   }
 }

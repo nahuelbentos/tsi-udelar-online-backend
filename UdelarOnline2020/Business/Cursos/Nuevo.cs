@@ -3,7 +3,7 @@ using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Aplicacion.ManejadorError;
+using Business.ManejadorError;
 using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -75,7 +75,8 @@ namespace Business.Cursos
           Modalidad = request.ModalidadCurso,
           RequiereMatriculacion = request.RequiereMatriculacion,
           SalaVirtual = request.SalaVirtual,
-          TemplateCurso = templateCurso
+          TemplateCurso = templateCurso,
+          ActaCerrada = false 
         };
 
         this.context.Curso.Add(curso);

@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
-using Aplicacion.ManejadorError;
+using Business.ManejadorError;
 using Newtonsoft.Json;
 
 namespace WebAPI.Middleware

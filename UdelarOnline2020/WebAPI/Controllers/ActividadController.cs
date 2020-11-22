@@ -9,7 +9,7 @@ using Models;
 
 namespace WebAPI.Controllers
 {
-    [AllowAnonymous]
+    
     [Route("api/[controller]")]
     [ApiController]
     public class ActividadController : MiControllerBase

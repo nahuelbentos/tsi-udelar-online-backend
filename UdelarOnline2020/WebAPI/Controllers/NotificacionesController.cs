@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
 {
-  [AllowAnonymous]
+  
   public class NotificacionesController : MiControllerBase
   {
     [HttpPost("sendMail")]
