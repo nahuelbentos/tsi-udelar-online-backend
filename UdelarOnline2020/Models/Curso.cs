@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Models
 {
@@ -15,7 +16,9 @@ namespace Models
     public string SalaVirtual { get; set; }
 
 
+    [AllowNull]
     public TemplateCurso TemplateCurso { get; set; }
+    public bool ActaCerrada { get; set; }
 
 
   }

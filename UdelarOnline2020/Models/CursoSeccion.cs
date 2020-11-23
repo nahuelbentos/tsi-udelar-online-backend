@@ -5,6 +5,7 @@ namespace Models
 {
   public class CursoSeccion
   {
+    public Guid CursoSeccionId { get; set; }
     public Guid CursoId { get; set; }
     public Curso Curso { get; set; }
     public Guid SeccionId { get; set; }

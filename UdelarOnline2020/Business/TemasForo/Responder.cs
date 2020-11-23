@@ -12,7 +12,7 @@ namespace Business.TemasForo
     public class Responder
     {
         public class Ejecuta : IRequest {
-
+          public Guid TemaForoId {get; set;}
     }
 
     public class EjecutaValidator : AbstractValidator<Ejecuta> {

@@ -19,5 +19,7 @@ namespace Models
     public string ColorCodigo { get; set; } 
 
     public ICollection<Usuario> UsuarioLista { get; set; }
+
+    public ICollection<Encuesta> ListaEncuesta { get; set; }
   }
 }

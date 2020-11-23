@@ -29,6 +29,10 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Business.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
+using Microsoft.AspNetCore.Http.Features;
+using Perifericos.Mail;
+using Perifericos.Bedelias;
 
 namespace WebAPI
 {
@@ -46,20 +50,36 @@ namespace WebAPI
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
+      // 200 MB
+      const int maxRequestLimit = 209715200;
 
       services.AddDbContext<UdelarOnlineContext>(opt =>
       {
         opt.UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection"));
       });
 
+      // If using Kestrel
+      services.Configure<KestrelServerOptions>(options =>
+      {
+        options.Limits.MaxRequestBodySize = maxRequestLimit;
+      });
+
+
+      services.Configure<FormOptions>(x =>
+      {
+        x.ValueLengthLimit = maxRequestLimit;
+        x.MultipartBodyLengthLimit = maxRequestLimit;
+        x.MultipartHeadersLengthLimit = maxRequestLimit;
+      });
 
       services.AddMediatR(typeof(Consulta.Manejador).Assembly);
 
       services.AddControllers(opt =>
       {
+ 
         // Declaro politica para requerir Autenticación y la agrego como filtro.
-        // var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
-        // opt.Filters.Add(new AuthorizeFilter(policy));
+        var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+        opt.Filters.Add(new AuthorizeFilter(policy));
       })
        .AddFluentValidation(config =>
        {
@@ -96,6 +116,8 @@ namespace WebAPI
       });
 
       services.AddScoped<IJwtGenerador, JwtGenerador>();
+      services.AddScoped<IMailGenerator, MailGenerator>();
+      services.AddScoped<IBedeliasGenerator, BedeliasGenerator>();
 
       // Middleware
 

@@ -41,6 +41,6 @@ Para probar los WS con tokens hay dos maneras:
   1) Agregar en los headers el token con el siguiente header:
     Authorization: Bearer tokenJWT
   2) Agregar arriba del controller para hacerlo publico
-    [AllowAnonymous]
+      [AllowAnonymous]
 
 */ 

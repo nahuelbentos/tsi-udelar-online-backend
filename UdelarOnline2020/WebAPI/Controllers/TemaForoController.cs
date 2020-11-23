@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace WebAPI.Controllers
 {
 
-  [AllowAnonymous]
+  
   [Route("api/[controller]")]
   [ApiController]
   public class TemaForoController : MiControllerBase
@@ -54,9 +54,10 @@ namespace WebAPI.Controllers
       return await this.Mediator.Send(data);
     }
 
-    // [HttpPost]
-    public async Task<ActionResult<Unit>> Bloquear(Bloquear.Ejecuta data)
+    [HttpPost("{id}")]
+    public async Task<ActionResult<Unit>> Bloquear(Guid id, Bloquear.Ejecuta data)
     {
+      data.MensajeId = id;
       return await this.Mediator.Send(data);
     }
 
