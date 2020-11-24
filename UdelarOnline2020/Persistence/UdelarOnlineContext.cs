@@ -85,6 +85,7 @@ namespace Persistence
     public DbSet<CursoSeccionActividad> CursoSeccionActividad { get; set; }
 
     public DbSet<AlumnoPruebaOnline> AlumnoPruebaOnline { get; set; }
+    public DbSet<RespuestaPrueba> RespuestaPrueba { get; set; }
     public DbSet<PruebaOnline> PruebaOnline { get; set; }
     public DbSet<PreguntaRespuesta> PreguntaRespuesta { get; set; }
 
