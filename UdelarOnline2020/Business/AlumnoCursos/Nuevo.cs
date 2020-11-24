@@ -33,6 +33,7 @@ namespace Business.AlumnoCursos
       {
         RuleFor(ac => ac.AlumnoId).NotEmpty().WithMessage("AlumnoId es requerido."); 
         RuleFor(ac => ac.CursoId).NotEmpty().WithMessage("CursoId es requerido.");
+        RuleFor(ac => ac.Inscripto).NotEmpty();
       }
     }
 

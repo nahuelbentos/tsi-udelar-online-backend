@@ -64,7 +64,7 @@ namespace Business.AlumnoCursos
         var res = await this.context.SaveChangesAsync();
         if (res < 0)
         {
-            throw new ManejadorExcepcion(HttpStatusCode.InternalServerError, new { mensaje = "Ocurrio un error al editar la respuesta" });
+            throw new ManejadorExcepcion(HttpStatusCode.InternalServerError, new { mensaje = "Ocurrio un error al editar la inscripcion" });
           
         }
         return Unit.Value;
