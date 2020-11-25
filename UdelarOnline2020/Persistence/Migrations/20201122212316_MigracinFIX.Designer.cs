@@ -10,8 +10,8 @@ using Persistence;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(UdelarOnlineContext))]
-    [Migration("20201030221706_AgregoCursoSeccion")]
-    partial class AgregoCursoSeccion
+    [Migration("20201122212316_MigracinFIX")]
+    partial class MigracinFIX
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -164,6 +164,9 @@ namespace Persistence.Migrations
                     b.Property<Guid?>("CursoSeccionSeccionId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Descripcion")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Discriminator")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -173,6 +176,9 @@ namespace Persistence.Migrations
 
                     b.Property<DateTime>("FechaRealizada")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Nombre")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ActividadId");
 
@@ -214,6 +220,18 @@ namespace Persistence.Migrations
                     b.Property<string>("AlumnoId1")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<int>("Calificacion")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("FechaActaCerrada")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Feedback")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Inscripto")
+                        .HasColumnType("bit");
+
                     b.HasKey("AlumnoId", "CursoId");
 
                     b.HasIndex("AlumnoId1");
@@ -221,6 +239,41 @@ namespace Persistence.Migrations
                     b.HasIndex("CursoId");
 
                     b.ToTable("AlumnoCurso");
+                });
+
+            modelBuilder.Entity("Models.AlumnoPruebaOnline", b =>
+                {
+                    b.Property<Guid>("AlumnoId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("PruebaOnlineId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("AlumnoId1")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("FechaExpiracion")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("FechaFin")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("FechaInicio")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("Inscripto")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Nota")
+                        .HasColumnType("int");
+
+                    b.HasKey("AlumnoId", "PruebaOnlineId");
+
+                    b.HasIndex("AlumnoId1");
+
+                    b.HasIndex("PruebaOnlineId");
+
+                    b.ToTable("AlumnoPruebaOnline");
                 });
 
             modelBuilder.Entity("Models.AlumnoTrabajo", b =>
@@ -295,12 +348,12 @@ namespace Persistence.Migrations
                     b.Property<string>("Url")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UsuarioId")
+                    b.Property<string>("usuarioId")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("ComunicadoId");
 
-                    b.HasIndex("UsuarioId");
+                    b.HasIndex("usuarioId");
 
                     b.ToTable("Comunicado");
                 });
@@ -372,6 +425,9 @@ namespace Persistence.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("SeccionId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CursoSeccionId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("CursoId", "SeccionId");
@@ -461,16 +517,48 @@ namespace Persistence.Migrations
                     b.ToTable("DocenteTrabajo");
                 });
 
+            modelBuilder.Entity("Models.DtPruebaRespuesta", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<Guid?>("PreguntaRespuestaId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("respuesta")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("PreguntaRespuestaId");
+
+                    b.ToTable("DtPruebaRespuesta");
+                });
+
             modelBuilder.Entity("Models.Facultad", b =>
                 {
                     b.Property<Guid>("FacultadId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("ColorCodigo")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Descripcion")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DominioMail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LogoData")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LogoExtension")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LogoNombre")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nombre")
@@ -515,14 +603,26 @@ namespace Persistence.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<byte[]>("Archivo")
+                    b.Property<byte[]>("ArchivoData")
                         .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("ArchivoExtension")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ArchivoNombre")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid?>("CursoSeccionCursoId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid?>("CursoSeccionSeccionId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Descripcion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nombre")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("MaterialId");
 
@@ -562,6 +662,53 @@ namespace Persistence.Migrations
                     b.HasDiscriminator<string>("Discriminator").HasValue("Mensaje");
                 });
 
+            modelBuilder.Entity("Models.Pregunta", b =>
+                {
+                    b.Property<Guid>("PreguntaId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("EncuestaId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Texto")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("PreguntaId");
+
+                    b.HasIndex("EncuestaId");
+
+                    b.ToTable("Pregunta");
+                });
+
+            modelBuilder.Entity("Models.PreguntaRespuesta", b =>
+                {
+                    b.Property<Guid>("PreguntaRespuestaId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Pregunta")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("PruebaOnlineActividadId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Puntos")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RespuestaCorrecta")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Resta")
+                        .HasColumnType("bit");
+
+                    b.HasKey("PreguntaRespuestaId");
+
+                    b.HasIndex("PruebaOnlineActividadId");
+
+                    b.ToTable("PreguntaRespuesta");
+                });
+
             modelBuilder.Entity("Models.Respuesta", b =>
                 {
                     b.Property<Guid>("RespuestaId")
@@ -571,17 +718,20 @@ namespace Persistence.Migrations
                     b.Property<string>("AlumnoId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<Guid?>("EncuestaActividadId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<DateTime>("FechaRealizada")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Mensaje")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("PreguntaId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("RespuestaId");
 
                     b.HasIndex("AlumnoId");
 
-                    b.HasIndex("EncuestaActividadId");
+                    b.HasIndex("PreguntaId");
 
                     b.ToTable("Respuesta");
                 });
@@ -614,6 +764,15 @@ namespace Persistence.Migrations
                     b.Property<Guid>("TemaForoId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<byte[]>("ArchivoData")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("ArchivoExtension")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ArchivoNombre")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Asunto")
                         .HasColumnType("nvarchar(max)");
@@ -662,6 +821,9 @@ namespace Persistence.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("SeccionId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("TemplateCursoSeccionId")
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("TemplateCursoId", "SeccionId");
@@ -832,8 +994,14 @@ namespace Persistence.Migrations
                 {
                     b.HasBaseType("Models.Actividad");
 
-                    b.Property<byte[]>("Archivo")
+                    b.Property<byte[]>("ArchivoData")
                         .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("ArchivoExtension")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ArchivoNombre")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue("ClaseDictada");
                 });
@@ -842,25 +1010,51 @@ namespace Persistence.Migrations
                 {
                     b.HasBaseType("Models.Actividad");
 
-                    b.Property<string>("Descripcion")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("EsAdministrador")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Nombre")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid>("FacultadId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasIndex("FacultadId");
 
                     b.HasDiscriminator().HasValue("Encuesta");
+                });
+
+            modelBuilder.Entity("Models.PruebaOnline", b =>
+                {
+                    b.HasBaseType("Models.Actividad");
+
+                    b.Property<bool>("Activa")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("Fecha")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("MinutosExpiracion")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Url")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasDiscriminator().HasValue("PruebaOnline");
                 });
 
             modelBuilder.Entity("Models.Trabajo", b =>
                 {
                     b.HasBaseType("Models.Actividad");
 
-                    b.Property<byte[]>("Archivo")
-                        .HasColumnName("Trabajo_Archivo")
+                    b.Property<byte[]>("ArchivoData")
+                        .HasColumnName("Trabajo_ArchivoData")
                         .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("ArchivoExtension")
+                        .HasColumnName("Trabajo_ArchivoExtension")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ArchivoNombre")
+                        .HasColumnName("Trabajo_ArchivoNombre")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Calificacion")
                         .HasColumnType("int");
@@ -1016,6 +1210,19 @@ namespace Persistence.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Models.AlumnoPruebaOnline", b =>
+                {
+                    b.HasOne("Models.Alumno", "Alumno")
+                        .WithMany()
+                        .HasForeignKey("AlumnoId1");
+
+                    b.HasOne("Models.PruebaOnline", "PruebaOnline")
+                        .WithMany()
+                        .HasForeignKey("PruebaOnlineId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Models.AlumnoTrabajo", b =>
                 {
                     b.HasOne("Models.Alumno", "Alumno")
@@ -1055,9 +1262,9 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Models.Comunicado", b =>
                 {
-                    b.HasOne("Models.Usuario", null)
+                    b.HasOne("Models.Usuario", "usuario")
                         .WithMany("ComunicadoLista")
-                        .HasForeignKey("UsuarioId");
+                        .HasForeignKey("usuarioId");
                 });
 
             modelBuilder.Entity("Models.ComunicadoCurso", b =>
@@ -1188,6 +1395,13 @@ namespace Persistence.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Models.DtPruebaRespuesta", b =>
+                {
+                    b.HasOne("Models.PreguntaRespuesta", null)
+                        .WithMany("Respuestas")
+                        .HasForeignKey("PreguntaRespuestaId");
+                });
+
             modelBuilder.Entity("Models.Foro", b =>
                 {
                     b.HasOne("Models.CursoSeccion", null)
@@ -1209,15 +1423,33 @@ namespace Persistence.Migrations
                         .HasForeignKey("EmisorId1");
                 });
 
+            modelBuilder.Entity("Models.Pregunta", b =>
+                {
+                    b.HasOne("Models.Encuesta", "Encuesta")
+                        .WithMany("PreguntaLista")
+                        .HasForeignKey("EncuestaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Models.PreguntaRespuesta", b =>
+                {
+                    b.HasOne("Models.PruebaOnline", null)
+                        .WithMany("ListaPreguntaRespuesta")
+                        .HasForeignKey("PruebaOnlineActividadId");
+                });
+
             modelBuilder.Entity("Models.Respuesta", b =>
                 {
                     b.HasOne("Models.Alumno", "Alumno")
                         .WithMany()
                         .HasForeignKey("AlumnoId");
 
-                    b.HasOne("Models.Encuesta", "Encuesta")
-                        .WithMany()
-                        .HasForeignKey("EncuestaActividadId");
+                    b.HasOne("Models.Pregunta", "Pregunta")
+                        .WithMany("RespuestaLista")
+                        .HasForeignKey("PreguntaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Models.TemaForo", b =>
@@ -1290,6 +1522,15 @@ namespace Persistence.Migrations
                     b.HasOne("Models.Usuario", "UsuarioRecibe")
                         .WithMany()
                         .HasForeignKey("UsuarioRecibeId");
+                });
+
+            modelBuilder.Entity("Models.Encuesta", b =>
+                {
+                    b.HasOne("Models.Facultad", "Facultad")
+                        .WithMany("ListaEncuesta")
+                        .HasForeignKey("FacultadId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Models.MensajeDirecto", b =>

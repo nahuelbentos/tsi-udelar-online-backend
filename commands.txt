@@ -44,3 +44,38 @@ Para probar los WS con tokens hay dos maneras:
       [AllowAnonymous]
 
 */ 
+
+
+
+// Codigo del profe, para analizar.
+/* Interceptor */
+intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+    this.blockUI.start();
+    if (this.stateService.authorization) {
+      request = request.clone({
+        headers: request.headers.set('authorization', this.stateService.authorization)
+      });
+    }
+    return next.handle(request)
+      .pipe(map((event: HttpEvent<any>) => {
+        this.blockUI.stop();
+        if (event instanceof HttpResponse) {
+          if (event.body.meta.code !== 0) {
+       
+.pipe(map((event: HttpEvent<any>) => {
+        this.blockUI.stop();
+        if (event instanceof HttpResponse) {
+          if (event.body.meta.code !== 0) {
+            this.toast.error(event.body.meta.message);
+          } else if (event.body.msg){
+            this.toast.success(event.body.meta.message);
+          }
+        }
+        return event;
+      }),
+      catchError(err => {
+        if (err.status === 401){
+          this.toast.error(err.error);
+          this.router.navigate(['/login']
+
+/* Interceptor */

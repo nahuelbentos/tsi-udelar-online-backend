@@ -7,6 +7,7 @@ namespace Business.Datatypes
   public class DtUsuario
   {
 
+    public string Id { get; set; }
     public string Nombres { get; set; }
     public string Apellidos { get; set; }
     public string CI { get; set; }

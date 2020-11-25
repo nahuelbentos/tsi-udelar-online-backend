@@ -45,6 +45,8 @@ namespace Business.Carreras
             {
                 //No se controla si la facultad es vacia, puede arrojar excepcion
                 Facultad facultad = await this.context.Facultad.FindAsync(request.FacultadId);
+                if(facultad == null)
+                    throw new ManejadorExcepcion(HttpStatusCode.InternalServerError, new { mensaje = "No existe la facultad ingresada." });
                 var carrera = new Carrera
                 {
                     CarreraId = Guid.NewGuid(),

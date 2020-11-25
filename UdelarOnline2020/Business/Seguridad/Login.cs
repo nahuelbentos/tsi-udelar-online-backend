@@ -54,25 +54,26 @@ namespace Business.Seguridad
 
         if (usuario == null)
         {
-          throw new ManejadorExcepcion(HttpStatusCode.Unauthorized, new { mensaje = "El usuario no existe en el sistema." });
+          throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "El usuario no existe en el sistema." });
         }
 
 
 
         var resultado = await signInManager.CheckPasswordSignInAsync(usuario, request.Password, false);
-
+        
+        Console.WriteLine(resultado.Succeeded);
 
         if (resultado.Succeeded)
         {
           var usuarioContext = await this.context.Usuario.Include(u => u.Facultad).Include(u => u.ComunicadoLista).FirstOrDefaultAsync(u => u.Id == usuario.Id);
+          
           var listaRoles = await this.userManager.GetRolesAsync(usuario);
           var roles = new List<string>(listaRoles);
           var facultad = await this.context.Facultad.FindAsync(usuarioContext.Facultad.FacultadId);
-
           // La idea es que solo haya un único rol por usuario.
           var rol = "";
           if (roles.Count > 0)
-            rol = roles[0];
+            rol = roles[0]; 
 
           var dtFacultad = new DtFacultad
           {
@@ -85,6 +86,7 @@ namespace Business.Seguridad
 
           return new DtUsuario
           {
+            Id = usuario.Id,
             Nombres = usuario.Nombres,
             Apellidos = usuario.Apellidos,
             emailPersonal = usuario.EmailPersonal,
@@ -98,7 +100,7 @@ namespace Business.Seguridad
           };
         }
 
-        throw new ManejadorExcepcion(HttpStatusCode.Unauthorized, new { mensaje = "Ocurrio un error al loguearse: " + resultado.ToString() });
+        throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "Credenciales de acceso incorrectas. "  });
       }
     }
   }

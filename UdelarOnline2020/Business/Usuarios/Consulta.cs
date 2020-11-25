@@ -54,6 +54,7 @@ namespace Business.Usuarios
            
           var dtUsuario = new DtUsuario
           {
+            Id = usuario.Id,
             Nombres = usuario.Nombres,
             Apellidos = usuario.Apellidos,
             CI = usuario.CI,
