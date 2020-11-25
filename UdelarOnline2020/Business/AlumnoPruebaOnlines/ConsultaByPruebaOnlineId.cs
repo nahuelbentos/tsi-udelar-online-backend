@@ -31,7 +31,7 @@ namespace Business.AlumnoPruebaOnlines
 
             public async Task<List<AlumnoPruebaOnline>> Handle(Ejecuta request, CancellationToken cancellationToken)
             {
-                var ap = await this.context.AlumnoPruebaOnline.Include(ap => ap.Alumno).Include(ap => ap.PruebaOnline).Where(ap => ap.PruebaOnlineId == request.PruebaOnlineId).ToListAsync();
+                var ap = await this.context.AlumnoPruebaOnline.Include(ap => ap.Alumno).Include(ap => ap.PruebaOnline).Include(ap => ap.ListaRespuestas).Where(ap => ap.PruebaOnlineId == request.PruebaOnlineId).ToListAsync();
                 if (!ap.Any())
                 {
                     throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "No se encontraron pruebas relacionadas a la PruebaOnlineId." });

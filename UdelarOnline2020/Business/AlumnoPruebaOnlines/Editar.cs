@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading;
@@ -24,6 +25,8 @@ namespace Business.AlumnoPruebaOnlines
             public DateTime? FechaExpiracion { get; set; }
             public int? Nota { get; set; }
             public bool? Inscripto { get; set; }
+
+            public List<RespuestaPrueba> Respuestas { get; set; }
         }
 
         public class EjecutaValidator : AbstractValidator<Ejecuta>
@@ -74,6 +77,8 @@ namespace Business.AlumnoPruebaOnlines
                 control.FechaFin = request.FechaFin.GetValueOrDefault();
                 control.Nota = request.Nota.GetValueOrDefault();
                 control.Inscripto = request.Inscripto.GetValueOrDefault();
+                control.ListaRespuestas = request.Respuestas;
+
             
                 context.AlumnoPruebaOnline.Update(control);
                 var res = await this.context.SaveChangesAsync();
