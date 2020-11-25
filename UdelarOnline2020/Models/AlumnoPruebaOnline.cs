@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Models
 {
@@ -17,6 +18,9 @@ namespace Models
     public DateTime FechaExpiracion { get; set; }
     public int Nota { get; set; }
     public bool Inscripto { get; set; }
+
+    public List<RespuestaPrueba> ListaRespuestas { get; set; }   
+    
 
 
   }
