@@ -66,9 +66,9 @@ namespace Business.CursosSeccion
         }
 
         
-        cursoSeccion.CursoId = request.CursoId;
+        cursoSeccion.CursoId = curso.CursoId;
         cursoSeccion.Curso = curso ?? cursoSeccion.Curso;
-        cursoSeccion.SeccionId = request.SeccionId;
+        cursoSeccion.SeccionId = seccion.SeccionId;
         cursoSeccion.Seccion = seccion;
 
 

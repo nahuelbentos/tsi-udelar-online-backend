@@ -74,9 +74,9 @@ namespace Business.AlumnoPruebaOnlines
                 
                 //hago el edit de los campos que se van a editar
                 control.FechaExpiracion = request.FechaExpiracion.GetValueOrDefault();
-                control.FechaFin = request.FechaFin.GetValueOrDefault();
-                control.Nota = request.Nota.GetValueOrDefault();
-                control.Inscripto = request.Inscripto.GetValueOrDefault();
+                control.FechaFin = request.FechaFin ?? control.FechaFin;
+                control.Nota = request.Nota ?? control.Nota;
+                control.Inscripto = request.Inscripto ?? control.Inscripto;
                 control.ListaRespuestas = request.Respuestas;
 
             

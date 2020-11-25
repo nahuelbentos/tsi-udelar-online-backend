@@ -56,9 +56,9 @@ namespace Business.AlumnoCursos
         }
 
         ac.Calificacion = request.Calificacion ?? ac.Calificacion;
-        ac.FechaActaCerrada = request.FechaActaCerrada.GetValueOrDefault();
+        ac.FechaActaCerrada = request.FechaActaCerrada ?? ac.FechaActaCerrada;
         ac.Feedback = request.Feedback ?? ac.Feedback;
-        ac.Inscripto = request.Inscripto.GetValueOrDefault();
+        ac.Inscripto = request.Inscripto ?? ac.Inscripto;
 
 
         var res = await this.context.SaveChangesAsync();
