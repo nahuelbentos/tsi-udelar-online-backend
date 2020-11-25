@@ -117,7 +117,7 @@ namespace Business.Usuarios
         usuario.ComunicadoLista = null;
         usuario.Facultad = facultad;
         var result = await this.userManager.CreateAsync(usuario, request.Password);
-
+        
         if (result.Succeeded)
         {
 
@@ -126,9 +126,13 @@ namespace Business.Usuarios
             return Unit.Value;
 
         }
+        var describer = new IdentityErrorDescriber();
+        
         // Esto va a cambiar, luego devuelvo un dataType de usuario con el token.
-
-        throw new ManejadorExcepcion(HttpStatusCode.InternalServerError, new { mensaje = "Ocurrió un error, no se pudo dar de alta el usuario" });
+       
+        
+        var mensajeErrores = result.Errors.Select( e => e.Description);
+        throw new ManejadorExcepcion(HttpStatusCode.InternalServerError, new { mensaje = "Ocurrió un error, no se pudo dar de alta el usuario", mensajeErrores });
 
       }
     }

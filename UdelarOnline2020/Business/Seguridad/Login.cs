@@ -54,7 +54,7 @@ namespace Business.Seguridad
 
         if (usuario == null)
         {
-          throw new ManejadorExcepcion(HttpStatusCode.Unauthorized, new { mensaje = "El usuario no existe en el sistema." });
+          throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "El usuario no existe en el sistema." });
         }
 
 
@@ -65,23 +65,15 @@ namespace Business.Seguridad
 
         if (resultado.Succeeded)
         {
-          Console.WriteLine("1");
           var usuarioContext = await this.context.Usuario.Include(u => u.Facultad).Include(u => u.ComunicadoLista).FirstOrDefaultAsync(u => u.Id == usuario.Id);
-          Console.WriteLine("2");
+          
           var listaRoles = await this.userManager.GetRolesAsync(usuario);
-          Console.WriteLine("3");
           var roles = new List<string>(listaRoles);
-          Console.WriteLine("4 ");
-          Console.WriteLine("4 + "+ usuarioContext.Facultad.FacultadId);
           var facultad = await this.context.Facultad.FindAsync(usuarioContext.Facultad.FacultadId);
-          Console.WriteLine("5");
-
           // La idea es que solo haya un único rol por usuario.
           var rol = "";
-          Console.WriteLine("6 + " + roles.Count);
           if (roles.Count > 0)
-            rol = roles[0];
-          Console.WriteLine("7 + " + rol);
+            rol = roles[0]; 
 
           var dtFacultad = new DtFacultad
           {
@@ -94,6 +86,7 @@ namespace Business.Seguridad
 
           return new DtUsuario
           {
+            Id = usuario.Id,
             Nombres = usuario.Nombres,
             Apellidos = usuario.Apellidos,
             emailPersonal = usuario.EmailPersonal,
@@ -107,7 +100,7 @@ namespace Business.Seguridad
           };
         }
 
-        throw new ManejadorExcepcion(HttpStatusCode.Unauthorized, new { mensaje = "Ocurrio un error al loguearse: " + resultado.ToString() });
+        throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "Credenciales de acceso incorrectas. "  });
       }
     }
   }
