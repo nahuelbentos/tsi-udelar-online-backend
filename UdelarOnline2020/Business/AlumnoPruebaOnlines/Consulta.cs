@@ -23,12 +23,12 @@ namespace Business.AlumnoPruebaOnlines
             public async Task<List<AlumnoPruebaOnline>> Handle(Ejecuta request, CancellationToken cancellationToken)
             {
                 //Hay que devolver DataTypes
-                var alumnocursos = await this.context.AlumnoPruebaOnline
-                                                        .Include(ac => ac.Alumno)
-                                                        .Include(ac => ac.PruebaOnline)
-                                                        
+                var alumnopruebaonline = await this.context.AlumnoPruebaOnline
+                                                        .Include(ap => ap.Alumno)
+                                                        .Include(ap => ap.PruebaOnline)
+                                                        .Include(ap => ap.ListaRespuestas)
                                                         .ToListAsync();
-                return alumnocursos;    
+                return alumnopruebaonline;    
             }
         }
     }
