@@ -55,6 +55,7 @@ namespace Business.Usuarios
 
         return new DtUsuario
         {
+          Id = usuario.Id,
           Nombres = usuario.Nombres,
           Apellidos = usuario.Apellidos,
           emailPersonal = usuario.EmailPersonal,
