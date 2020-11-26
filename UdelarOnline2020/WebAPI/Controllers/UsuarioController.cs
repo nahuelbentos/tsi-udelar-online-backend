@@ -28,6 +28,12 @@ namespace WebAPI.Controllers
 
     [HttpGet("id/{id}")]
     public async Task<ActionResult<DtUsuario>> GetUsuarioById(string id) => await this.Mediator.Send(new ConsultaById.Ejecuta { Id = id });
+    
+    [HttpGet("tipo/{tipo}")]
+    public async Task<ActionResult<List<DtUsuario>>> GetUsuariosByTipo(string tipo) => await this.Mediator.Send(new ConsultaByTipo.Ejecuta { Tipo = tipo });
+    
+    [HttpGet("rol/{rol}")]
+    public async Task<ActionResult<List<DtUsuario>>> GetUsuariosByRol(string rol) => await this.Mediator.Send(new ConsultaByRol.Ejecuta { Rol = rol });
   
 
     [HttpGet("email/{email}")]
