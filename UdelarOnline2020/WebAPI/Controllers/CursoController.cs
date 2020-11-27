@@ -20,6 +20,15 @@ namespace WebAPI.Controllers
 
     public async Task<ActionResult<Unit>> AltaCurso(Nuevo.Ejecuta data) => await this.Mediator.Send(data);
 
+    [HttpGet("usuario/{id}")]
+    public async Task<ActionResult<List<Curso>>> GetCursosByUsuario(Guid id) => await this.Mediator.Send(new ConsultaByUsuario.Ejecuta{ Id = id });
+    
+    [HttpGet("facultad/{id}")]
+    public async Task<ActionResult<List<Curso>>> GetCursosByFacultad(Guid id ) => await this.Mediator.Send(new ConsultaByFacultad.Ejecuta{ Id = id });
+
+    [HttpGet("carrera/{id}")]
+    public async Task<ActionResult<List<Curso>>> GetCursosByCarrera(Guid id ) => await this.Mediator.Send(new ConsultaByCarrera.Ejecuta{ Id = id });
+    
     [HttpGet]
     public async Task<ActionResult<List<Curso>>> GetCursos() => await this.Mediator.Send(new Consulta.Ejecuta());
 

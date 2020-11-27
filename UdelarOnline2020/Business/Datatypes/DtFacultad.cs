@@ -5,6 +5,7 @@ namespace Business.Datatypes
   public class DtFacultad
   {
 
+    public Guid Id { get; set; }
     public Guid FacultadId { get; set; }
     public string Nombre { get; set; }
     public string Descripcion { get; set; }

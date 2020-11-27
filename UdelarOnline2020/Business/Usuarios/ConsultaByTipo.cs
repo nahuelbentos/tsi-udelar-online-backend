@@ -64,7 +64,9 @@ namespace Business.Usuarios
             Descripcion = facultad.Descripcion,
             DominioMail = facultad.DominioMail,
             UrlAcceso = facultad.UrlAcceso,
-            FacultadId = facultad.FacultadId
+            FacultadId = facultad.FacultadId,
+            ColorCodigo = facultad.ColorCodigo
+
           };
 
           dtUsuarios.Add(new DtUsuario
