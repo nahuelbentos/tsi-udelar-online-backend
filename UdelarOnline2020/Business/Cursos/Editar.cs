@@ -20,10 +20,10 @@ namespace Business.Cursos
       public Guid? CursoId { get; set; }
       public string Nombre { get; set; }
       public string Descripcion { get; set; }
-      public ModalidadEnum? ModalidadCurso { get; set; }
+      public ModalidadEnum? Modalidad { get; set; }
       public bool? RequiereMatriculacion { get; set; }
       public string SalaVirtual { get; set; }
-      public Guid? TemplateCursoId { get; set; } 
+      public Guid? TemplateCursoId { get; set; }
     }
 
 
@@ -32,7 +32,6 @@ namespace Business.Cursos
       public EjecutaValidacion()
       {
         RuleFor(c => c.Nombre).NotEmpty().WithMessage("El nombre es requerido");
-        RuleFor(c => c.ModalidadCurso).NotEmpty().WithMessage("Es requerido enviar ModalidadCurso, incluso si es la misma que la anterior.");
       }
     }
 
@@ -51,13 +50,14 @@ namespace Business.Cursos
 
         if (curso == null)
           throw new ManejadorExcepcion(HttpStatusCode.NotFound, new { mensaje = "El curso no existe" });
-        
+
         TemplateCurso templateCurso = null;
         if (request.TemplateCursoId != null)
         {
-
+          Console.WriteLine("1) tc:: " + request.TemplateCursoId);
           if (!(request.TemplateCursoId.Equals(Guid.Empty) || request.TemplateCursoId.Equals(String.Empty)))
           {
+            Console.WriteLine("2) tc:: " + request.TemplateCursoId);
 
 
             templateCurso = await this.context.TemplateCurso.Where(tc => tc.TemplateCursoId == request.TemplateCursoId).FirstOrDefaultAsync();
@@ -73,15 +73,22 @@ namespace Business.Cursos
 
           }
 
+
+        }
+        else
+        {
+          
+          curso.TemplateCurso = null;
+          curso.TemplateCursoId = null;
         }
 
         curso.Nombre = request.Nombre ?? curso.Nombre;
         curso.Descripcion = request.Descripcion ?? curso.Descripcion;
-        curso.Modalidad = request.ModalidadCurso ?? curso.Modalidad;
+        curso.Modalidad = request.Modalidad ?? curso.Modalidad;
         curso.RequiereMatriculacion = request.RequiereMatriculacion ?? curso.RequiereMatriculacion;
         curso.SalaVirtual = request.SalaVirtual ?? curso.SalaVirtual;
 
-
+        Console.WriteLine("curso.template :: " + curso.TemplateCurso);
         var res = await this.context.SaveChangesAsync();
 
 

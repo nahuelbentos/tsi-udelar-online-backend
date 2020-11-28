@@ -43,7 +43,7 @@ namespace WebAPI.Controllers
       return await this.Mediator.Send(data);
     }
 
-    [HttpPut("asignar-docente")]
+    [HttpPost("docente")]
     public async Task<ActionResult<Unit>> AsignarDocente(AsignarDocente.Ejecuta data) =>  await this.Mediator.Send(data);
 
     [HttpDelete("{id}")]

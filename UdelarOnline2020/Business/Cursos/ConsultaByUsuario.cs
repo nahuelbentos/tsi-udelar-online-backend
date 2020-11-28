@@ -35,10 +35,19 @@ namespace Business.Cursos
         if (usuario == null)
           throw new ManejadorExcepcion(HttpStatusCode.NotFound, new { mensaje = "No existe un usuario con ese Id." });
 
-        var cursos = await this.context.UsuarioCurso.Include(uc => uc.Curso)
-                                                    .Where(u => u.UsuarioId == request.Id)
+        List<Curso> cursos = new List<Curso>();
+
+        if( usuario is Alumno)
+            cursos = await this.context.AlumnoCurso.Include(uc => uc.Curso)
+                                                    .Where(u => u.AlumnoId == request.Id)
                                                     .Select(c => c.Curso)
                                                     .ToListAsync();
+        else
+          cursos = await this.context.UsuarioCurso.Include(uc => uc.Curso)
+                                                  .Where(u => u.UsuarioId == request.Id)
+                                                  .Select(c => c.Curso)
+                                                  .ToListAsync();
+
 
         return cursos;
 
