@@ -50,11 +50,13 @@ namespace Business.Usuarios
           Descripcion = facultad.Descripcion,
           DominioMail = facultad.DominioMail,
           UrlAcceso = facultad.UrlAcceso,
-          FacultadId = facultad.FacultadId
+          FacultadId = facultad.FacultadId,
+          ColorCodigo = facultad.ColorCodigo
         };
 
         return new DtUsuario
         {
+          Id = usuario.Id,
           Nombres = usuario.Nombres,
           Apellidos = usuario.Apellidos,
           emailPersonal = usuario.EmailPersonal,

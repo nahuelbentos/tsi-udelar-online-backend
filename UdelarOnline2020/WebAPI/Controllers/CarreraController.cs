@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Business.Carreras;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 
@@ -15,6 +16,7 @@ namespace WebAPI.Controllers
     public class CarreraController : MiControllerBase
     {
         [HttpPost]
+ 
         public async Task<ActionResult<Unit>> AltaCarrera(Nuevo.Ejecuta data)
         {
             return await this.Mediator.Send(data);
@@ -39,17 +41,14 @@ namespace WebAPI.Controllers
             return await this.Mediator.Send(data);
         }
 
-        [HttpPost("asignar-curso")]
+        [HttpPost("curso")]
         public async Task<ActionResult<Unit>> AsignarCurso(AgregarCurso.Ejecuta data)
         {
             return await this.Mediator.Send(data);
         }
 
-        [HttpDelete("quitar-curso")]
-        public async Task<ActionResult<Unit>> QuitarCurso(QuitarCurso.Ejecuta data)
-        {
-            return await this.Mediator.Send(data);
-        }
+        [HttpDelete("curso/{carreraId}/{cursoId}")]
+        public async Task<ActionResult<Unit>> QuitarCurso(Guid carreraId, Guid cursoId ) => await this.Mediator.Send( new QuitarCurso.Ejecuta{ CursoId = cursoId, CarreraId = carreraId });
 
         [HttpDelete("{id}")]
         public async Task<ActionResult<Unit>> EliminarCarrera(Guid Id)
