@@ -31,11 +31,11 @@ namespace Business.Cursos
 
       public async Task<List<Curso>> Handle(Ejecuta request, CancellationToken cancellationToken)
       {
-        var facultad = await this.context.Facultad.Include(f => f.CarreraLista).FirstOrDefaultAsync(f => f.FacultadId == request.Id);
+        var facultad = await this.context.Facultad.Include(f => f.CarreraLista).Where(f => f.FacultadId == request.Id).FirstOrDefaultAsync();
 
         if (facultad == null)
           throw new ManejadorExcepcion(HttpStatusCode.NotFound, new { mensaje = "No existe una facultad con el Id ingresado" });
-
+          
         List<Curso> cursos = new List<Curso>();
         foreach (var carrera in facultad.CarreraLista)
         {
@@ -43,7 +43,7 @@ namespace Business.Cursos
                                               .Where(cc => cc.CarreraId == carrera.CarreraId)
                                               .Select(c => c.Curso)
                                               .ToListAsync();
-          cursos.Concat(auxCursos);
+          cursos = cursos.Concat(auxCursos).ToList();
         }
 
         return cursos;
