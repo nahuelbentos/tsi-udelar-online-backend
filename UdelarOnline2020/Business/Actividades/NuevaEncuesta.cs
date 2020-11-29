@@ -16,7 +16,6 @@ namespace Business.Actividades
     {
         public class Ejecuta : IRequest
         {
-            public Guid ActividadId { get; set; }
             public DateTime FechaRealizada { get; set; }
             public DateTime FechaFinalizada { get; set; }
             public string Nombre { get; set; }
@@ -71,7 +70,6 @@ namespace Business.Actividades
                         Encuesta = e,
                         EncuestaId = e.ActividadId
                     };
-                    this.context.Pregunta.Add(p);
                     e.PreguntaLista.Add(p);
                 }
 
