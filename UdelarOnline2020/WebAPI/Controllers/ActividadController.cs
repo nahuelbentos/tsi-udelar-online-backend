@@ -15,34 +15,21 @@ namespace WebAPI.Controllers
     public class ActividadController : MiControllerBase
     {
         [HttpPost]
-        public async Task<ActionResult<Unit>> AltaActividad(Nuevo.Ejecuta data)
-        {
-            return await this.Mediator.Send(data);
-        }
+        public async Task<ActionResult<Unit>> AltaActividad(Nuevo.Ejecuta data) => await this.Mediator.Send(data);
 
         [HttpPost("encuesta")]
-        public async Task<ActionResult<Unit>> AltaEncuesta(NuevaEncuesta.Ejecuta data)
-        {
-            return await this.Mediator.Send(data);
-        }
+        public async Task<ActionResult<Unit>> AltaEncuesta(NuevaEncuesta.Ejecuta data) => await this.Mediator.Send(data);
 
         [HttpPost("pruebaonline")]
-        public async Task<ActionResult<Unit>> AltaPruebaOnline(NuevaPruebaOnline.Ejecuta data)
-        {
-            return await this.Mediator.Send(data);
-        }
+        public async Task<ActionResult<Unit>> AltaPruebaOnline(NuevaPruebaOnline.Ejecuta data) => await this.Mediator.Send(data);
 
         [HttpGet]
-        public async Task<ActionResult<List<Actividad>>> GetActividades()
-        {
-            return await this.Mediator.Send(new Consulta.Ejecuta());
-        }
+        public async Task<ActionResult<List<Actividad>>> GetActividades() => await this.Mediator.Send(new Consulta.Ejecuta());
+        [HttpGet("tipo/{tipo}")]
+        public async Task<ActionResult<List<Actividad>>> GetActividadesByTipo( string tipo) => await this.Mediator.Send(new ConsultaByTipo.Ejecuta{ Tipo = tipo });
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Actividad>> GetActividad(Guid id)
-        {
-            return await this.Mediator.Send(new ConsultaById.Ejecuta { ActividadId = id});
-        }
+        public async Task<ActionResult<Actividad>> GetActividad(Guid id) => await this.Mediator.Send(new ConsultaById.Ejecuta { ActividadId = id});
 
         [HttpPut("{id}")]
         public async Task<ActionResult<Unit>> ModificarActividad(Guid id, Editar.Ejecuta data)
@@ -52,9 +39,6 @@ namespace WebAPI.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Unit>> EliminarActividad(Guid id)
-        {
-            return await this.Mediator.Send(new Eliminar.Ejecuta { ActividadId = id});
-        }
+        public async Task<ActionResult<Unit>> EliminarActividad(Guid id) => await this.Mediator.Send(new Eliminar.Ejecuta { ActividadId = id});
     }
 }
