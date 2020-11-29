@@ -37,18 +37,23 @@ namespace Business.Cursos
 
         List<Curso> cursos = new List<Curso>();
 
-        if( usuario is Alumno)
-            cursos = await this.context.AlumnoCurso.Include(uc => uc.Curso)
-                                                    .Where(u => u.AlumnoId == request.Id)
-                                                    .Select(c => c.Curso)
-                                                    .ToListAsync();
+        if (usuario is Alumno)
+        {
+          cursos = await this.context.AlumnoCurso.Include(uc => uc.Curso)
+                                                  .Where(u => u.AlumnoId == request.Id)
+                                                  .Select(c => c.Curso)
+                                                  .ToListAsync();
+
+        }
         else
+        {
+
           cursos = await this.context.UsuarioCurso.Include(uc => uc.Curso)
                                                   .Where(u => u.UsuarioId == request.Id)
                                                   .Select(c => c.Curso)
                                                   .ToListAsync();
 
-
+        }
         return cursos;
 
 
