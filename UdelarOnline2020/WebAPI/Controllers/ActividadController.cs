@@ -50,9 +50,9 @@ namespace WebAPI.Controllers
     public async Task<ActionResult<Unit>> AltaEncuesta(NuevaEncuesta.Ejecuta data) => await this.Mediator.Send(data);
 
     [HttpPut("encuesta/{id}")]
-    public async Task<ActionResult<Unit>> ModificarEncuesta(Guid id, Editar.Ejecuta data)
+    public async Task<ActionResult<Unit>> ModificarEncuesta(Guid id, EditarEncuesta.Ejecuta data)
     {
-      data.ActividadId = id;
+      data.EncuestaId = id;
       return await this.Mediator.Send(data);
     }
   }
