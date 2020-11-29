@@ -23,7 +23,7 @@ namespace Business.Actividades
             public async Task<List<Actividad>> Handle(Ejecuta request, CancellationToken cancellationToken)
             {
                 //Hay que devolver Datatypes
-                var actividades = await this.context.Actividad.ToListAsync();
+                var actividades = await this.context.Actividad.Include(a => a.Usuario).ToListAsync();
                 return actividades;                                                        
             }
         }

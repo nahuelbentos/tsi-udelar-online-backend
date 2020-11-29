@@ -25,20 +25,11 @@ namespace Business.Actividades
             public List<string> PreguntaLista { get; set; }
             public Guid? FacultadId { get; set; }
 
+            public string UsuarioId { get; set; }
+
 
         }   
-
-        public class EjecutaValidator : AbstractValidator<Ejecuta>
-        {
-        public EjecutaValidator()
-        {
-            RuleFor(a => a.FechaRealizada).NotEmpty();
-            RuleFor(a => a.FechaFinalizada).NotEmpty();
-            RuleFor(a => a.Nombre).NotEmpty();
-            RuleFor(a => a.Descripcion).NotEmpty();
-            RuleFor(a => a.PreguntaLista).NotEmpty();
-        }
-        }
+ 
 
         public class Manejador : IRequestHandler<Ejecuta>
         {
@@ -53,6 +44,13 @@ namespace Business.Actividades
 
             public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
             {
+
+
+                var usuario = await this.context.Usuario.FindAsync(request.UsuarioId);
+
+                if (usuario == null)
+                throw new ManejadorExcepcion(HttpStatusCode.NotFound, new { mensaje = "No existe un usuario con ese Id." });
+
                 Encuesta e = new Encuesta
                 {
                     ActividadId = Guid.NewGuid(),
@@ -61,6 +59,8 @@ namespace Business.Actividades
                     Nombre = request.Nombre,
                     Descripcion = request.Descripcion,
                     EsAdministrador = request.EsAdministrador.GetValueOrDefault(),
+                    Usuario = usuario,
+                    UsuarioId = usuario.Id
                 };              
                 //creo las preguntas
                 foreach (var pregunta in request.PreguntaLista){

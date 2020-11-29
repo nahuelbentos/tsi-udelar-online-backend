@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
@@ -27,8 +28,11 @@ namespace Business.Actividades
             public async Task<Actividad> Handle(Ejecuta request,
                                                 CancellationToken cancellationToken)
             {
+                var actividad = await this.context.Actividad
+                                                    .Include(a => a.Usuario)
+                                                    .Where(a => a.ActividadId == request.ActividadId)
+                                                    .FirstOrDefaultAsync();
                 //Hay que devolver datatypes
-                var actividad = await this.context.Actividad.FirstOrDefaultAsync(a => a.ActividadId == request.ActividadId);
                 if (actividad == null)
                 {
                     throw new ManejadorExcepcion(HttpStatusCode.Forbidden, new { mensaje = "No existe una actividad con el CursoId ingresado" });

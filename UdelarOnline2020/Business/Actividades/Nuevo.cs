@@ -35,6 +35,7 @@ namespace Business.Actividades
       public int MinutosExpiracion { get; set; }
       public bool Activa { get; set; }
 
+      public string UsuarioId { get; set; }
 
     }
     public class Manejador : IRequestHandler<Ejecuta>
@@ -50,6 +51,13 @@ namespace Business.Actividades
 
       public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
       {
+
+
+        var usuario = await this.context.Usuario.FindAsync( request.UsuarioId );        
+
+        if (usuario == null)
+          throw new ManejadorExcepcion(HttpStatusCode.NotFound, new { mensaje = "No existe un usuario con ese Id." });
+
         Actividad actividad = null;
         byte[] archivoData = null;
         if (request.ArchivoData != null)
@@ -112,6 +120,8 @@ namespace Business.Actividades
         actividad.FechaRealizada = request.FechaRealizada;
         actividad.Nombre = request.Nombre;
         actividad.Descripcion = request.Descripcion;
+        actividad.Usuario = usuario;
+        actividad.UsuarioId = usuario.Id;
  
         this.context.Actividad.Add(actividad);
 
