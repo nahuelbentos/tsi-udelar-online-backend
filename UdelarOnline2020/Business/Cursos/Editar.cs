@@ -54,10 +54,8 @@ namespace Business.Cursos
         TemplateCurso templateCurso = null;
         if (request.TemplateCursoId != null)
         {
-          Console.WriteLine("1) tc:: " + request.TemplateCursoId);
           if (!(request.TemplateCursoId.Equals(Guid.Empty) || request.TemplateCursoId.Equals(String.Empty)))
           {
-            Console.WriteLine("2) tc:: " + request.TemplateCursoId);
 
 
             templateCurso = await this.context.TemplateCurso.Where(tc => tc.TemplateCursoId == request.TemplateCursoId).FirstOrDefaultAsync();
@@ -88,7 +86,6 @@ namespace Business.Cursos
         curso.RequiereMatriculacion = request.RequiereMatriculacion ?? curso.RequiereMatriculacion;
         curso.SalaVirtual = request.SalaVirtual ?? curso.SalaVirtual;
 
-        Console.WriteLine("curso.template :: " + curso.TemplateCurso);
         var res = await this.context.SaveChangesAsync();
 
 

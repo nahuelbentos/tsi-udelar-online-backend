@@ -61,8 +61,6 @@ namespace Business.Seguridad
 
         var resultado = await signInManager.CheckPasswordSignInAsync(usuario, request.Password, false);
         
-        Console.WriteLine(resultado.Succeeded);
-
         if (resultado.Succeeded)
         {
           var usuarioContext = await this.context.Usuario.Include(u => u.Facultad).Include(u => u.ComunicadoLista).FirstOrDefaultAsync(u => u.Id == usuario.Id);
@@ -74,7 +72,6 @@ namespace Business.Seguridad
           var rol = "";
           if (roles.Count > 0)
             rol = roles[0]; 
-          Console.WriteLine("facultad color :: " + facultad.ColorCodigo);
           var dtFacultad = new DtFacultad
           {
 

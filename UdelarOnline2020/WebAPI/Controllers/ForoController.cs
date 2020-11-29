@@ -35,10 +35,6 @@ namespace WebAPI.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult<Unit>> ModificarForo(Guid id, Editar.Ejecuta data)
         {
-            Console.WriteLine(id);
-            Console.WriteLine(id.GetType().ToString());
-            
-
             data.ForoId = id;
             return await this.Mediator.Send(data);
         }
