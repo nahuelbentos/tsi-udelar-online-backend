@@ -14,19 +14,16 @@ namespace WebAPI.Controllers
     public class MaterialController : MiControllerBase
     {
         [HttpPost]
-        public async Task<ActionResult<Unit>> AltaMaterial(Nuevo.Ejecuta data)
-        {
-        return await this.Mediator.Send(data);
-        }
+        public async Task<ActionResult<Unit>> AltaMaterial(Nuevo.Ejecuta data) => await this.Mediator.Send(data);
+
+        [HttpPost("curso-seccion")]
+        public async Task<ActionResult<Unit>> AltaMaterialCursoSeccion(NuevoEnCursoSeccion.Ejecuta data) => await this.Mediator.Send(data);
 
         [HttpGet]
         public async Task<ActionResult<List<DtMaterial>>> GetMensajes() =>  await this.Mediator.Send(new Consulta.Ejecuta());
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Material>> GetMensaje(Guid Id)
-        {
-        return await this.Mediator.Send(new ConsultaById.Ejecuta { MaterialId = Id });
-        }
+        public async Task<ActionResult<Material>> GetMensaje(Guid Id) => await this.Mediator.Send(new ConsultaById.Ejecuta { MaterialId = Id });
 
         [HttpPut("{id}")]
         public async Task<ActionResult<Unit>> ModificarMensaje(Guid Id, Editar.Ejecuta data)
@@ -36,9 +33,6 @@ namespace WebAPI.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Unit>> Eliminar(Guid Id)
-        {
-        return await this.Mediator.Send(new Eliminar.Ejecuta { MaterialId = Id });
-        } 
+        public async Task<ActionResult<Unit>> Eliminar(Guid Id) => await this.Mediator.Send(new Eliminar.Ejecuta { MaterialId = Id });
     }
 }

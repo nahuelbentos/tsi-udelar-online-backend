@@ -39,7 +39,6 @@ namespace Business.Cursos
 
         if (usuario is Alumno)
         {
-          Console.WriteLine("es alumno");
           cursos = await this.context.AlumnoCurso.Include(uc => uc.Curso)
                                                   .Where(u => u.AlumnoId == request.Id)
                                                   .Select(c => c.Curso)
@@ -48,7 +47,6 @@ namespace Business.Cursos
         }
         else
         {
-          Console.WriteLine("No es alumno");
 
           cursos = await this.context.UsuarioCurso.Include(uc => uc.Curso)
                                                   .Where(u => u.UsuarioId == request.Id)
@@ -56,7 +54,6 @@ namespace Business.Cursos
                                                   .ToListAsync();
 
         }
-        Console.WriteLine("cursos::: "+  cursos.Count);
         return cursos;
 
 
