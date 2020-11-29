@@ -35,19 +35,9 @@ namespace Business.Actividades
       public int MinutosExpiracion { get; set; }
       public bool Activa { get; set; }
 
+      public string UsuarioId { get; set; }
 
     }
-
-    public class EjecutaValidator : AbstractValidator<Ejecuta>
-    {
-      public EjecutaValidator()
-      {
-        RuleFor(a => a.FechaRealizada).NotEmpty();
-        RuleFor(a => a.FechaFinalizada).NotEmpty();
-        RuleFor(a => a.Tipo).NotEmpty().WithMessage("Los tipos son Encuesta, Trabajo, PruebaOnline o ClaseDictada");
-      }
-    }
-
     public class Manejador : IRequestHandler<Ejecuta>
     {
       private readonly UdelarOnlineContext context;
@@ -61,6 +51,13 @@ namespace Business.Actividades
 
       public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
       {
+
+
+        var usuario = await this.context.Usuario.FindAsync( request.UsuarioId );        
+
+        if (usuario == null)
+          throw new ManejadorExcepcion(HttpStatusCode.NotFound, new { mensaje = "No existe un usuario con ese Id." });
+
         Actividad actividad = null;
         byte[] archivoData = null;
         if (request.ArchivoData != null)
@@ -79,7 +76,6 @@ namespace Business.Actividades
           case "ClaseDictada":
             actividad = new ClaseDictada
             {
-
               ArchivoData = archivoData,
               ArchivoExtension = archivoExtension,
               ArchivoNombre = archivoNombre,
@@ -90,7 +86,6 @@ namespace Business.Actividades
             {
 
               EsAdministrador = request.EsAdministrador,
-              
 
             };
             break;
@@ -125,6 +120,9 @@ namespace Business.Actividades
         actividad.FechaRealizada = request.FechaRealizada;
         actividad.Nombre = request.Nombre;
         actividad.Descripcion = request.Descripcion;
+        
+        actividad.Usuario = usuario;
+        actividad.UsuarioId = usuario.Id;
  
         this.context.Actividad.Add(actividad);
 

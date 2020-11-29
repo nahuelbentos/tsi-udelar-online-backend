@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
+using System;
+using Models;
 
-namespace Models
+namespace Business.Datatypes
 {
-  public class Actividad
+  public class DtActividad
   {
-
 
     public Guid ActividadId { get; set; }
     public DateTime FechaRealizada { get; set; }
@@ -18,8 +15,5 @@ namespace Models
 
     public string UsuarioId { get; set; }
     public Usuario Usuario { get; set; }
-    
-    
-
   }
 }

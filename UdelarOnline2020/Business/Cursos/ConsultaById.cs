@@ -29,7 +29,8 @@ namespace Business.Cursos
       public async Task<Curso> Handle(Ejecuta request, CancellationToken cancellationToken)
       {
         // Esto cambia para devolver una lista de DataTypes, en breves lo cambio.
-        var curso = await this.context.Curso.Include(c => c.TemplateCurso).FirstOrDefaultAsync(c => c.CursoId == request.CursoId);
+        var curso = await this.context.Curso.Include(c => c.TemplateCurso).Where(c => c.CursoId == request.CursoId).FirstOrDefaultAsync();
+        
         if (curso == null)
         {
           throw new ManejadorExcepcion(HttpStatusCode.Forbidden, new { mensaje = "No existe un curso con el CursoId ingresado" });

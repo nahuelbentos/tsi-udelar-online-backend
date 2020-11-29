@@ -22,5 +22,6 @@ namespace Models
     public Facultad Facultad { get; set; }
 
     public  ICollection<Comunicado> ComunicadoLista { get; set; }
+    public  ICollection<Actividad> ActividadLista { get; set; }
   }
 }

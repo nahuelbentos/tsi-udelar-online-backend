@@ -28,6 +28,21 @@ namespace WebAPI.Controllers
 
     [HttpGet("id/{id}")]
     public async Task<ActionResult<DtUsuario>> GetUsuarioById(string id) => await this.Mediator.Send(new ConsultaById.Ejecuta { Id = id });
+    
+    [HttpGet("tipo/{tipo}")]
+    public async Task<ActionResult<List<DtUsuario>>> GetUsuariosByTipo(string tipo) => await this.Mediator.Send(new ConsultaByTipo.Ejecuta { Tipo = tipo });
+    
+    [HttpGet("rol/{rol}")]
+    public async Task<ActionResult<List<DtUsuario>>> GetUsuariosByRol(string rol) => await this.Mediator.Send(new ConsultaByRol.Ejecuta { Rol = rol });
+
+    [HttpGet("alumno/curso/{id}")]
+    public async Task<ActionResult<List<DtUsuario>>> GetAlumnosByCurso(Guid id) => await this.Mediator.Send(new ConsultaAlumnoByCurso.Ejecuta { CursoId = id });
+    
+    [HttpGet("docente/curso/{id}")]
+    public async Task<ActionResult<List<DtUsuario>>> GetDocentesByCurso(Guid id) => await this.Mediator.Send(new ConsultaDocenteByCurso.Ejecuta { CursoId = id });
+    
+    [HttpGet("docente/facultad/{id}")]
+    public async Task<ActionResult<List<DtUsuario>>> GetDocentesByFacultad(Guid id) => await this.Mediator.Send(new ConsultaDocenteByFacultad.Ejecuta { FacultadId = id });
   
 
     [HttpGet("email/{email}")]

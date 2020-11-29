@@ -19,7 +19,7 @@ namespace Business.Cursos
     {
       public string Nombre { get; set; }
       public string Descripcion { get; set; }
-      public ModalidadEnum ModalidadCurso { get; set; }
+      public ModalidadEnum Modalidad { get; set; }
       public bool RequiereMatriculacion { get; set; }
       public string SalaVirtual { get; set; }
       public Guid? TemplateCursoId { get; set; }
@@ -31,8 +31,7 @@ namespace Business.Cursos
       public EjecutaValidator()
       {
         RuleFor(c => c.Nombre).NotEmpty().WithMessage("El nombre es requerido.");
-        RuleFor(c => c.Descripcion).NotEmpty();
-        RuleFor(c => c.ModalidadCurso).NotEmpty();
+        RuleFor(c => c.Descripcion).NotEmpty(); 
         RuleFor(c => c.SalaVirtual).NotEmpty();
       }
     }
@@ -72,7 +71,7 @@ namespace Business.Cursos
           CursoId = Guid.NewGuid(),
           Descripcion = request.Descripcion,
           Nombre = request.Nombre,
-          Modalidad = request.ModalidadCurso,
+          Modalidad = request.Modalidad,
           RequiereMatriculacion = request.RequiereMatriculacion,
           SalaVirtual = request.SalaVirtual,
           TemplateCurso = templateCurso,
