@@ -15,14 +15,15 @@ namespace WebAPI.Controllers
   [ApiController]
   public class ActividadController : MiControllerBase
   {
+
+    // Actividades
     [HttpPost]
     public async Task<ActionResult<Unit>> AltaActividad(Nuevo.Ejecuta data) => await this.Mediator.Send(data);
 
-    [HttpPost("pruebaonline")]
-    public async Task<ActionResult<Unit>> AltaPruebaOnline(NuevaPruebaOnline.Ejecuta data) => await this.Mediator.Send(data);
 
     [HttpGet]
     public async Task<ActionResult<List<Actividad>>> GetActividades() => await this.Mediator.Send(new Consulta.Ejecuta());
+
     [HttpGet("tipo/{tipo}")]
     public async Task<ActionResult<List<Actividad>>> GetActividadesByTipo(string tipo) => await this.Mediator.Send(new ConsultaByTipo.Ejecuta { Tipo = tipo });
 
@@ -40,19 +41,15 @@ namespace WebAPI.Controllers
     [HttpDelete("{id}")]
     public async Task<ActionResult<Unit>> EliminarActividad(Guid id) => await this.Mediator.Send(new Eliminar.Ejecuta { ActividadId = id });
 
+    //Prueba Online
+    [HttpPost("pruebaonline")]
+    public async Task<ActionResult<Unit>> AltaPruebaOnline(NuevaPruebaOnline.Ejecuta data) => await this.Mediator.Send(data);
 
-        [HttpGet("/pruebaonline")]
-        public async Task<ActionResult<List<PruebaOnline>>> GetPruebasOnline()
-        {
-            return await this.Mediator.Send(new ConsultaPruebaOnline.Ejecuta());
-        }
+    [HttpGet("pruebaonline")]
+    public async Task<ActionResult<List<PruebaOnline>>> GetPruebasOnline() => await this.Mediator.Send(new ConsultaPruebaOnline.Ejecuta());
+ 
 
-        [HttpGet]
-        public async Task<ActionResult<List<Actividad>>> GetActividades()
-        {
-            return await this.Mediator.Send(new Consulta.Ejecuta());
-        }
-
+    //Encuesta
     [HttpGet("encuesta/{id}")]
     public async Task<ActionResult<DtEncuesta>> GetEncuesta(Guid id) => await this.Mediator.Send(new ConsultaEncuestaById.Ejecuta { Id = id });
 
