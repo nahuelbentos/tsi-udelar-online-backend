@@ -34,16 +34,7 @@ namespace Business.Actividades
       public int? MinutosExpiracion { get; set; }
       public bool Activa { get; set; }
     }
-
-    public class EjecutaValidator : AbstractValidator<Ejecuta>
-    {
-      public EjecutaValidator()
-      {
-        RuleFor(a => a.FechaRealizada).NotEmpty();
-        RuleFor(a => a.FechaFinalizada).NotEmpty();
-        RuleFor(a => a.Tipo).NotEmpty();
-      }
-    }
+  
 
     public class Manejador : IRequestHandler<Ejecuta>
     {

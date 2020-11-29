@@ -120,6 +120,7 @@ namespace Business.Actividades
         actividad.FechaRealizada = request.FechaRealizada;
         actividad.Nombre = request.Nombre;
         actividad.Descripcion = request.Descripcion;
+        
         actividad.Usuario = usuario;
         actividad.UsuarioId = usuario.Id;
  
