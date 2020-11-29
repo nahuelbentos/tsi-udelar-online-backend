@@ -38,11 +38,11 @@ namespace Business.Usuarios
         if (curso == null)
           throw new ManejadorExcepcion(HttpStatusCode.Forbidden, new { mensaje = "No existe un curso con el CursoId ingresado" });
 
-        var alumnos = await this.context.UsuarioCurso
+        var alumnos = await this.context.AlumnoCurso
                                           .Include(uc => uc.Curso)
-                                          .Include(uc => uc.Usuario).ThenInclude(u => u.Facultad)
-                                          .Where(uc => uc.CursoId == request.CursoId && (uc.Usuario is Alumno))
-                                          .Select(uc => uc.Usuario)
+                                          .Include(uc => uc.Alumno).ThenInclude(u => u.Facultad)
+                                          .Where(uc => uc.CursoId == request.CursoId)
+                                          .Select(uc => uc.Alumno)
                                           .ToListAsync();
 
         List<DtUsuario> dtUsuarios = new List<DtUsuario>();
