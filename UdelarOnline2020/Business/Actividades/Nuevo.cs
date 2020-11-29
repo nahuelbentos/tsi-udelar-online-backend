@@ -68,7 +68,6 @@ namespace Business.Actividades
           case "ClaseDictada":
             actividad = new ClaseDictada
             {
-
               ArchivoData = archivoData,
               ArchivoExtension = archivoExtension,
               ArchivoNombre = archivoNombre,
@@ -79,7 +78,6 @@ namespace Business.Actividades
             {
 
               EsAdministrador = request.EsAdministrador,
-              
 
             };
             break;
