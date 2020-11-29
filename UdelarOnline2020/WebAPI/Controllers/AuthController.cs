@@ -24,6 +24,8 @@ namespace WebAPI.Controllers
     public async Task<ActionResult<Boolean>> ValidateToken(ValidateToken.Ejecuta data) => await Mediator.Send(data);
 
     [HttpPost("forgot-password")]
+
+    // [ValidateAntiForgeryToken]
     public async Task<ActionResult<DtUsuario>> ForgotPassword(ForgotPassword.Ejecuta data) => await Mediator.Send(data);
 
     [HttpPost("mail-forgot-password")]
