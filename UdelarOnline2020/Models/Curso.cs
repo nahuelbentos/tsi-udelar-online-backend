@@ -18,6 +18,7 @@ namespace Models
 
     [AllowNull]
     public TemplateCurso TemplateCurso { get; set; }
+    public Guid? TemplateCursoId { get; set; }
     public bool ActaCerrada { get; set; }
 
 

@@ -74,14 +74,17 @@ namespace Business.Seguridad
           var rol = "";
           if (roles.Count > 0)
             rol = roles[0]; 
-
+          Console.WriteLine("facultad color :: " + facultad.ColorCodigo);
           var dtFacultad = new DtFacultad
           {
+
+            Id = facultad.FacultadId,
             FacultadId = facultad.FacultadId,
             Descripcion = facultad.Descripcion,
             Nombre = facultad.Nombre,
             UrlAcceso = facultad.UrlAcceso,
             DominioMail = facultad.DominioMail,
+            ColorCodigo = facultad.ColorCodigo,
           };
 
           return new DtUsuario
