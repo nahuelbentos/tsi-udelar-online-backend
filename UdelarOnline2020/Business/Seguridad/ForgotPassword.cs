@@ -11,23 +11,11 @@ namespace Business.Seguridad
         
         public class Ejecuta : IRequest<DtUsuario>{
 
-            public string Email { get; set; }
-            public string PasswordOld { get; set; }
+            public string Email { get; set; } 
             public string PasswordNew { get; set; }
             public string PasswordConfirm { get; set; }
         }
-
-        public class EjecutaValidator : AbstractValidator<Ejecuta>
-        {
-            public EjecutaValidator()
-            {
-                RuleFor(u => u.Email).NotEmpty();
-                RuleFor(u => u.PasswordOld).NotEmpty();
-                RuleFor(u => u.PasswordNew).NotEmpty();
-                RuleFor(u => u.PasswordConfirm).NotEmpty();
-            }
-        }
-
+ 
     public class Manejador : IRequestHandler<Ejecuta, DtUsuario>
     {
       public Task<DtUsuario> Handle(Ejecuta request, CancellationToken cancellationToken)

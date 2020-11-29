@@ -98,6 +98,7 @@ namespace Business.Seguridad
             Rol = rol,
             Facultad = dtFacultad
           };
+        
         }
 
         throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "Credenciales de acceso incorrectas. "  });
