@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Business.Actividades;
+using Business.Datatypes;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -27,6 +28,9 @@ namespace WebAPI.Controllers
         public async Task<ActionResult<List<Actividad>>> GetActividades() => await this.Mediator.Send(new Consulta.Ejecuta());
         [HttpGet("tipo/{tipo}")]
         public async Task<ActionResult<List<Actividad>>> GetActividadesByTipo( string tipo) => await this.Mediator.Send(new ConsultaByTipo.Ejecuta{ Tipo = tipo });
+
+        [HttpGet("encuesta/{id}")]
+        public async Task<ActionResult<DtEncuesta>> GetEncuesta(Guid id) => await this.Mediator.Send(new ConsultaEncuestaById.Ejecuta { Id = id});
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Actividad>> GetActividad(Guid id) => await this.Mediator.Send(new ConsultaById.Ejecuta { ActividadId = id});

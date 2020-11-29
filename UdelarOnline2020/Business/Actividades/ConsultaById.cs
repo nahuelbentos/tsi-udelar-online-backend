@@ -34,9 +34,8 @@ namespace Business.Actividades
                                                     .FirstOrDefaultAsync();
                 //Hay que devolver datatypes
                 if (actividad == null)
-                {
-                    throw new ManejadorExcepcion(HttpStatusCode.Forbidden, new { mensaje = "No existe una actividad con el CursoId ingresado" });
-                }
+                    throw new ManejadorExcepcion(HttpStatusCode.NotFound, new { mensaje = "No existe una actividad con el CursoId ingresado" });
+                    
                 return actividad;
             }
         }
