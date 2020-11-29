@@ -37,8 +37,7 @@ namespace Business.Usuarios
       {
         // var usuario = await this.userManager.FindByIdAsync(request.Id);
         var usuario = await this.context.Users.Include(u => u.Facultad).Include(u => u.ComunicadoLista).FirstOrDefaultAsync(u => u.Id == request.Id);
-        Console.WriteLine(usuario.Facultad.FacultadId);
-
+        
 
         if (usuario == null)
           throw new ManejadorExcepcion(HttpStatusCode.NotFound, new { mensaje = "No existe un usuario con ese Id." });

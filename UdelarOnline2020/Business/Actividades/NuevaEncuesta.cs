@@ -49,7 +49,7 @@ namespace Business.Actividades
 
         if (usuario == null)
           throw new ManejadorExcepcion(HttpStatusCode.NotFound, new { mensaje = "No existe un usuario con ese Id." });
-
+        
         Encuesta e = new Encuesta
         {
           ActividadId = Guid.NewGuid(),
@@ -61,18 +61,7 @@ namespace Business.Actividades
           Usuario = usuario,
           UsuarioId = usuario.Id
         };
-        //creo las preguntas
-        foreach (var pregunta in request.PreguntaLista)
-        {
-          Pregunta p = new Pregunta
-          {
-            PreguntaId = Guid.NewGuid(),
-            Texto = pregunta,
-            Encuesta = e,
-            EncuestaId = e.ActividadId
-          };
-          e.PreguntaLista.Add(p);
-        }
+        
 
         //asigno la facultad si me lo mandan
         if (request.FacultadId.GetValueOrDefault() != default(Guid))
@@ -86,8 +75,23 @@ namespace Business.Actividades
         var res = await this.context.SaveChangesAsync();
         if (res > 0)
         {
-          return Unit.Value;
+          //creo las preguntas
+          foreach (var pregunta in request.PreguntaLista)
+          { 
+            Pregunta p = new Pregunta
+            {
+              PreguntaId = Guid.NewGuid(),
+              Texto = pregunta,
+              Encuesta = e,
+              EncuestaId = e.ActividadId
+            };
+            this.context.Pregunta.Add(p);
+          }
         }
+
+
+        if( await this.context.SaveChangesAsync() > 0)
+            return Unit.Value;
 
         throw new ManejadorExcepcion(HttpStatusCode.InternalServerError, new { mensaje = "Ocurrio un error al insertar la Encuesta" });
       }

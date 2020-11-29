@@ -63,20 +63,13 @@ namespace Business.Usuarios
       public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
       {
 
-        Console.WriteLine("request.Email:: " + request.Email);
         var usuario = await this.context.Users.Include(u => u.Facultad).Include(u => u.ComunicadoLista).FirstOrDefaultAsync(u => u.Email == request.Email);
 
 
-        // var user = await this.context.FindAsync();
-        // Console.WriteLine("user.Apellidos:: " + user.Apellidos);
-        // Console.WriteLine("user.FacultadId:: " + user.FacultadId);
-        // Console.WriteLine("user.Descripcion:: " + user.Facultad.Descripcion);
 
         if (usuario == null)
           throw new ManejadorExcepcion(HttpStatusCode.NotFound, new { mensaje = "No existe el usuario ingresado." });
 
-        Console.WriteLine("Apellidos:: " + usuario.Apellidos);
-        Console.WriteLine("FacultadId:: " + usuario.Facultad.FacultadId);
         // Agrego Models. para poder comparar con el namespaces completo.
         var tipo = "Models." + request.Tipo;
 

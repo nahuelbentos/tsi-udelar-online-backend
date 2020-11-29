@@ -7,6 +7,7 @@ using Business.Cursos;
 using Models;
 using System;
 using Microsoft.AspNetCore.Authorization;
+using Business.Datatypes;
 
 namespace WebAPI.Controllers
 {
@@ -31,6 +32,9 @@ namespace WebAPI.Controllers
     
     [HttpGet]
     public async Task<ActionResult<List<Curso>>> GetCursos() => await this.Mediator.Send(new Consulta.Ejecuta());
+    
+    [HttpGet("filter/{filter}")]
+    public async Task<ActionResult<List<DtCurso>>> GetCursosByFilter(string filter) => await this.Mediator.Send(new ConsultaByFilter.Ejecuta{ Filter = filter });
 
 
     [HttpGet("{id}")]
