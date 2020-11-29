@@ -16,6 +16,7 @@ namespace Business.AlumnoCursos
     {
         public class Ejecuta : IRequest
     {
+      public Guid AlumnoCursoId {get; set;}
       public Guid CursoId { get; set; }
       public Guid AlumnoId { get; set; }
       public bool? Inscripto { get; set; }

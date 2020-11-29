@@ -36,18 +36,17 @@ namespace WebAPI.Controllers
             return await this.Mediator.Send(new ConsultaByCursoId.Ejecuta { CursoId = id});
         }
 
-        [HttpPut("{alumnoId}/{cursoId}")]
-        public async Task<ActionResult<Unit>> ModificarAlumnoCurso(Guid alumnoId, Guid cursoId, Editar.Ejecuta data)
+        [HttpPut("{alumnoCursoId}")]
+        public async Task<ActionResult<Unit>> ModificarAlumnoCurso(Guid alumnoCursoId, Editar.Ejecuta data)
         {
-            data.AlumnoId = alumnoId;
-            data.CursoId = cursoId;
+            data.AlumnoCursoId = alumnoCursoId;
             return await this.Mediator.Send(data);
         }
 
-        [HttpDelete("{alumnoId}/{cursoId}")]
-        public async Task<ActionResult<Unit>> EliminarAlumnoCurso(Guid alumnoId, Guid cursoId)
+        [HttpDelete("{alumnoCursoId}")]
+        public async Task<ActionResult<Unit>> EliminarAlumnoCurso(Guid alumnoCursoId)
         {
-            return await this.Mediator.Send(new Eliminar.Ejecuta { AlumnoId = alumnoId, CursoId = cursoId });
+            return await this.Mediator.Send(new Eliminar.Ejecuta { AlumnoId = alumnoCursoId});
         }
     }
 }

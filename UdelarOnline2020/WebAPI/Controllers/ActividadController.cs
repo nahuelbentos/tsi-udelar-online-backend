@@ -32,6 +32,12 @@ namespace WebAPI.Controllers
             return await this.Mediator.Send(data);
         }
 
+        [HttpGet("/pruebaonline")]
+        public async Task<ActionResult<List<PruebaOnline>>> GetPruebasOnline()
+        {
+            return await this.Mediator.Send(new ConsultaPruebaOnline.Ejecuta());
+        }
+
         [HttpGet]
         public async Task<ActionResult<List<Actividad>>> GetActividades()
         {
