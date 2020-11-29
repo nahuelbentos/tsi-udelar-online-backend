@@ -12,6 +12,7 @@ using Persistence;
 using Business.ManejadorError;
 using Business.Interfaces;
 using System.Collections.Generic;
+using System;
 
 namespace Business.Seguridad
 {
@@ -20,6 +21,7 @@ namespace Business.Seguridad
         
         public class Ejecuta : IRequest<DtUsuario>{
 
+            public string Token { get; set; } 
             public string Email { get; set; } 
             public string PasswordNew { get; set; } 
         }
@@ -42,17 +44,22 @@ namespace Business.Seguridad
       public async Task<DtUsuario> Handle(Ejecuta request, CancellationToken cancellationToken)
       {
         // esto no esta muy bien...
-        var usuario = await this.context.Users.Where( u => u.Email.Contains(request.Email) || u.EmailPersonal.Contains(request.Email) ).FirstOrDefaultAsync();
+        // var usuario = await this.context.Users.Where( u => u.Email.Contains(request.Email) || u.EmailPersonal.Contains(request.Email) ).FirstOrDefaultAsync();
+        var usuario = await this.userManager.FindByEmailAsync(request.Email);
 
         if (usuario == null) 
           throw new ManejadorExcepcion(HttpStatusCode.NotFound, new { mensaje = "No existe un usuario con el email ingresado."});
         
-
+        var resetPassResult = await this.userManager.ResetPasswordAsync(usuario, request.Token, request.PasswordNew);
         
-        var newPassword = this.userManager.PasswordHasher.HashPassword(usuario, request.PasswordNew);
-        usuario.PasswordHash = newPassword;
-        var res = await this.userManager.UpdateAsync(usuario);
-        if(res.Succeeded){
+        Console.WriteLine("token:: " +  request.Token);
+        Console.WriteLine("usuario:: " +  usuario.Id);
+        Console.WriteLine("usuario:: " +  usuario.EmailPersonal);
+        Console.WriteLine("usuario:: " +  usuario.Nombres);
+        // var newPassword = this.userManager.PasswordHasher.HashPassword(usuario, request.PasswordNew);
+        // usuario.PasswordHash = newPassword;
+        // var res = await this.userManager.UpdateAsync(usuario);
+        if(resetPassResult.Succeeded){
 
 
           var resultado = await signInManager.CheckPasswordSignInAsync(usuario, request.PasswordNew, false);
@@ -96,7 +103,10 @@ namespace Business.Seguridad
           }
         }
 
-        throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "Ocurrio un error inesperado. " }); 
+
+        var mensajeErrores = resetPassResult.Errors.Select(e => e.Description);
+        throw new ManejadorExcepcion(HttpStatusCode.InternalServerError, new { mensaje = "Ocurrió un error, no se pudo reestablecer la contraseña", mensajeErrores });
+        // throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "Ocurrio un error inesperado. " }); 
       }
     }
 

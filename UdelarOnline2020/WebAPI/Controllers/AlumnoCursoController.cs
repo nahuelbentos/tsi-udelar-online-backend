@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Business.AlumnoCursos;
+using Business.Datatypes;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Models;
@@ -13,28 +14,16 @@ namespace WebAPI.Controllers
     public class AlumnoCursoController : MiControllerBase
     {
         [HttpPost]
-        public async Task<ActionResult<Unit>> AltaAlumnoCurso(Nuevo.Ejecuta data)
-        {
-            return await this.Mediator.Send(data);
-        }
+        public async Task<ActionResult<Unit>> AltaAlumnoCurso(Nuevo.Ejecuta data) => await this.Mediator.Send(data);
 
         [HttpGet]
-        public async Task<ActionResult<List<AlumnoCurso>>> GetAlumnoCursos()
-        {
-            return await this.Mediator.Send(new Consulta.Ejecuta());
-        }
+        public async Task<ActionResult<List<DtAlumnoCurso>>> GetAlumnoCursos() => await this.Mediator.Send(new Consulta.Ejecuta());
 
         [HttpGet("byalumno/{id}")]
-        public async Task<ActionResult<List<AlumnoCurso>>> GetAlumnoCursoByAlumno(Guid id)
-        {
-            return await this.Mediator.Send(new ConsultaByAlumnoId.Ejecuta { AlumnoId = id});
-        }
+        public async Task<ActionResult<List<DtAlumnoCurso>>> GetAlumnoCursoByAlumno(Guid id) => await this.Mediator.Send(new ConsultaByAlumnoId.Ejecuta { AlumnoId = id});
 
         [HttpGet("bycurso/{id}")]
-        public async Task<ActionResult<List<AlumnoCurso>>> GetAlumnoCursoByCurso(Guid id)
-        {
-            return await this.Mediator.Send(new ConsultaByCursoId.Ejecuta { CursoId = id});
-        }
+        public async Task<ActionResult<List<DtAlumnoCurso>>> GetAlumnoCursoByCurso(Guid id) => await this.Mediator.Send(new ConsultaByCursoId.Ejecuta { CursoId = id});
 
         [HttpPut("{alumnoId}/{cursoId}")]
         public async Task<ActionResult<Unit>> ModificarAlumnoCurso(Guid alumnoId, Guid cursoId, Editar.Ejecuta data)
@@ -45,9 +34,6 @@ namespace WebAPI.Controllers
         }
 
         [HttpDelete("{alumnoId}/{cursoId}")]
-        public async Task<ActionResult<Unit>> EliminarAlumnoCurso(Guid alumnoId, Guid cursoId)
-        {
-            return await this.Mediator.Send(new Eliminar.Ejecuta { AlumnoId = alumnoId, CursoId = cursoId });
-        }
+        public async Task<ActionResult<Unit>> EliminarAlumnoCurso(Guid alumnoId, Guid cursoId) => await this.Mediator.Send(new Eliminar.Ejecuta { AlumnoId = alumnoId, CursoId = cursoId });
     }
 }
