@@ -1,8 +1,12 @@
 using System;
+using System.Linq;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using Business.ManejadorError;
 using FluentValidation;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Models;
 using Persistence;
 
@@ -12,11 +16,11 @@ namespace Business.Comunicados {
 
             public Guid ComunicadoId { get; set; }
 
-            public Comunicado Comunicado { get; set; }
+            //public Comunicado Comunicado { get; set; }
 
             public Guid FacultadId { get; set; }
 
-            public Facultad Facultad { get; set; }
+            //public Facultad Facultad { get; set; }
             
 
         }
@@ -36,12 +40,26 @@ namespace Business.Comunicados {
             }
 
             public async Task<Unit> Handle (Ejecuta request, CancellationToken cancellationToken) {
-                
+                var comunicadoExiste = await this.context.Comunicado.Where(e => e.ComunicadoId == request.ComunicadoId).FirstOrDefaultAsync();
+      
+                if (comunicadoExiste == null)
+                {
+                    throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "No existe el comunicado ingresado" });
+                }
+
+                var facultad = await this.context.Facultad.Where(e => e.FacultadId == request.FacultadId).FirstOrDefaultAsync();
+      
+                if (comunicadoExiste == null)
+                {
+                    throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "No existe la facultad ingresada" });
+                }
+
+
                 var comunicado = new ComunicadoFacultad {
                     ComunicadoId = Guid.NewGuid (),
-                    Comunicado = request.Comunicado,
+                    Comunicado = comunicadoExiste,
                     FacultadId = request.FacultadId,
-                    Facultad = request.Facultad
+                    Facultad = facultad
                 };
 
                 this.context.ComunicadoFacultad.Add (comunicado);
