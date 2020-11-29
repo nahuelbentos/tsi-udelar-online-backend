@@ -20,13 +20,13 @@ namespace WebAPI.Controllers
             return await this.Mediator.Send(data);
         }
 
-        [HttpPost("/encuesta")]
+        [HttpPost("encuesta")]
         public async Task<ActionResult<Unit>> AltaEncuesta(NuevaEncuesta.Ejecuta data)
         {
             return await this.Mediator.Send(data);
         }
 
-        [HttpPost("/pruebaonline")]
+        [HttpPost("pruebaonline")]
         public async Task<ActionResult<Unit>> AltaPruebaOnline(NuevaPruebaOnline.Ejecuta data)
         {
             return await this.Mediator.Send(data);

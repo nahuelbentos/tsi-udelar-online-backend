@@ -49,7 +49,7 @@ namespace Business.Actividades
 
         if (usuario == null)
           throw new ManejadorExcepcion(HttpStatusCode.NotFound, new { mensaje = "No existe un usuario con ese Id." });
-
+        
         Encuesta e = new Encuesta
         {
           ActividadId = Guid.NewGuid(),
@@ -77,7 +77,7 @@ namespace Business.Actividades
         {
           //creo las preguntas
           foreach (var pregunta in request.PreguntaLista)
-          {
+          { 
             Pregunta p = new Pregunta
             {
               PreguntaId = Guid.NewGuid(),
@@ -85,7 +85,7 @@ namespace Business.Actividades
               Encuesta = e,
               EncuestaId = e.ActividadId
             };
-            e.PreguntaLista.Add(p);
+            this.context.Pregunta.Add(p);
           }
         }
 
