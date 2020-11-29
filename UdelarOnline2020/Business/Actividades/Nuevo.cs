@@ -37,17 +37,6 @@ namespace Business.Actividades
 
 
     }
-
-    public class EjecutaValidator : AbstractValidator<Ejecuta>
-    {
-      public EjecutaValidator()
-      {
-        RuleFor(a => a.FechaRealizada).NotEmpty();
-        RuleFor(a => a.FechaFinalizada).NotEmpty();
-        RuleFor(a => a.Tipo).NotEmpty().WithMessage("Los tipos son Encuesta, Trabajo, PruebaOnline o ClaseDictada");
-      }
-    }
-
     public class Manejador : IRequestHandler<Ejecuta>
     {
       private readonly UdelarOnlineContext context;
