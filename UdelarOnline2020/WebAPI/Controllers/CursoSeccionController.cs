@@ -38,30 +38,31 @@ namespace WebAPI.Controllers {
       return await this.Mediator.Send (new Consulta.Ejecuta ());
     }
 
-    [HttpGet ("{id}")]
-    public async Task<ActionResult<CursoSeccion>> GetCursoSeccion (Guid Id) {
-      return await this.Mediator.Send (new ConsultaById.Ejecuta { CursoSeccionId = Id });
+    [HttpGet ("{cursoId}/{seccionId}")]
+    public async Task<ActionResult<CursoSeccion>> GetCursoSeccion (Guid cursoId, Guid seccionId) {
+      return await this.Mediator.Send (new ConsultaById.Ejecuta { CursoId = cursoId, SeccionId = seccionId });
     }
 
-    [HttpGet ("{id}")]
-    public async Task<ActionResult<CursoSeccion>> GetCursoSeccionByCurso (Guid Id) {
-      return await this.Mediator.Send (new ConsultaByCurso.Ejecuta { CursoId = Id });
+    [HttpGet ("{cursoId}/{seccionId}")]
+    public async Task<ActionResult<CursoSeccion>> GetCursoSeccionByCurso (Guid cursoId, Guid seccionId) {
+      return await this.Mediator.Send (new ConsultaByCurso.Ejecuta { CursoId = cursoId });
     }
 
-    [HttpGet ("{id}")]
-    public async Task<ActionResult<CursoSeccion>> GetCursoSeccionBySeccion (Guid Id) {
-      return await this.Mediator.Send (new ConsultaBySeccion.Ejecuta { SeccionId = Id });
+    [HttpGet ("{cursoId}/{seccionId}")]
+    public async Task<ActionResult<CursoSeccion>> GetCursoSeccionBySeccion (Guid cursoId, Guid seccionId) {
+      return await this.Mediator.Send (new ConsultaBySeccion.Ejecuta { SeccionId = cursoId, CursoId = cursoId });
     }
 
-    [HttpPut ("{id}")]
-    public async Task<ActionResult<Unit>> ModificarCurso (Guid Id, Editar.Ejecuta data) {
-      data.CursoId = Id;
+    [HttpPut ("{cursoId}/{seccionId}")]
+    public async Task<ActionResult<Unit>> ModificarCurso (Guid cursoId, Guid seccionId, Editar.Ejecuta data) {
+      data.CursoId = cursoId;
+      data.SeccionId = seccionId;
       return await this.Mediator.Send (data);
     }
 
-    [HttpDelete ("{id}")]
-    public async Task<ActionResult<Unit>> Eliminar (Guid Id) {
-      return await this.Mediator.Send (new Eliminar.Ejecuta { CursoSeccionId = Id });
+    [HttpDelete ("{cursoId}/{seccionId}")]
+    public async Task<ActionResult<Unit>> Eliminar (Guid cursoId, Guid seccionId) {
+      return await this.Mediator.Send (new Eliminar.Ejecuta { CursoId = cursoId, SeccionId = seccionId });
     }
 
   }
