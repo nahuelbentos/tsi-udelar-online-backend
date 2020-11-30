@@ -22,17 +22,7 @@ namespace Business.Secciones
             public bool IsDefault { get; set; }
             public bool IsVisible { get; set; }
         }
-
-        public class EjecutaValidator : AbstractValidator<Ejecuta>
-        {
-            public EjecutaValidator()
-            {
-                RuleFor(s => s.Nombre).NotEmpty().WithMessage("El Nombre es requerido.");
-                RuleFor(s => s.Descripcion).NotEmpty();
-                RuleFor(s => s.IsDefault).NotEmpty();
-                RuleFor(s => s.IsVisible).NotEmpty();
-            }
-        }
+ 
 
         public class Manejador : IRequestHandler<Ejecuta>
         {
