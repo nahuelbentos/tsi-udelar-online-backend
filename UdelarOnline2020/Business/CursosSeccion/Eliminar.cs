@@ -6,6 +6,8 @@ using FluentValidation;
 using MediatR;
 using Persistence;
 using Business.ManejadorError;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Business.CursosSeccion
 {
@@ -13,14 +15,16 @@ namespace Business.CursosSeccion
   {
     public class Ejecuta : IRequest
     {
-      public Guid CursoSeccionId { get; set; }
+      public Guid CursoId { get; set; }
+      public Guid SeccionId {get; set;}
     }
 
     public class EjecutaValidator : AbstractValidator<Ejecuta>
     {
       public EjecutaValidator()
       {
-        RuleFor(c => c.CursoSeccionId).NotEmpty().WithMessage("Es necesario el CursoId para eliminar un curso.");
+        RuleFor(c => c.CursoId).NotEmpty().WithMessage("Es necesario el CursoId para eliminar un curso.");
+         RuleFor(c => c.CursoId).NotEmpty().WithMessage("Es necesario el CursoId para eliminar un curso.");
       }
     }
 
@@ -35,7 +39,7 @@ namespace Business.CursosSeccion
 
       public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
       {
-        var cursoSeccion = await this.context.CursoSeccion.FindAsync(request.CursoSeccionId);
+         var cursoSeccion = await this.context.CursoSeccion.Where (tc => tc.CursoId == request.CursoId && tc.SeccionId == request.SeccionId).FirstOrDefaultAsync ();
 
         if (cursoSeccion == null)
           throw new ManejadorExcepcion(HttpStatusCode.NotFound, new { mensaje = "El curso no existe. " });
