@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Net;
 using System;
 using System.Linq;
@@ -58,14 +59,66 @@ namespace Business.Cursos
                                             .Select(c => c.Comunicado)
                                             .ToListAsync();
 
+        List<DtCursoSeccion> dtCursoSecciones = new List<DtCursoSeccion>();
+
         foreach (var cs in cursoSecciones)
         {
           var materialLista = await this.context.CursoSeccionMaterial
                                                   .Where( csm => csm.CursoId == cs.CursoId && csm.Seccion == cs.Seccion)
                                                   .Select( csm => csm.Material)
-                                                  .ToListAsync();
-          Console.WriteLine( "counte:: " + materialLista.Count)  ;
-          cs.MaterialLista = materialLista;
+                                                  .ToListAsync(); 
+          
+          var foroLista = await this.context.CursoSeccionForo
+                                                  .Where( csf => csf.CursoId == cs.CursoId && csf.Seccion == cs.Seccion)
+                                                  .Select( csf => csf.Foro)
+                                                  .ToListAsync(); 
+
+          var actividadLista = await this.context.CursoSeccionActividad
+                                                  .Where( csa => csa.CursoId == cs.CursoId && csa.Seccion == cs.Seccion)
+                                                  .Select( csa => csa.Actividad)
+                                                  .ToListAsync(); 
+
+          List<DtActividadLista> dtActividadLista = new List<DtActividadLista>();
+          foreach (var actividad in actividadLista)
+          {
+            string tipo = "";
+            switch (actividad)
+            {
+              case Trabajo trabajo :
+                tipo = "Trabajo";
+                break;
+
+              case ClaseDictada clase :
+                tipo = "ClaseDictada";
+                break;
+
+              case PruebaOnline prueba :
+                tipo = "PruebaOnline";
+                break;
+
+              case Encuesta encuesta :
+                tipo = "Encuesta";
+                break;
+   
+
+            }
+
+            dtActividadLista.Add( new DtActividadLista {
+              Actividad = actividad,
+              Tipo = tipo
+            });
+          }
+
+
+          dtCursoSecciones.Add( new DtCursoSeccion {
+            Curso = curso,
+            CursoId = curso.CursoId,
+            ActividadLista = dtActividadLista,
+            ForoLista = foroLista,
+            MaterialLista = materialLista,
+            Seccion = cs.Seccion,
+            SeccionId = cs.SeccionId
+          });
  
           
         }  
@@ -77,7 +130,7 @@ namespace Business.Cursos
           ModalidadId = curso.Modalidad,
           Docentes = docentes,
           Alumnos = alumnos,
-          CursoSecciones = cursoSecciones,
+          CursoSecciones = dtCursoSecciones,
           Comunicados = comunicados,
           Modalidad = Enum.GetName(typeof(ModalidadEnum), curso.Modalidad),
           Nombre = curso.Nombre,

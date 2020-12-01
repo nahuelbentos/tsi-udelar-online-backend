@@ -18,7 +18,7 @@ namespace Business.Datatypes
         public Guid? TemplateCursoId { get; set; }
         public bool ActaCerrada { get; set; }
 
-        public List<CursoSeccion> CursoSecciones { get; set; }
+        public List<DtCursoSeccion> CursoSecciones { get; set; }
         public List<Seccion> Secciones { get; set; }
         public List<Comunicado> Comunicados { get; set; }
         public List<Alumno> Alumnos { get; set; }
