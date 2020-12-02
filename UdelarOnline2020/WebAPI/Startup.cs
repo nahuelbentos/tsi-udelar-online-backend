@@ -76,7 +76,7 @@ namespace WebAPI
 
       services.AddControllers(opt =>
       {
- 
+
         // Declaro politica para requerir Autenticación y la agrego como filtro.
         var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
         opt.Filters.Add(new AuthorizeFilter(policy));
@@ -85,9 +85,20 @@ namespace WebAPI
        {
          config.RegisterValidatorsFromAssemblyContaining<Business.Cursos.Nuevo>();
        });
-
-
-
+      /* Configuración Forgot Password */
+      // services.AddIdentity<Usuario, IdentityRole>(opt =>
+      // {
+      //   opt.Password.RequiredLength = 7;
+      //   opt.Password.RequireDigit = false;
+      //   opt.Password.RequireUppercase = false;
+      //   opt.User.RequireUniqueEmail = true;
+      // })
+      // .AddEntityFrameworkStores<UdelarOnlineContext>()
+      // .AddDefaultTokenProviders();
+      // services.Configure<DataProtectionTokenProviderOptions>(opt =>
+      //             opt.TokenLifespan = TimeSpan.FromHours(2));
+ 
+      /* Configuración Forgot Password */
       // Configuración de IdentityCore
       var builder = services.AddIdentityCore<Usuario>();
       var identityBuilder = new IdentityBuilder(builder.UserType, builder.Services);

@@ -20,7 +20,7 @@ namespace Business.Cursos
       public Guid? CursoId { get; set; }
       public string Nombre { get; set; }
       public string Descripcion { get; set; }
-      public ModalidadEnum? Modalidad { get; set; }
+      public ModalidadEnum? ModalidadId { get; set; }
       public bool? RequiereMatriculacion { get; set; }
       public string SalaVirtual { get; set; }
       public Guid? TemplateCursoId { get; set; }
@@ -82,7 +82,7 @@ namespace Business.Cursos
 
         curso.Nombre = request.Nombre ?? curso.Nombre;
         curso.Descripcion = request.Descripcion ?? curso.Descripcion;
-        curso.Modalidad = request.Modalidad ?? curso.Modalidad;
+        curso.Modalidad = request.ModalidadId ?? curso.Modalidad;
         curso.RequiereMatriculacion = request.RequiereMatriculacion ?? curso.RequiereMatriculacion;
         curso.SalaVirtual = request.SalaVirtual ?? curso.SalaVirtual;
 

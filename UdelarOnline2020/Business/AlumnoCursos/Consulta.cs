@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Business.Datatypes;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Models;
@@ -8,27 +9,48 @@ using Persistence;
 
 namespace Business.AlumnoCursos
 {
-    public class Consulta
+  public class Consulta
+  {
+    public class Ejecuta : IRequest<List<DtAlumnoCurso>> { }
+    public class Manejador : IRequestHandler<Ejecuta, List<DtAlumnoCurso>>
     {
-        public class Ejecuta : IRequest<List<AlumnoCurso>> { }
-        public class Manejador : IRequestHandler<Ejecuta, List<AlumnoCurso>>
+      private readonly UdelarOnlineContext context;
+
+      public Manejador(UdelarOnlineContext context)
+      {
+        this.context = context;
+      }
+
+      public async Task<List<DtAlumnoCurso>> Handle(Ejecuta request, CancellationToken cancellationToken)
+      {
+        //Hay que devolver DataTypes
+        var alumnoCursos = await this.context.AlumnoCurso
+                                                .Include(ac => ac.Curso)
+                                                .Include(ac => ac.Alumno)
+                                                .ToListAsync();
+
+        List<DtAlumnoCurso> dtAlumnoCursos = new List<DtAlumnoCurso>();
+
+        foreach (var ac in alumnoCursos)
         {
-            private readonly UdelarOnlineContext context;
+          DtAlumnoCurso dtAlumnoCurso = new DtAlumnoCurso
+          {
+            Alumno = $" {ac.Alumno.Nombres}  {ac.Alumno.Apellidos}",
+            AlumnoId = ac.AlumnoId,
+            Calificacion = ac.Calificacion,
+            Curso = $" {ac.Curso.Nombre} - {ac.Curso.Descripcion}",
+            CursoId = ac.CursoId,
+            DataAlumno = ac.Alumno,
+            DataCurso = ac.Curso,
+            FechaActaCerrada = ac.FechaActaCerrada,
+            Feedback = ac.Feedback,
+            Inscripto = ac.Inscripto
+          };
 
-            public Manejador(UdelarOnlineContext context)
-            {
-                this.context = context;
-            }
-
-            public async Task<List<AlumnoCurso>> Handle(Ejecuta request, CancellationToken cancellationToken)
-            {
-                //Hay que devolver DataTypes
-                var alumnocursos = await this.context.AlumnoCurso
-                                                        .Include(ac => ac.Curso)
-                                                        .Include(ac => ac.Alumno)
-                                                        .ToListAsync();
-                return alumnocursos;    
-            }
+          dtAlumnoCursos.Add(dtAlumnoCurso);
         }
+        return dtAlumnoCursos;
+      }
     }
+  }
 }

@@ -19,7 +19,7 @@ namespace Business.Cursos
     {
       public string Nombre { get; set; }
       public string Descripcion { get; set; }
-      public ModalidadEnum Modalidad { get; set; }
+      public ModalidadEnum ModalidadId { get; set; }
       public bool RequiereMatriculacion { get; set; }
       public string SalaVirtual { get; set; }
       public Guid? TemplateCursoId { get; set; }
@@ -71,7 +71,7 @@ namespace Business.Cursos
           CursoId = Guid.NewGuid(),
           Descripcion = request.Descripcion,
           Nombre = request.Nombre,
-          Modalidad = request.Modalidad,
+          Modalidad = request.ModalidadId,
           RequiereMatriculacion = request.RequiereMatriculacion,
           SalaVirtual = request.SalaVirtual,
           TemplateCurso = templateCurso,

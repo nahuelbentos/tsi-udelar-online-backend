@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using Business.Datatypes;
 using Business.ManejadorError;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -14,13 +15,13 @@ namespace Business.Cursos
 {
   public class ConsultaByUsuario
   {
-    public class Ejecuta : IRequest<List<Curso>>
+    public class Ejecuta : IRequest<List<DtCurso>>
     {
       public Guid Id { get; set; }
 
     }
 
-    public class Manejador : IRequestHandler<Ejecuta, List<Curso>>
+    public class Manejador : IRequestHandler<Ejecuta, List<DtCurso>>
     {
       private readonly UdelarOnlineContext context;
 
@@ -29,7 +30,7 @@ namespace Business.Cursos
         this.context = context;
       }
 
-      public async Task<List<Curso>> Handle(Ejecuta request, CancellationToken cancellationToken)
+      public async Task<List<DtCurso>> Handle(Ejecuta request, CancellationToken cancellationToken)
       {
         var usuario = await this.context.Usuario.FindAsync(request.Id.ToString());
         if (usuario == null)
@@ -54,7 +55,30 @@ namespace Business.Cursos
                                                   .ToListAsync();
 
         }
-        return cursos;
+
+        List<DtCurso> dtCursos = new List<DtCurso>();
+
+        foreach (var curso in cursos)        
+        {
+          var dtCurso = new DtCurso
+          {
+            CursoId = curso.CursoId,
+            Descripcion = curso.Descripcion,
+            ModalidadId = curso.Modalidad,
+            Modalidad = Enum.GetName(typeof(ModalidadEnum), curso.Modalidad),
+            Nombre = curso.Nombre,
+            RequiereMatriculacion = curso.RequiereMatriculacion,
+            SalaVirtual = curso.SalaVirtual,
+            TemplateCurso = curso.TemplateCurso,
+            TemplateCursoId = curso.TemplateCursoId,
+            ActaCerrada = curso.ActaCerrada,
+          };
+
+          dtCursos.Add(dtCurso);
+          
+        }
+
+        return dtCursos;
 
 
 

@@ -27,7 +27,8 @@ namespace WebAPI.Controllers
       data.FacultadId = id;
       return await this.Mediator.Send(data);
     }
-
+    
+    [AllowAnonymous]
     [HttpGet]
     public async Task<ActionResult<List<Facultad>>> GetFacultades()
     {
