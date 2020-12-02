@@ -22,23 +22,23 @@ namespace WebAPI.Controllers
     public async Task<ActionResult<Unit>> AltaCurso(Nuevo.Ejecuta data) => await this.Mediator.Send(data);
 
     [HttpGet("usuario/{id}")]
-    public async Task<ActionResult<List<Curso>>> GetCursosByUsuario(Guid id) => await this.Mediator.Send(new ConsultaByUsuario.Ejecuta{ Id = id });
+    public async Task<ActionResult<List<DtCurso>>> GetCursosByUsuario(Guid id) => await this.Mediator.Send(new ConsultaByUsuario.Ejecuta{ Id = id });
     
     [HttpGet("facultad/{id}")]
-    public async Task<ActionResult<List<Curso>>> GetCursosByFacultad(Guid id ) => await this.Mediator.Send(new ConsultaByFacultad.Ejecuta{ Id = id });
+    public async Task<ActionResult<List<DtCurso>>> GetCursosByFacultad(Guid id ) => await this.Mediator.Send(new ConsultaByFacultad.Ejecuta{ Id = id });
 
     [HttpGet("carrera/{id}")]
-    public async Task<ActionResult<List<Curso>>> GetCursosByCarrera(Guid id ) => await this.Mediator.Send(new ConsultaByCarrera.Ejecuta{ Id = id });
+    public async Task<ActionResult<List<DtCurso>>> GetCursosByCarrera(Guid id ) => await this.Mediator.Send(new ConsultaByCarrera.Ejecuta{ Id = id });
     
     [HttpGet]
-    public async Task<ActionResult<List<Curso>>> GetCursos() => await this.Mediator.Send(new Consulta.Ejecuta());
+    public async Task<ActionResult<List<DtCurso>>> GetCursos() => await this.Mediator.Send(new Consulta.Ejecuta());
     
     [HttpGet("filter/{filter}")]
     public async Task<ActionResult<List<DtCurso>>> GetCursosByFilter(string filter) => await this.Mediator.Send(new ConsultaByFilter.Ejecuta{ Filter = filter });
 
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<Curso>> GetCurso(Guid Id) =>  await this.Mediator.Send(new ConsultaById.Ejecuta { CursoId = Id });
+    public async Task<ActionResult<DtCurso>> GetCurso(Guid Id) =>  await this.Mediator.Send(new ConsultaById.Ejecuta { CursoId = Id });
 
     [HttpPut("{id}")]
     public async Task<ActionResult<Unit>> ModificarCurso(Guid Id, Editar.Ejecuta data)
