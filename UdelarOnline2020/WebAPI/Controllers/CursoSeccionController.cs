@@ -43,12 +43,12 @@ namespace WebAPI.Controllers {
       return await this.Mediator.Send (new ConsultaById.Ejecuta { CursoSeccionId = Id });
     }
 
-    [HttpGet ("{id}")]
+    [HttpGet ("/bycurso/{id}")]
     public async Task<ActionResult<CursoSeccion>> GetCursoSeccionByCurso (Guid Id) {
       return await this.Mediator.Send (new ConsultaByCurso.Ejecuta { CursoId = Id });
     }
 
-    [HttpGet ("{id}")]
+    [HttpGet ("/byseccion/{id}")]
     public async Task<ActionResult<CursoSeccion>> GetCursoSeccionBySeccion (Guid Id) {
       return await this.Mediator.Send (new ConsultaBySeccion.Ejecuta { SeccionId = Id });
     }
