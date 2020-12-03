@@ -74,8 +74,15 @@ namespace Business.Actividades
                 trabajo.ArchivoExtension = archivoExtension ?? trabajo.ArchivoExtension;
                 trabajo.ArchivoData = archivoData ?? trabajo.ArchivoData;
 
-                alumno.ActividadLista.Add(trabajo);
+                var AlumnoTrabajo = new AlumnoTrabajo{
+                    AlumnoId = Guid.Parse(request.UsuarioId),
+                    Alumno = alumno,
+                    TrabajoId = request.ActividadId,
+                    Trabajo = trabajo
+                };
 
+                this.context.AlumnoTrabajo.Add(AlumnoTrabajo);
+                
                 var res = await this.context.SaveChangesAsync();
                 if (res > 0)
                 {
