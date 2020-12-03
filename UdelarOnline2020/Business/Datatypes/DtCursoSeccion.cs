@@ -8,9 +8,11 @@ namespace Business.Datatypes
     {
     public Guid CursoSeccionId { get; set; }
     public Guid CursoId { get; set; }
-    public Curso Curso { get; set; }
+    public string Curso {get; set;} 
+    public Curso CursoData { get; set; }
     public Guid SeccionId { get; set; }
-    public Seccion Seccion { get; set; }
+    public Seccion SeccionData { get; set; }
+     public string Seccion {get; set;} 
 
 
     public ICollection<Material> MaterialLista { get; set; }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Business.CursosSeccion;
+using Business.Datatypes;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -34,7 +35,7 @@ namespace WebAPI.Controllers {
     }
 
     [HttpGet]
-    public async Task<ActionResult<List<CursoSeccion>>> GetCursosSeccion () {
+    public async Task<ActionResult<List<DtCursoSeccion>>> GetCursosSeccion () {
       return await this.Mediator.Send (new Consulta.Ejecuta ());
     }
 
