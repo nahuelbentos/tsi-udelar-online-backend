@@ -8,5 +8,7 @@ namespace Business.Interfaces
   {
     string CrearToken(Usuario usuario, List<string> roles);
     bool ValidarToken(string token);
+
+    string TokenResetPassword(Usuario usuario, string resetToken);
   }
 }

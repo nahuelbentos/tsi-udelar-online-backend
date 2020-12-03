@@ -96,7 +96,7 @@ namespace WebAPI
       // .AddEntityFrameworkStores<UdelarOnlineContext>()
       // .AddDefaultTokenProviders();
       // services.Configure<DataProtectionTokenProviderOptions>(opt =>
-      //             opt.TokenLifespan = TimeSpan.FromHours(2));
+      //             opt.TokenLifespan = TimeSpan.FromMinutes(10));
  
       /* Configuración Forgot Password */
       // Configuración de IdentityCore
@@ -123,6 +123,10 @@ namespace WebAPI
           IssuerSigningKey = key,
           ValidateAudience = false, // Alguien con una IP cualquiera pueda generar un Token
           ValidateIssuer = false, // Es para el envio del token (?)
+
+          ValidateLifetime = true,
+          LifetimeValidator = CustomLifetimeValidator,
+          RequireExpirationTime = true,  
         };
       });
 
@@ -171,6 +175,15 @@ namespace WebAPI
       {
         endpoints.MapControllers();
       });
+    }
+
+    private bool CustomLifetimeValidator(DateTime? notBefore, DateTime? expires, SecurityToken tokenToValidate, TokenValidationParameters @param)
+    {
+      if (expires != null)
+      {
+        return expires > DateTime.UtcNow;
+      }
+      return false;
     }
   }
 }
