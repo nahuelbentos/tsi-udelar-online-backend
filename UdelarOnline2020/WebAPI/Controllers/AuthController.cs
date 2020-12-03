@@ -22,7 +22,8 @@ namespace WebAPI.Controllers
 
     [HttpPost("validate-token")]
     public async Task<ActionResult<Boolean>> ValidateToken(ValidateToken.Ejecuta data) => await Mediator.Send(data);
-
+    
+    [Authorize]
     [HttpPost("forgot-password")]
 
     // [ValidateAntiForgeryToken]

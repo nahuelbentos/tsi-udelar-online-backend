@@ -21,6 +21,13 @@ namespace WebAPI.Controllers
     public async Task<ActionResult<Unit>> AltaActividad(Nuevo.Ejecuta data) => await this.Mediator.Send(data);
 
 
+    [HttpPut("trabajo/{id}")]
+    public async Task<ActionResult<Unit>> AltaTrabajo(Guid id, NuevoTrabajo.Ejecuta data)
+    {
+      data.ActividadId = id;
+      return await this.Mediator.Send(data);
+    } 
+
     [HttpGet]
     public async Task<ActionResult<List<Actividad>>> GetActividades() => await this.Mediator.Send(new Consulta.Ejecuta());
     

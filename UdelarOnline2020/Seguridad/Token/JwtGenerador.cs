@@ -24,7 +24,7 @@ namespace Seguridad.Token
       {
         foreach (var role in roles)
         {
-          claims.Add(new Claim(ClaimTypes.Role, role));
+          claims.Add(new Claim(ClaimTypes.Role, role)); 
         }
       }
 
@@ -36,7 +36,7 @@ namespace Seguridad.Token
       var tokenDescripcion = new SecurityTokenDescriptor
       {
         Subject = new ClaimsIdentity(claims),
-        Expires = DateTime.Now.AddDays(30),
+        Expires = DateTime.Now.AddDays(1),
         SigningCredentials = credentials
       };
 
@@ -45,6 +45,37 @@ namespace Seguridad.Token
 
       return tokenManejador.WriteToken(token);
 
+    }
+
+    public string TokenResetPassword(Usuario usuario, string resetToken)
+    {
+      // string resetToken = await UserManager.GeneratePasswordResetTokenAsync(model.Id);
+
+      var claims = new List<Claim>{
+        new Claim(JwtRegisteredClaimNames.Email, usuario.Email) 
+      };
+ 
+
+  Console.WriteLine("1");
+      // var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes( resetToken ));
+      var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("Udelar Online TSI"));
+  Console.WriteLine("2");
+
+      var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
+
+      var tokenDescripcion = new SecurityTokenDescriptor
+      {
+        Subject = new ClaimsIdentity(claims),
+        Expires = DateTime.Now.AddDays(1),
+        SigningCredentials = credentials
+      };
+
+      var tokenManejador = new JwtSecurityTokenHandler();
+      
+      var token = tokenManejador.CreateToken(tokenDescripcion);
+      
+
+      return tokenManejador.WriteToken(token);
     }
 
     public bool ValidarToken(string token)

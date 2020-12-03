@@ -44,14 +44,14 @@ namespace WebAPI.Controllers {
       return await this.Mediator.Send (new ConsultaById.Ejecuta { CursoId = cursoId, SeccionId = seccionId });
     }
 
-    [HttpGet ("{cursoId}/{seccionId}")]
-    public async Task<ActionResult<CursoSeccion>> GetCursoSeccionByCurso (Guid cursoId, Guid seccionId) {
-      return await this.Mediator.Send (new ConsultaByCurso.Ejecuta { CursoId = cursoId });
+    [HttpGet ("/bycurso/{id}")]
+    public async Task<ActionResult<CursoSeccion>> GetCursoSeccionByCurso (Guid Id) {
+      return await this.Mediator.Send (new ConsultaByCurso.Ejecuta { CursoId = Id });
     }
 
-    [HttpGet ("{cursoId}/{seccionId}")]
-    public async Task<ActionResult<CursoSeccion>> GetCursoSeccionBySeccion (Guid cursoId, Guid seccionId) {
-      return await this.Mediator.Send (new ConsultaBySeccion.Ejecuta { SeccionId = cursoId, CursoId = cursoId });
+    [HttpGet ("/byseccion/{id}")]
+    public async Task<ActionResult<CursoSeccion>> GetCursoSeccionBySeccion (Guid Id) {
+      return await this.Mediator.Send (new ConsultaBySeccion.Ejecuta { SeccionId = Id });
     }
 
     [HttpPut ("{cursoId}/{seccionId}")]
