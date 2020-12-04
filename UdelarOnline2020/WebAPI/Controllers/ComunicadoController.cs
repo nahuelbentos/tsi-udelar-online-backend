@@ -46,19 +46,19 @@ namespace WebAPI.Controllers
       return await this.Mediator.Send(new Eliminar.Ejecuta { ComunicadoId = id });
     }
 
-    // [HttpPost]
+    [HttpPost("general")]
     public async Task<ActionResult<Unit>> PublicarGeneral(PublicarGeneral.Ejecuta data)
     {
       return await this.Mediator.Send(data);
     }
 
-    // [HttpPost]
+    [HttpPost("facultad")]
     public async Task<ActionResult<Unit>> PublicarFacultad(PublicarFacultad.Ejecuta data)
     {
       return await this.Mediator.Send(data);
     }
 
-    // [HttpPost]
+    [HttpPost("curso")]
     public async Task<ActionResult<Unit>> PublicarCurso(PublicarCurso.Ejecuta data)
     {
       return await this.Mediator.Send(data);

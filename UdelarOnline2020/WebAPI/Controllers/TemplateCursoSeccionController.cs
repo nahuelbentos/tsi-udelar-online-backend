@@ -24,9 +24,9 @@ namespace WebAPI.Controllers {
       return await this.Mediator.Send (new Consulta.Ejecuta ());
     }
 
-    [HttpGet ("id/{id}")]
-    public async Task<ActionResult<TemplateCursoSeccion>> GetTemplateCursoSeccionById (Guid id) {
-      return await this.Mediator.Send (new ConsultaById.Ejecuta { TemplateCursoSeccionId = id });
+    [HttpGet ("{templateCursoId}/{seccionId}")]
+    public async Task<ActionResult<TemplateCursoSeccion>> GetTemplateCursoSeccionById (Guid templateCursoId, Guid seccionId) {
+      return await this.Mediator.Send (new ConsultaById.Ejecuta { TemplateCursoId = templateCursoId, SeccionId = seccionId });
     }
 
     [HttpGet ("seccionId/{id}")]
@@ -39,15 +39,16 @@ namespace WebAPI.Controllers {
       return await this.Mediator.Send (new ConsultaByTemplateCurso.Ejecuta { TemplateCursoId = id });
     }
 
-    [HttpPut ("{id}")]
-    public async Task<ActionResult<Unit>> ModificarTemplateCursoSeccion (Guid id, Editar.Ejecuta data) {
-      data.TemplateCursoSeccionId = id;
+    [HttpPut ("{templateCursoId}/{seccionId}")]
+    public async Task<ActionResult<Unit>> ModificarTemplateCursoSeccion (Guid templateCursoId, Guid seccionId, Editar.Ejecuta data) {
+      data.TemplateCursoId = templateCursoId;
+      data.SeccionId = seccionId;
       return await this.Mediator.Send (data);
     }
 
-    [HttpDelete ("{id}")]
-    public async Task<ActionResult<Unit>> Eliminar (Guid id) {
-      return await this.Mediator.Send (new Eliminar.Ejecuta { TemplateCursoSeccionId = id });
+    [HttpDelete ("{templateCursoId}/{seccionId}")]
+    public async Task<ActionResult<Unit>> Eliminar (Guid templateCusoId, Guid seccionId) {
+      return await this.Mediator.Send (new Eliminar.Ejecuta { TemplateCursoId = templateCusoId, SeccionId = seccionId });
     }
 
   }

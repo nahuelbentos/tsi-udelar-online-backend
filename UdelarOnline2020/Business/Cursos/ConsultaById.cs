@@ -111,12 +111,14 @@ namespace Business.Cursos
 
 
           dtCursoSecciones.Add( new DtCursoSeccion {
-            Curso = curso,
+            Curso = curso.Nombre,
+            CursoData = curso,
             CursoId = curso.CursoId,
             ActividadLista = dtActividadLista,
             ForoLista = foroLista,
             MaterialLista = materialLista,
-            Seccion = cs.Seccion,
+            SeccionData = cs.Seccion,
+            Seccion = cs.Seccion.Nombre,
             SeccionId = cs.SeccionId
           });
  

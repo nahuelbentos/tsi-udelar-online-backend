@@ -4,7 +4,6 @@ namespace Models
 {
   public class AlumnoCurso
   {
-
     public Guid AlumnoId { get; set; }
 
     public Alumno Alumno { get; set; }
@@ -18,9 +17,6 @@ namespace Models
     public int Calificacion { get; set; }
     public string Feedback { get; set; }
     public DateTime FechaActaCerrada { get; set; }
-    
-    
-    
     
     
     

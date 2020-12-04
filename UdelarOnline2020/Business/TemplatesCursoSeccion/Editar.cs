@@ -1,24 +1,24 @@
 using System;
+using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
 using Business.ManejadorError;
 using FluentValidation;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Persistence;
 
 namespace Business.TemplatesCursoSeccion {
     public class Editar {
 
-        public class Ejecuta : IRequest {
-            public Guid TemplateCursoSeccionId { get; set; }
+        public class Ejecuta : IRequest {           
             public Guid TemplateCursoId { get; set; }
             public Guid SeccionId { get; set; }
         }
 
         public class EjecutaValidacion : AbstractValidator<Ejecuta> {
             public EjecutaValidacion () {
-                RuleFor (t => t.TemplateCursoSeccionId).NotEmpty ();
                 RuleFor (t => t.TemplateCursoId).NotEmpty ();
                 RuleFor (t => t.SeccionId).NotEmpty ();
 
@@ -33,7 +33,7 @@ namespace Business.TemplatesCursoSeccion {
             }
 
             public async Task<Unit> Handle (Ejecuta request, CancellationToken cancellationToken) {
-                var templateCursoSeccion = await this.context.TemplateCursoSeccion.FindAsync (request.TemplateCursoSeccionId);
+                var templateCursoSeccion = await this.context.TemplateCursoSeccion.Where (tc => tc.TemplateCursoId == request.TemplateCursoId && tc.SeccionId == request.SeccionId).FirstOrDefaultAsync ();
 
                 if (templateCursoSeccion == null) {
                     throw new ManejadorExcepcion (HttpStatusCode.NotFound, new { mensaje = "El template de curso no existe" });

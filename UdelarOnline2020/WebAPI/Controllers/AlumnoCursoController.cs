@@ -25,11 +25,10 @@ namespace WebAPI.Controllers
         [HttpGet("bycurso/{id}")]
         public async Task<ActionResult<List<DtAlumnoCurso>>> GetAlumnoCursoByCurso(Guid id) => await this.Mediator.Send(new ConsultaByCursoId.Ejecuta { CursoId = id});
 
-        [HttpPut("{alumnoId}/{cursoId}")]
-        public async Task<ActionResult<Unit>> ModificarAlumnoCurso(Guid alumnoId, Guid cursoId, Editar.Ejecuta data)
+        [HttpPut("{alumnoCursoId}")]
+        public async Task<ActionResult<Unit>> ModificarAlumnoCurso(Guid alumnoCursoId, Editar.Ejecuta data)
         {
-            data.AlumnoId = alumnoId;
-            data.CursoId = cursoId;
+            data.AlumnoCursoId = alumnoCursoId;
             return await this.Mediator.Send(data);
         }
 

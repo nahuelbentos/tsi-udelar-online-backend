@@ -16,14 +16,15 @@ namespace Business.CursosSeccion {
   public class AgregarForo {
 
     public class Ejecuta : IRequest {
-      public Guid CursoSeccionId { get; set; }
+      public Guid CursoId { get; set; }
+      public Guid SeccionId {get; set;}
       public Guid ForoId { get; set; }
 
     }
 
     public class EjecutaValidator : AbstractValidator<Ejecuta> {
       public EjecutaValidator () {
-        RuleFor (c => c.CursoSeccionId).NotEmpty ();
+        RuleFor (c => c.CursoId).NotEmpty ();
         RuleFor (c => c.ForoId).NotEmpty ();
       }
     }
@@ -39,7 +40,7 @@ namespace Business.CursosSeccion {
 
       public async Task<Unit> Handle (Ejecuta request, CancellationToken cancellationToken) {
 
-        var cursoSeccion = await this.context.CursoSeccion.Where (tc => tc.CursoSeccionId == request.CursoSeccionId).FirstOrDefaultAsync ();
+        var cursoSeccion = await this.context.CursoSeccion.Where (tc => tc.CursoId == request.CursoId && tc.SeccionId == request.SeccionId).FirstOrDefaultAsync ();
         if (cursoSeccion == null) {
           throw new ManejadorExcepcion (HttpStatusCode.BadRequest, new { mensaje = "No existe el curso ingresado" });
         }
