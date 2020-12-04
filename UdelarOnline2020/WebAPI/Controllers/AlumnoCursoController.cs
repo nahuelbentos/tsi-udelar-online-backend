@@ -19,18 +19,16 @@ namespace WebAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<List<DtAlumnoCurso>>> GetAlumnoCursos() => await this.Mediator.Send(new Consulta.Ejecuta());
 
+        [HttpGet("id/{alumnoId}/{cursoId}")]
+        public async Task<ActionResult<DtAlumnoCurso>> GetById(string alumnoId, Guid cursoId) => await this.Mediator.Send(new ConsultaById.Ejecuta { AlumnoId = alumnoId, CursoId = cursoId});
         [HttpGet("byalumno/{id}")]
         public async Task<ActionResult<List<DtAlumnoCurso>>> GetAlumnoCursoByAlumno(Guid id) => await this.Mediator.Send(new ConsultaByAlumnoId.Ejecuta { AlumnoId = id});
 
         [HttpGet("bycurso/{id}")]
         public async Task<ActionResult<List<DtAlumnoCurso>>> GetAlumnoCursoByCurso(Guid id) => await this.Mediator.Send(new ConsultaByCursoId.Ejecuta { CursoId = id});
 
-        [HttpPut("{alumnoCursoId}")]
-        public async Task<ActionResult<Unit>> ModificarAlumnoCurso(Guid alumnoCursoId, Editar.Ejecuta data)
-        {
-            data.AlumnoCursoId = alumnoCursoId;
-            return await this.Mediator.Send(data);
-        }
+        [HttpPut]
+        public async Task<ActionResult<Unit>> ModificarAlumnoCurso(  Editar.Ejecuta data) => await this.Mediator.Send(data);
 
         [HttpDelete("{alumnoId}/{cursoId}")]
         public async Task<ActionResult<Unit>> EliminarAlumnoCurso(Guid alumnoId, Guid cursoId) => await this.Mediator.Send(new Eliminar.Ejecuta { AlumnoId = alumnoId, CursoId = cursoId });

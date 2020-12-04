@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
@@ -12,17 +13,11 @@ namespace Business.TemplatesCursoSeccion {
   public class Nuevo {
 
     public class Ejecuta : IRequest {
-      public Guid TemplateCursoId { get; set; }
-      public Guid SeccionId { get; set; }
+      public TemplateCurso TemplateCurso { get; set; } 
+      public List<Guid> Secciones { get; set; }
 
     }
-
-    public class EjecutaValidator : AbstractValidator<Ejecuta> {
-      public EjecutaValidator () {
-        RuleFor (t => t.TemplateCursoId).NotEmpty ();
-        RuleFor (t => t.SeccionId).NotEmpty ();
-      }
-    }
+ 
 
     public class Manejador : IRequestHandler<Ejecuta> {
       private readonly UdelarOnlineContext context;
@@ -32,28 +27,32 @@ namespace Business.TemplatesCursoSeccion {
       }
 
       public async Task<Unit> Handle (Ejecuta request, CancellationToken cancellationToken) {
-        var templateCurso = await this.context.TemplateCurso.FindAsync (request.TemplateCursoId);
-
-        if (templateCurso == null) {
-          throw new ManejadorExcepcion (HttpStatusCode.NotFound, new { mensaje = "El template de curso no existe" });
-
-        }
-        var seccion = await this.context.Seccion.FindAsync (request.SeccionId);
-
-        if (seccion == null) {
-          throw new ManejadorExcepcion (HttpStatusCode.NotFound, new { mensaje = "La seccion no existe" });
-
-        }
-
-        var templateCursoSeccion = new TemplateCursoSeccion {
-          TemplateCursoSeccionId = Guid.NewGuid (),
-          TemplateCursoId = request.TemplateCursoId,
-          TemplateCurso = templateCurso,
-          SeccionId = request.SeccionId,
-          Seccion = seccion
+        var templateCurso = new TemplateCurso {
+          Descripcion = request.TemplateCurso.Descripcion,
+          Nombre = request.TemplateCurso.Nombre,
+          TemplateCursoId = Guid.NewGuid()
         };
 
-        this.context.TemplateCursoSeccion.Add (templateCursoSeccion);
+        this.context.TemplateCurso.Add(templateCurso);
+
+        foreach (var seccionId in request.Secciones)
+        {
+          var seccion = await this.context.Seccion.FindAsync (seccionId);
+
+          if (seccion == null) 
+            throw new ManejadorExcepcion (HttpStatusCode.NotFound, new { mensaje = "La seccion no existe" });
+
+          var templateCursoSeccion = new TemplateCursoSeccion {
+            TemplateCursoSeccionId = Guid.NewGuid (),
+            TemplateCursoId = templateCurso.TemplateCursoId,
+            TemplateCurso = templateCurso,
+            SeccionId = seccion.SeccionId,
+            Seccion = seccion
+          };
+
+          this.context.TemplateCursoSeccion.Add (templateCursoSeccion);
+          
+        }
 
         var res = await this.context.SaveChangesAsync ();
         if (res > 0) {

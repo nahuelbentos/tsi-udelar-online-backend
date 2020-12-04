@@ -32,8 +32,12 @@ namespace Business.AlumnoCursos
 
       public async Task<List<DtAlumnoCurso>> Handle(Ejecuta request, CancellationToken cancellationToken)
       {
-        var alumnoCursos = await this.context.AlumnoCurso.Include(ac => ac.Alumno).Include(ac => ac.Curso).Where(ac => ac.CursoId == request.CursoId).ToListAsync();
-        if (!alumnoCursos.Any())
+        var alumnoCursos = await this.context.AlumnoCurso
+                                                .Include(ac => ac.Alumno)
+                                                .Include(ac => ac.Curso)
+                                                .Where(ac => ac.CursoId == request.CursoId)
+                                                .ToListAsync();
+        if (alumnoCursos == null)
           throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "No se encontraron inscripciones asociadas al Curso" });
 
         List<DtAlumnoCurso> dtAlumnoCursos = new List<DtAlumnoCurso>();

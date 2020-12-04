@@ -43,15 +43,11 @@ namespace Business.Usuarios
       {
         RuleFor(u => u.Nombres).NotEmpty();
         RuleFor(u => u.Apellidos).NotEmpty();
-        RuleFor(u => u.CI).NotEmpty();
-        RuleFor(u => u.FechaNacimiento).NotEmpty();
-        RuleFor(u => u.Direccion).NotEmpty();
-        RuleFor(u => u.Telefono).NotEmpty();
+        RuleFor(u => u.CI).NotEmpty(); 
         RuleFor(u => u.UserName).NotEmpty();
         RuleFor(u => u.EmailPersonal).NotEmpty();
         RuleFor(u => u.FacultadId).NotEmpty().WithMessage("Es necesario saber la facultad para crear el usuario");
-        RuleFor(u => u.Password).NotEmpty();
-        RuleFor(u => u.Tipo).NotEmpty();
+        RuleFor(u => u.Password).NotEmpty(); 
       }
     }
 
