@@ -44,7 +44,7 @@ namespace Business.Seguridad
 
         // var ok = this.mailGenerator.SendMail(usuario.EmailPersonal, "Renovar Password",);
         var ok = this.mailGenerator.ResetPassword( usuario.Email, "Renovar Password",  token, usuario  );
-
+ 
         if(ok)
             return Unit.Value;
 
