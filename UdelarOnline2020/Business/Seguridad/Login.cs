@@ -21,6 +21,7 @@ namespace Business.Seguridad
     {
       public string Email { get; set; }
       public string Password { get; set; }
+      public string TokenPush { get; set; }
     }
 
     public class EjecutaValidator : AbstractValidator<Ejecuta>
@@ -55,9 +56,7 @@ namespace Business.Seguridad
         if (usuario == null)
         {
           throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "El usuario no existe en el sistema." });
-        }
-
-
+        }      
 
         var resultado = await signInManager.CheckPasswordSignInAsync(usuario, request.Password, false);
         
@@ -69,6 +68,12 @@ namespace Business.Seguridad
           var roles = new List<string>(listaRoles);
           var facultad = await this.context.Facultad.FindAsync(usuarioContext.Facultad.FacultadId);
           // La idea es que solo haya un único rol por usuario.
+
+        if(request.TokenPush != ""){
+          usuario.TokenPush = request.TokenPush;        
+        }
+        await this.context.SaveChangesAsync();
+
           var rol = "";
           if (roles.Count > 0)
             rol = roles[0]; 

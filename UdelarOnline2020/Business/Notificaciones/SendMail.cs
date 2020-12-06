@@ -29,7 +29,7 @@ namespace Business.Notificaciones
 
       public async Task<bool> Handle(Ejecuta request, CancellationToken cancellationToken)
       {
-        return await Task.FromResult( this.mailGenerator.SendMailPrueba() ) ; 
+        return await Task.FromResult( this.mailGenerator.SendMailPrueba()) ; 
       }
     }  
   }
