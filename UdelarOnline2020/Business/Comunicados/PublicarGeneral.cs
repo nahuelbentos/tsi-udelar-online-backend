@@ -43,20 +43,32 @@ namespace Business.Comunicados {
                 
                 var facultades = this.context.Facultad.ToList();
                 
+                var cantidadRegistros = 0;
                 foreach(var facultad in facultades){
-                    var comunicadoFacultad = new ComunicadoFacultad {
-                        ComunicadoId = comunicado.ComunicadoId,
-                        Comunicado = comunicado,
-                        FacultadId = facultad.FacultadId,
-                        Facultad = facultad
-                    };
-                    await this.context.ComunicadoFacultad.AddAsync(comunicadoFacultad);
+                    var existeComunicadoFacultad = await this.context.ComunicadoFacultad
+                                                    .Where(cf => cf.ComunicadoId == comunicado.ComunicadoId && cf.FacultadId == facultad.FacultadId)
+                                                    .FirstOrDefaultAsync();
+
+                    if (existeComunicadoFacultad == null){
+                        cantidadRegistros += 1;
+                        var comunicadoFacultad = new ComunicadoFacultad {
+                            ComunicadoId = comunicado.ComunicadoId,
+                            Comunicado = comunicado,
+                            FacultadId = facultad.FacultadId,
+                            Facultad = facultad
+                        };
+                        await this.context.ComunicadoFacultad.AddAsync(comunicadoFacultad);
+                    }
+                    
                 }
                 //this.context.Comunicado.Add (comunicado);
 
                 var res = await this.context.SaveChangesAsync ();
-                if (res > 0) {
+                if (res > 0) 
                     return Unit.Value;
+
+                if(cantidadRegistros == 0){
+                    throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "El comunicado ya se publico en todas las facultades." });
                 }
 
                 throw new Exception ("No se pudo dar de alta el comunicado");
