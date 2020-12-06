@@ -33,6 +33,7 @@ namespace Business.Alumnos
       {
         this.context = context;
         this.bedelias = bedelias;
+        this.pushGenerator = pushGenerator;
       }
       public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
       {

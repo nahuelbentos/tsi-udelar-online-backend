@@ -28,6 +28,7 @@ namespace Business.Alumnos {
       public Manejador (UdelarOnlineContext context, IBedeliasGenerator bedelias, IPushGenerator pushGenerator) {
         this.context = context;
         this.bedelias = bedelias;
+        this.pushGenerator = pushGenerator;
       }
       public async Task<Unit> Handle (Ejecuta request, CancellationToken cancellationToken) {
 

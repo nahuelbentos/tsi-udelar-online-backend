@@ -26,10 +26,11 @@ namespace Business.Cursos
       private readonly IBedeliasGenerator bedelias;
       private readonly IPushGenerator pushGenerator;
 
-      public Manejador(UdelarOnlineContext context, IBedeliasGenerator bedelias)
+      public Manejador(UdelarOnlineContext context, IBedeliasGenerator bedelias, IPushGenerator pushGenerator)
       {
         this.context = context;
         this.bedelias = bedelias;
+        this.pushGenerator = pushGenerator;
       }
 
       public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
