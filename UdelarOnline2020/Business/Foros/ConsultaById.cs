@@ -35,7 +35,7 @@ namespace Business.Foros
                                                 .FirstOrDefaultAsync(f => f.ForoId == request.ForoId);
                 if (foro == null)
                 {
-                    throw new ManejadorExcepcion(HttpStatusCode.Forbidden, new { mensaje = "No existe un curso con el CursoId ingresado" });
+                    throw new ManejadorExcepcion(HttpStatusCode.NotFound, new { mensaje = "No existe un curso con el CursoId ingresado" });
                 }
                 return foro;
             }

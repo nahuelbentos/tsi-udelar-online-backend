@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
@@ -12,7 +13,8 @@ namespace Business.TemplatesCursoSeccion {
     public class ConsultaById {
 
         public class Ejecuta : IRequest<TemplateCursoSeccion> {
-            public Guid TemplateCursoSeccionId { get; set; }
+            public Guid TemplateCursoId {get; set;}
+            public Guid SeccionId {get; set;}
         }
         public class Manejador : IRequestHandler<Ejecuta, TemplateCursoSeccion> {
             private readonly UdelarOnlineContext context;
@@ -22,10 +24,9 @@ namespace Business.TemplatesCursoSeccion {
             }
 
             public async Task<TemplateCursoSeccion> Handle (Ejecuta request, CancellationToken cancellationToken) {
-                var templateCursoSeccion = await this.context.TemplateCursoSeccion
-                    .Include(t => t.Seccion).Include(t => t.TemplateCurso).FirstOrDefaultAsync (t => t.TemplateCursoSeccionId == request.TemplateCursoSeccionId);
+                var templateCursoSeccion = await this.context.TemplateCursoSeccion.Where (tc => tc.TemplateCursoId == request.TemplateCursoId && tc.SeccionId == request.SeccionId).FirstOrDefaultAsync ();    
                 if (templateCursoSeccion == null) {
-                    throw new ManejadorExcepcion (HttpStatusCode.Forbidden, new { mensaje = "No existe un template de curso con el TemplateCursoId ingresado" });
+                    throw new ManejadorExcepcion (HttpStatusCode.NotFound, new { mensaje = "No existe un template de curso con el TemplateCursoId ingresado" });
                 }
                 return templateCursoSeccion;
             }

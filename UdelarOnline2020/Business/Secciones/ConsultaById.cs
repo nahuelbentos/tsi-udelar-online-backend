@@ -32,7 +32,7 @@ namespace Business.Secciones {
                                                     .FirstOrDefaultAsync(c => c.SeccionId == request.SeccionId);
                 if (carrera == null)
                 {
-                    throw new ManejadorExcepcion(HttpStatusCode.Forbidden, new { mensaje = "No existe una seccion con el SeccionId ingresado" });
+                    throw new ManejadorExcepcion(HttpStatusCode.NotFound, new { mensaje = "No existe una seccion con el SeccionId ingresado" });
                 }
                 return carrera;
             }

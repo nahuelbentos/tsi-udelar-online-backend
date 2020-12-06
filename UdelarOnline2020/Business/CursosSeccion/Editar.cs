@@ -17,7 +17,7 @@ namespace Business.CursosSeccion
   {
     public class Ejecuta : IRequest
     {
-      public Guid CursoSeccionId { get; set; }
+      public Guid CursoSeccion { get; set; }
       public Guid CursoId { get; set; }
       public Guid SeccionId { get; set; }
     }
@@ -43,8 +43,8 @@ namespace Business.CursosSeccion
 
       public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
       {
-        var cursoSeccion = await this.context.CursoSeccion.FindAsync(request.CursoSeccionId);
-
+         var cursoSeccion = await this.context.CursoSeccion.Where (tc => tc.CursoId == request.CursoId && tc.SeccionId == request.SeccionId).FirstOrDefaultAsync ();
+                
         if (cursoSeccion == null)
         {
           throw new ManejadorExcepcion(HttpStatusCode.NotFound, new { mensaje = "El curso seccion no existe" });

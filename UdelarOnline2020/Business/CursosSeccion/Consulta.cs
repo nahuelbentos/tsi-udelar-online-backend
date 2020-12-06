@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Business.Datatypes;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Models;
@@ -10,8 +11,8 @@ namespace Business.CursosSeccion
 {
   public class Consulta
   {
-    public class Ejecuta : IRequest<List<CursoSeccion>> { }
-    public class Manejador : IRequestHandler<Ejecuta, List<CursoSeccion>>
+    public class Ejecuta : IRequest<List<DtCursoSeccion>> { }
+    public class Manejador : IRequestHandler<Ejecuta, List<DtCursoSeccion>>
     {
       private readonly UdelarOnlineContext context;
 
@@ -20,12 +21,32 @@ namespace Business.CursosSeccion
         this.context = context;
       }
 
-      public async Task<List<CursoSeccion>> Handle(Ejecuta request, CancellationToken cancellationToken)
+      public async Task<List<DtCursoSeccion>> Handle(Ejecuta request, CancellationToken cancellationToken)
       {
-        // Esto cambia para devolver una lista de DataTypes, en breves lo cambio.
+
+        List<DtCursoSeccion> dtCursoSecciones = new List<DtCursoSeccion>();
         var cursos = await this.context.CursoSeccion
+                                      .Include("Curso")
+                                      .Include("Seccion")
                                       .ToListAsync();
-        return cursos;
+        if(cursos.Count > 0){
+           foreach( var c in cursos){
+             DtCursoSeccion dt = new DtCursoSeccion {
+              CursoData = c.Curso,
+              CursoId = c.Curso.CursoId,
+              Curso = c.Curso.Nombre,
+              SeccionData = c.Seccion,
+              SeccionId = c.SeccionId,
+              Seccion = c.Seccion.Nombre,
+              ActividadLista = null,
+              ForoLista = null,
+              MaterialLista = null,
+            };
+            dtCursoSecciones.Add(dt);
+          }          
+        }
+         
+        return dtCursoSecciones;
       }
     }
 

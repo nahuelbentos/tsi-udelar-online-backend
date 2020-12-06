@@ -39,34 +39,36 @@ namespace Business.Comunicados {
             }
 
             public async Task<Unit> Handle (Ejecuta request, CancellationToken cancellationToken) {
-                var comunicadoExiste = await this.context.Comunicado.Where(e => e.ComunicadoId == request.ComunicadoId).FirstOrDefaultAsync();
+                var comunicado = await this.context.Comunicado.Where(e => e.ComunicadoId == request.ComunicadoId).FirstOrDefaultAsync();
       
-                if (comunicadoExiste == null)
-                {
+                if (comunicado == null)
                     throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "No existe el comunicado ingresado" });
-                }
 
                 var curso = await this.context.Curso.Where(e => e.CursoId == request.CursoId).FirstOrDefaultAsync();
       
-                if (comunicadoExiste == null)
-                {
+                if (curso == null)
                     throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "No existe el curso ingresado" });
-                }
-                var comunicado = new ComunicadoCurso {
-                    ComunicadoId = Guid.NewGuid (),
-                    Comunicado = comunicadoExiste,
+
+                var existeCursoComunicado = await this.context.ComunicadoCurso
+                                                            .Where(cc => cc.ComunicadoId == comunicado.ComunicadoId && cc.CursoId == curso.CursoId)
+                                                            .FirstOrDefaultAsync();
+                if(existeCursoComunicado != null)
+                    throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "El comunicado ya esta publicado en el curso." });
+
+                var comunicadoCurso = new ComunicadoCurso {
+                    ComunicadoId = comunicado.ComunicadoId,
+                    Comunicado = comunicado,
                     CursoId = request.CursoId,
                     Curso = curso
                 };
 
-                this.context.ComunicadoCurso.Add (comunicado);
+                this.context.ComunicadoCurso.Add (comunicadoCurso);
 
                 var res = await this.context.SaveChangesAsync ();
-                if (res > 0) {
+                if (res > 0)  
                     return Unit.Value;
-                }
 
-                throw new Exception ("No se pudo publicar el comunicado en el curso");
+                throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "No se pudo publicar el comunicado en el curso"} );
 
             }
         }

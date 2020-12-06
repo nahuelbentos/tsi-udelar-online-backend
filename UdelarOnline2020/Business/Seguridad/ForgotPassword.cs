@@ -50,16 +50,17 @@ namespace Business.Seguridad
         if (usuario == null) 
           throw new ManejadorExcepcion(HttpStatusCode.NotFound, new { mensaje = "No existe un usuario con el email ingresado."});
         
-        var resetPassResult = await this.userManager.ResetPasswordAsync(usuario, request.Token, request.PasswordNew);
+        // var resetPassResult = await this.userManager.ResetPasswordAsync(usuario, request.Token, request.PasswordNew);
         
         Console.WriteLine("token:: " +  request.Token);
         Console.WriteLine("usuario:: " +  usuario.Id);
         Console.WriteLine("usuario:: " +  usuario.EmailPersonal);
         Console.WriteLine("usuario:: " +  usuario.Nombres);
-        // var newPassword = this.userManager.PasswordHasher.HashPassword(usuario, request.PasswordNew);
-        // usuario.PasswordHash = newPassword;
-        // var res = await this.userManager.UpdateAsync(usuario);
-        if(resetPassResult.Succeeded){
+
+        var newPassword = this.userManager.PasswordHasher.HashPassword(usuario, request.PasswordNew);
+        usuario.PasswordHash = newPassword;
+        var res = await this.userManager.UpdateAsync(usuario);
+        if(res.Succeeded){
 
 
           var resultado = await signInManager.CheckPasswordSignInAsync(usuario, request.PasswordNew, false);
@@ -68,7 +69,10 @@ namespace Business.Seguridad
           { 
             var listaRoles = await this.userManager.GetRolesAsync(usuario);
             var roles = new List<string>(listaRoles);
-            var facultad = await this.context.Facultad.FindAsync(usuario.Facultad.FacultadId);
+            
+            var usuarioContext = await this.context.Usuario.Include(u => u.Facultad).Include(u => u.ComunicadoLista).FirstOrDefaultAsync(u => u.Id == usuario.Id);
+            Console.WriteLine("FacultadId:: " + usuarioContext.Facultad.FacultadId);
+            var facultad = await this.context.Facultad.FindAsync(usuarioContext.Facultad.FacultadId);
             // La idea es que solo haya un único rol por usuario.
             var rol = "";
             if (roles.Count > 0)
@@ -104,7 +108,7 @@ namespace Business.Seguridad
         }
 
 
-        var mensajeErrores = resetPassResult.Errors.Select(e => e.Description);
+        var mensajeErrores = res.Errors.Select(e => e.Description);
         throw new ManejadorExcepcion(HttpStatusCode.InternalServerError, new { mensaje = "Ocurrió un error, no se pudo reestablecer la contraseña", mensajeErrores });
         // throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "Ocurrio un error inesperado. " }); 
       }

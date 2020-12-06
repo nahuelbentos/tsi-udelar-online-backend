@@ -11,13 +11,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Business.Cursos
 {
-    public class CerrarActas
+  public class CerrarActas
+  {
+    public class Ejecuta : IRequest
     {
-        public class Ejecuta : IRequest        
-        {
-            public Guid CursoId { get; set; }            
-            
-        }
+      public Guid CursoId { get; set; }
+
+    }
 
     public class Manejador : IRequestHandler<Ejecuta>
     {
@@ -32,24 +32,33 @@ namespace Business.Cursos
 
       public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
       {
-        var curso = await this.context.Curso.FindAsync( request.CursoId );
-        if(curso == null)
-            throw new ManejadorExcepcion(HttpStatusCode.NotFound, new { mensaje = "El curso no existe."} );
+        var curso = await this.context.Curso.FindAsync(request.CursoId);
+        if (curso == null)
+          throw new ManejadorExcepcion(HttpStatusCode.NotFound, new { mensaje = "El curso no existe." });
 
-        var alumnosDelCurso = await this.context.AlumnoCurso.Where( ac => ac.CursoId == curso.CursoId).ToListAsync();
-        var ciAlumnos = alumnosDelCurso.Select( a => a.Alumno.CI).ToArray();
+        var alumnosDelCurso = await this.context.AlumnoCurso.Include(ac => ac.Alumno).Where(ac => ac.CursoId == curso.CursoId).ToListAsync();
+        if (alumnosDelCurso == null)
+          throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "El curso no tiene alumnos inscriptos." });
+          
+        var ciAlumnos = alumnosDelCurso.Select(a => a.Alumno.CI).ToArray();
         var actaCerrada = await this.bedelias.CerrarActa(ciAlumnos, curso.CursoId);
-
-        curso.ActaCerrada = actaCerrada;
-        if(!actaCerrada)
-            throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "No se pudo cerrar el acta, verifique la lista de alumnos."} );
-
-        if(await this.context.SaveChangesAsync() > 0)
-            return Unit.Value;
-
-        throw new ManejadorExcepcion(HttpStatusCode.InternalServerError, new { mensaje = "Ocurrio un error al cerrar el acta del curso."} );
-            
         
+        curso.ActaCerrada = actaCerrada;
+        if (!actaCerrada)
+          throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "No se pudo cerrar el acta, verifique la lista de alumnos." });
+
+          foreach (var ac in alumnosDelCurso)
+          {
+              ac.FechaActaCerrada = DateTime.UtcNow;
+          }
+
+        var result = await this.context.SaveChangesAsync();
+        if (result > 0)
+          return Unit.Value;
+
+        throw new ManejadorExcepcion(HttpStatusCode.InternalServerError, new { mensaje = "Ocurrio un error al cerrar el acta del curso." });
+
+
 
 
 
