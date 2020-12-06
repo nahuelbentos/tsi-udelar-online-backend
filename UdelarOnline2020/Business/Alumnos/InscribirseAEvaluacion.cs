@@ -29,7 +29,7 @@ namespace Business.Alumnos
       private readonly IBedeliasGenerator bedelias;
       private readonly IPushGenerator pushGenerator;
 
-      public Manejador(UdelarOnlineContext context, IBedeliasGenerator bedelias)
+      public Manejador(UdelarOnlineContext context, IBedeliasGenerator bedelias, IPushGenerator pushGenerator)
       {
         this.context = context;
         this.bedelias = bedelias;
