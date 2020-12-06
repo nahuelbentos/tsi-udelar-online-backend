@@ -8,8 +8,8 @@ namespace Business.Notificaciones
 {
     public class PushNotifications
     {
-        public class Ejecuta : IRequest<bool> {}
-        public class Manejador : IRequestHandler<Ejecuta, bool>
+        public class Ejecuta : IRequest<string> {}
+        public class Manejador : IRequestHandler<Ejecuta, string>
         {
         private readonly IPushGenerator pushGenerator;
 
@@ -18,7 +18,7 @@ namespace Business.Notificaciones
             this.pushGenerator = pushGenerator;
         }
 
-        public async Task<bool> Handle(Ejecuta request, CancellationToken cancellationToken)
+        public async Task<string> Handle(Ejecuta request, CancellationToken cancellationToken)
         {
             return await Task.FromResult( this.pushGenerator.SendPushPrueba()) ; 
         }

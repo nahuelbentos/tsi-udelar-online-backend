@@ -17,6 +17,6 @@ namespace WebAPI.Controllers
     
 
     [HttpPost("sendPush")]
-      public async Task<ActionResult<bool>> SendPush() => await this.Mediator.Send(new PushNotifications.Ejecuta());
+      public async Task<ActionResult<string>> SendPush() => await this.Mediator.Send(new PushNotifications.Ejecuta());
   }
 }
