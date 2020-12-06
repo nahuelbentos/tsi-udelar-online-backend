@@ -8,6 +8,7 @@ using Persistence;
 using Business.ManejadorError;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 
 namespace Business.Cursos
 {
@@ -23,6 +24,7 @@ namespace Business.Cursos
     {
       private readonly UdelarOnlineContext context;
       private readonly IBedeliasGenerator bedelias;
+      private readonly IPushGenerator pushGenerator;
 
       public Manejador(UdelarOnlineContext context, IBedeliasGenerator bedelias)
       {
@@ -46,12 +48,19 @@ namespace Business.Cursos
         curso.ActaCerrada = actaCerrada;
         if (!actaCerrada)
           throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "No se pudo cerrar el acta, verifique la lista de alumnos." });
+       
+         List<string> tokens = new List<string>();
 
           foreach (var ac in alumnosDelCurso)
           {
               ac.FechaActaCerrada = DateTime.UtcNow;
+              if(ac.Alumno.TokenPush != "")
+                tokens.Add(ac.Alumno.TokenPush);
+              
           }
 
+        pushGenerator.SendPushNotifications ("Ya están las notas!", "Ya fueron cerradas las actas del curso " + curso.Nombre, tokens);
+        
         var result = await this.context.SaveChangesAsync();
         if (result > 0)
           return Unit.Value;
