@@ -16,7 +16,7 @@ namespace Business.Usuarios
     {
         public class Ejecuta : IRequest<List<DtUsuario>>
         {
-            public string Rol { get; set; }            
+            public string UsuarioId { get; set; }            
             
         }
 
@@ -31,8 +31,13 @@ namespace Business.Usuarios
       public async Task<List<DtUsuario>> Handle(Ejecuta request, CancellationToken cancellationToken)
       {
         
+        var usuarioDb = await this.context.Users.Include(u => u.Facultad).Include(u => u.ComunicadoLista).Where(u => u.Id == request.UsuarioId).FirstOrDefaultAsync();
+        if(usuarioDb == null)
+          throw new ManejadorExcepcion(HttpStatusCode.NotFound, new { mensaje = "No existe un usuario con ese Id." });
+        var rol = usuarioDb.GetType().ToString().Split('.')[1];
+
         List<Usuario> usuarios = null;
-        switch (request.Rol)
+        switch (rol)
         {
           case "Administrador":
 
@@ -42,7 +47,7 @@ namespace Business.Usuarios
             usuarios = await this.context.Usuario
                                           .Include(u => u.Facultad)
                                           .Include(u => u.ComunicadoLista)
-                                          .Where(u => !(u is Administrador))
+                                          .Where(u => !(u is Administrador) && u.Facultad.FacultadId == usuarioDb.Facultad.FacultadId)
                                           .ToListAsync<Usuario>();
             
             break;
@@ -50,7 +55,7 @@ namespace Business.Usuarios
             usuarios = await this.context.Usuario
                                           .Include(u => u.Facultad)
                                           .Include(u => u.ComunicadoLista)
-                                          .Where(u => (u is Alumno)) 
+                                          .Where(u => (u is Alumno) && u.Facultad.FacultadId == usuarioDb.Facultad.FacultadId ) 
                                           .ToListAsync<Usuario>();
 
             break;
@@ -58,7 +63,7 @@ namespace Business.Usuarios
             usuarios = await this.context.Usuario
                                           .Include(u => u.Facultad)
                                           .Include(u => u.ComunicadoLista)
-                                          .Where(u => !((u is Administrador) && (u is AdministradorFacultad)))
+                                          .Where(u => !((u is Administrador) && (u is AdministradorFacultad)) && u.Facultad.FacultadId == usuarioDb.Facultad.FacultadId )
                                           .ToListAsync<Usuario>(); 
             
             break;

@@ -34,6 +34,10 @@ namespace WebAPI.Controllers {
       return await this.Mediator.Send (new ConsultaBySeccion.Ejecuta { SeccionId = id });
     }
 
+    [HttpGet ("secciones-by-template/{id}")]
+    public async Task<ActionResult<List<Seccion>>> getSeccionesByTemplate (Guid id)  => 
+        await this.Mediator.Send (new GetSeccionesByTemplate.Ejecuta { TemplateCursoId = id });
+
     [HttpGet ("templateCursoId/{id}")]
     public async Task<ActionResult<TemplateCursoSeccion>> GetTemplateCursoSeccionByTemplateCurso (Guid id) {
       return await this.Mediator.Send (new ConsultaByTemplateCurso.Ejecuta { TemplateCursoId = id });

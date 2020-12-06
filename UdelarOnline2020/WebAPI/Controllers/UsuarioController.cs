@@ -32,8 +32,8 @@ namespace WebAPI.Controllers
     [HttpGet("tipo/{tipo}")]
     public async Task<ActionResult<List<DtUsuario>>> GetUsuariosByTipo(string tipo) => await this.Mediator.Send(new ConsultaByTipo.Ejecuta { Tipo = tipo });
     
-    [HttpGet("rol/{rol}")]
-    public async Task<ActionResult<List<DtUsuario>>> GetUsuariosByRol(string rol) => await this.Mediator.Send(new ConsultaByRol.Ejecuta { Rol = rol });
+    [HttpGet("rol/{id}")]
+    public async Task<ActionResult<List<DtUsuario>>> GetUsuariosByRol(string id) => await this.Mediator.Send(new ConsultaByRol.Ejecuta { UsuarioId = id });
 
     [HttpGet("alumno/curso/{id}")]
     public async Task<ActionResult<List<DtUsuario>>> GetAlumnosByCurso(Guid id) => await this.Mediator.Send(new ConsultaAlumnoByCurso.Ejecuta { CursoId = id });
