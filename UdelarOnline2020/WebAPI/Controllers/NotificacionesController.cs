@@ -8,12 +8,15 @@ namespace WebAPI.Controllers
   
   public class NotificacionesController : MiControllerBase
   {
-    [HttpPost("sendMail")]
 
+    [HttpPost("sendMail")]
     public async Task<ActionResult<bool>> SendMail()
     {
         return await this.Mediator.Send(new SendMail.Ejecuta());
     }
     
+
+    [HttpPost("sendPush")]
+      public async Task<ActionResult<bool>> SendPush() => await this.Mediator.Send(new PushNotifications.Ejecuta());
   }
 }
