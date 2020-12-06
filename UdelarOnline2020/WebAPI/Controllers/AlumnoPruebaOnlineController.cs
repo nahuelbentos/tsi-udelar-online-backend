@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Business.AlumnoPruebaOnlines;
+using Business.Datatypes;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Models;
@@ -25,7 +26,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpGet("byalumno/{id}")]
-        public async Task<ActionResult<List<AlumnoPruebaOnline>>> GetAlumnoPruebaOnlineByAlumno(Guid id)
+        public async Task<ActionResult<List<DtEvaluacion>>> GetAlumnoPruebaOnlineByAlumno(Guid id)
         {
             return await this.Mediator.Send(new ConsultaByAlumnoId.Ejecuta { AlumnoId = id});
         }

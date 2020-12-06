@@ -36,7 +36,7 @@ namespace Business.Usuarios
         var facultadDb = await this.context.Facultad.FindAsync(request.FacultadId);
 
         if (facultadDb == null)
-          throw new ManejadorExcepcion(HttpStatusCode.Forbidden, new { mensaje = "No existe un facultad con el FacultadId ingresado" });
+          throw new ManejadorExcepcion(HttpStatusCode.NotFound, new { mensaje = "No existe un facultad con el FacultadId ingresado" });
 
         var docentes = await this.context.Usuario
                                           .Include(u => u.Facultad)

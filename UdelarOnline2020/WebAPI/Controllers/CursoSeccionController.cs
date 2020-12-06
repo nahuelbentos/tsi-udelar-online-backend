@@ -19,17 +19,17 @@ namespace WebAPI.Controllers {
       return await this.Mediator.Send (data);
     }
 
-    [HttpPost ("/foro")]
+    [HttpPost ("foro")]
     public async Task<ActionResult<Unit>> AgregarForo (AgregarForo.Ejecuta data) {
       return await this.Mediator.Send (data);
     }
 
-    [HttpPost ("/actividad")]
+    [HttpPost ("actividad")]
     public async Task<ActionResult<Unit>> AgregarActividad (AgregarActividad.Ejecuta data) {
       return await this.Mediator.Send (data);
     }
 
-    [HttpPost ("/material")]
+    [HttpPost ("material")]
     public async Task<ActionResult<Unit>> AgregarMaterial (AgregarMaterial.Ejecuta data) {
       return await this.Mediator.Send (data);
     }
@@ -39,17 +39,21 @@ namespace WebAPI.Controllers {
       return await this.Mediator.Send (new Consulta.Ejecuta ());
     }
 
+    [HttpGet("secciones-by-curso/{cursoId}")]
+    public async Task<ActionResult<List<Seccion>>> GetSeccionesByCurso (Guid cursoId) =>
+              await this.Mediator.Send (new SeccionesByCurso.Ejecuta { CursoId = cursoId });
+
     [HttpGet ("{cursoId}/{seccionId}")]
     public async Task<ActionResult<CursoSeccion>> GetCursoSeccion (Guid cursoId, Guid seccionId) {
       return await this.Mediator.Send (new ConsultaById.Ejecuta { CursoId = cursoId, SeccionId = seccionId });
     }
 
-    [HttpGet ("/bycurso/{id}")]
+    [HttpGet ("bycurso/{id}")]
     public async Task<ActionResult<CursoSeccion>> GetCursoSeccionByCurso (Guid Id) {
       return await this.Mediator.Send (new ConsultaByCurso.Ejecuta { CursoId = Id });
     }
 
-    [HttpGet ("/byseccion/{id}")]
+    [HttpGet ("byseccion/{id}")]
     public async Task<ActionResult<CursoSeccion>> GetCursoSeccionBySeccion (Guid Id) {
       return await this.Mediator.Send (new ConsultaBySeccion.Ejecuta { SeccionId = Id });
     }

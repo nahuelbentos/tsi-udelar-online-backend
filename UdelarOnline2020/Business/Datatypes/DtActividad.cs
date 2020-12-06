@@ -15,5 +15,9 @@ namespace Business.Datatypes
 
     public string UsuarioId { get; set; }
     public Usuario Usuario { get; set; }
+
+    public string Tipo { get; set; }
+    
+    
   }
 }

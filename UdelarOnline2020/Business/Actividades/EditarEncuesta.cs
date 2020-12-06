@@ -16,7 +16,7 @@ namespace Business.Actividades
   {
     public class Ejecuta : IRequest
     {
-      public Guid EncuestaId { get; set; }
+      public Guid ActividadId { get; set; }
       public DateTime? FechaRealizada { get; set; }
       public DateTime? FechaFinalizada { get; set; }
       public string Nombre { get; set; }
@@ -35,16 +35,16 @@ namespace Business.Actividades
 
       public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
       {
-        var encuesta = await this.context.Encuesta.FindAsync(request.EncuestaId);
+        var encuesta = await this.context.Encuesta.FindAsync(request.ActividadId);
 
         if (encuesta == null)
           throw new ManejadorExcepcion(HttpStatusCode.NotFound, new { mensaje = "No existe un encuesta con ese Id." });
 
-        var preguntas = await this.context.Pregunta.Include(p => p.RespuestaLista).Where(p => p.EncuestaId == request.EncuestaId).ToListAsync();
+        var preguntas = await this.context.Pregunta.Include(p => p.RespuestaLista).Where(p => p.EncuestaId == request.ActividadId).ToListAsync();
 
         foreach (var pregunta in preguntas)
         {
-            if( pregunta.RespuestaLista.Count == 0 )
+            if( pregunta.RespuestaLista.Count > 0 )
                 throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "La encuesta ya ha sido respondida por un alumno, no se puede modificar." });
         }
 
@@ -52,10 +52,11 @@ namespace Business.Actividades
           encuesta.FechaFinalizada = request.FechaFinalizada ?? encuesta.FechaFinalizada;
           encuesta.FechaRealizada = request.FechaRealizada ?? encuesta.FechaRealizada;
           encuesta.Nombre = request.Nombre ?? encuesta.Nombre;
-          encuesta.Descripcion = request.Descripcion ?? encuesta.Descripcion; 
+          encuesta.Descripcion = request.Descripcion ?? encuesta.Descripcion;
 
-        
-        if (await this.context.SaveChangesAsync() > 0)
+        this.context.Encuesta.Update(encuesta);
+        var res = await this.context.SaveChangesAsync();
+        if (res > 0)
         {
             //eliminoLasPreguntasQueNo tiene
             var preguntasEliminar = await this.context.Pregunta.Where( p => p.EncuestaId == encuesta.ActividadId).ToListAsync();
@@ -73,8 +74,8 @@ namespace Business.Actividades
                 };
                 this.context.Pregunta.Add(p);
             }
-
-          if (await this.context.SaveChangesAsync() > 0)
+            var response = await this.context.SaveChangesAsync();
+          if (response > 0)
             return Unit.Value;
         }
 

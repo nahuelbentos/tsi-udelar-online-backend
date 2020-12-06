@@ -39,13 +39,19 @@ namespace Business.CursosSeccion {
       public async Task<Unit> Handle (Ejecuta request, CancellationToken cancellationToken) {
 
         var curso = await this.context.Curso.Where (tc => tc.CursoId == request.CursoId).FirstOrDefaultAsync ();
-        if (curso == null) {
+        if (curso == null)
           throw new ManejadorExcepcion (HttpStatusCode.BadRequest, new { mensaje = "No existe el curso ingresado" });
-        }
+
         var seccion = await this.context.Seccion.Where (tc => tc.SeccionId == request.SeccionId).FirstOrDefaultAsync ();
-        if (seccion == null) {
+        if (seccion == null) 
           throw new ManejadorExcepcion (HttpStatusCode.BadRequest, new { mensaje = "No existe la seccion ingresada" });
-        }
+        
+        var existeCursoSeccion = await this.context.CursoSeccion
+                                                        .Where (cs => cs.SeccionId == request.SeccionId && cs.CursoId == curso.CursoId)
+                                                        .FirstOrDefaultAsync ();
+        if (existeCursoSeccion != null) 
+          throw new ManejadorExcepcion (HttpStatusCode.BadRequest, new { mensaje = "La sección ya se encuentra vinculada al curso." });
+
 
         var cursoSeccion = new CursoSeccion {
           CursoId = request.CursoId,

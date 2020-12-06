@@ -29,7 +29,7 @@ namespace WebAPI.Controllers
     } 
 
     [HttpGet]
-    public async Task<ActionResult<List<Actividad>>> GetActividades() => await this.Mediator.Send(new Consulta.Ejecuta());
+    public async Task<ActionResult<List<DtActividad>>> GetActividades() => await this.Mediator.Send(new Consulta.Ejecuta());
     
     [HttpGet("tipo/{tipo}")]
     public async Task<ActionResult<List<Actividad>>> GetActividadesByTipo(string tipo) => await this.Mediator.Send(new ConsultaByTipo.Ejecuta { Tipo = tipo });
@@ -66,7 +66,7 @@ namespace WebAPI.Controllers
     [HttpPut("encuesta/{id}")]
     public async Task<ActionResult<Unit>> ModificarEncuesta(Guid id, EditarEncuesta.Ejecuta data)
     {
-      data.EncuestaId = id;
+      data.ActividadId = id;
       return await this.Mediator.Send(data);
     }
   }

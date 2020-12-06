@@ -25,7 +25,7 @@ namespace Business.TemplatesCurso {
                 var templateCurso = await this.context.TemplateCurso
                     .FirstOrDefaultAsync (t => t.TemplateCursoId == request.TemplateCursoId);
                 if (templateCurso == null) {
-                    throw new ManejadorExcepcion (HttpStatusCode.Forbidden, new { mensaje = "No existe un template de curso con el TemplateCursoId ingresado" });
+                    throw new ManejadorExcepcion (HttpStatusCode.NotFound, new { mensaje = "No existe un template de curso con el TemplateCursoId ingresado" });
                 }
                 return templateCurso;
             }

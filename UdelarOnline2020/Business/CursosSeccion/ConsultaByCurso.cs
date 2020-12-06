@@ -32,7 +32,7 @@ namespace Business.CursosSeccion
         var curso = await this.context.CursoSeccion.FirstOrDefaultAsync(c => c.CursoId == request.CursoId);
         if (curso == null)
         {
-          throw new ManejadorExcepcion(HttpStatusCode.Forbidden, new { mensaje = "No existe un curso con el CursoId ingresado" });
+          throw new ManejadorExcepcion(HttpStatusCode.NotFound, new { mensaje = "No existe un curso con el CursoId ingresado" });
         }
         return curso;
       }

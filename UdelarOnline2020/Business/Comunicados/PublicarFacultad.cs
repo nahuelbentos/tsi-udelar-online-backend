@@ -40,36 +40,37 @@ namespace Business.Comunicados {
             }
 
             public async Task<Unit> Handle (Ejecuta request, CancellationToken cancellationToken) {
-                var comunicadoExiste = await this.context.Comunicado.Where(e => e.ComunicadoId == request.ComunicadoId).FirstOrDefaultAsync();
+                var comunicado = await this.context.Comunicado.Where(e => e.ComunicadoId == request.ComunicadoId).FirstOrDefaultAsync();
       
-                if (comunicadoExiste == null)
-                {
+                if (comunicado == null)
                     throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "No existe el comunicado ingresado" });
-                }
 
                 var facultad = await this.context.Facultad.Where(e => e.FacultadId == request.FacultadId).FirstOrDefaultAsync();
       
-                if (comunicadoExiste == null)
-                {
+                if (facultad == null)
                     throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "No existe la facultad ingresada" });
-                }
 
+                var existeComunicadoFacultad = await this.context.ComunicadoFacultad
+                                                    .Where(cf => cf.ComunicadoId == comunicado.ComunicadoId && cf.FacultadId == facultad.FacultadId)
+                                                    .FirstOrDefaultAsync();
 
-                var comunicado = new ComunicadoFacultad {
-                    ComunicadoId = Guid.NewGuid (),
-                    Comunicado = comunicadoExiste,
+                if (existeComunicadoFacultad != null)
+                    throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "El comunicado ya esta publicado en el curso." });
+
+                var comunicadoFacultad = new ComunicadoFacultad {
+                    ComunicadoId = comunicado.ComunicadoId,
+                    Comunicado = comunicado,
                     FacultadId = request.FacultadId,
                     Facultad = facultad
                 };
 
-                this.context.ComunicadoFacultad.Add (comunicado);
+                this.context.ComunicadoFacultad.Add (comunicadoFacultad);
 
                 var res = await this.context.SaveChangesAsync ();
-                if (res > 0) {
+                if (res > 0) 
                     return Unit.Value;
-                }
 
-                throw new Exception ("No se pudo publicar el comunicado en la facultad");
+                throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "No se pudo publicar el comunicado en la facultad"});
 
             }
         }

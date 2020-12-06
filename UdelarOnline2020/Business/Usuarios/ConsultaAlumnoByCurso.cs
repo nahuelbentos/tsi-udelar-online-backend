@@ -36,7 +36,7 @@ namespace Business.Usuarios
         var curso = await this.context.Curso.FindAsync(request.CursoId);
 
         if (curso == null)
-          throw new ManejadorExcepcion(HttpStatusCode.Forbidden, new { mensaje = "No existe un curso con el CursoId ingresado" });
+          throw new ManejadorExcepcion(HttpStatusCode.NotFound, new { mensaje = "No existe un curso con el CursoId ingresado" });
 
         var alumnos = await this.context.AlumnoCurso
                                           .Include(uc => uc.Curso)

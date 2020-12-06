@@ -42,6 +42,7 @@ namespace Business.Comunicados {
                 }
                 
                 var facultades = this.context.Facultad.ToList();
+                
                 foreach(var facultad in facultades){
                     var comunicadoFacultad = new ComunicadoFacultad {
                         ComunicadoId = comunicado.ComunicadoId,

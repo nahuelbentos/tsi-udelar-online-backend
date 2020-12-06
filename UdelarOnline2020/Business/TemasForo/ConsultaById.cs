@@ -25,7 +25,7 @@ namespace Business.TemasForo {
                 var temaForo = await this.context.TemaForo
                     .FirstOrDefaultAsync (t => t.TemaForoId == request.TemaForoId);
                 if (temaForo == null) {
-                    throw new ManejadorExcepcion (HttpStatusCode.Forbidden, new { mensaje = "No existe un tema de foro con el TemaForoId ingresado" });
+                    throw new ManejadorExcepcion (HttpStatusCode.NotFound, new { mensaje = "No existe un tema de foro con el TemaForoId ingresado" });
                 }
                 return temaForo;
             }

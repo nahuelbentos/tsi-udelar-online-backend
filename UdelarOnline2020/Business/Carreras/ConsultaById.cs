@@ -34,7 +34,7 @@ namespace Business.Carreras
                                                     .FirstOrDefaultAsync(c => c.CarreraId == request.CarreraId);
                 if (carrera == null)
                 {
-                    throw new ManejadorExcepcion(HttpStatusCode.Forbidden, new { mensaje = "No existe una carrera con el CarreraId ingresado" });
+                    throw new ManejadorExcepcion(HttpStatusCode.NotFound, new { mensaje = "No existe una carrera con el CarreraId ingresado" });
                 }
                 return carrera;
             }
