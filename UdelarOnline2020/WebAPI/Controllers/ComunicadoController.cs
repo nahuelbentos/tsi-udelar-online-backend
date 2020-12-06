@@ -33,6 +33,12 @@ namespace WebAPI.Controllers
       return await this.Mediator.Send(new ConsultaById.Ejecuta { ComunicadoId = id });
     }
 
+    [HttpGet("facultad/{id}")]
+    public async Task<ActionResult<List<Comunicado>>> GetComunicadosByFacultadId(Guid id)
+    {
+      return await this.Mediator.Send(new ConsultaByFacultadId.Ejecuta { FacultadId = id });
+    }
+
       [HttpPut("{id}")]
     public async Task<ActionResult<Unit>> ModificarComunicado(Guid id, Editar.Ejecuta data)
     {

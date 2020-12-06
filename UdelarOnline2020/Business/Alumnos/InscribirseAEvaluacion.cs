@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading;
@@ -26,6 +27,7 @@ namespace Business.Alumnos
     {
       private readonly UdelarOnlineContext context;
       private readonly IBedeliasGenerator bedelias;
+      private readonly IPushGenerator pushGenerator;
 
       public Manejador(UdelarOnlineContext context, IBedeliasGenerator bedelias)
       {
@@ -55,6 +57,13 @@ namespace Business.Alumnos
 
         if (!inscripto)
           throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "Bedelías rechazo la inscripcion, comuniquese con un administrador." });
+       
+        if (alumno.TokenPush != "") {
+          List<string> token = new List<string>();
+          token.Add (alumno.TokenPush);
+          pushGenerator.SendPushNotifications ("Inscripción Correcta!", "Te has inscripto correctamente a la evaluación " + pruebaOnline.Nombre, token);
+        }
+         
 
         var alumnoPruebaOnline = new AlumnoPruebaOnline
         {
@@ -71,11 +80,6 @@ namespace Business.Alumnos
           return Unit.Value;
 
         throw new ManejadorExcepcion(HttpStatusCode.InternalServerError, new { mensaje = "Ocurrió un error al inscribir al alumno en la evaluación." });
-
-
-
-
-
 
       }
     }
