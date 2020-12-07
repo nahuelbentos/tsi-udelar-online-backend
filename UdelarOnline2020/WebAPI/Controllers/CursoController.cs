@@ -8,6 +8,7 @@ using Models;
 using System;
 using Microsoft.AspNetCore.Authorization;
 using Business.Datatypes;
+using System.IO;
 
 namespace WebAPI.Controllers
 {
@@ -29,6 +30,9 @@ namespace WebAPI.Controllers
 
     [HttpGet("carrera/{id}")]
     public async Task<ActionResult<List<DtCurso>>> GetCursosByCarrera(Guid id ) => await this.Mediator.Send(new ConsultaByCarrera.Ejecuta{ Id = id });
+
+    [HttpGet("exportarPdf/{facultadId}")]
+        public async Task<ActionResult<Stream>>ExportarPDF(Guid facultadId) =>  await Mediator.Send(new ExportarPDF.Ejecuta{FacultadId = facultadId});
     
     [HttpGet]
     public async Task<ActionResult<List<DtCurso>>> GetCursos() => await this.Mediator.Send(new Consulta.Ejecuta());
