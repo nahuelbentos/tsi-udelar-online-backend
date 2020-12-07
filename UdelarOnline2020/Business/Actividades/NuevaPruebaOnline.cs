@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using Business.Datatypes;
 using Business.ManejadorError;
 using FluentValidation;
 using MediatR;
@@ -24,7 +25,7 @@ namespace Business.Actividades
       public string Url { get; set; }
       public int MinutosExpiracion { get; set; }
       public bool Activa { get; set; }
-      public ICollection<PreguntaRespuesta> ListaPreguntaRespuesta { get; set; }
+      public List<DtPreguntaRespuesta> ListaPreguntaRespuesta { get; set; }
 
       public string UsuarioId { get; set; }
 
@@ -46,14 +47,16 @@ namespace Business.Actividades
       public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
       {
 
-
+  	    Console.WriteLine("ListaPreguntaRespuesta: " + request.ListaPreguntaRespuesta.Count);
         var usuario = await this.context.Usuario.FindAsync(request.UsuarioId);
 
         if (usuario == null)
           throw new ManejadorExcepcion(HttpStatusCode.NotFound, new { mensaje = "No existe un usuario con ese Id." });
+        
 
         PruebaOnline po = new PruebaOnline
-        {
+        { 
+          ActividadId = Guid.NewGuid(),
           FechaFinalizada = request.FechaFinalizada,
           FechaRealizada = request.FechaRealizada,
           Nombre = request.Nombre,
@@ -62,7 +65,6 @@ namespace Business.Actividades
           Url = request.Url,
           MinutosExpiracion = request.MinutosExpiracion,
           Activa = request.Activa,
-          ListaPreguntaRespuesta = request.ListaPreguntaRespuesta,
           Usuario = usuario,
           UsuarioId = usuario.Id
 
@@ -72,11 +74,34 @@ namespace Business.Actividades
         var res = await this.context.SaveChangesAsync();
         if (res > 0)
         {
-          return Unit.Value;
+          foreach (var pr in request.ListaPreguntaRespuesta)
+          {
+            PreguntaRespuesta preguntaRespuesta = new PreguntaRespuesta{
+              PruebaOnline = po,
+              PruebaOnlineActividadId = po.ActividadId,
+              PreguntaRespuestaId = Guid.NewGuid(),
+              Pregunta = pr.Pregunta,
+              Puntos = pr.Puntos,
+              RespuestaCorrecta = pr.RespuestaCorrecta,
+              Resta = pr.Resta,
+              Respuesta1 = pr.Respuesta1,
+              Respuesta2 = pr.Respuesta2,
+              Respuesta3 = pr.Respuesta3,
+              Respuesta4 = pr.Respuesta4,
+
+            };
+            this.context.PreguntaRespuesta.Add(preguntaRespuesta);
+          }
+
+          var response = await this.context.SaveChangesAsync();
+          if(response > 0){
+            return Unit.Value;
+          }
         }
 
         throw new ManejadorExcepcion(HttpStatusCode.InternalServerError, new { mensaje = "Ocurrio un error al insertar la PruebaOnline" });
       }
+
     }
   }
 }

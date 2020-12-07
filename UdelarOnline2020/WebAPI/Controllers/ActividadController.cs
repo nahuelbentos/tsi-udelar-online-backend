@@ -56,7 +56,10 @@ namespace WebAPI.Controllers
     public async Task<ActionResult<Unit>> AltaPruebaOnline(NuevaPruebaOnline.Ejecuta data) => await this.Mediator.Send(data);
 
     [HttpGet("pruebaonline")]
-    public async Task<ActionResult<List<PruebaOnline>>> GetPruebasOnline() => await this.Mediator.Send(new ConsultaPruebaOnline.Ejecuta());
+    public async Task<ActionResult<List<DtPruebaOnline>>> GetPruebasOnline() => await this.Mediator.Send(new ConsultaPruebaOnline.Ejecuta());
+    
+    [HttpGet("pruebaonline/{id}")]
+    public async Task<ActionResult<DtPruebaOnline>> GetPruebasOnlineById(Guid id) => await this.Mediator.Send(new GetPruebaOnlineById.Ejecuta{ Id = id });
  
 
     //Encuesta

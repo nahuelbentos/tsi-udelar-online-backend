@@ -17,7 +17,7 @@ namespace Perifericos.Mail
                       "<body>";
           mail += "<h4>Estimado alumno:</h4> <br>";
           mail += "<h4>En este mail encontrará un link para poder cambiar su contraseña. En caso de no haber solicitado dicha acción, ignore el mensaje.</h4><br>";
-          mail += $"<h4>Link:  <a href='http://localhost:4200/home/forgot-password?fromEmail=true&token={token}' target='_blank' rel='noopener noreferrer'>ir a UdelarOnline</a>.</h4>";
+          mail += $"<h4>Link:  <a href='http://udelaronline.web.elasticloud.uy/home/forgot-password?fromEmail=true&token={token}' target='_blank' rel='noopener noreferrer'>ir a UdelarOnline</a>.</h4>";
           mail += "<br><br><br><br><br>";
           mail += "<h4>Saluda atte.: Equipo de UdelarOnline</h4>";
           mail += "</body>" +

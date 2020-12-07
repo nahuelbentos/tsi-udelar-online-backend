@@ -57,8 +57,7 @@ namespace Business.PreguntaRespuestas
                 var preguntarespuesta = new PreguntaRespuesta
                 {
                     PreguntaRespuestaId = new Guid(),
-                    Pregunta = request.Pregunta,
-                    Respuestas = request.Respuestas,
+                    Pregunta = request.Pregunta, 
                     RespuestaCorrecta = request.RespuestaCorrecta,
                     Puntos = request.Puntos,
                     Resta = request.Resta
