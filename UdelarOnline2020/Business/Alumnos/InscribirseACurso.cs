@@ -24,11 +24,13 @@ namespace Business.Alumnos {
       private readonly UdelarOnlineContext context;
       private readonly IBedeliasGenerator bedelias;
       private readonly IPushGenerator pushGenerator;
+      private readonly IMailGenerator mailGenerator;
 
-      public Manejador (UdelarOnlineContext context, IBedeliasGenerator bedelias, IPushGenerator pushGenerator) {
+      public Manejador (UdelarOnlineContext context, IBedeliasGenerator bedelias, IPushGenerator pushGenerator, IMailGenerator mailGenerator) {
         this.context = context;
         this.bedelias = bedelias;
         this.pushGenerator = pushGenerator;
+        this.mailGenerator = mailGenerator;
       }
       public async Task<Unit> Handle (Ejecuta request, CancellationToken cancellationToken) {
 
@@ -53,6 +55,9 @@ namespace Business.Alumnos {
           inscripto = await this.bedelias.AprobarInscripcionCurso (alumno.CI, curso.CursoId);
           if (!inscripto)
             throw new ManejadorExcepcion (HttpStatusCode.BadRequest, new { mensaje = "Bedelías rechazo la inscripcion, comuniquese con un administrador." });
+          
+          if (alumno.EmailPersonal != "")
+            this.mailGenerator.mailInscripcionCurso(alumno.EmailPersonal, $"Inscripción al curso: {curso.Nombre} {curso.Descripcion}", curso);
             
           if (alumno.TokenPush != "") {
             List<string> token = new List<string>();

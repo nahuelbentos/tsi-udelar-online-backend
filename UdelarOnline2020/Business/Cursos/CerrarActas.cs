@@ -25,12 +25,14 @@ namespace Business.Cursos
       private readonly UdelarOnlineContext context;
       private readonly IBedeliasGenerator bedelias;
       private readonly IPushGenerator pushGenerator;
+      private readonly IMailGenerator mailGenerator;
 
-      public Manejador(UdelarOnlineContext context, IBedeliasGenerator bedelias, IPushGenerator pushGenerator)
+      public Manejador(UdelarOnlineContext context, IBedeliasGenerator bedelias, IPushGenerator pushGenerator, IMailGenerator mailGenerator)
       {
         this.context = context;
         this.bedelias = bedelias;
         this.pushGenerator = pushGenerator;
+        this.mailGenerator = mailGenerator;
       }
 
       public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
@@ -57,10 +59,14 @@ namespace Business.Cursos
               ac.FechaActaCerrada = DateTime.UtcNow;
               if(ac.Alumno.TokenPush != "")
                 tokens.Add(ac.Alumno.TokenPush);
+              if(ac.Alumno.EmailPersonal != "")
+                this.mailGenerator.mailCerrarActa(ac.Alumno.EmailPersonal, "Cierre de cursos - Acta cerrada", curso);
               
           }
 
         pushGenerator.SendPushNotifications ("Ya están las notas!", "Ya fueron cerradas las actas del curso " + curso.Nombre, tokens);
+
+        
         
         var result = await this.context.SaveChangesAsync();
         if (result > 0)

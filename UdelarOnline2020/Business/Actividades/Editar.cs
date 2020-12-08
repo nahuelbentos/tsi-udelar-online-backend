@@ -33,6 +33,11 @@ namespace Business.Actividades
       public string Url { get; set; }
       public int? MinutosExpiracion { get; set; }
       public bool Activa { get; set; }
+
+
+      public string ArchivoData { get; set; }
+      public string ArchivoNombre { get; set; }
+      public string ArchivoExtension { get; set; }
     }
   
 
@@ -52,6 +57,7 @@ namespace Business.Actividades
         {
           throw new ManejadorExcepcion(HttpStatusCode.NotFound, new { mensaje = "No existe la actividad ingresada." });
         }
+
 
         var tipo = "Models." + request.Tipo;
 
@@ -116,16 +122,31 @@ namespace Business.Actividades
         actividad.Nombre = request.Nombre ?? actividad.Nombre;
         actividad.Descripcion = request.Descripcion ?? actividad.Nombre;
 
+
+        byte[] archivoData = null;
+        if (request.ArchivoData != null)
+          archivoData = Convert.FromBase64String(request.ArchivoData);
+
+        string archivoNombre = null;
+        if (request.ArchivoNombre != null)
+          archivoNombre = request.ArchivoNombre;
+
+        string archivoExtension = null;
+        if (request.ArchivoExtension != null)
+          archivoExtension = request.ArchivoExtension;
+
         switch (request.Tipo)
         {
           case "ClaseDictada":
-            /*
+            
 
             ClaseDictada claseAux = (ClaseDictada)actividad;
             ClaseDictada claseOldAux = (ClaseDictada)actividadActualizar;
-            claseAux.Archivo = request.Archivo ?? claseOldAux.Archivo;
+            claseAux.ArchivoData = archivoData ?? claseOldAux.ArchivoData;
+            claseAux.ArchivoNombre = archivoNombre ?? claseOldAux.ArchivoNombre;
+            claseAux.ArchivoExtension = archivoExtension ?? claseOldAux.ArchivoExtension;
 
-            */
+            
             break;
           case "Encuesta":
             //no me permitia acceder al atributo nombre sin hacer conversion implicita, por eso está asi 22-10-2020 Albert
@@ -141,6 +162,9 @@ namespace Business.Actividades
             trabajoAux.Nota = request.Nota ?? trabajoOldAux.Nota;
             trabajoAux.EsIndividual = request.EsIndividual ? true : false;
             trabajoAux.Calificacion = request.Calificacion;
+            trabajoAux.ArchivoData = archivoData ?? trabajoOldAux.ArchivoData;
+            trabajoAux.ArchivoNombre = archivoNombre ?? trabajoOldAux.ArchivoNombre;
+            trabajoAux.ArchivoExtension = archivoExtension ?? trabajoOldAux.ArchivoExtension;
             break;
           case "PruebaOnline":
             PruebaOnline pruebaOnlineAux = (PruebaOnline)actividad;

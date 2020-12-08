@@ -192,7 +192,10 @@ namespace Business.Usuarios
       EmailPersonal = data.EmailPersonal,
       Email = email,
       Password = data.Password,
-      Tipo = data.Tipo
+      Tipo = data.Tipo,
+      CI = data.CI,
+      
+
     };
   }
 }

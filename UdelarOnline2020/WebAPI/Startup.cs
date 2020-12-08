@@ -51,8 +51,8 @@ namespace WebAPI
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
-      // 200 MB
-      const int maxRequestLimit = 209715200;
+      // 10MB
+      const int maxRequestLimit = 10485760; // 209715200; -> 200MB
 
       services.AddDbContext<UdelarOnlineContext>(opt =>
       {

@@ -28,12 +28,14 @@ namespace Business.Alumnos
       private readonly UdelarOnlineContext context;
       private readonly IBedeliasGenerator bedelias;
       private readonly IPushGenerator pushGenerator;
+      private readonly IMailGenerator mailGenerator;
 
-      public Manejador(UdelarOnlineContext context, IBedeliasGenerator bedelias, IPushGenerator pushGenerator)
+      public Manejador(UdelarOnlineContext context, IBedeliasGenerator bedelias, IPushGenerator pushGenerator, IMailGenerator mailGenerator)
       {
         this.context = context;
         this.bedelias = bedelias;
         this.pushGenerator = pushGenerator;
+        this.mailGenerator = mailGenerator;
       }
       public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
       {
@@ -54,10 +56,21 @@ namespace Business.Alumnos
         if (curso == null)
           throw new ManejadorExcepcion(HttpStatusCode.NotFound, new { mensaje = "La Prueba Online no esta vinculada a ningún curso." });
 
+        var estaInscripto = await this.context.AlumnoPruebaOnline
+                                                .Include(apo => apo.Alumno)
+                                                .Include(apo => apo.PruebaOnline)
+                                                .Where( apo => apo.AlumnoId == Guid.Parse(alumno.Id)  && apo.PruebaOnlineId == pruebaOnline.ActividadId)
+                                                .FirstOrDefaultAsync();
+        if(estaInscripto != null)
+          throw new ManejadorExcepcion(HttpStatusCode.NotFound, new { mensaje = "El alumno ya está inscripto en la evaluación." });
+
         var inscripto = await this.bedelias.AprobarInscripcionEvaluacion(alumno.CI, curso.CursoId);
 
         if (!inscripto)
           throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "Bedelías rechazo la inscripcion, comuniquese con un administrador." });
+        
+        if (alumno.EmailPersonal != "")
+          this.mailGenerator.mailInscripcionEvaluacion(alumno.EmailPersonal, $"Inscripción a la evaluación: {pruebaOnline.Nombre} {pruebaOnline.Descripcion}", pruebaOnline);
        
         if (alumno.TokenPush != "") {
           List<string> token = new List<string>();

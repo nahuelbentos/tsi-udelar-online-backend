@@ -36,10 +36,13 @@ namespace WebAPI.Controllers
 
     [HttpGet("alumno/{id}")]
     public async Task<ActionResult<List<Actividad>>> GetActividadesByAlumno(Guid id) => await this.Mediator.Send(new ConsultaByAlumno.Ejecuta { AlumnoId = id });
+    
+    [HttpGet("curso/{id}")]
+    public async Task<ActionResult<List<Actividad>>> GetActividadesByCurso(Guid id) => await this.Mediator.Send(new ConsultaByCurso.Ejecuta { CursoId = id });
 
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<Actividad>> GetActividad(Guid id) => await this.Mediator.Send(new ConsultaById.Ejecuta { ActividadId = id });
+    public async Task<ActionResult<DtActividad>> GetActividad(Guid id) => await this.Mediator.Send(new ConsultaById.Ejecuta { ActividadId = id });
 
     [HttpPut("{id}")]
     public async Task<ActionResult<Unit>> ModificarActividad(Guid id, Editar.Ejecuta data)

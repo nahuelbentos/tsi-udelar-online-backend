@@ -5,6 +5,75 @@ namespace Perifericos.Mail
 {
   public class MailGenerator : IMailGenerator
   {
+    public bool mailCerrarActa(string to, string subject, Curso curso)
+    {
+
+
+      string mail = string.Empty;
+      mail = $"<html>" +
+                  "<head> " +
+                  "<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'>" +
+                  "</head>" +
+                  "<body>";
+      mail += "<h4>Estimado alumno:</h4> <br>";
+      mail += $"<h4>Le informamos que ya se encuentran cerradas las actas para el curso {curso.Nombre} {curso.Descripcion}.</h4><br>";
+      mail += $"<h4>Cualquier duda que tenga, no dude en consultar con sus docentes.</h4>";
+      mail += "<br><br><br><br><br>";
+      mail += "<h4>Saluda atte.: Equipo de UdelarOnline</h4>";
+      mail += "</body>" +
+                  "</html>";
+
+      MailService.SendMail(to, "", subject, mail, "UdelarOnline - Notificaciones");
+      return true;
+    }
+
+    public bool mailInscripcionCurso(string to, string subject, Curso curso)
+    {
+
+
+      string mail = string.Empty;
+
+      mail = $"<html>" +
+                  "<head> " +
+                  "<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'>" +
+                  "</head>" +
+                  "<body>";
+      mail += "<h4>Estimado alumno:</h4> <br>";
+      mail += $"<h4>Se ha registrado la inscripción al curso {curso.Nombre} {curso.Descripcion}.</h4><br>";
+      mail += $"<h4>Esperamos que los contenidos del curso, sean de su agrado.</h4>";
+      mail += "<br><br><br><br><br>";
+      mail += "<h4>Saluda atte.: Equipo de UdelarOnline</h4>";
+      mail += "</body>" +
+                  "</html>";
+
+      MailService.SendMail(to, "", subject, mail, "UdelarOnline - Notificaciones");
+      return true;
+    }
+
+    public bool mailInscripcionEvaluacion(string to, string subject, PruebaOnline evaluacion)
+    {
+      
+          string mail = string.Empty;
+
+          mail = $"<html>" +
+                      "<head> " +
+                      "<link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'>" +
+                      "</head>" +
+                      "<body>";
+          mail += "<h4>Estimado alumno:</h4> <br>";
+          mail += $"<h4>Se ha registrado la inscripción a la evaluación {evaluacion.Nombre} {evaluacion.Descripcion}.</h4><br>";
+          mail += $"<h4>La misma tiene fecha de realización: {evaluacion.FechaFinalizada}.</h4>";
+          mail += "<br><br><br><br><br>";
+          mail += "<h4>Le deseamos, buena suerte en la misma.</h4>";
+          mail += "<br><br><br>";
+          mail += "<h4>Saluda atte.: Equipo de UdelarOnline</h4>";
+          mail += "</body>" +
+                      "</html>";
+
+          MailService.SendMail(to, "", subject, mail, "UdelarOnline - Notificaciones");
+          return true;
+    }
+
     public bool ResetPassword(string to, string subject,  string token, Usuario usuario)
     {
 

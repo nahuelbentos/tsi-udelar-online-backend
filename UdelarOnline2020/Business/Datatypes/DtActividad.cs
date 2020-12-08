@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Models;
 
 namespace Business.Datatypes
@@ -17,7 +18,11 @@ namespace Business.Datatypes
     public Usuario Usuario { get; set; }
 
     public string Tipo { get; set; }
+ 
+
     
-    
+
+
+
   }
 }
