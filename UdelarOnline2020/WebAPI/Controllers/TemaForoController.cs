@@ -23,8 +23,9 @@ namespace WebAPI.Controllers
     [HttpGet]
     public async Task<ActionResult<List<TemaForo>>> GetTemasForo() => await this.Mediator.Send(new Consulta.Ejecuta());
     
-    [HttpGet("foro/{id}")]
-    public async Task<ActionResult<List<TemaForo>>> GetTemaForoByForo(Guid id) => await this.Mediator.Send(new GetTemaForoByForo.Ejecuta { ForoId = id });
+    [HttpGet("foro/{id}/{usuarioId}")]
+    public async Task<ActionResult<List<TemaForo>>> GetTemaForoByForo(Guid id, string usuarioId) => 
+          await this.Mediator.Send(new GetTemaForoByForo.Ejecuta { ForoId = id, UsuarioId = usuarioId });
 
     [HttpGet("id/{id}")]
     public async Task<ActionResult<TemaForo>> GetTemaForoById(Guid id) => await this.Mediator.Send(new ConsultaById.Ejecuta { TemaForoId = id });
