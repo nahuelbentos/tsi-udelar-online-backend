@@ -24,18 +24,11 @@ namespace Business.TemasForo
       public string ArchivoNombre { get; set; }
       public string ArchivoExtension { get; set; }
       public bool SuscripcionADiscusion { get; set; }
+      public Guid ForoId { get; set; }
 
     }
 
-    public class EjecutaValidator : AbstractValidator<Ejecuta>
-    {
-      public EjecutaValidator()
-      {
-        RuleFor(t => t.Asunto).NotEmpty().WithMessage("El asunto es requerido.");
-        RuleFor(t => t.Mensaje).NotEmpty();
-        RuleFor(t => t.EmisorId).NotEmpty();
-      }
-    }
+    
 
     public class Manejador : IRequestHandler<Ejecuta>
     {
@@ -49,37 +42,39 @@ namespace Business.TemasForo
       public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
       {
 
-        if (request.EmisorId != string.Empty)
-        {
 
-          var emisorId = await this.context.Usuario.Where(u => u.Id == request.EmisorId).FirstOrDefaultAsync();
+          var emisor = await this.context.Usuario.Where(u => u.Id == request.EmisorId).FirstOrDefaultAsync();
 
-          if (emisorId == null)
-          {
+          if (emisor == null)
             throw new ManejadorExcepcion(HttpStatusCode.NotFound, new { mensaje = "No existe el emisor ingresado." });
-          }
-        }
+
+          var foro = await this.context.Foro.Where( f => f.ForoId == request.ForoId).FirstOrDefaultAsync();
+
+          if (foro == null)
+            throw new ManejadorExcepcion(HttpStatusCode.NotFound, new { mensaje = "No existe el foro ingresado." });
+
         var temaForo = new TemaForo
         {
           TemaForoId = Guid.NewGuid(),
           Asunto = request.Asunto,
           Mensaje = request.Mensaje,
           EmisorId = request.EmisorId,
+          Emisor = emisor,
           ArchivoData = Convert.FromBase64String(request.ArchivoData),
           ArchivoNombre = request.ArchivoNombre,
           ArchivoExtension = request.ArchivoExtension,
           SubscripcionADiscusion = request.SuscripcionADiscusion,
+          Foro = foro,
+          ForoId = foro.ForoId,
         };
 
         this.context.TemaForo.Add(temaForo);
 
         var res = await this.context.SaveChangesAsync();
         if (res > 0)
-        {
           return Unit.Value;
-        }
-
-        throw new Exception("No se pudo dar de alta el tema de foro");
+        
+        throw new ManejadorExcepcion(HttpStatusCode.InternalServerError, new { mensaje = "No se pudo dar de alta el tema de foro." });
 
       }
     }

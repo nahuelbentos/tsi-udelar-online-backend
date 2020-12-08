@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Business.Datatypes;
@@ -12,7 +13,11 @@ namespace Business.Actividades
 {
     public class ConsultaPruebaOnline
     {
-         public class Ejecuta : IRequest<List<DtPruebaOnline>> { }
+         public class Ejecuta : IRequest<List<DtPruebaOnline>> {
+             public string UsuarioId { get; set; }
+             
+             
+          }
         public class Manejador : IRequestHandler<Ejecuta, List<DtPruebaOnline>>
         {
             private readonly UdelarOnlineContext context;
@@ -28,6 +33,7 @@ namespace Business.Actividades
                 var pruebasOnlines = await this.context.PruebaOnline
                                                                 .Include(a => a.Usuario)
                                                                 .Include(a => a.ListaPreguntaRespuesta)
+                                                                .Where(p => p.UsuarioId == request.UsuarioId)
                                                                 .ToListAsync();
                 
                 List<DtPruebaOnline> dtPruebaOnlines = new List<DtPruebaOnline>();

@@ -13,5 +13,8 @@ namespace Models
     public string ArchivoNombre { get; set; }
     public string ArchivoExtension { get; set; }
     public bool SubscripcionADiscusion { get; set; }
+
+    public Guid ForoId { get; set; }
+    public Foro Foro { get; set; }
   }
 }
