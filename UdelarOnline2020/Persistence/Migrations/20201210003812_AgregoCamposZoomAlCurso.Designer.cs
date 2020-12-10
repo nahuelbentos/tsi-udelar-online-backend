@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence;
 
 namespace Persistence.Migrations
 {
     [DbContext(typeof(UdelarOnlineContext))]
-    partial class UdelarOnlineContextModelSnapshot : ModelSnapshot
+    [Migration("20201210003812_AgregoCamposZoomAlCurso")]
+    partial class AgregoCamposZoomAlCurso
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -529,6 +531,26 @@ namespace Persistence.Migrations
                     b.ToTable("DocenteTrabajo");
                 });
 
+            modelBuilder.Entity("Models.DtPruebaRespuesta", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<Guid?>("PreguntaRespuestaId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("respuesta")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("PreguntaRespuestaId");
+
+                    b.ToTable("DtPruebaRespuesta");
+                });
+
             modelBuilder.Entity("Models.Facultad", b =>
                 {
                     b.Property<Guid>("FacultadId")
@@ -687,18 +709,6 @@ namespace Persistence.Migrations
 
                     b.Property<int>("Puntos")
                         .HasColumnType("int");
-
-                    b.Property<string>("Respuesta1")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Respuesta2")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Respuesta3")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Respuesta4")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("RespuestaCorrecta")
                         .HasColumnType("int");
@@ -938,9 +948,6 @@ namespace Persistence.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Telefono")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TokenPush")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("TwoFactorEnabled")
@@ -1434,6 +1441,13 @@ namespace Persistence.Migrations
                         .HasForeignKey("TrabajoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Models.DtPruebaRespuesta", b =>
+                {
+                    b.HasOne("Models.PreguntaRespuesta", null)
+                        .WithMany("Respuestas")
+                        .HasForeignKey("PreguntaRespuestaId");
                 });
 
             modelBuilder.Entity("Models.Foro", b =>

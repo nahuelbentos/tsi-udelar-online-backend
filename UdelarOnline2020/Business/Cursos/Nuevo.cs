@@ -23,6 +23,8 @@ namespace Business.Cursos
       public ModalidadEnum ModalidadId { get; set; }
       public bool RequiereMatriculacion { get; set; }
       public string SalaVirtual { get; set; }
+      public string ZoomId { get; set; }
+      public string ZoomPassword { get; set; }
       public Guid? TemplateCursoId { get; set; }
 
     }
@@ -64,6 +66,8 @@ namespace Business.Cursos
           Modalidad = request.ModalidadId,
           RequiereMatriculacion = request.RequiereMatriculacion,
           SalaVirtual = request.SalaVirtual,
+          ZoomId= request.ZoomId,
+          ZoomPassword = request.ZoomPassword,
           TemplateCurso = templateCurso,
           ActaCerrada = false
         };
