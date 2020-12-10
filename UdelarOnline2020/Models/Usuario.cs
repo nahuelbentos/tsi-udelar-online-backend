@@ -21,6 +21,7 @@ namespace Models
     public string EmailPersonal { get; set; }
     public Facultad Facultad { get; set; }
 
+    public string UrlFotoPerfil { get; set; }
     public string TokenPush { get; set; }
 
     public  ICollection<Comunicado> ComunicadoLista { get; set; }

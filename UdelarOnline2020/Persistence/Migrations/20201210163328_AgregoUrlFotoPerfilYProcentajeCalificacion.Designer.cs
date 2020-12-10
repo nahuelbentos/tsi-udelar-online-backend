@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence;
 
 namespace Persistence.Migrations
 {
     [DbContext(typeof(UdelarOnlineContext))]
-    partial class UdelarOnlineContextModelSnapshot : ModelSnapshot
+    [Migration("20201210163328_AgregoUrlFotoPerfilYProcentajeCalificacion")]
+    partial class AgregoUrlFotoPerfilYProcentajeCalificacion
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -272,9 +274,6 @@ namespace Persistence.Migrations
 
                     b.Property<int>("Nota")
                         .HasColumnType("int");
-
-                    b.Property<bool>("RealizadaPorAlumno")
-                        .HasColumnType("bit");
 
                     b.HasKey("AlumnoId", "PruebaOnlineId");
 

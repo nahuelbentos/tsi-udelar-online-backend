@@ -17,7 +17,9 @@ namespace Models
     public DateTime FechaFin { get; set; }
     public DateTime FechaExpiracion { get; set; }
     public int Nota { get; set; }
+    public float CalificacionPorcentaje { get; set; }
     public bool Inscripto { get; set; }
+    public bool RealizadaPorAlumno { get; set; }
 
     public List<RespuestaPrueba> ListaRespuestas { get; set; }   
     

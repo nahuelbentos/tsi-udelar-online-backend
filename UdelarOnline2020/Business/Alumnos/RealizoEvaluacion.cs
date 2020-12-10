@@ -10,8 +10,8 @@ using Persistence;
 
 namespace Business.Alumnos
 {
-  public class EstaInscriptoEvaluacion
-  {
+    public class RealizoEvaluacion
+    {
     public class Ejecuta : IRequest<bool>
     {
       public string AlumnoId { get; set; }
@@ -38,12 +38,13 @@ namespace Business.Alumnos
         if (pruebaOnline == null)
           throw new ManejadorExcepcion(HttpStatusCode.NotFound, new { mensaje = "La Prueba Online no existe." });
 
-        var estaInscripto = await this.context.AlumnoPruebaOnline
+        var realizoEvaluacion = await this.context.AlumnoPruebaOnline
                                                 .Where(apo => apo.Alumno.Id == request.AlumnoId && apo.PruebaOnlineId == request.PruebaOnlineId)
+                                                .Select(apo => apo.RealizadaPorAlumno)
                                                 .FirstOrDefaultAsync();
 
-        return (estaInscripto != null);
+        return realizoEvaluacion;
       }
     }
-  }
+    }
 }

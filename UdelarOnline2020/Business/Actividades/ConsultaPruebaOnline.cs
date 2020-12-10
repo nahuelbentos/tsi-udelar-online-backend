@@ -39,7 +39,7 @@ namespace Business.Actividades
                 List<DtPruebaOnline> dtPruebaOnlines = new List<DtPruebaOnline>();
                 foreach (var pruebaOnline in pruebasOnlines)
                 {   
-                    Console.WriteLine("count:: " + pruebaOnline.ListaPreguntaRespuesta.Count);
+                    
                     dtPruebaOnlines.Add(new DtPruebaOnline{
                         Activa = pruebaOnline.Activa,
                         ActividadId = pruebaOnline.ActividadId,

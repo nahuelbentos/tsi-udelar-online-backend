@@ -32,6 +32,9 @@ namespace WebAPI.Controllers
     
     [HttpPost("esta-inscripto-evaluacion")]
     public async Task<ActionResult<bool>> EstaInscriptoEvaluacion(EstaInscriptoEvaluacion.Ejecuta data) => await this.Mediator.Send(data);
+    
+    [HttpPost("realizo-evaluacion")]
+    public async Task<ActionResult<bool>> RealizoEvaluacion(EstaInscriptoEvaluacion.Ejecuta data) => await this.Mediator.Send(data);
 
 
     [HttpGet("prueba-online/{id}")]

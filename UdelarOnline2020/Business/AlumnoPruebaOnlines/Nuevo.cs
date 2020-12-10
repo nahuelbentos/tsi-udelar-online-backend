@@ -1,8 +1,10 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using Business.Datatypes;
 using Business.ManejadorError;
 using FluentValidation;
 using MediatR;
@@ -17,13 +19,16 @@ namespace Business.AlumnoPruebaOnlines
     {
         public class Ejecuta : IRequest
         {
-            public Guid AlumnoId { get; set; }
             public Guid PruebaOnlineId { get; set; }
+            public Guid AlumnoId { get; set; }
             public DateTime FechaInicio { get; set; }
             public DateTime? FechaFin { get; set; }
             public DateTime FechaExpiracion { get; set; }
             public int? Nota { get; set; }
             public bool? Inscripto { get; set; }
+            public float? CalificacionPorcentaje { get; set; }
+
+            public List<DtRespuestaPrueba> RespuestasAlumno { get; set; }
         }
 
         public class EjecutaValidator : AbstractValidator<Ejecuta>
@@ -40,12 +45,10 @@ namespace Business.AlumnoPruebaOnlines
         public class Manejador : IRequestHandler<Ejecuta>
         {
             private readonly UdelarOnlineContext context;
-            private readonly ILogger<Manejador> logger;
 
-            public Manejador(UdelarOnlineContext context, ILogger<Manejador> logger)
+            public Manejador(UdelarOnlineContext context)
             {
                 this.context = context;
-                this.logger = logger;
             }
             public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
             {
@@ -79,7 +82,9 @@ namespace Business.AlumnoPruebaOnlines
                     FechaFin = request.FechaFin.GetValueOrDefault(),
                     FechaExpiracion = request.FechaExpiracion,
                     Nota = request.Nota.GetValueOrDefault(),
-                    Inscripto = request.Inscripto.GetValueOrDefault()
+                    CalificacionPorcentaje = request.CalificacionPorcentaje.GetValueOrDefault(),
+                    Inscripto = request.Inscripto.GetValueOrDefault(),
+                    RealizadaPorAlumno = false
                 };
 
                 context.AlumnoPruebaOnline.Add(ac);

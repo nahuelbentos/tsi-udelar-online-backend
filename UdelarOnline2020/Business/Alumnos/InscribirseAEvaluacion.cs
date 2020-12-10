@@ -63,11 +63,12 @@ namespace Business.Alumnos
                                                 .FirstOrDefaultAsync();
         if(estaInscripto != null)
           throw new ManejadorExcepcion(HttpStatusCode.NotFound, new { mensaje = "El alumno ya está inscripto en la evaluación." });
+        
+        var inscripto = true;
+        // var inscripto = await this.bedelias.AprobarInscripcionEvaluacion(alumno.CI, curso.CursoId);
 
-        var inscripto = await this.bedelias.AprobarInscripcionEvaluacion(alumno.CI, curso.CursoId);
-
-        if (!inscripto)
-          throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "Bedelías rechazo la inscripcion, comuniquese con un administrador." });
+        // if (!inscripto)
+        //   throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "Bedelías rechazo la inscripcion, comuniquese con un administrador." });
         
         if (alumno.EmailPersonal != "")
           this.mailGenerator.mailInscripcionEvaluacion(alumno.EmailPersonal, $"Inscripción a la evaluación: {pruebaOnline.Nombre} {pruebaOnline.Descripcion}", pruebaOnline);
