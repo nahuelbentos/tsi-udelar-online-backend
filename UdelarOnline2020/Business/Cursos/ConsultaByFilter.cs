@@ -65,6 +65,8 @@ namespace Business.Cursos
                 Nombre = curso.Nombre,
                 RequiereMatriculacion = curso.RequiereMatriculacion,
                 SalaVirtual = curso.SalaVirtual,
+                ZoomId = curso.ZoomId,
+                ZoomPassword = curso.ZoomPassword,
                 Alumnos = alumnos,
                 Secciones = secciones,
                 TemplateCurso = curso.TemplateCurso,

@@ -14,6 +14,8 @@ namespace Business.Datatypes
         public string Modalidad { get; set; }
         public bool RequiereMatriculacion { get; set; }
         public string SalaVirtual { get; set; }
+        public string ZoomId { get; set; }
+        public string ZoomPassword { get; set; }
         public TemplateCurso TemplateCurso { get; set; }
         public Guid? TemplateCursoId { get; set; }
         public bool ActaCerrada { get; set; }

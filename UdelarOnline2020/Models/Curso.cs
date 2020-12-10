@@ -14,6 +14,8 @@ namespace Models
     public ModalidadEnum Modalidad { get; set; }
     public bool RequiereMatriculacion { get; set; }
     public string SalaVirtual { get; set; }
+    public string ZoomId { get; set; }
+    public string ZoomPassword { get; set; }
 
 
     [AllowNull]

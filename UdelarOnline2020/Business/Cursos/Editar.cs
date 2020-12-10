@@ -23,6 +23,8 @@ namespace Business.Cursos
       public ModalidadEnum? ModalidadId { get; set; }
       public bool? RequiereMatriculacion { get; set; }
       public string SalaVirtual { get; set; }
+      public string ZoomId { get; set; }
+      public string ZoomPassword { get; set; }
       public Guid? TemplateCursoId { get; set; }
     }
 
@@ -85,6 +87,8 @@ namespace Business.Cursos
         curso.Modalidad = request.ModalidadId ?? curso.Modalidad;
         curso.RequiereMatriculacion = request.RequiereMatriculacion ?? curso.RequiereMatriculacion;
         curso.SalaVirtual = request.SalaVirtual ?? curso.SalaVirtual;
+        curso.ZoomId = request.ZoomId ?? curso.ZoomId;
+        curso.ZoomPassword = request.ZoomPassword ?? curso.ZoomPassword;
 
         var res = await this.context.SaveChangesAsync();
 
