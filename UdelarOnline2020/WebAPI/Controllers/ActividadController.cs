@@ -63,6 +63,10 @@ namespace WebAPI.Controllers
     
     [HttpGet("pruebaonline/{id}")]
     public async Task<ActionResult<DtPruebaOnline>> GetPruebasOnlineById(Guid id) => await this.Mediator.Send(new GetPruebaOnlineById.Ejecuta{ Id = id });
+
+
+    [HttpPut("pruebaonline/{id}")]
+    public async Task<ActionResult<Unit>> ModificarUsuario(Guid id, EditarPruebaOnline.Ejecuta data) => await this.Mediator.Send(EditarPruebaOnline.GetData(id, data));
  
 
     //Encuesta
