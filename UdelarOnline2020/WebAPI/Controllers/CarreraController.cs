@@ -17,22 +17,16 @@ namespace WebAPI.Controllers
     {
         [HttpPost]
  
-        public async Task<ActionResult<Unit>> AltaCarrera(Nuevo.Ejecuta data)
-        {
-            return await this.Mediator.Send(data);
-        }
+        public async Task<ActionResult<Unit>> AltaCarrera(Nuevo.Ejecuta data) => await this.Mediator.Send(data);
 
         [HttpGet]
-        public async Task<ActionResult<List<Carrera>>> GetCarreras()
-        {
-            return await this.Mediator.Send(new Consulta.Ejecuta());
-        }
+        public async Task<ActionResult<List<Carrera>>> GetCarreras() => await this.Mediator.Send(new Consulta.Ejecuta());
+
+        [HttpGet("facultad/{id}")]
+        public async Task<ActionResult<List<Carrera>>> GetCarrerasByFacultad(Guid id) => await this.Mediator.Send(new consultaByFacultad.Ejecuta { FacultadId = id });
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Carrera>> GetCarrera(Guid id)
-        {
-            return await this.Mediator.Send(new ConsultaById.Ejecuta { CarreraId = id });
-        }
+        public async Task<ActionResult<Carrera>> GetCarrera(Guid id) => await this.Mediator.Send(new ConsultaById.Ejecuta { CarreraId = id });
 
         [HttpPut("{id}")]
         public async Task<ActionResult<Unit>> ModificarCarrera(Guid Id, Editar.Ejecuta data)
@@ -42,19 +36,13 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("curso")]
-        public async Task<ActionResult<Unit>> AsignarCurso(AgregarCurso.Ejecuta data)
-        {
-            return await this.Mediator.Send(data);
-        }
+        public async Task<ActionResult<Unit>> AsignarCurso(AgregarCurso.Ejecuta data) => await this.Mediator.Send(data);
 
         [HttpDelete("curso/{carreraId}/{cursoId}")]
         public async Task<ActionResult<Unit>> QuitarCurso(Guid carreraId, Guid cursoId ) => await this.Mediator.Send( new QuitarCurso.Ejecuta{ CursoId = cursoId, CarreraId = carreraId });
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Unit>> EliminarCarrera(Guid Id)
-        {
-            return await this.Mediator.Send(new Eliminar.Ejecuta { CarreraId = Id });
-        }
+        public async Task<ActionResult<Unit>> EliminarCarrera(Guid Id) => await this.Mediator.Send(new Eliminar.Ejecuta { CarreraId = Id });
         
     }
 }

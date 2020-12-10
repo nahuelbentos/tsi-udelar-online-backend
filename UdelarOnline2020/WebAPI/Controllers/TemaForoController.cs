@@ -18,22 +18,17 @@ namespace WebAPI.Controllers
   {
 
     [HttpPost]
-    public async Task<ActionResult<Unit>> AltaTemaForo(Nuevo.Ejecuta data)
-    {
-      return await this.Mediator.Send(data);
-    }
+    public async Task<ActionResult<Unit>> AltaTemaForo(Nuevo.Ejecuta data) => await this.Mediator.Send(data);
 
     [HttpGet]
-    public async Task<ActionResult<List<TemaForo>>> GetTemasForo()
-    {
-      return await this.Mediator.Send(new Consulta.Ejecuta());
-    }
+    public async Task<ActionResult<List<TemaForo>>> GetTemasForo() => await this.Mediator.Send(new Consulta.Ejecuta());
+    
+    [HttpGet("foro/{id}/{usuarioId}")]
+    public async Task<ActionResult<List<TemaForo>>> GetTemaForoByForo(Guid id, string usuarioId) => 
+          await this.Mediator.Send(new GetTemaForoByForo.Ejecuta { ForoId = id, UsuarioId = usuarioId });
 
     [HttpGet("id/{id}")]
-    public async Task<ActionResult<TemaForo>> GetTemaForoById(Guid id)
-    {
-      return await this.Mediator.Send(new ConsultaById.Ejecuta { TemaForoId = id });
-    }
+    public async Task<ActionResult<TemaForo>> GetTemaForoById(Guid id) => await this.Mediator.Send(new ConsultaById.Ejecuta { TemaForoId = id });
 
     [HttpPut("{id}")]
     public async Task<ActionResult<Unit>> ModificarTemaForo(Guid id, Editar.Ejecuta data)
@@ -43,16 +38,10 @@ namespace WebAPI.Controllers
     }
 
     [HttpDelete("{id}")]
-    public async Task<ActionResult<Unit>> Eliminar(Guid id)
-    {
-      return await this.Mediator.Send(new Eliminar.Ejecuta { TemaForoId = id });
-    }
+    public async Task<ActionResult<Unit>> Eliminar(Guid id) => await this.Mediator.Send(new Eliminar.Ejecuta { TemaForoId = id });
 
     // [HttpPost]
-    public async Task<ActionResult<Unit>> Responder(Responder.Ejecuta data)
-    {
-      return await this.Mediator.Send(data);
-    }
+    public async Task<ActionResult<Unit>> Responder(Responder.Ejecuta data) => await this.Mediator.Send(data);
 
     [HttpPost("{id}")]
     public async Task<ActionResult<Unit>> Bloquear(Guid id, Bloquear.Ejecuta data)

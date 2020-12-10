@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence;
 
 namespace Persistence.Migrations
 {
     [DbContext(typeof(UdelarOnlineContext))]
-    partial class UdelarOnlineContextModelSnapshot : ModelSnapshot
+    [Migration("20201207023053_QuitoDtPruebaRespuestaDePreguntaRespuesta")]
+    partial class QuitoDtPruebaRespuestaDePreguntaRespuesta
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -417,12 +419,6 @@ namespace Persistence.Migrations
 
                     b.Property<Guid?>("TemplateCursoId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("ZoomId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ZoomPassword")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("CursoId");
 

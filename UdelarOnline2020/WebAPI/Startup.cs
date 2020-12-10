@@ -33,6 +33,7 @@ using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.AspNetCore.Http.Features;
 using Perifericos.Mail;
 using Perifericos.Bedelias;
+using Perifericos.PushNotifications;
 
 namespace WebAPI
 {
@@ -50,8 +51,8 @@ namespace WebAPI
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
-      // 200 MB
-      const int maxRequestLimit = 209715200;
+      // 10MB
+      const int maxRequestLimit = 10485760; // 209715200; -> 200MB
 
       services.AddDbContext<UdelarOnlineContext>(opt =>
       {
@@ -133,6 +134,7 @@ namespace WebAPI
       services.AddScoped<IJwtGenerador, JwtGenerador>();
       services.AddScoped<IMailGenerator, MailGenerator>();
       services.AddScoped<IBedeliasGenerator, BedeliasGenerator>();
+      services.AddScoped<IPushGenerator, PushNotifications>();
 
       // Middleware
 

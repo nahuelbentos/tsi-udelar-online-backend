@@ -19,7 +19,7 @@ namespace Business.Bedelias
     {
       private readonly IBedeliasGenerator bedeliasGenerator;
 
-      public Manejador(IBedeliasGenerator bedeliasGenerator)
+      public Manejador(IBedeliasGenerator bedeliasGenerator, IPushGenerator pushGenerator)
       {
         this.bedeliasGenerator = bedeliasGenerator;
       }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using Business.AlumnoCursos;
 using Business.Datatypes;
@@ -23,6 +24,9 @@ namespace WebAPI.Controllers
         public async Task<ActionResult<DtAlumnoCurso>> GetById(string alumnoId, Guid cursoId) => await this.Mediator.Send(new ConsultaById.Ejecuta { AlumnoId = alumnoId, CursoId = cursoId});
         [HttpGet("byalumno/{id}")]
         public async Task<ActionResult<List<DtAlumnoCurso>>> GetAlumnoCursoByAlumno(Guid id) => await this.Mediator.Send(new ConsultaByAlumnoId.Ejecuta { AlumnoId = id});
+
+        [HttpGet("exportarPdf/{cursoId}")]
+        public async Task<ActionResult<Stream>>ExportarPDF(Guid cursoId) =>  await Mediator.Send(new ExportarPDF.Ejecuta{CursoId = cursoId});
 
         [HttpGet("bycurso/{id}")]
         public async Task<ActionResult<List<DtAlumnoCurso>>> GetAlumnoCursoByCurso(Guid id) => await this.Mediator.Send(new ConsultaByCursoId.Ejecuta { CursoId = id});

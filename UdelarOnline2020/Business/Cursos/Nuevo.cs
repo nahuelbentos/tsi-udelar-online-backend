@@ -1,3 +1,4 @@
+using System.Net.NetworkInformation;
 using System.Net;
 using System;
 using System.Linq;
@@ -28,15 +29,6 @@ namespace Business.Cursos
 
     }
 
-    public class EjecutaValidator : AbstractValidator<Ejecuta>
-    {
-      public EjecutaValidator()
-      {
-        RuleFor(c => c.Nombre).NotEmpty().WithMessage("El nombre es requerido.");
-        RuleFor(c => c.Descripcion).NotEmpty(); 
-        RuleFor(c => c.SalaVirtual).NotEmpty();
-      }
-    }
 
 
     public class Manejador : IRequestHandler<Ejecuta>
@@ -62,9 +54,7 @@ namespace Business.Cursos
           templateCurso = await this.context.TemplateCurso.Where(tc => tc.TemplateCursoId == request.TemplateCursoId).FirstOrDefaultAsync();
 
           if (templateCurso == null)
-          {
             throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "No existe el template ingresado" });
-          }
 
         }
 
@@ -79,7 +69,7 @@ namespace Business.Cursos
           ZoomId= request.ZoomId,
           ZoomPassword = request.ZoomPassword,
           TemplateCurso = templateCurso,
-          ActaCerrada = false 
+          ActaCerrada = false
         };
 
         this.context.Curso.Add(curso);
@@ -87,6 +77,34 @@ namespace Business.Cursos
         var res = await this.context.SaveChangesAsync();
         if (res > 0)
         {
+          if (templateCurso != null)
+          {
+            var secciones = await this.context.TemplateCursoSeccion
+                                                .Include(tcs => tcs.Seccion)
+                                                .Include(tcs => tcs.TemplateCurso)
+                                                .Where(tcs => tcs.TemplateCursoId == templateCurso.TemplateCursoId)
+                                                .Select(tcs => tcs.Seccion)
+                                                .ToListAsync();
+            if (secciones.Count > 0)
+            {
+              foreach (var seccion in secciones)
+              {
+                this.context.CursoSeccion.Add(new CursoSeccion
+                {
+                  Curso = curso,
+                  CursoId = curso.CursoId,
+                  Seccion = seccion,
+                  SeccionId = seccion.SeccionId
+
+                });
+              }
+
+              var result = await this.context.SaveChangesAsync();
+              if (result > 0)
+                return Unit.Value;
+
+            }
+          }
           return Unit.Value;
         }
 

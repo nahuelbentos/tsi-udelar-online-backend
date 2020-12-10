@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading;
@@ -10,74 +11,75 @@ using Microsoft.EntityFrameworkCore;
 using Models;
 using Persistence;
 
-namespace Business.Alumnos
-{
-  public class InscribirseACurso
-  {
-    public class Ejecuta : IRequest
-    {
+namespace Business.Alumnos {
+  public class InscribirseACurso {
+    public class Ejecuta : IRequest {
 
       public string AlumnoId { get; set; }
 
       public Guid CursoId { get; set; }
     }
 
-    public class Manejador : IRequestHandler<Ejecuta>
-    {
+    public class Manejador : IRequestHandler<Ejecuta> {
       private readonly UdelarOnlineContext context;
       private readonly IBedeliasGenerator bedelias;
+      private readonly IPushGenerator pushGenerator;
+      private readonly IMailGenerator mailGenerator;
 
-      public Manejador(UdelarOnlineContext context, IBedeliasGenerator bedelias)
-      {
+      public Manejador (UdelarOnlineContext context, IBedeliasGenerator bedelias, IPushGenerator pushGenerator, IMailGenerator mailGenerator) {
         this.context = context;
         this.bedelias = bedelias;
+        this.pushGenerator = pushGenerator;
+        this.mailGenerator = mailGenerator;
       }
-      public async Task<Unit> Handle(Ejecuta request, CancellationToken cancellationToken)
-      {
+      public async Task<Unit> Handle (Ejecuta request, CancellationToken cancellationToken) {
 
-        var alumno = await this.context.Alumno.FindAsync(request.AlumnoId);
+        var alumno = await this.context.Alumno.FindAsync (request.AlumnoId);
         if (alumno == null)
-          throw new ManejadorExcepcion(HttpStatusCode.NotFound, new { mensaje = "El alumno no existe." });
+          throw new ManejadorExcepcion (HttpStatusCode.NotFound, new { mensaje = "El alumno no existe." });
 
-
-        var curso = await this.context.Curso.FindAsync(request.CursoId);
+        var curso = await this.context.Curso.FindAsync (request.CursoId);
 
         if (curso == null)
-          throw new ManejadorExcepcion(HttpStatusCode.NotFound, new { mensaje = "El curso no existe" });
-
+          throw new ManejadorExcepcion (HttpStatusCode.NotFound, new { mensaje = "El curso no existe" });
 
         var existeAlumnoEnCurso = await this.context.AlumnoCurso
-                                                        .Where(ac => ac.CursoId == request.CursoId && ac.Alumno.Id == request.AlumnoId)
-                                                        .FirstOrDefaultAsync();
+          .Where (ac => ac.CursoId == request.CursoId && ac.Alumno.Id == request.AlumnoId)
+          .FirstOrDefaultAsync ();
 
         if (existeAlumnoEnCurso != null)
-          throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "El alumno ya se encuentra matriculado en este curso." });
+          throw new ManejadorExcepcion (HttpStatusCode.BadRequest, new { mensaje = "El alumno ya se encuentra matriculado en este curso." });
 
         var inscripto = true;
-        if (curso.RequiereMatriculacion)
-        {
-          inscripto = await this.bedelias.AprobarInscripcionCurso(alumno.CI, curso.CursoId);
+        if (curso.RequiereMatriculacion) {
+          inscripto = await this.bedelias.AprobarInscripcionCurso (alumno.CI, curso.CursoId);
           if (!inscripto)
-            throw new ManejadorExcepcion(HttpStatusCode.BadRequest, new { mensaje = "Bedelías rechazo la inscripcion, comuniquese con un administrador." });
+            throw new ManejadorExcepcion (HttpStatusCode.BadRequest, new { mensaje = "Bedelías rechazo la inscripcion, comuniquese con un administrador." });
+          
+          if (alumno.EmailPersonal != "")
+            this.mailGenerator.mailInscripcionCurso(alumno.EmailPersonal, $"Inscripción al curso: {curso.Nombre} {curso.Descripcion}", curso);
+            
+          if (alumno.TokenPush != "") {
+            List<string> token = new List<string>();
+            token.Add (alumno.TokenPush);
+            pushGenerator.SendPushNotifications ("Inscripción Correcta!", "Te has inscripto correctamente al curso " + curso.Nombre, token);
+          }
         }
 
-
-        var alumnoCurso = new AlumnoCurso
-        {
+        var alumnoCurso = new AlumnoCurso {
           Alumno = alumno,
-          AlumnoId = Guid.Parse(alumno.Id),
+          AlumnoId = Guid.Parse (alumno.Id),
           Curso = curso,
           CursoId = curso.CursoId,
           Inscripto = inscripto
         };
 
-        this.context.AlumnoCurso.Add(alumnoCurso);
+        this.context.AlumnoCurso.Add (alumnoCurso);
 
-        if (await this.context.SaveChangesAsync() > 0)
+        if (await this.context.SaveChangesAsync () > 0)
           return Unit.Value;
 
-        throw new ManejadorExcepcion(HttpStatusCode.InternalServerError, new { mensaje = "Ocurrió un error al inscribir al alumno en el curso." });
-
+        throw new ManejadorExcepcion (HttpStatusCode.InternalServerError, new { mensaje = "Ocurrió un error al inscribir al alumno en el curso." });
 
       }
     }

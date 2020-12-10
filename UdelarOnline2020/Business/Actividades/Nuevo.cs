@@ -65,21 +65,31 @@ namespace Business.Actividades
 
         string archivoNombre = null;
         if (request.ArchivoNombre != null)
-          archivoNombre = request.Nombre;
+          archivoNombre = request.ArchivoNombre;
 
         string archivoExtension = null;
         if (request.ArchivoExtension != null)
           archivoExtension = request.ArchivoExtension;
 
+          Console.WriteLine("Archivo Data:: " + archivoData);
+          Console.WriteLine("Archivo Nombre:: " + archivoNombre);
+          Console.WriteLine("Archivo Extension:: " + archivoExtension);
+
         switch (request.Tipo)
         {
           case "ClaseDictada":
-            actividad = new ClaseDictada
+            var claseDictada = new ClaseDictada
             {
               ArchivoData = archivoData,
               ArchivoExtension = archivoExtension,
               ArchivoNombre = archivoNombre,
             };
+            
+            Console.WriteLine("Clase Dictada, Data:: " + claseDictada.ArchivoData);
+            Console.WriteLine("Clase Dictada, Nombre:: " + claseDictada.ArchivoNombre);
+            Console.WriteLine("Clase Dictada, Extension:: " + claseDictada.ArchivoExtension);
+
+            actividad = claseDictada;
             break;
           case "Encuesta":
             actividad = new Encuesta

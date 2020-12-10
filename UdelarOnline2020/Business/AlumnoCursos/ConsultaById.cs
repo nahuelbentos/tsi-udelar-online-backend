@@ -47,13 +47,13 @@ namespace Business.AlumnoCursos
 
           return new DtAlumnoCurso
           {
-            Alumno = $" {alumnoCurso.Alumno.Nombres}  {alumnoCurso.Alumno.Apellidos}",
+            Alumno = $" {alumno.Nombres}  {alumno.Apellidos}",
             AlumnoId = alumnoCurso.AlumnoId,
             Calificacion = alumnoCurso.Calificacion,
-            Curso = $" {alumnoCurso.Curso.Nombre} - {alumnoCurso.Curso.Descripcion}",
-            CursoId = alumnoCurso.CursoId,
-            DataAlumno = alumnoCurso.Alumno,
-            DataCurso = alumnoCurso.Curso,
+            Curso = $" {curso.Nombre} - {curso.Descripcion}",
+            CursoId = curso.CursoId,
+            DataAlumno = alumno,
+            DataCurso = curso,
             FechaActaCerrada = alumnoCurso.FechaActaCerrada,
             Feedback = alumnoCurso.Feedback,
             Inscripto = alumnoCurso.Inscripto

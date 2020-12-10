@@ -36,10 +36,13 @@ namespace WebAPI.Controllers
 
     [HttpGet("alumno/{id}")]
     public async Task<ActionResult<List<Actividad>>> GetActividadesByAlumno(Guid id) => await this.Mediator.Send(new ConsultaByAlumno.Ejecuta { AlumnoId = id });
+    
+    [HttpGet("curso/{id}")]
+    public async Task<ActionResult<List<Actividad>>> GetActividadesByCurso(Guid id) => await this.Mediator.Send(new ConsultaByCurso.Ejecuta { CursoId = id });
 
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<Actividad>> GetActividad(Guid id) => await this.Mediator.Send(new ConsultaById.Ejecuta { ActividadId = id });
+    public async Task<ActionResult<DtActividad>> GetActividad(Guid id) => await this.Mediator.Send(new ConsultaById.Ejecuta { ActividadId = id });
 
     [HttpPut("{id}")]
     public async Task<ActionResult<Unit>> ModificarActividad(Guid id, Editar.Ejecuta data)
@@ -55,8 +58,11 @@ namespace WebAPI.Controllers
     [HttpPost("pruebaonline")]
     public async Task<ActionResult<Unit>> AltaPruebaOnline(NuevaPruebaOnline.Ejecuta data) => await this.Mediator.Send(data);
 
-    [HttpGet("pruebaonline")]
-    public async Task<ActionResult<List<PruebaOnline>>> GetPruebasOnline() => await this.Mediator.Send(new ConsultaPruebaOnline.Ejecuta());
+    [HttpGet("pruebaonline/usuario/{id}")]
+    public async Task<ActionResult<List<DtPruebaOnline>>> GetPruebasOnline(string id) => await this.Mediator.Send(new ConsultaPruebaOnline.Ejecuta{ UsuarioId = id });
+    
+    [HttpGet("pruebaonline/{id}")]
+    public async Task<ActionResult<DtPruebaOnline>> GetPruebasOnlineById(Guid id) => await this.Mediator.Send(new GetPruebaOnlineById.Ejecuta{ Id = id });
  
 
     //Encuesta

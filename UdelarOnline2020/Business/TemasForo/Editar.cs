@@ -26,16 +26,7 @@ namespace Business.TemasForo
       public bool SubscripcionADiscusion { get; set; }
     }
 
-    public class EjecutaValidacion : AbstractValidator<Ejecuta>
-    {
-      public EjecutaValidacion()
-      {
-        RuleFor(t => t.Asunto).NotEmpty().WithMessage("El asunto es requerido");
-        RuleFor(t => t.Mensaje).NotEmpty();
-        RuleFor(t => t.EmisorId).NotEmpty();
-      }
-    }
-
+ 
     public class Manejador : IRequestHandler<Ejecuta>
     {
       private readonly UdelarOnlineContext context;
