@@ -66,6 +66,7 @@ namespace Business.TemasForo
         temaForo.ArchivoData = Convert.FromBase64String(request.ArchivoData) ?? temaForo.ArchivoData;
         temaForo.ArchivoNombre = request.ArchivoNombre ?? temaForo.ArchivoNombre;
         temaForo.ArchivoExtension = request.ArchivoExtension ?? temaForo.ArchivoExtension;
+        
         temaForo.SubscripcionADiscusion = request.SubscripcionADiscusion;
 
         var res = await this.context.SaveChangesAsync();

@@ -1,3 +1,4 @@
+
 using System;
 using System.Linq;
 using System.Net;
@@ -22,34 +23,34 @@ namespace Business.CursosSeccion {
 
     }
 
-    public class EjecutaValidator : AbstractValidator<Ejecuta> {
-      public EjecutaValidator () {
-        RuleFor (c => c.CursoId).NotEmpty ();
-        RuleFor (c => c.ForoId).NotEmpty ();
-      }
-    }
+ 
 
     public class Manejador : IRequestHandler<Ejecuta> {
       private readonly UdelarOnlineContext context;
-      private readonly ILogger<Manejador> logger;
+      
 
-      public Manejador (UdelarOnlineContext context, ILogger<Manejador> logger) {
+      public Manejador (UdelarOnlineContext context) {
         this.context = context;
-        this.logger = logger;
       }
 
       public async Task<Unit> Handle (Ejecuta request, CancellationToken cancellationToken) {
 
         var cursoSeccion = await this.context.CursoSeccion.Where (tc => tc.CursoId == request.CursoId && tc.SeccionId == request.SeccionId).FirstOrDefaultAsync ();
-        if (cursoSeccion == null) {
+        if (cursoSeccion == null) 
           throw new ManejadorExcepcion (HttpStatusCode.BadRequest, new { mensaje = "No existe el curso ingresado" });
-        }
+        
         var foro = await this.context.Foro.Where (tc => tc.ForoId == request.ForoId).FirstOrDefaultAsync ();
-        if (foro == null) {
-          throw new ManejadorExcepcion (HttpStatusCode.BadRequest, new { mensaje = "No existe el foro ingresado" });
-        }
-
-        cursoSeccion.ForoLista.Add (foro);
+        if (foro == null) 
+        throw new ManejadorExcepcion (HttpStatusCode.BadRequest, new { mensaje = "No existe el foro ingresado" });
+        
+        this.context.CursoSeccionForo.Add(new CursoSeccionForo{
+          Curso = cursoSeccion.Curso,
+          CursoId = cursoSeccion.CursoId,
+          Seccion = cursoSeccion.Seccion,
+          SeccionId = cursoSeccion.SeccionId,
+          Foro = foro,
+          ForoId = foro.ForoId,
+        }); 
 
         var res = await this.context.SaveChangesAsync ();
         if (res > 0) {

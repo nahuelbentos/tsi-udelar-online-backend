@@ -43,7 +43,7 @@ namespace WebAPI.Controllers
     // [HttpPost]
     public async Task<ActionResult<Unit>> Responder(Responder.Ejecuta data) => await this.Mediator.Send(data);
 
-    [HttpPost("{id}")]
+    [HttpPost("bloquear/{id}")]
     public async Task<ActionResult<Unit>> Bloquear(Guid id, Bloquear.Ejecuta data)
     {
       data.MensajeId = id;
